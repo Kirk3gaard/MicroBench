@@ -16,9 +16,25 @@ options(scipen = 10)
 
 # MicroBench 
 
-Overview of our data for microbial genomic benchmarking
+Overview of our data for microbial genomic benchmarking. We have sequenced a bunch of mono cultures, and metagenomic samples.
 
-## Data availability
+
+Monocultures:
+
+ * [Anabaena variabilis PCC 7120	DSM 107007](#anabaena-variabilis-pcc-7120-dsm-107007)
+ * [Bacillus cereus NRS 248	ATCC 10987](bacillus-cereus-nrs-248-atcc-10987) 
+
+Mock Metagenomes:
+
+ * [ZymoHMW](#zymohmw)
+ * [ZymoGut](#zymogut)
+ * [ZymoOral](#zymooral)
+
+"Real" metagenomes:
+
+ * [ZymoFecal](#zymofecal)
+
+
 
 ```{r echo=FALSE,warning=FALSE,message=FALSE}
 library(readxl)
@@ -27,11 +43,74 @@ library(tidyverse)
 d<-read_xlsx("data_links.xlsx")
 ```
 
+## Mono cultures
+
+### Anabaena variabilis PCC 7120	DSM 107007
+
+You find a description of this sample here: [https://www.dsmz.de/collection/catalogue/details/culture/DSM-107007](https://www.dsmz.de/collection/catalogue/details/culture/DSM-107007)
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+d %>% 
+  filter(Sample=="Anabaena variabilis PCC 7120	DSM 107007") %>%
+  arrange(desc(`date of basecalling`)) %>%
+  kable(format = "markdown")
+```
+
+### Bacillus cereus NRS 248	ATCC 10987 
+
+You find a description of this sample here: [https://www.atcc.org/products/10987d-5](https://www.atcc.org/products/10987d-5)
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+d %>% 
+  filter(Sample=="Bacillus cereus NRS 248	ATCC 10987 ") %>%
+  arrange(desc(`date of basecalling`)) %>%
+  kable(format = "markdown")
+```
+
+## Mock metagenomes
+
 ### ZymoHMW
+
+You find a description of this sample here: [https://zymoresearch.eu/products/zymobiomics-hmw-dna-standard?srsltid=AfmBOooNJLjOVzGjtNm0BJY2WoMS0vHsUDi7mR59p4HDqyBX7FlJe7jy](https://zymoresearch.eu/products/zymobiomics-hmw-dna-standard?srsltid=AfmBOooNJLjOVzGjtNm0BJY2WoMS0vHsUDi7mR59p4HDqyBX7FlJe7jy)
 
 ```{r echo=FALSE,warning=FALSE,message=FALSE}
 d %>% 
   filter(Sample=="ZymoHMW") %>%
+  arrange(desc(`date of basecalling`)) %>%
+  kable(format = "markdown")
+```
+
+### ZymoGut
+
+You find a description of this sample here: [https://zymoresearch.eu/collections/zymobiomics-microbial-community-standards/products/zymobiomics-gut-microbiome-standard](https://zymoresearch.eu/collections/zymobiomics-microbial-community-standards/products/zymobiomics-gut-microbiome-standard)
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+d %>% 
+  filter(Sample=="ZymoGut") %>%
+  arrange(desc(`date of basecalling`)) %>%
+  kable(format = "markdown")
+```
+
+### ZymoOral
+
+You find a description of this sample here: [https://zymoresearch.eu/collections/zymobiomics-microbial-community-standards/products/zymobiomics-oral-microbiome-standard](https://zymoresearch.eu/collections/zymobiomics-microbial-community-standards/products/zymobiomics-oral-microbiome-standard)
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+d %>% 
+  filter(Sample=="ZymoOral") %>%
+  arrange(desc(`date of basecalling`)) %>%
+  kable(format = "markdown")
+```
+
+## "Real" metagenomes
+
+### ZymoFecal
+
+You find a description of this sample here: [https://zymoresearch.eu/products/zymobiomics-fecal-reference-with-trumatrix-technology?srsltid=AfmBOorYH_EvSWZvzNTVTAb7NYQk_zlNcRO4NXzI8WCiUPgG13fQBJhd](https://zymoresearch.eu/products/zymobiomics-fecal-reference-with-trumatrix-technology?srsltid=AfmBOorYH_EvSWZvzNTVTAb7NYQk_zlNcRO4NXzI8WCiUPgG13fQBJhd)
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+d %>% 
+  filter(Sample=="ZymoFecal") %>%
   arrange(desc(`date of basecalling`)) %>%
   kable(format = "markdown")
 ```
