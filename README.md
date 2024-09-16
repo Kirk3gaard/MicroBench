@@ -36,6 +36,7 @@ You find a description of this sample here:
 
 | Sample | date of sequencing | sequencing kit | flowcell type | flowcell ID | sample rate | date of basecalling | dorado version | basecall model version | fast | hac | hacdup | sup | supdup | allmods |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| Anabaena variabilis PCC 7120 DSM 107007 | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA |
 
 ### Bacillus cereus NRS 248 ATCC 10987
 
@@ -44,6 +45,7 @@ You find a description of this sample here:
 
 | Sample | date of sequencing | sequencing kit | flowcell type | flowcell ID | sample rate | date of basecalling | dorado version | basecall model version | fast | hac | hacdup | sup | supdup | allmods |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| Bacillus cereus NRS 248 ATCC 10987 | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA |
 
 ## Mock metagenomes
 

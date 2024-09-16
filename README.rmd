@@ -51,7 +51,7 @@ You find a description of this sample here: [https://www.dsmz.de/collection/cata
 
 ```{r echo=FALSE,warning=FALSE,message=FALSE}
 d %>% 
-  filter(Sample=="Anabaena variabilis PCC 7120	DSM 107007") %>%
+  filter(Sample=="Anabaena variabilis PCC 7120 DSM 107007") %>%
   arrange(desc(`date of basecalling`)) %>%
   kable(format = "markdown")
 ```
@@ -62,7 +62,7 @@ You find a description of this sample here: [https://www.atcc.org/products/10987
 
 ```{r echo=FALSE,warning=FALSE,message=FALSE}
 d %>% 
-  filter(Sample=="Bacillus cereus NRS 248	ATCC 10987 ") %>%
+  filter(Sample=="Bacillus cereus NRS 248 ATCC 10987") %>%
   arrange(desc(`date of basecalling`)) %>%
   kable(format = "markdown")
 ```
