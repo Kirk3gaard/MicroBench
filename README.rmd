@@ -5,12 +5,17 @@ date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: github_document
 ---
 
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 options(scipen = 10)
 ```
 
-# MicroBench
+<img align="right" src="images/microbench.jpg" width="200">
+
+# MicroBench 
+
 Overview of our data for microbial genomic benchmarking
 
 ## Data availability
