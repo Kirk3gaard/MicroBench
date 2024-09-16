@@ -22,8 +22,14 @@ Overview of our data for microbial genomic benchmarking
 
 ```{r echo=FALSE,warning=FALSE,message=FALSE}
 library(readxl)
-read_xlsx("data_links.xlsx")
+library(kableExtra)
+d<-read_xlsx("data_links.xlsx")
 ```
+
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+d %>% kable(format = "markdown")
+```
+
 
 Nanopore data
 

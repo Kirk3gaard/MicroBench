@@ -1,0 +1,6 @@
+# Filetypes to ignore
+*fasta
+*fastq
+*gz
+# Folders to ignore
+data/
