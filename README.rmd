@@ -23,6 +23,20 @@ Monocultures:
 
  * [Anabaena variabilis PCC 7120	DSM 107007](#anabaena-variabilis-pcc-7120-dsm-107007)
  * [Bacillus cereus NRS 248	ATCC 10987](bacillus-cereus-nrs-248-atcc-10987) 
+ * [Burkholderia cenocepacia J2315 DSM 16553]()
+ * [Cellulophaga lytica Cy l20, LIM -21 DSMZ 7489]()
+ * [Desulfobacca acetoxidans ASRB2 DSM 11109]()
+ * [Helicobacter pylori J99 ATCC 700824]()
+ * [Helicobacter pylori 26695 ATCC 700392]()
+ * [Methanocaldococcus jannaschii JAL-1 DSM 2661]()
+ * [Neisseria gonorrhoeae FA1090 ATCC 700825]()
+ * [Pelobacter carbinolicus Bd1 DSM 2380]()
+ * [Sagittula stellata E-37 DSM 11524]()
+ * [Salmonella bongori 1224.72 DSM 13772]()
+ * [Sphaerobacter thermophilus S 6022 DSM 20745]()
+ * [Sphaerotilus natans 6 DSM 6575]()
+ * [Thermanaerovibrio acidaminovorans Su883 DSM 6589]()
+ * [Zymomonas mobilis subsp. pomaceae Barker I DSM 22645]()
 
 Mock Metagenomes:
 
