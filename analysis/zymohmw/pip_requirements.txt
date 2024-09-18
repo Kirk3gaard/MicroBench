@@ -1,4 +1,4 @@
 ###### Requirements without Version Specifiers ######
 
 ###### Requirements with Version Specifiers ######
-medaka == 1.11.3
+medaka == 2.0.0

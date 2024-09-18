@@ -1,20 +1,9 @@
 inputNPfiles:
-    - "dna_r10.4.1_e8.2_400bps_fast@v4.0.0"
-    - "dna_r10.4.1_e8.2_400bps_hac@v4.0.0"
-    - "dna_r10.4.1_e8.2_400bps_sup@v4.0.0"
-    - "dna_r10.4.1_e8.2_400bps_fast@v4.1.0"
-    - "dna_r10.4.1_e8.2_400bps_hac@v4.1.0"
-    - "dna_r10.4.1_e8.2_400bps_sup@v4.1.0"
-    - "dna_r10.4.1_e8.2_400bps_supdup@v4.1.0"
-    - "dna_r10.4.1_e8.2_400bps_fast@v4.2.0"
-    - "dna_r10.4.1_e8.2_400bps_hac@v4.2.0"
-    - "dna_r10.4.1_e8.2_400bps_sup@v4.2.0"
-    - "dna_r10.4.1_e8.2_400bps_supdup@v4.2.0"
-    - "dna_r10.4.1_e8.2_400bps_fast@v4.3.0"
-    - "dna_r10.4.1_e8.2_400bps_hac@v4.3.0"
-    - "dna_r10.4.1_e8.2_400bps_hacdup@v4.3.0"
-    - "dna_r10.4.1_e8.2_400bps_sup@v4.3.0"
-    - "dna_r10.4.1_e8.2_400bps_supdup@v4.3.0"
+    - "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps@5.0.0_fast.sim"
+    - "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps@5.0.0_hac.sim"
+    - "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps@5.0.0_hac.dup"
+    - "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps@5.0.0_sup.sim"
+    - "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps@5.0.0_sup.dup"
 npreads:
     - 10000
     - 20000
@@ -42,14 +31,8 @@ reffiles:
     - S.enterica_hifiasm
 asmtypes:
     - flye
-    - flye.medaka1x
 assembly_threads:
-     20
-polish_threads:
      20
 assembly_mb:
      100000
-polish_mb:
-     100000
-medaka_model:
-     "r1041_e82_400bps_sup_v4.0.0"
+

@@ -1,0 +1,12 @@
+name: microbench_zymohmw_basecalling-benchmarks
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r-base=4.3.0  # Use an older version of r-base
+  - r-tidyverse=2.0.0
+  - r-gridextra=2.3
+  - r-kableextra=1.4.0
+  - r-rmarkdown=2.28
+  - pandoc=3.4

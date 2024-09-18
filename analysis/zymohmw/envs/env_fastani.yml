@@ -4,5 +4,4 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - snakemake=8.20.3
-
+  - fastani=1.33
