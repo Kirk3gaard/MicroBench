@@ -2,5 +2,9 @@
 *fasta
 *fastq
 *gz
+
 # Folders to ignore
 data/
+slurm_logs/
+jobs/
+.snakemake/

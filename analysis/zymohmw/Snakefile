@@ -86,7 +86,7 @@ rule flye:
         "envs/env_flye.yml"
     shell:
         """
-        basecall_mode=$(echo {wildcards.npID} | sed -E 's/.*_([a-z]+)\@.*/\1/')
+        basecall_mode=$(echo {wildcards.npID} | sed -E 's/.*_([a-z]+)\\@.*/\1/')
         if [[ $basecall_mode == "fast" ]]
         then
         flye --nano-raw {input.NPreads} --threads {threads} --meta --out-dir temp/flye.{wildcards.npID}
