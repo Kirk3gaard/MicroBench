@@ -7,4 +7,6 @@
 data/
 slurm_logs/
 jobs/
+temp/
+results/
 .snakemake/

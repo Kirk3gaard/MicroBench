@@ -1,4 +1,4 @@
-name: microbench_zymohmw_basecalling-benchmarks
+name: microbench_zymohmw_basecalling-benchmarks_r
 channels:
   - conda-forge
   - bioconda
