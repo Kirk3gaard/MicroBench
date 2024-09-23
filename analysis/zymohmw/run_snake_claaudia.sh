@@ -6,7 +6,7 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1   # Adjust this to the desired number of threads
 #SBATCH --mem=16G           # Adjust this to the desired memory allocation
-#SBATCH --time=07-10:00:00     # Adjust this to the desired time limit
+#SBATCH --time=07-00:00:00     # Adjust this to the desired time limit
 #SBATCH --mail-user=rhk@bio.aau.dk   # Email address for notifications
 #SBATCH --mail-type=BEGIN,END,FAIL    # When to send email notifications
 

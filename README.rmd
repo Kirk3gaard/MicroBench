@@ -87,6 +87,8 @@ d %>%
 
 You find a description of this sample here: [https://zymoresearch.eu/products/zymobiomics-hmw-dna-standard?srsltid=AfmBOooNJLjOVzGjtNm0BJY2WoMS0vHsUDi7mR59p4HDqyBX7FlJe7jy](https://zymoresearch.eu/products/zymobiomics-hmw-dna-standard?srsltid=AfmBOooNJLjOVzGjtNm0BJY2WoMS0vHsUDi7mR59p4HDqyBX7FlJe7jy)
 
+Some brief analysis of this data can be found here: [analysis/zymohmw](https://github.com/Kirk3gaard/MicroBench/tree/main/analysis/zymohmw)
+
 ```{r echo=FALSE,warning=FALSE,message=FALSE}
 d %>% 
   filter(Sample=="ZymoHMW") %>%

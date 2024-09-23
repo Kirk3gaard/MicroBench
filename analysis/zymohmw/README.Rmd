@@ -15,9 +15,10 @@ options(scipen = 10)
 
 ## Aim
 
+To check the quality of nanopore data with the ZymoHMW mock DNA.
 
 ## Conclusion
-
+There are some serious improvements in raw read accuracy between the fast, hac and sup models.
 
 ## Data availability
 
@@ -74,7 +75,7 @@ NP_QC_combined<-bind_rows(NP_QC_fast_5.0.0,
 draft_assemblies<-list.files(path = "results/",pattern = "*.assembly_info.txt",full.names = T)
 cov_tab<-tibble()
 for (f in draft_assemblies) {
-  cov_temp<-read_tsv(file = f) %>% mutate(draft=f)
+  cov_temp<-read_tsv(file = f,show_col_types = FALSE) %>% mutate(draft=f)
   cov_tab<-bind_rows(cov_tab,cov_temp)
 }
 cov_tab<-cov_tab %>% mutate(contigName=`#seq_name`,coverage=cov.,circular=circ.,
@@ -82,7 +83,7 @@ cov_tab<-cov_tab %>% mutate(contigName=`#seq_name`,coverage=cov.,circular=circ.,
   select(ReadSet,contigName,coverage,circular)
 
 ### Assembly based stats
-fastani<-read_tsv(file = "results/fastani.tsv",col_names = c("query","ref","ANI","aligned_segments","total_segments")) %>% 
+fastani<-read_tsv(file = "results/fastani.tsv",col_names = c("query","ref","ANI","aligned_segments","total_segments",show_col_types = FALSE)) %>% 
   mutate(Assembly=str_replace(string = query,pattern = "results/bins/(.*).fa.*",replacement = "\\1"),
          ref=str_replace(string = ref,pattern = ".*/(.*).fasta",replacement = "\\1")) %>% 
   select(Assembly,ref,ANI)
@@ -92,7 +93,7 @@ ref_genomes=list.files(path = "results/",pattern = "quast_.*.tsv",full.names = T
 # Load quast data
 quast_tab<-tibble()
 for (f in ref_genomes) {
-  quast_temp<-read_tsv(file = f) %>% mutate(ref=f) %>% filter(`Total aligned length`!="-")
+  quast_temp<-read_tsv(file = f,show_col_types = FALSE) %>% mutate(ref=f) %>% filter(`Total aligned length`!="-")
   quast_tab<-bind_rows(quast_tab,quast_temp)
 }
 quast_tab<-quast_tab %>% mutate(ref=str_replace(string = ref,pattern = ".*quast_(.*).tsv",replacement = "\\1"),
@@ -127,7 +128,7 @@ NP_QC_combined %>% ggplot(aes(x = percentIdentity,col=basecalling_model))+geom_d
 
 ```{r fig.width=10,fig.height=30,echo=FALSE,warning=FALSE,message=FALSE}
 NP_QC_combined %>% group_by(basecalling_model,model_version,REF) %>% filter(percentIdentity==100) %>% filter(aligned_lengths==max(aligned_lengths)) %>% 
-  ggplot(aes(x=lengths,y=model))+geom_point()+facet_wrap(~REF,ncol = 1)
+  ggplot(aes(x=lengths,y=model,label=lengths))+geom_point()+facet_wrap(~REF,ncol = 1)+geom_text(nudge_x = 5000)
 ```
 
 ## NP reads mapped to the refs overall (phred scale)
