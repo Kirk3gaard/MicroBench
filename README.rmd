@@ -47,8 +47,14 @@ Mock Metagenomes:
 "Real" metagenomes:
 
  * [ZymoFecal](#zymofecal)
+ * [AAU-Anaerobic Digester standard]()
+ * [AAU-WTTP standard]()
+ * [AAU-Soil standard]()
 
+## To do:
 
+ * Sequence all standards
+ * Get AAU to support public links or upload data to NCBI/ENA
 
 ```{r echo=FALSE,warning=FALSE,message=FALSE}
 library(readxl)

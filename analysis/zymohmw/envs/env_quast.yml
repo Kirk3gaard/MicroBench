@@ -5,3 +5,4 @@ channels:
   - defaults
 dependencies:
   - quast=5.2.0
+  - minimap2=2.24

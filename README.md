@@ -1,7 +1,7 @@
 README
 ================
 Rasmus Kirkegaard
-23 September, 2024
+02 October, 2024
 
 <img align="right" src="images/microbench.jpg" width="200">
 
@@ -40,6 +40,14 @@ Mock Metagenomes:
 “Real” metagenomes:
 
 - [ZymoFecal](#zymofecal)
+- [AAU-Anaerobic Digester standard]()
+- [AAU-WTTP standard]()
+- [AAU-Soil standard]()
+
+## To do:
+
+- Sequence all standards
+- Get AAU to support public links or upload data to NCBI/ENA
 
 ## Mono cultures
 
@@ -103,4 +111,4 @@ You find a description of this sample here:
 
 | Sample | date of sequencing | sequencing kit | flowcell type | flowcell ID | sample rate | date of basecalling | dorado version | basecall model version | fast | hac | hacdup | sup | supdup | mods |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| ZymoFecal | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA |
+| ZymoFecal | 2024-10-01 | LSK114 | FLO-PRO114M | PAW77640 | 5 khz | NA | NA | NA | NA | NA | NA | NA | NA | NA |

@@ -128,9 +128,9 @@ rule split_quast_QC:
         ref="data/hmw_individual/{refID}.fasta",
     output:
         "results/quast_{refID}.tsv"
-    threads: 16
+    threads: 32
     resources:
-        mem_mb=10000,
+        mem_mb=20000,
         node_type="basic",
     conda:
         "envs/env_quast.yml"
