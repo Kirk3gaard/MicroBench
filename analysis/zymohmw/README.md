@@ -1,13 +1,18 @@
 README
 ================
 Rasmus Kirkegaard
-23 September, 2024
+07 October, 2024
 
 # R10.4.1 Zymo HMW basecalling
 
 ## Aim
 
+To check the quality of nanopore data with the ZymoHMW mock DNA.
+
 ## Conclusion
+
+There are some serious improvements in raw read accuracy between the
+fast, hac and sup models.
 
 ## Data availability
 
@@ -29,49 +34,54 @@ Topfer](https://twitter.com/kirk3gaard/status/1397457000217423873) which
 takes length into account by adjusting the percent identity value
 100\*(1-1/(length+1)). This implies that a perfect read of 100 bp will
 achieve a phred score of ~20, while 1000 bp caps out at ~30 etc. So
-forget about your shor reads being Q40.
+forget about your short reads being Q40.
 
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+As the phred score calculation above somewhat hides the fraction of
+perfect reads here they come as such.
+
+![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ## Fast mode
 
 ### Indel rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ### Mismatch rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 ## HAC mode
 
 ### Indel rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ### Mismatch rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ## SUP mode
 
 ### Indel rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ### Mismatch rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ## Duplex mode
 
 ### Indel rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ### Mismatch rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 ## Materials and methods
 
