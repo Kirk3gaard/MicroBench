@@ -43,7 +43,7 @@ perfect reads here they come as such.
 
 ![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
-## Fast mode
+## all modes
 
 ### Indel rate vs coverage
 
@@ -53,7 +53,7 @@ perfect reads here they come as such.
 
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-## HAC mode
+## Fast mode
 
 ### Indel rate vs coverage
 
@@ -63,7 +63,7 @@ perfect reads here they come as such.
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
-## SUP mode
+## HAC mode
 
 ### Indel rate vs coverage
 
@@ -73,7 +73,7 @@ perfect reads here they come as such.
 
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
-## Duplex mode
+## SUP mode
 
 ### Indel rate vs coverage
 
@@ -82,6 +82,16 @@ perfect reads here they come as such.
 ### Mismatch rate vs coverage
 
 ![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+## Duplex mode
+
+### Indel rate vs coverage
+
+![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+
+### Mismatch rate vs coverage
+
+![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
 ## Materials and methods
 

@@ -1,7 +1,7 @@
 README
 ================
 Rasmus Kirkegaard
-02 October, 2024
+08 October, 2024
 
 <img align="right" src="images/microbench.jpg" width="200">
 
@@ -111,4 +111,5 @@ You find a description of this sample here:
 
 | Sample | date of sequencing | sequencing kit | flowcell type | flowcell ID | sample rate | date of basecalling | dorado version | basecall model version | fast | hac | hacdup | sup | supdup | mods |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| ZymoFecal | 2024-10-01 | LSK114 | FLO-PRO114M | PAW77640 | 5 khz | NA | NA | NA | NA | NA | NA | NA | NA | NA |
+| ZymoFecal | 2024-10-01 | LSK114 | FLO-PRO114M | PAW77640 | 5 khz | 2024-10-07 | 0.8.1 | 5.0.0 | NA | NA | NA | NA | NA | NA |
+| ZymoFecal | 2024-10-01 | LSK114 | FLO-PRO114M | PAW77640 | 5 khz | 2024-10-05 | 0.7.3 | 5.0.0 | NA | NA | NA | NA | NA | /projects/MicroBench/data/PAW77640.dorado0.7.3.bm5.0.0.sup.mod4mC_5mC_6mA.subset.bam |

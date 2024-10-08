@@ -34,19 +34,19 @@ tt2 <- ttheme_default(core=list(fg_params=list(hjust=1, x = 0.95, fontsize = 10)
 # duplex read QC new ref
 get_read_QC<-function(model="dna_r10.4.1_e8.2_400bps_hac@v4.0.0") {
   files<-dir(pattern = paste0(model,"_ref_E.coli_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Escherichia_coli <- files %>% map(read_tsv) %>% reduce(rbind) %>% mutate(REF="Escherichia_coli")
+  NP_QC_ref_Escherichia_coli <- files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Escherichia_coli")
   files<-dir(pattern = paste0(model,"_ref_L.monocytogenes_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Listeria_monocytogenes<-files %>% map(read_tsv) %>% reduce(rbind) %>% mutate(REF="Listeria_monocytogenes")
+  NP_QC_ref_Listeria_monocytogenes<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Listeria_monocytogenes")
   files<-dir(pattern = paste0(model,"_ref_P.aeruginosa_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Pseudomonas_aeruginosa<- files %>% map(read_tsv) %>% reduce(rbind) %>% mutate(REF="Pseudomonas_aeruginosa")
+  NP_QC_ref_Pseudomonas_aeruginosa<- files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Pseudomonas_aeruginosa")
   files<-dir(pattern = paste0(model,"_ref_B.subtilis_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Bacillus_subtilis<- files %>% map(read_tsv) %>% reduce(rbind) %>% mutate(REF="Bacillus_subtilis")
+  NP_QC_ref_Bacillus_subtilis<- files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Bacillus_subtilis")
   files<-dir(pattern = paste0(model,"_ref_S.enterica_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Salmonella_enterica<-files %>% map(read_tsv) %>% reduce(rbind) %>% mutate(REF="Salmonella_enterica")
+  NP_QC_ref_Salmonella_enterica<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Salmonella_enterica")
   files<-dir(pattern = paste0(model,"_ref_E.faecalis_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Enterococcus_faecalis<-files %>% map(read_tsv) %>% reduce(rbind) %>% mutate(REF="Enterococcus_faecalis")
+  NP_QC_ref_Enterococcus_faecalis<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Enterococcus_faecalis")
   files<-dir(pattern = paste0(model,"_ref_S.aureus_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Staphylococcus_aureus<-files %>% map(read_tsv) %>% reduce(rbind) %>% mutate(REF="Staphylococcus_aureus")
+  NP_QC_ref_Staphylococcus_aureus<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Staphylococcus_aureus")
   NP_QC_combined<-bind_rows(NP_QC_ref_Bacillus_subtilis,
                             NP_QC_ref_Enterococcus_faecalis,
                             NP_QC_ref_Escherichia_coli,
@@ -79,7 +79,7 @@ for (f in draft_assemblies) {
   cov_tab<-bind_rows(cov_tab,cov_temp)
 }
 cov_tab<-cov_tab %>% mutate(contigName=`#seq_name`,coverage=cov.,circular=circ.,
-                            ReadSet=str_replace(string =draft,pattern = ".*(dna.*).assembly_info.txt",replacement = "\\1")) %>% 
+                            ReadSet=str_replace(string =draft,pattern = "results//(.*dna.*).assembly_info.txt",replacement = "\\1")) %>% 
   select(ReadSet,contigName,coverage,circular)
 
 ### Assembly based stats
@@ -127,8 +127,12 @@ NP_QC_combined %>% ggplot(aes(x = percentIdentity,col=basecalling_model))+geom_d
 ## Longest perfect read
 
 ```{r fig.width=10,fig.height=30,echo=FALSE,warning=FALSE,message=FALSE}
+order_df<-NP_QC_combined %>% group_by(model) %>% filter(percentIdentity==100) %>% filter(aligned_lengths==max(aligned_lengths)) %>% select(model,aligned_lengths)
+order_vector<-order_df$model[order(order_df$aligned_lengths)]
+
 NP_QC_combined %>% group_by(basecalling_model,model_version,REF) %>% filter(percentIdentity==100) %>% filter(aligned_lengths==max(aligned_lengths)) %>% 
-  ggplot(aes(x=lengths,y=model,label=lengths))+geom_point()+facet_wrap(~REF,ncol = 1)+geom_text(nudge_x = 5000)
+  mutate(model=factor(model,levels=order_vector)) %>%
+  ggplot(aes(x=lengths,y=model,label=lengths,col=basecalling_model))+geom_point()+facet_wrap(~REF,ncol = 1)+geom_text(nudge_x = 5000)
 ```
 
 ## NP reads mapped to the refs overall (phred scale)
@@ -157,13 +161,29 @@ NP_QC_combined %>%
            alpha = 1,fill = "lightgray")
 ```
 
+## all modes
+
+### Indel rate vs coverage
+
+```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
+genome_stats %>% 
+  ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
+```
+
+### Mismatch rate vs coverage
+
+```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
+genome_stats %>% 
+  ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
+```
+
 ## Fast mode
 
 ### Indel rate vs coverage
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
-  filter(basecalling_model=="fast.sim") %>%
+    filter(basecalling_model=="fast.sim") %>%
   ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
 
