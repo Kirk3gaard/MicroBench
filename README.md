@@ -1,7 +1,7 @@
 README
 ================
 Rasmus Kirkegaard
-08 October, 2024
+29 October, 2024
 
 <img align="right" src="images/microbench.jpg" width="200">
 
@@ -58,7 +58,7 @@ You find a description of this sample here:
 
 | Sample | date of sequencing | sequencing kit | flowcell type | flowcell ID | sample rate | date of basecalling | dorado version | basecall model version | fast | hac | hacdup | sup | supdup | mods |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| Anabaena variabilis PCC 7120 DSM 107007 | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA |
+| Anabaena variabilis PCC 7120 DSM 107007 | NA | NA | NA | NA | 5 khz | NA | NA | NA | NA | NA | NA | NA | NA | NA |
 
 ### Bacillus cereus NRS 248 ATCC 10987
 
@@ -67,7 +67,7 @@ You find a description of this sample here:
 
 | Sample | date of sequencing | sequencing kit | flowcell type | flowcell ID | sample rate | date of basecalling | dorado version | basecall model version | fast | hac | hacdup | sup | supdup | mods |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| Bacillus cereus NRS 248 ATCC 10987 | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA |
+| Bacillus cereus NRS 248 ATCC 10987 | NA | NA | NA | NA | 5 khz | NA | NA | NA | NA | NA | NA | NA | NA | NA |
 
 ## Mock metagenomes
 
@@ -91,7 +91,7 @@ You find a description of this sample here:
 
 | Sample | date of sequencing | sequencing kit | flowcell type | flowcell ID | sample rate | date of basecalling | dorado version | basecall model version | fast | hac | hacdup | sup | supdup | mods |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| ZymoGut | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA |
+| ZymoGut | 2024-10-25 | NA | FLO-PRO114M | PAY12289 | 5 khz | 2024-10-28 | 0.8.2 | 5.0.0 | NA | NA | NA | NA | NA | /projects/MicroBench/data/PAY12289_barcode13.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam |
 
 ### ZymoOral
 
@@ -100,7 +100,7 @@ You find a description of this sample here:
 
 | Sample | date of sequencing | sequencing kit | flowcell type | flowcell ID | sample rate | date of basecalling | dorado version | basecall model version | fast | hac | hacdup | sup | supdup | mods |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
-| ZymoOral | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA | NA |
+| ZymoOral | 2024-10-25 | NA | FLO-PRO114M | PAY12289 | 5 khz | 2024-10-29 | 0.8.2 | 5.0.0 | NA | NA | NA | NA | NA | /projects/MicroBench/data/PAY12289_barcode12.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam |
 
 ## “Real” metagenomes
 
