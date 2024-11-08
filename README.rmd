@@ -12,6 +12,13 @@ knitr::opts_chunk$set(echo = TRUE)
 options(scipen = 10)
 ```
 
+```{r echo=FALSE,warning=FALSE,message=FALSE}
+library(readxl)
+library(kableExtra)
+library(tidyverse)
+d<-read_xlsx("data_links.xlsx")
+```
+
 <img align="right" src="images/microbench.jpg" width="200">
 
 # MicroBench 
@@ -21,120 +28,75 @@ Overview of our data for microbial genomic benchmarking. We have sequenced a bun
 
 Monocultures:
 
- * [Anabaena variabilis PCC 7120	DSM 107007](#anabaena-variabilis-pcc-7120-dsm-107007)
- * [Bacillus cereus NRS 248	ATCC 10987](bacillus-cereus-nrs-248-atcc-10987) 
- * [Burkholderia cenocepacia J2315 DSM 16553]()
- * [Cellulophaga lytica Cy l20, LIM -21 DSMZ 7489]()
- * [Desulfobacca acetoxidans ASRB2 DSM 11109]()
- * [Helicobacter pylori J99 ATCC 700824]()
- * [Helicobacter pylori 26695 ATCC 700392]()
- * [Methanocaldococcus jannaschii JAL-1 DSM 2661]()
- * [Neisseria gonorrhoeae FA1090 ATCC 700825]()
- * [Pelobacter carbinolicus Bd1 DSM 2380]()
- * [Sagittula stellata E-37 DSM 11524]()
- * [Salmonella bongori 1224.72 DSM 13772]()
- * [Sphaerobacter thermophilus S 6022 DSM 20745]()
- * [Sphaerotilus natans 6 DSM 6575]()
- * [Thermanaerovibrio acidaminovorans Su883 DSM 6589]()
- * [Zymomonas mobilis subsp. pomaceae Barker I DSM 22645]()
+```{r echo=FALSE,message=FALSE,results='asis'}
+list_samples <- function(df) {
+  # Assuming 'Sample' column contains the monoculture names
+  samples <- unique(df$Sample) 
+
+  for (sample in samples) {
+    sample_formatted<-sample %>% gsub(pattern=" ",replacement="-") %>% tolower()
+    cat(paste0(" * [",sample,"](#",sample_formatted,")"),"\n")
+  }
+}
+list_samples(d %>% filter(SampleType=="monoculture"))
+```
 
 Mock Metagenomes:
 
- * [ZymoHMW](#zymohmw)
- * [ZymoGut](#zymogut)
- * [ZymoOral](#zymooral)
+```{r echo=FALSE,message=FALSE,results='asis'}
+list_samples(d %>% filter(SampleType=="mock"))
+```
 
 "Real" metagenomes:
 
- * [ZymoFecal](#zymofecal)
- * [AAU-Anaerobic Digester standard]()
- * [AAU-WTTP standard]()
- * [AAU-Soil standard]()
+```{r echo=FALSE,message=FALSE,results='asis'}
+list_samples(d %>% filter(SampleType=="metagenome"))
+```
 
 ## To do:
 
  * Sequence all standards
  * Get AAU to support public links or upload data to NCBI/ENA
 
-```{r echo=FALSE,warning=FALSE,message=FALSE}
-library(readxl)
-library(kableExtra)
-library(tidyverse)
-d<-read_xlsx("data_links.xlsx")
-```
-
 ## Mono cultures
 
-### Anabaena variabilis PCC 7120	DSM 107007
+```{r echo=FALSE,message=FALSE,results='asis'}
+generate_monoculture_report <- function(df) {
+  # Assuming 'Sample' column contains the monoculture names
+  monocultures <- unique(df$Sample) 
 
-You find a description of this sample here: [https://www.dsmz.de/collection/catalogue/details/culture/DSM-107007](https://www.dsmz.de/collection/catalogue/details/culture/DSM-107007)
+  for (culture in monocultures) {
+    # Extract relevant information for the current monoculture
+    culture_data <- df %>% 
+      filter(Sample == culture) %>%
+      arrange(desc(`date of basecalling`))
 
-```{r echo=FALSE,warning=FALSE,message=FALSE}
-d %>% 
-  filter(Sample=="Anabaena variabilis PCC 7120 DSM 107007") %>%
-  arrange(desc(`date of basecalling`)) %>%
-  kable(format = "markdown")
-```
+    # Create the markdown output
+    cat("###", culture, "\n\n")  # Heading with culture name
 
-### Bacillus cereus NRS 248	ATCC 10987 
+    # Construct the DSMZ link (assuming a pattern in your data)
+    dsmz_link <- culture_data$SampleInfo[1]
+    
+    cat("You find a description of this sample here: [",dsmz_link,"](",dsmz_link,")\n")
 
-You find a description of this sample here: [https://www.atcc.org/products/10987d-5](https://www.atcc.org/products/10987d-5)
-
-```{r echo=FALSE,warning=FALSE,message=FALSE}
-d %>% 
-  filter(Sample=="Bacillus cereus NRS 248 ATCC 10987") %>%
-  arrange(desc(`date of basecalling`)) %>%
-  kable(format = "markdown")
+    # Output the table
+    print(culture_data %>% select(-c(	SampleType,SampleInfo)) %>% kable(format = 'markdown')) 
+    cat("\n\n")
+  }
+}
+generate_monoculture_report(d %>% filter(SampleType=="monoculture"))
 ```
 
 ## Mock metagenomes
 
-### ZymoHMW
-
-You find a description of this sample here: [https://zymoresearch.eu/products/zymobiomics-hmw-dna-standard?srsltid=AfmBOooNJLjOVzGjtNm0BJY2WoMS0vHsUDi7mR59p4HDqyBX7FlJe7jy](https://zymoresearch.eu/products/zymobiomics-hmw-dna-standard?srsltid=AfmBOooNJLjOVzGjtNm0BJY2WoMS0vHsUDi7mR59p4HDqyBX7FlJe7jy)
-
-Some brief analysis of this data can be found here: [analysis/zymohmw](https://github.com/Kirk3gaard/MicroBench/tree/main/analysis/zymohmw)
-
-```{r echo=FALSE,warning=FALSE,message=FALSE}
-d %>% 
-  filter(Sample=="ZymoHMW") %>%
-  arrange(desc(`date of basecalling`)) %>%
-  kable(format = "markdown")
-```
-
-### ZymoGut
-
-You find a description of this sample here: [https://zymoresearch.eu/collections/zymobiomics-microbial-community-standards/products/zymobiomics-gut-microbiome-standard](https://zymoresearch.eu/collections/zymobiomics-microbial-community-standards/products/zymobiomics-gut-microbiome-standard)
-
-```{r echo=FALSE,warning=FALSE,message=FALSE}
-d %>% 
-  filter(Sample=="ZymoGut") %>%
-  arrange(desc(`date of basecalling`)) %>%
-  kable(format = "markdown")
-```
-
-### ZymoOral
-
-You find a description of this sample here: [https://zymoresearch.eu/collections/zymobiomics-microbial-community-standards/products/zymobiomics-oral-microbiome-standard](https://zymoresearch.eu/collections/zymobiomics-microbial-community-standards/products/zymobiomics-oral-microbiome-standard)
-
-```{r echo=FALSE,warning=FALSE,message=FALSE}
-d %>% 
-  filter(Sample=="ZymoOral") %>%
-  arrange(desc(`date of basecalling`)) %>%
-  kable(format = "markdown")
+```{r echo=FALSE,message=FALSE,results='asis'}
+generate_monoculture_report(d %>% filter(SampleType=="mock"))
 ```
 
 ## "Real" metagenomes
 
-### ZymoFecal
-
-You find a description of this sample here: [https://zymoresearch.eu/products/zymobiomics-fecal-reference-with-trumatrix-technology?srsltid=AfmBOorYH_EvSWZvzNTVTAb7NYQk_zlNcRO4NXzI8WCiUPgG13fQBJhd](https://zymoresearch.eu/products/zymobiomics-fecal-reference-with-trumatrix-technology?srsltid=AfmBOorYH_EvSWZvzNTVTAb7NYQk_zlNcRO4NXzI8WCiUPgG13fQBJhd)
-
-```{r echo=FALSE,warning=FALSE,message=FALSE}
-d %>% 
-  filter(Sample=="ZymoFecal") %>%
-  arrange(desc(`date of basecalling`)) %>%
-  kable(format = "markdown")
+```{r echo=FALSE,message=FALSE,results='asis'}
+generate_monoculture_report(d %>% filter(SampleType=="metagenome"))
 ```
 
 
