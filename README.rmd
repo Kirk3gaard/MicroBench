@@ -3,6 +3,7 @@ title: "README"
 author: "Rasmus Kirkegaard"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: github_document
+always_allow_html: true
 ---
 
 
@@ -24,7 +25,6 @@ d<-read_xlsx("data_links.xlsx")
 # MicroBench 
 
 Overview of our data for microbial genomic benchmarking. We have sequenced a bunch of mono cultures, and metagenomic samples.
-
 
 Monocultures:
 
@@ -80,7 +80,24 @@ generate_monoculture_report <- function(df) {
     cat("You find a description of this sample here: [",dsmz_link,"](",dsmz_link,")\n")
 
     # Output the table
-    print(culture_data %>% select(-c(	SampleType,SampleInfo)) %>% kable(format = 'markdown')) 
+    print(culture_data %>% select(-c(	SampleType,SampleInfo)) %>% 
+            mutate(fast = case_when(is.na(fast)~NA,
+                           TRUE~cell_spec("fast", "html", link = fast))) %>%
+            mutate(hac = case_when(is.na(hac)~NA,
+                           TRUE~cell_spec("hac", "html", link = hac))) %>%
+            mutate(sup = case_when(is.na(sup)~NA,
+                           TRUE~cell_spec("sup", "html", link = sup))) %>%
+            mutate(hacdup = case_when(is.na(hacdup)~NA,
+                           TRUE~cell_spec("hacdup", "html", link = hacdup))) %>%
+            mutate(supdup = case_when(is.na(supdup)~NA,
+                           TRUE~cell_spec("supdup", "html", link = supdup))) %>%
+            mutate(mods = case_when(is.na(mods)~NA,
+                           TRUE~cell_spec("mods", "html", link = mods))) %>%
+            mutate(pod5 = case_when(is.na(pod5)~NA,
+                           TRUE~cell_spec("pod5", "html", link = pod5))) %>%
+            kable(format="html",escape = F) %>%
+    kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive" ,"bordered"), 
+                  full_width=FALSE,  position = "left"))
     cat("\n\n")
   }
 }
