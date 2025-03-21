@@ -18,13 +18,22 @@ library(readxl)
 library(kableExtra)
 library(tidyverse)
 d<-read_xlsx("data_links.xlsx")
+ENA_IDs<-read_delim("data/run-files-2025-02-05T13_15_57.csv",delim = ";")
+#d %>% pivot_longer(cols = c(fast,hac,hacdup,sup,supdup,mods)) %>%
+#  mutate(fileName=case_when(is.na(value)~value,
+#                            TRUE~gsub(value,pattern=".*/",replacement=""))) %>%
+#  left_join(ENA_IDs %>% select(ENAID=id,fileName)) %>%
+#  mutate(value_ena=case_when(is.na(ENAID)~value,
+#                             TRUE~paste0("ftp://ftp.sra.ebi.ac.uk/vol1/run/",fileName))) %>%
+#  select(-c(value,fileName,ENAID)) %>%
+#  pivot_wider(names_from = name,values_from = value_ena)
 ```
 
 <img align="right" src="images/microbench.jpg" width="200">
 
 # MicroBench 
 
-Overview of our data for microbial genomic benchmarking. We have sequenced a bunch of mono cultures, and metagenomic samples.
+Overview of our data for microbial genomic benchmarking. We have sequenced a bunch of mono cultures, and metagenomic samples. Data has been deposited to the ENA ([PRJEB85558](https://www.ebi.ac.uk/ena/browser/view/PRJEB85558)). 
 
 Monocultures:
 
