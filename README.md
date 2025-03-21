@@ -48,8 +48,7 @@ Mock Metagenomes:
 
 ## To do:
 
-- Sequence all standards
-- Get AAU to support public links or upload data to NCBI/ENA
+- Upload the pod5 files
 
 ## Mono cultures
 
