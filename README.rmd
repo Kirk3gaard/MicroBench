@@ -91,17 +91,17 @@ generate_monoculture_report <- function(df) {
     # Output the table
     print(culture_data %>% select(-c(	SampleType,SampleInfo)) %>% 
             mutate(fast = case_when(is.na(fast)~NA,
-                           TRUE~cell_spec("fast", "html", link = fast))) %>%
+                           TRUE~cell_spec("fast", "html", link = paste0("ftp://",fast)))) %>%
             mutate(hac = case_when(is.na(hac)~NA,
-                           TRUE~cell_spec("hac", "html", link = hac))) %>%
+                           TRUE~cell_spec("hac", "html", link = paste0("ftp://",hac)))) %>%
             mutate(sup = case_when(is.na(sup)~NA,
-                           TRUE~cell_spec("sup", "html", link = sup))) %>%
+                           TRUE~cell_spec("sup", "html", link = paste0("ftp://",sup)))) %>%
             mutate(hacdup = case_when(is.na(hacdup)~NA,
-                           TRUE~cell_spec("hacdup", "html", link = hacdup))) %>%
+                           TRUE~cell_spec("hacdup", "html", link = paste0("ftp://",hacdup)))) %>%
             mutate(supdup = case_when(is.na(supdup)~NA,
-                           TRUE~cell_spec("supdup", "html", link = supdup))) %>%
+                           TRUE~cell_spec("supdup", "html", link = paste0("ftp://",supdup)))) %>%
             mutate(mods = case_when(is.na(mods)~NA,
-                           TRUE~cell_spec("mods", "html", link = mods))) %>%
+                           TRUE~cell_spec("mods", "html", link = paste0("ftp://",mods))))%>%
             mutate(pod5 = case_when(is.na(pod5)~NA,
                            TRUE~cell_spec("pod5", "html", link = pod5))) %>%
             kable(format="html",escape = F) %>%
