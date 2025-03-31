@@ -1,7 +1,7 @@
 README
 ================
 Rasmus Kirkegaard
-21 March, 2025
+31 March, 2025
 
 <img align="right" src="images/microbench.jpg" width="200">
 
@@ -157,7 +157,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294002/PAW78174_barcode01.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW78174_barcode01/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789835/PAW78174_barcode01.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -268,7 +268,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294003/PAW78174_barcode11.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW78174_barcode11/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789836/PAW78174_barcode11.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -379,7 +379,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294004/PAW78174_barcode05.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW78174_barcode05/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789837/PAW78174_barcode05.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -490,7 +490,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294005/PAW78174_barcode07.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW78174_barcode07/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789838/PAW78174_barcode07.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -601,7 +601,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294006/PAW78174_barcode06.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW78174_barcode06/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789839/PAW78174_barcode06.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -712,7 +712,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294007/PAW78174_barcode10.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW78174_barcode10/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789840/PAW78174_barcode10.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -823,7 +823,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294008/PAW78174_barcode08.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW78174_barcode08/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789841/PAW78174_barcode08.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -934,7 +934,7 @@ NA
 <a href="http:///projects/MicroBench/data/PAW78174_barcode09.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW78174_barcode09/" style="     ">pod5</a>
+<a href="http:///projects/MicroBench/data/pod5/PAW78174_barcode09/" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -1045,7 +1045,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294009/PAW78174_barcode04.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW78174_barcode04/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789842/PAW78174_barcode04.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -1156,7 +1156,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294010/PAW78174_barcode03.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW78174_barcode03/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789843/PAW78174_barcode03.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -1267,7 +1267,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294011/PAW78174_barcode02.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW78174_barcode02/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789844/PAW78174_barcode02.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -1380,7 +1380,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251397/PAY12289_barcode13.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAY12289_barcode13/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789832/PAY12289_barcode13.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -1491,7 +1491,7 @@ PAS01578
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251398/PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps@5.0.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAS01578/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789833/PAS01578.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 <tr>
@@ -1541,7 +1541,7 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAS01578/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789833/PAS01578.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -1652,7 +1652,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251399/PAY12289_barcode12.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAY12289_barcode12/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789834/PAY12289_barcode12.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>
@@ -1765,7 +1765,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251396/PAW77640.dorado0.8.2.bm5.0.0.sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW77640/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789831/PAW77640.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 <tr>
@@ -1815,7 +1815,7 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW77640/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789831/PAW77640.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 <tr>
@@ -1865,7 +1865,7 @@ NA
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251395/PAW77640.dorado0.7.3.bm5.0.0.sup.mod4mC_5mC_6mA.subset.bam" style="     ">mods</a>
 </td>
 <td style="text-align:left;">
-<a href="/projects/MicroBench/data/pod5/PAW77640/" style="     ">pod5</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789831/PAW77640.tar.gz" style="     ">pod5</a>
 </td>
 </tr>
 </tbody>

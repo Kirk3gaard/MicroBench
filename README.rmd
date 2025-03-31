@@ -102,7 +102,7 @@ generate_monoculture_report <- function(df) {
             mutate(mods = case_when(is.na(mods)~NA,
                            TRUE~cell_spec("mods", "html", link = paste0("http://",mods))))%>%
             mutate(pod5 = case_when(is.na(pod5)~NA,
-                           TRUE~cell_spec("pod5", "html", link = pod5))) %>%
+                           TRUE~cell_spec("pod5", "html", link = paste0("http://",pod5)))) %>%
             kable(format="html",escape = F) %>%
     kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive" ,"bordered"), 
                   full_width=FALSE,  position = "left"))
