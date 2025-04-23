@@ -62,9 +62,6 @@ list_samples(d %>% filter(SampleType=="mock"))
 list_samples(d %>% filter(SampleType=="metagenome"))
 ```
 
-## To do:
-
- * Upload the pod5 files
 
 ## Mono cultures
 

@@ -1,7 +1,7 @@
 README
 ================
 Rasmus Kirkegaard
-31 March, 2025
+23 April, 2025
 
 <img align="right" src="images/microbench.jpg" width="200">
 
@@ -45,10 +45,6 @@ Mock Metagenomes:
 “Real” metagenomes:
 
 - [ZymoFecal](#zymofecal)
-
-## To do:
-
-- Upload the pod5 files
 
 ## Mono cultures
 
