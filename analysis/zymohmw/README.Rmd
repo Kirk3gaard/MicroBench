@@ -18,7 +18,7 @@ options(scipen = 10)
 To check the quality of nanopore data with the ZymoHMW mock DNA.
 
 ## Conclusion
-There are some serious improvements in raw read accuracy between the fast, hac and sup models.
+There are some serious improvements in raw read accuracy between the fast, hac sup, and now hyp models. However, for some reason the improved raw read accuracy of the hyp(er) accuracy model does not improve assemblies consistently for all of the organisms. 
 
 ## Data availability
 
@@ -27,49 +27,158 @@ There are some serious improvements in raw read accuracy between the fast, hac a
 
 ```{r load_libraries_and_data,echo=FALSE,warning=FALSE,message=FALSE}
 library(tidyverse)
-library(gridExtra)
-tt2 <- ttheme_default(core=list(fg_params=list(hjust=1, x = 0.95, fontsize = 10)),
-                      colhead=list(fg_params=list(fontsize = 12)))
+library(vroom)
 
-# duplex read QC new ref
-get_read_QC<-function(model="dna_r10.4.1_e8.2_400bps_hac@v4.0.0") {
-  files<-dir(pattern = paste0(model,"_ref_E.coli_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Escherichia_coli <- files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Escherichia_coli")
-  files<-dir(pattern = paste0(model,"_ref_L.monocytogenes_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Listeria_monocytogenes<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Listeria_monocytogenes")
-  files<-dir(pattern = paste0(model,"_ref_P.aeruginosa_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Pseudomonas_aeruginosa<- files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Pseudomonas_aeruginosa")
-  files<-dir(pattern = paste0(model,"_ref_B.subtilis_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Bacillus_subtilis<- files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Bacillus_subtilis")
-  files<-dir(pattern = paste0(model,"_ref_S.enterica_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Salmonella_enterica<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Salmonella_enterica")
-  files<-dir(pattern = paste0(model,"_ref_E.faecalis_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Enterococcus_faecalis<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Enterococcus_faecalis")
-  files<-dir(pattern = paste0(model,"_ref_S.aureus_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
-  NP_QC_ref_Staphylococcus_aureus<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Staphylococcus_aureus")
-  NP_QC_combined<-bind_rows(NP_QC_ref_Bacillus_subtilis,
-                            NP_QC_ref_Enterococcus_faecalis,
-                            NP_QC_ref_Escherichia_coli,
-                            NP_QC_ref_Listeria_monocytogenes,
-                            NP_QC_ref_Pseudomonas_aeruginosa,
-                            NP_QC_ref_Salmonella_enterica,
-                            NP_QC_ref_Staphylococcus_aureus) %>% 
-    mutate(model=model)
-return(NP_QC_combined)
+get_read_QC_optimized <- function(model = "dna_r10.4.1_e8.2_400bps_hac@v4.0.0") {
+
+  # Define a regular expression to match the files and capture the reference name.
+  # The (.*?) is a non-greedy capture group for the reference name.
+  # \\. escapes the dots, and $ anchors to the end of the string.
+  base_file_pattern <- paste0(model, "_ref_(.*?)_.*\\.NanoPlot-data\\.tsv\\.gz$")
+
+  # 1. Discover all relevant files in the 'temp/' directory in a single call.
+  # This avoids repeated directory listing operations.
+  all_files_paths <- dir(path = "temp/", pattern = base_file_pattern, full.names = TRUE)
+
+  # Handle the case where no files are found matching the pattern.
+  if (length(all_files_paths) == 0) {
+    message("No files found matching the pattern. Returning an empty tibble.")
+    # Return a tibble with expected column names for consistency in downstream operations.
+    # You might need to adjust these column names based on the actual structure of your TSV files.
+    return(tibble(
+      read_id = character(), # Example column, replace with actual column names from your TSVs
+      REF = character(),
+      model = character()
+      # Add other expected columns like 'mean_read_length', 'median_quality', etc.
+    ))
+  }
+
+  # 2. Define a helper function to process each individual file.
+  # This function reads the file, extracts the reference name, and adds the 'model' column.
+  process_single_file <- function(file_path) {
+    # Extract the base filename (e.g., "model_ref_E.coli_run1.NanoPlot-data.tsv.gz")
+    file_basename <- basename(file_path)
+
+    # Extract the reference name using the defined pattern.
+    # str_match returns a matrix; the second column is the captured group.
+    ref_name <- str_match(file_basename, base_file_pattern)[, 2]
+
+    # Read the gzipped TSV file using vroom for optimized performance.
+    # `vroom` is designed for speed when reading many files or large files.
+    df <- vroom(file_path, show_col_types = FALSE, delim = "\t") %>%
+      # 3. Mutate the data frame to add the 'REF' and 'model' columns dynamically.
+      mutate(
+        REF = ref_name,
+        model = model
+      )
+    return(df)
+  }
+
+  # 4. Use purrr::map_dfr to apply 'process_single_file' to all discovered
+  #    file paths and efficiently combine all resulting data frames row-wise.
+  #    map_dfr is designed for this exact use case and avoids inefficient
+  #    repeated rbind operations.
+  NP_QC_combined <- all_files_paths %>%
+    map_dfr(process_single_file)
+
+  return(NP_QC_combined)
 }
 
-NP_QC_fast_5.0.0<-get_read_QC(model = "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_fast.sim")
-NP_QC_hac_5.0.0<-get_read_QC(model = "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_hac.sim")
-NP_QC_hacdup_5.0.0<-get_read_QC(model = "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_hac.dup")
-NP_QC_sup_5.0.0<-get_read_QC(model = "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_sup.sim")
-NP_QC_supdup_5.0.0<-get_read_QC(model = "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_sup.dup")
-NP_QC_combined<-bind_rows(NP_QC_fast_5.0.0,
-                          NP_QC_hac_5.0.0,
-                          NP_QC_hacdup_5.0.0,
-                          NP_QC_sup_5.0.0,
-                          NP_QC_supdup_5.0.0) %>%
-  mutate(model_version=gsub(x = model,pattern=".*bps_([0-9].[0-9].[0-9])_.*",replacement = "\\1"),
-         basecalling_model=gsub(x = model,pattern=".*_(.*)",replacement = "\\1"))
+# Define the path where the combined data will be saved/loaded.
+output_file_path <- "temp/NP_QC_combined_data.rds"
+
+# Check if the combined data file already exists
+if (file.exists(output_file_path)) {
+  message(paste0("Loading combined QC data from existing file: ", output_file_path))
+  NP_QC_combined <- readRDS(output_file_path)
+} else {
+  message("Combined QC data file not found. Processing raw data...")
+
+  # 1. Define all the model strings in a single vector
+  models_to_process <- c(
+    "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_fast.sim",
+    "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_hac.sim",
+    "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_hac.dup",
+    "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_sup.sim",
+    "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_sup.dup",
+    "PAS01578.dorado1.0.0.bmdna_r10.4.1_e8.2_400bps_5.2.0_fast.sim",
+    "PAS01578.dorado1.0.0.bmdna_r10.4.1_e8.2_400bps_5.2.0_hac.sim",
+    "PAS01578.dorado1.0.0.bmdna_r10.4.1_e8.2_400bps_5.2.0_sup.sim",
+    "PAS01578.dorado1.0.0.bmdna_r10.4.1_e8.2_400bps_5.0.0_hyp.sim"
+  )
+
+  # 2. Use purrr::map to apply the get_read_QC_optimized function to each model.
+  # This will return a list of data frames, where each element is the result
+  # of calling get_read_QC_optimized with one of the models.
+  list_of_qc_dfs <- models_to_process %>%
+    map(~ get_read_QC_optimized(model = .x))
+
+  # 3. Combine all data frames in the list into one using bind_rows.
+  # This is much more efficient than calling bind_rows multiple times sequentially.
+  NP_QC_combined <- bind_rows(list_of_qc_dfs) %>%
+    # 4. Perform the final mutate operations to add model_version and basecalling_model
+    mutate(
+      model_version = gsub(x = model, pattern = ".*bps_([0-9].[0-9].[0-9])_.*", replacement = "\\1"),
+      basecalling_model = gsub(x = model, pattern = ".*_(.*)", replacement = "\\1")
+    )
+
+  # Save the newly processed data for future use
+  saveRDS(NP_QC_combined, output_file_path)
+  message(paste0("Data processed and saved to: ", output_file_path))
+}
+
+
+#library(gridExtra)
+#tt2 <- ttheme_default(core=list(fg_params=list(hjust=1, x = 0.95, fontsize = 10)),
+#                      colhead=list(fg_params=list(fontsize = 12)))
+
+# duplex read QC new ref
+# get_read_QC<-function(model="dna_r10.4.1_e8.2_400bps_hac@v4.0.0") {
+#   files<-dir(pattern = paste0(model,"_ref_E.coli_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
+#   NP_QC_ref_Escherichia_coli <- files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Escherichia_coli")
+#   files<-dir(pattern = paste0(model,"_ref_L.monocytogenes_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
+#   NP_QC_ref_Listeria_monocytogenes<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Listeria_monocytogenes")
+#   files<-dir(pattern = paste0(model,"_ref_P.aeruginosa_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
+#   NP_QC_ref_Pseudomonas_aeruginosa<- files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Pseudomonas_aeruginosa")
+#   files<-dir(pattern = paste0(model,"_ref_B.subtilis_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
+#   NP_QC_ref_Bacillus_subtilis<- files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Bacillus_subtilis")
+#   files<-dir(pattern = paste0(model,"_ref_S.enterica_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
+#   NP_QC_ref_Salmonella_enterica<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Salmonella_enterica")
+#   files<-dir(pattern = paste0(model,"_ref_E.faecalis_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
+#   NP_QC_ref_Enterococcus_faecalis<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Enterococcus_faecalis")
+#   files<-dir(pattern = paste0(model,"_ref_S.aureus_.*.NanoPlot-data.tsv.gz"),path = "temp/",full.names = T)
+#   NP_QC_ref_Staphylococcus_aureus<-files %>% map(.,~read_tsv(., show_col_types = FALSE)) %>% reduce(rbind) %>% mutate(REF="Staphylococcus_aureus")
+#   NP_QC_combined<-bind_rows(NP_QC_ref_Bacillus_subtilis,
+#                             NP_QC_ref_Enterococcus_faecalis,
+#                             NP_QC_ref_Escherichia_coli,
+#                             NP_QC_ref_Listeria_monocytogenes,
+#                             NP_QC_ref_Pseudomonas_aeruginosa,
+#                             NP_QC_ref_Salmonella_enterica,
+#                             NP_QC_ref_Staphylococcus_aureus) %>% 
+#     mutate(model=model)
+# return(NP_QC_combined)
+# }
+# 
+# NP_QC_fast_5.0.0<-get_read_QC(model = "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_fast.sim")
+# NP_QC_hac_5.0.0<-get_read_QC(model = "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_hac.sim")
+# NP_QC_hacdup_5.0.0<-get_read_QC(model = "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_hac.dup")
+# NP_QC_sup_5.0.0<-get_read_QC(model = "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_sup.sim")
+# NP_QC_supdup_5.0.0<-get_read_QC(model = "PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_sup.dup")
+# NP_QC_fast_5.2.0<-get_read_QC(model = "PAS01578.dorado1.0.0.bmdna_r10.4.1_e8.2_400bps_5.2.0_fast.sim")
+# NP_QC_hac_5.2.0<-get_read_QC(model = "PAS01578.dorado1.0.0.bmdna_r10.4.1_e8.2_400bps_5.2.0_hac.sim")
+# NP_QC_sup_5.2.0<-get_read_QC(model = "PAS01578.dorado1.0.0.bmdna_r10.4.1_e8.2_400bps_5.2.0_sup.sim")
+# NP_QC_hyp_5.0.0<-get_read_QC(model = "PAS01578.dorado1.0.0.bmdna_r10.4.1_e8.2_400bps_5.0.0_hyp.sim")
+# NP_QC_combined<-bind_rows(NP_QC_fast_5.0.0,
+#                           NP_QC_hac_5.0.0,
+#                           NP_QC_hacdup_5.0.0,
+#                           NP_QC_sup_5.0.0,
+#                           NP_QC_supdup_5.0.0,
+#                           NP_QC_fast_5.2.0,
+#                           NP_QC_hac_5.2.0,
+#                           NP_QC_sup_5.2.0,
+#                           HP_QC_hyp_5.0.0) %>%
+#   mutate(model_version=gsub(x = model,pattern=".*bps_([0-9].[0-9].[0-9])_.*",replacement = "\\1"),
+#          basecalling_model=gsub(x = model,pattern=".*_(.*)",replacement = "\\1"))
 
 ### read coverage
 draft_assemblies<-list.files(path = "results/",pattern = "*.assembly_info.txt",full.names = T)
@@ -116,6 +225,11 @@ genome_stats<-fastani %>% right_join(quast_tab,by = c("Assembly", "ref")) %>%
   filter(ref!="S.cerevisiae") %>%
   mutate(model_version=gsub(x = model,pattern=".*bps_([0-9].[0-9].[0-9])_.*",replacement = "\\1"),
          basecalling_model=gsub(x = model,pattern=".*_(.*)",replacement = "\\1"))
+
+perfect_fraction<<-NP_QC_combined %>% mutate(perfect=case_when(percentIdentity==100~"yes",
+                                            TRUE~"no")) %>% group_by(model,perfect) %>% summarise(n=n()) %>% ungroup() %>% group_by(model,.drop=FALSE) %>% mutate(Fraction=round(100*n/sum(n))) %>% filter(perfect=="yes") %>% select(model,Perfect_fraction=Fraction) %>%
+  mutate(model_version=gsub(x = model,pattern=".*bps_([0-9].[0-9].[0-9])_.*",replacement = "\\1"),
+         basecalling_model=gsub(x = model,pattern=".*_(.*)",replacement = "\\1"))
 ```
 
 ## NP reads mapped to the refs overall (percent identity)
@@ -137,9 +251,10 @@ NP_QC_combined %>% group_by(basecalling_model,model_version,REF) %>% filter(perc
 
 ## NP reads mapped to the refs overall (phred scale)
 
-Phred scores for perfect matching reads are calculated as recommended by [Armin Topfer](https://twitter.com/kirk3gaard/status/1397457000217423873) which takes length into account by adjusting the percent identity value 100*(1-1/(length+1)). This implies that a perfect read of 100 bp will achieve a phred score of ~20, while 1000 bp caps out at ~30 etc. So forget about your short reads being Q40. 
 
-```{r fig.width=10,fig.height=7,echo=FALSE,warning=FALSE,message=FALSE}
+
+```{r fig.width=10,fig.height=7,echo=FALSE,warning=FALSE,message=FALSE, include=FALSE}
+# Phred scores for perfect matching reads are calculated as recommended by [Armin Topfer](https://twitter.com/kirk3gaard/status/1397457000217423873) which takes length into account by adjusting the percent identity value 100*(1-1/(length+1)). This implies that a perfect read of 100 bp will achieve a phred score of ~20, while 1000 bp caps out at ~30 etc. So forget about your short reads being Q40. 
 PHREDNORMPERFECT=function(length=10) {
   adj_percentidentity<-100*(1-1/(length+1))
   phred<--10*log10((100-adj_percentidentity)/100)
@@ -149,16 +264,17 @@ NP_QC_combined %>%
   mutate(Phred=case_when(percentIdentity==100~PHREDNORMPERFECT(length=lengths),
                          TRUE~-10*log10((100-percentIdentity)/100))) %>%
   ggplot(aes(x = Phred,col=basecalling_model))+geom_density()+geom_vline(xintercept = 20,col="red",linetype="dashed")+xlab("Phred score (Q)")+facet_wrap(~model_version,ncol = 1)
+# As the phred score calculation above somewhat hides the fraction of perfect reads here they come as such. 
+
 ```
 
-As the phred score calculation above somewhat hides the fraction of perfect reads here they come as such. 
 
 ```{r fig.width=10,fig.height=7,echo=FALSE,warning=FALSE,message=FALSE}
 NP_QC_combined %>% 
-  mutate(Phred=case_when(percentIdentity==100~50,
-                         TRUE~-10*log10((100-percentIdentity)/100))) %>%
+  filter(percentIdentity!=100) %>%
+  mutate(Phred=-10*log10((100-percentIdentity)/100)) %>%
   ggplot(aes(x = Phred,col=basecalling_model))+geom_density()+geom_vline(xintercept = 20,col="red",linetype="dashed")+xlab("Phred score (Q)")+facet_wrap(~model_version,ncol = 1)+scale_x_continuous(labels=c("0" = "0", "10" = "10", "20" = "20", "30" = "30", "40" = "40", "50" = "Perfect"))+annotate("rect", xmin = 45, xmax = 47, ymin = 0, ymax = 0.4,
-           alpha = 1,fill = "lightgray")
+           alpha = 1,fill = "lightgray")+geom_text(data = perfect_fraction,x=50,aes(y=Perfect_fraction/100,label=paste0(Perfect_fraction," %")),show.legend = F)+ylab("density")+expand_limits(x=50)
 ```
 
 ## all modes
@@ -249,6 +365,23 @@ genome_stats %>%
   ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
 
+## hyp mode vs sup
+
+### Indel rate vs coverage
+
+```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
+genome_stats %>% 
+  filter(basecalling_model %in% c("sup.sim","hyp.sim")) %>%
+  ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
+```
+
+### Mismatch rate vs coverage
+
+```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
+genome_stats %>% 
+  filter(basecalling_model %in% c("sup.sim","hyp.sim")) %>%
+  ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
+```
 
 ## Materials and methods
 
@@ -259,7 +392,7 @@ DNA sample was the [Zymo Mock HMW standard](https://zymoresearch.eu/products/zym
 
 ### Basecalling
 #### 5 khz High Duplex PromethION data
-The reads were basecalled using [dorado](https://github.com/nanoporetech/dorado) (v. 0.7.3) with fast, hac and sup accuracy mode using the 5.0.0 models.
+The reads were basecalled using [dorado](https://github.com/nanoporetech/dorado) (v. 0.7.3) with fast, hac and sup accuracy mode using the 5.0.0 models.The reads were basecalled using [dorado](https://github.com/nanoporetech/dorado) (v. 1.0.0) with fast, hac and sup accuracy mode using the 5.2.0 models and hyp model 5.0.0.
 
 ### Read QC
 Reads were mapped to the updated zymo reference genomes (hopefully goes public soon) using [minimap2](https://github.com/lh3/minimap2) (v. 2.24), and QC information was obtained using [NanoPlot](https://github.com/wdecoster/NanoPlot) (v. 1.41.0).

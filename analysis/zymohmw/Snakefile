@@ -12,13 +12,13 @@ rule all:
 
 rule get_data:
     input:
-        "/projects/MicroBench/data/{npID}.fastq.gz"
+        "/projects/MA/RHK/MicroBench/data/{npID}.fastq.gz"
     output:
         "data/{npID}.fastq.gz"
     threads: 1
     resources:
         mem_mb=10000,
-        node_type="basic",
+        node_type="shared",
     shell:
         """
         ln -s {input} {output}
@@ -32,7 +32,7 @@ rule getNPsubsets:
     threads: 2
     resources:
         mem_mb=100000,
-        node_type="basic",
+        node_type="high-mem",
     conda:
         "envs/env_seqtk.yml"
     shell:
@@ -49,22 +49,22 @@ rule NPQC_ref:
     threads: 30
     resources:
         mem_mb=100000,
-        node_type="himem",
+        node_type="high-mem",
     conda:
         "envs/env_nanoplot.yml"
     shell:
         """
         # Run mapping
-        minimap2 -ax map-ont --secondary=no -t {threads} {input.ref} {input.NPreads} |\
-          samtools view --threads {threads} -Sb -F 0x104 - |\
-          samtools sort -T temp/ --threads {threads} - > temp/{wildcards.npID}.cov.bam
+        minimap2 -ax map-ont --secondary=no -t $(nproc) {input.ref} {input.NPreads} |\
+          samtools view --threads $(nproc) -Sb -F 0x104 - |\
+          samtools sort -T temp/ --threads $(nproc) - > temp/{wildcards.npID}.cov.bam
         samtools index temp/{wildcards.npID}.cov.bam
         bamtools split -in temp/{wildcards.npID}.cov.bam -reference
         for f in temp/{wildcards.npID}*REF*bam;
             do 
                 NAME=$(echo $f | sed 's/.*REF_//' | sed 's/.bam//')
                 samtools index $f
-                NanoPlot --threads {threads} -o temp/NP_QC_ref_{wildcards.npID}/ --no_static --raw --tsv_stats --bam  $f
+                NanoPlot --threads $(nproc) -o temp/NP_QC_ref_{wildcards.npID}/ --no_static --raw --tsv_stats --bam  $f
                 cp temp/NP_QC_ref_{wildcards.npID}/NanoPlot-data.tsv.gz temp/{wildcards.npID}_ref_$NAME.NanoPlot-data.tsv.gz
                 rm -rf temp/NP_QC_ref_{wildcards.npID}/
                 rm $f
@@ -81,7 +81,7 @@ rule flye:
     threads: config["assembly_threads"]
     resources:
         mem_mb=config["assembly_mb"],
-        node_type="basic",
+        node_type="general",
     conda:
         "envs/env_flye.yml"
     shell:
@@ -89,9 +89,9 @@ rule flye:
         basecall_mode=$(echo {wildcards.npID} | sed -E 's/.*_([a-z]+)\\@.*/\1/')
         if [[ $basecall_mode == "fast" ]]
         then
-        flye --nano-raw {input.NPreads} --threads {threads} --meta --out-dir temp/flye.{wildcards.npID}
+        flye --nano-raw {input.NPreads} --threads $(nproc) --meta --out-dir temp/flye.{wildcards.npID}
         else
-        flye --nano-hq {input.NPreads} --threads {threads} --meta --out-dir temp/flye.{wildcards.npID}
+        flye --nano-hq {input.NPreads} --threads $(nproc) --meta --out-dir temp/flye.{wildcards.npID}
         fi
         cat temp/flye.{wildcards.npID}/assembly.fasta | gzip > {output.asm}
         cp temp/flye.{wildcards.npID}/assembly_info.txt {output.asminfo}
@@ -106,7 +106,7 @@ rule extract_contigs:
     threads: 2
     resources:
         mem_mb=5000,
-        node_type="basic",
+        node_type="general",
     conda:
         "envs/env_seqtk.yml"
     shell:
@@ -131,13 +131,13 @@ rule split_quast_QC:
     threads: 32
     resources:
         mem_mb=20000,
-        node_type="basic",
+        node_type="general",
     conda:
         "envs/env_quast.yml"
     shell:
         """
         ulimit -s 65536
-        quast.py --threads {threads} --output-dir temp/quast_ref_{wildcards.refID} -r {input.ref} --no-plots --no-html results/bins/*.fa.gz {input.ref}
+        quast.py --threads $(nproc) --output-dir temp/quast_ref_{wildcards.refID} -r {input.ref} --no-plots --no-html results/bins/*.fa.gz {input.ref}
         cat temp/quast_ref_{wildcards.refID}/transposed_report.tsv > {output}
         """
 
@@ -151,7 +151,7 @@ rule split_ANI:
     threads: 16
     resources:
         mem_mb=10000,
-        node_type="basic",
+        node_type="general",
     conda:
         "envs/env_fastani.yml"
     shell:
@@ -159,7 +159,7 @@ rule split_ANI:
         ulimit -s 65536
         ls results/bins/*.fa.gz > temp/draft_genome_list.txt
         ls data/hmw_individual/*.fasta > temp/ref_genome_list.txt
-        fastANI --threads {threads} --queryList temp/draft_genome_list.txt --refList temp/ref_genome_list.txt -o {output}
+        fastANI --threads $(nproc) --queryList temp/draft_genome_list.txt --refList temp/ref_genome_list.txt -o {output}
         """
 
 
@@ -174,7 +174,7 @@ rule knitRMD:
     threads: 4
     resources:
         mem_mb=50000,
-        node_type="basic",
+        node_type="general",
     conda:
         "envs/env_r.yml"
     shell:

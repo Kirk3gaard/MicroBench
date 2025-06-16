@@ -1,7 +1,7 @@
 README
 ================
 Rasmus Kirkegaard
-07 October, 2024
+16 June, 2025
 
 # R10.4.1 Zymo HMW basecalling
 
@@ -12,7 +12,9 @@ To check the quality of nanopore data with the ZymoHMW mock DNA.
 ## Conclusion
 
 There are some serious improvements in raw read accuracy between the
-fast, hac and sup models.
+fast, hac sup, and now hyp models. However, for some reason the improved
+raw read accuracy of the hyp(er) accuracy model does not improve
+assemblies consistently for all of the organisms.
 
 ## Data availability
 
@@ -27,19 +29,6 @@ fast, hac and sup models.
 ![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 ## NP reads mapped to the refs overall (phred scale)
-
-Phred scores for perfect matching reads are calculated as recommended by
-[Armin
-Topfer](https://twitter.com/kirk3gaard/status/1397457000217423873) which
-takes length into account by adjusting the percent identity value
-100\*(1-1/(length+1)). This implies that a perfect read of 100 bp will
-achieve a phred score of ~20, while 1000 bp caps out at ~30 etc. So
-forget about your short reads being Q40.
-
-![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
-
-As the phred score calculation above somewhat hides the fraction of
-perfect reads here they come as such.
 
 ![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
@@ -93,6 +82,16 @@ perfect reads here they come as such.
 
 ![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
+## hyp mode vs sup
+
+### Indel rate vs coverage
+
+![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+### Mismatch rate vs coverage
+
+![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+
 ## Materials and methods
 
 Here is a brief description of the tools used. For the exact commands
@@ -114,7 +113,10 @@ sampling).
 
 The reads were basecalled using
 [dorado](https://github.com/nanoporetech/dorado) (v. 0.7.3) with fast,
-hac and sup accuracy mode using the 5.0.0 models.
+hac and sup accuracy mode using the 5.0.0 models.The reads were
+basecalled using [dorado](https://github.com/nanoporetech/dorado) (v.
+1.0.0) with fast, hac and sup accuracy mode using the 5.2.0 models and
+hyp model 5.0.0.
 
 ### Read QC
 
