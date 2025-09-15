@@ -2000,7 +2000,7 @@ NA
 ### sediment_MFD04716
 
 You find a description of this sample here:
-[sediment_MFD04716](sediment_MFD04716)
+<https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
 <thead>
 <tr>
@@ -2075,7 +2075,7 @@ NA
 ### sediment_MFD00905
 
 You find a description of this sample here:
-[sediment_MFD00905](sediment_MFD00905)
+<https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
 <thead>
 <tr>
@@ -2150,7 +2150,7 @@ NA
 ### sediment_MFD05674
 
 You find a description of this sample here:
-[sediment_MFD05674](sediment_MFD05674)
+<https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
 <thead>
 <tr>
@@ -2225,7 +2225,7 @@ NA
 ### sediment_MFD10007
 
 You find a description of this sample here:
-[sediment_MFD10007](sediment_MFD10007)
+<https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
 <thead>
 <tr>
@@ -2300,7 +2300,7 @@ NA
 ### sediment_MFD09779
 
 You find a description of this sample here:
-[sediment_MFD09779](sediment_MFD09779)
+<https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
 <thead>
 <tr>
@@ -2375,7 +2375,7 @@ NA
 ### soil_MFD00392
 
 You find a description of this sample here:
-[soil_MFD00392](soil_MFD00392)
+<https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
 <thead>
 <tr>
@@ -2450,7 +2450,7 @@ NA
 ### soil_MFD06742
 
 You find a description of this sample here:
-[soil_MFD06742](soil_MFD06742)
+<https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
 <thead>
 <tr>
@@ -2525,7 +2525,7 @@ NA
 ### soil_MFD06229
 
 You find a description of this sample here:
-[soil_MFD06229](soil_MFD06229)
+<https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
 <thead>
 <tr>
@@ -2600,7 +2600,7 @@ NA
 ### soil_MFD02242
 
 You find a description of this sample here:
-[soil_MFD02242](soil_MFD02242)
+<https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
 <thead>
 <tr>
@@ -2675,7 +2675,7 @@ NA
 ### soil_MFD02360
 
 You find a description of this sample here:
-[soil_MFD02360](soil_MFD02360)
+<https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
 <thead>
 <tr>
