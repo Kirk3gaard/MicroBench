@@ -17,7 +17,7 @@ options(scipen = 10)
 library(readxl)
 library(kableExtra)
 library(tidyverse)
-d<-read_xlsx("data_links.xlsx")
+d<-read_tsv("ENA_data_links.tsv")#read_xlsx("data_links.xlsx")
 ENA_IDs<-read_delim("data/run-files-2025-02-05T13_15_57.csv",delim = ";")
 ```
 
@@ -66,7 +66,7 @@ generate_monoculture_report <- function(df) {
     # Extract relevant information for the current monoculture
     culture_data <- df %>% 
       filter(Sample == culture) %>%
-      arrange(desc(`date of basecalling`))
+      arrange(desc(`basecall model version`))
 
     # Create the markdown output
     cat("###", culture, "\n\n")  # Heading with culture name
