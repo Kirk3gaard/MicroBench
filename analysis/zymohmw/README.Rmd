@@ -180,7 +180,7 @@ if (file.exists(output_file_path)) {
 #   mutate(model_version=gsub(x = model,pattern=".*bps_([0-9].[0-9].[0-9])_.*",replacement = "\\1"),
 #          basecalling_model=gsub(x = model,pattern=".*_(.*)",replacement = "\\1"))
 
-### read coverage
+### read coverage flye
 draft_assemblies<-list.files(path = "results/",pattern = "*.assembly_info.txt",full.names = T)
 cov_tab<-tibble()
 for (f in draft_assemblies) {
@@ -190,6 +190,24 @@ for (f in draft_assemblies) {
 cov_tab<-cov_tab %>% mutate(contigName=`#seq_name`,coverage=cov.,circular=circ.,
                             ReadSet=str_replace(string =draft,pattern = "results//(.*dna.*).assembly_info.txt",replacement = "\\1")) %>% 
   select(ReadSet,contigName,coverage,circular)
+
+# read coverage metamdbg
+metamdbg_assemblies<-gsub(pattern = "results//(.*).metamdbg.fa.gz",replacement = "temp/metamdbg.\\1/asminfo.txt",x = list.files(path = "results/",pattern = "*.metamdbg*",full.names = T))
+metamdbg_asminfo<-tibble()
+for (f in metamdbg_assemblies) {
+  info_temp<-read_tsv(file = f,show_col_types = FALSE,col_names = c("contig","length","coverage","circular")) %>% mutate(draft=f)
+  metamdbg_asminfo<-bind_rows(metamdbg_asminfo,info_temp)
+}
+metamdbg_asminfo <-metamdbg_asminfo %>% 
+  mutate(circular=case_when(str_detect(string=contig,pattern = "circular=yes")~"Y",
+                            TRUE~"N"),
+         coverage=as.numeric(gsub(x = contig,pattern=".*coverage=([0-9]+.[0-9]+) circular.*",replacement="\\1")),
+         Assembly=paste0(gsub(x = draft,pattern="temp/metamdbg.(.*)/asminfo.txt",replacement = "\\1"),".metamdbg."),
+         Assembly=paste0(Assembly,gsub(x = contig,pattern=">(ctg[0-9]+) .*",replacement="\\1"))) %>%
+  select(Assembly,coverage,circular)
+
+# >ctg3 length=2579 coverage=4.58 circular=no
+# PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_hac.dup-100000.metamdbg.ctg51
 
 ### Assembly based stats
 fastani<-read_tsv(file = "results/fastani.tsv",col_names = c("query","ref","ANI","aligned_segments","total_segments",show_col_types = FALSE)) %>% 
@@ -213,18 +231,35 @@ quast_tab<-quast_tab %>% mutate(ref=str_replace(string = ref,pattern = ".*quast_
          `# mismatches per 100 kbp`=as.numeric(`# mismatches per 100 kbp`)) %>%
   filter(Assembly!=ref)
 
+
+
 ###
 genome_stats<-fastani %>% right_join(quast_tab,by = c("Assembly", "ref")) %>%
   mutate(contigName=str_replace(string = Assembly,pattern = ".*(contig.*)",replacement = "\\1"),
-         ReadSet=str_replace(string = Assembly,pattern = "(.*).flye.*",replacement = "\\1")) %>%
+         contigName=str_replace(string = contigName,pattern = ".*.myloasm.(u[0-9]+ctg).*",replacement = "\\1"),
+         contigName=str_replace(string = contigName,pattern = ".*metamdbg.(ctg[0-9]+)",replacement = "\\1"),
+         ReadSet=str_replace(string = Assembly,pattern = "(.*).flye.*",replacement = "\\1"),
+         ReadSet=str_replace(string = ReadSet,pattern = "(.*).myloasm.*",replacement = "\\1"),
+         ReadSet=str_replace(string = ReadSet,pattern = "(.*).metamdbg.*",replacement = "\\1")) %>%
   filter(ANI>95) %>%
   left_join(cov_tab,by = c("contigName", "ReadSet")) %>%
-  mutate(asmtype=str_replace(string = Assembly,pattern = ".*(fly.*).contig.*",replacement = "\\1")) %>%
+  mutate(asmtype=case_when(str_detect(string = Assembly,pattern = "flye")~"flye",
+                           str_detect(string = Assembly,pattern = "myloasm")~"myloasm",
+                           str_detect(string = Assembly,pattern = "metamdbg")~"metamdbg",)) %>%
+  mutate(coverage=case_when(asmtype=="myloasm"~as.numeric(gsub(x = Assembly,pattern=".*depth-([0-9]+)-.*",replacement = "\\1")),
+                            TRUE~coverage)) %>%
+  mutate(circular=case_when(asmtype=="myloasm" & str_detect(string= Assembly,pattern = "circular-yes")~"Y",
+                            asmtype=="myloasm" & str_detect(string= Assembly,pattern = "circular-no")~"N",
+                            TRUE~circular)) %>% 
   mutate(model=str_replace(ReadSet,pattern = "-.*",replacement = "")) %>%
   mutate(ref=str_replace(ref,pattern = "_hifiasm",replacement = "")) %>%
   filter(ref!="S.cerevisiae") %>%
   mutate(model_version=gsub(x = model,pattern=".*bps_([0-9].[0-9].[0-9])_.*",replacement = "\\1"),
          basecalling_model=gsub(x = model,pattern=".*_(.*)",replacement = "\\1"))
+genome_stats_metamdbg<-genome_stats %>% filter(asmtype=="metamdbg") %>% select(-coverage,-circular) %>% left_join(metamdbg_asminfo) %>% select(names(genome_stats))
+genome_stats<-bind_rows(genome_stats,genome_stats_metamdbg) %>% filter(!is.na(coverage))
+
+
 
 perfect_fraction<<-NP_QC_combined %>% mutate(perfect=case_when(percentIdentity==100~"yes",
                                             TRUE~"no")) %>% group_by(model,perfect) %>% summarise(n=n()) %>% ungroup() %>% group_by(model,.drop=FALSE) %>% mutate(Fraction=round(100*n/sum(n))) %>% filter(perfect=="yes") %>% select(model,Perfect_fraction=Fraction) %>%
@@ -277,12 +312,27 @@ NP_QC_combined %>%
            alpha = 1,fill = "lightgray")+geom_text(data = perfect_fraction,x=50,aes(y=Perfect_fraction/100,label=paste0(Perfect_fraction," %")),show.legend = F)+ylab("density")+expand_limits(x=50)
 ```
 
+
+
 ## all modes
+
+### Mismatch rate vs coverage
+
+```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
+genome_stats %>%
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
+  ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
+```
 
 ### Indel rate vs coverage
 
+
+
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
   ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
 
@@ -290,6 +340,8 @@ genome_stats %>%
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
   ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
 
@@ -299,6 +351,8 @@ genome_stats %>%
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
     filter(basecalling_model=="fast.sim") %>%
   ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
@@ -307,6 +361,8 @@ genome_stats %>%
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
   filter(basecalling_model=="fast.sim") %>%
   ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
@@ -317,6 +373,8 @@ genome_stats %>%
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
   filter(basecalling_model=="hac.sim") %>%
   ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
@@ -325,6 +383,8 @@ genome_stats %>%
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
   filter(basecalling_model=="hac.sim") %>%
   ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
@@ -335,6 +395,8 @@ genome_stats %>%
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
   filter(basecalling_model=="sup.sim") %>%
   ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
@@ -343,6 +405,8 @@ genome_stats %>%
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
   filter(basecalling_model=="sup.sim") %>%
   ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
@@ -353,6 +417,8 @@ genome_stats %>%
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
   filter(basecalling_model %in% c("hac.dup","sup.dup")) %>%
   ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
@@ -361,6 +427,8 @@ genome_stats %>%
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
   filter(basecalling_model %in% c("hac.dup","sup.dup")) %>%
   ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
@@ -371,6 +439,8 @@ genome_stats %>%
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
   filter(basecalling_model %in% c("sup.sim","hyp.sim")) %>%
   ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
@@ -379,8 +449,32 @@ genome_stats %>%
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
 genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
   filter(basecalling_model %in% c("sup.sim","hyp.sim")) %>%
   ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
+```
+
+## Assemblers
+
+- flye
+- myloasm 
+- metamdbg
+
+### Mismatch rate vs coverage
+
+```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
+genome_stats %>% 
+  filter(basecalling_model=="sup.sim" & model_version=="5.2.0") %>%
+  ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,,col=asmtype,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
+```
+
+### Indel rate vs coverage
+
+```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
+genome_stats %>% 
+  filter(basecalling_model=="sup.sim" & model_version=="5.2.0") %>%
+  ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=asmtype,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
 ```
 
 ## Materials and methods
@@ -398,7 +492,7 @@ The reads were basecalled using [dorado](https://github.com/nanoporetech/dorado)
 Reads were mapped to the updated zymo reference genomes (hopefully goes public soon) using [minimap2](https://github.com/lh3/minimap2) (v. 2.24), and QC information was obtained using [NanoPlot](https://github.com/wdecoster/NanoPlot) (v. 1.41.0).
 
 ### Assembly
-The reads were subsampled using [seqtk](https://github.com/lh3/seqtk) (v. 1.3) and assembled using [flye](https://github.com/fenderglass/Flye) (v. 2.9.5).
+The reads were subsampled using [seqtk](https://github.com/lh3/seqtk) (v. 1.3) and assembled using [flye](https://github.com/fenderglass/Flye) (v. 2.9.5), [myloasm](https://github.com/bluenote-1577/myloasm) (v. 0.2.0), and [metamdbg](https://github.com/GaetanBenoitDev/metaMDBG) (v. 1.2). 
 
 ### Genome quality assessment
 The assembled contigs were compared to the reference contigs using [QUAST](https://github.com/ablab/quast) (v. 5.2.0) and [fastANI](https://github.com/ParBLiSS/FastANI) (v. 1.33).

@@ -19,6 +19,7 @@ rule get_data:
     resources:
         mem_mb=10000,
         node_type="shared",
+        time="00:10:00",
     shell:
         """
         ln -s {input} {output}
@@ -33,6 +34,7 @@ rule getNPsubsets:
     resources:
         mem_mb=100000,
         node_type="high-mem",
+        time="10:00:00",
     conda:
         "envs/env_seqtk.yml"
     shell:
@@ -50,6 +52,7 @@ rule NPQC_ref:
     resources:
         mem_mb=100000,
         node_type="high-mem",
+        time="1-00:00:00",
     conda:
         "envs/env_nanoplot.yml"
     shell:
@@ -82,6 +85,7 @@ rule flye:
     resources:
         mem_mb=config["assembly_mb"],
         node_type="general",
+        time="2-00:00:00",
     conda:
         "envs/env_flye.yml"
     shell:
@@ -96,30 +100,72 @@ rule flye:
         cat temp/flye.{wildcards.npID}/assembly.fasta | gzip > {output.asm}
         cp temp/flye.{wildcards.npID}/assembly_info.txt {output.asminfo}
         """
+        
+rule myloasm:
+    input:
+        NPreads="data/{npID}.fastq.gz"
+    output:
+        asm="results/{npID}.myloasm.fa.gz",
+    threads: config["assembly_threads"]
+    resources:
+        mem_mb=config["assembly_mb"],
+        node_type="general",
+        time="00:05:00",
+    conda:
+        "envs/env_myloasm.yml"
+    shell:
+        """
+        [[ -s temp/myloasm.{wildcards.npID}/assembly_primary.fa ]] || myloasm {input.NPreads} -o temp/myloasm.{wildcards.npID} -t $(nproc)
+        cat temp/myloasm.{wildcards.npID}/assembly_primary.fa | gzip > {output.asm}
+        """
+
+rule metaMDBG:
+    input:
+        NPreads="data/{npID}.fastq.gz"
+    output:
+        asm="results/{npID}.metamdbg.fa.gz",
+    threads: config["assembly_threads"]
+    resources:
+        mem_mb=config["metamdbg_mb"],
+        node_type="general",
+        time="10:00:00",
+    conda:
+        "envs/env_metamdbg.yml"
+    shell:
+        """
+        [[ -s temp/metamdbg.{wildcards.npID}/contigs.fasta.gz ]] || metaMDBG asm --out-dir temp/metamdbg.{wildcards.npID} --in-ont {input.NPreads} --threads $(nproc)
+        zcat temp/metamdbg.{wildcards.npID}/contigs.fasta.gz | grep "^>" > temp/metamdbg.{wildcards.npID}/asminfo.txt
+        cp temp/metamdbg.{wildcards.npID}/contigs.fasta.gz {output.asm}
+        """
 
 rule extract_contigs:
     input:
         asm="results/{npID}.{asmtype}.fa.gz",
-        asminfo="results/{npID}.assembly_info.txt"
     output:
         "temp/{npID}.contigIDs.{asmtype}.txt"
     threads: 2
     resources:
         mem_mb=5000,
         node_type="general",
+        time="00:30:00",
     conda:
         "envs/env_seqtk.yml"
     shell:
-        """
+        '''
         mkdir -p results/bins/
-        tail -n +2 {input.asminfo} | cut -f 1 > {output}
+        zcat {input} | grep '^>' | sed -E 's/^>([[:alnum:]_.-]+).*$/\\1/' > {output}
         # Separate contigs as individual "bins" (https://twitter.com/lh3lh3/status/1453374559084765185)
+        # + avoid writing contigs of less than 250 kbp
         while read -r line;
         do
         echo $line > temp/{wildcards.npID}.{wildcards.asmtype}thisID
-        seqtk subseq {input.asm} temp/{wildcards.npID}.{wildcards.asmtype}thisID | gzip > results/bins/{wildcards.npID}.{wildcards.asmtype}.$line.fa.gz
+        OUTPUT=$(seqtk subseq {input.asm} temp/{wildcards.npID}.{wildcards.asmtype}thisID | seqtk seq -L 250000)
+        if [ -n "$OUTPUT" ]; then
+            echo "$OUTPUT" | gzip > results/bins/{wildcards.npID}.{wildcards.asmtype}.$line.fa.gz
+        fi
+        #seqtk subseq {input.asm} temp/{wildcards.npID}.{wildcards.asmtype}thisID | gzip > results/bins/{wildcards.npID}.{wildcards.asmtype}.$line.fa.gz
         done < {output}
-        """
+        '''
 
 rule split_quast_QC:
     input:
@@ -128,10 +174,11 @@ rule split_quast_QC:
         ref="data/hmw_individual/{refID}.fasta",
     output:
         "results/quast_{refID}.tsv"
-    threads: 32
+    threads: 16
     resources:
         mem_mb=20000,
         node_type="general",
+        time="05:00:00",
     conda:
         "envs/env_quast.yml"
     shell:
@@ -152,6 +199,7 @@ rule split_ANI:
     resources:
         mem_mb=10000,
         node_type="general",
+        time="10:00:00",
     conda:
         "envs/env_fastani.yml"
     shell:
@@ -175,6 +223,7 @@ rule knitRMD:
     resources:
         mem_mb=50000,
         node_type="general",
+        time="10:00:00",
     conda:
         "envs/env_r.yml"
     shell:

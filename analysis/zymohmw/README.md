@@ -1,7 +1,7 @@
 README
 ================
 Rasmus Kirkegaard
-16 June, 2025
+30 September, 2025
 
 # R10.4.1 Zymo HMW basecalling
 
@@ -34,63 +34,81 @@ assemblies consistently for all of the organisms.
 
 ## all modes
 
-### Indel rate vs coverage
+### Mismatch rate vs coverage
 
 ![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
-### Mismatch rate vs coverage
+### Indel rate vs coverage
 
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+### Mismatch rate vs coverage
+
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ## Fast mode
 
 ### Indel rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ### Mismatch rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ## HAC mode
 
 ### Indel rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 ### Mismatch rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 ## SUP mode
 
 ### Indel rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 ### Mismatch rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
 ## Duplex mode
 
 ### Indel rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
 
 ### Mismatch rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 ## hyp mode vs sup
 
 ### Indel rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
 ### Mismatch rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+
+## Assemblers
+
+- flye
+- myloasm
+- metamdbg
+
+### Mismatch rate vs coverage
+
+![](README_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+
+### Indel rate vs coverage
+
+![](README_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
 
 ## Materials and methods
 
@@ -129,7 +147,9 @@ public soon) using [minimap2](https://github.com/lh3/minimap2) (v.
 
 The reads were subsampled using [seqtk](https://github.com/lh3/seqtk)
 (v. 1.3) and assembled using [flye](https://github.com/fenderglass/Flye)
-(v. 2.9.5).
+(v. 2.9.5), [myloasm](https://github.com/bluenote-1577/myloasm) (v.
+0.2.0), and [metamdbg](https://github.com/GaetanBenoitDev/metaMDBG) (v.
+1.2).
 
 ### Genome quality assessment
 

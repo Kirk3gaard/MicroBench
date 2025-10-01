@@ -35,8 +35,12 @@ reffiles:
     - S.enterica_hifiasm
 asmtypes:
     - flye
+    - myloasm
+    - metamdbg
 assembly_threads:
-     20
+     2 # 0
 assembly_mb:
-     100000
+     5000 #00
+metamdbg_mb:
+     10000
 

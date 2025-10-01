@@ -6,6 +6,6 @@ printshellcmds: True
 jobname: "{rule}.{jobid}"
 max-jobs-per-second: 1
 max-status-checks-per-second: 10
-jobs: 400
+jobs: 50
 use-conda: True
-cluster: "sbatch --parsable --output=jobs/{rule}/slurm_%x_%j.out --error=jobs/{rule}/slurm_%x_%j.log --mem={resources.mem_mb} --cpus-per-task={threads} --partition={resources.node_type} --time 02-00:00:00"
+cluster: "sbatch --parsable --output=jobs/{rule}/slurm_%x_%j.out --error=jobs/{rule}/slurm_%x_%j.log --mem={resources.mem_mb} --cpus-per-task={threads} --partition={resources.node_type} --time {resources.time}"

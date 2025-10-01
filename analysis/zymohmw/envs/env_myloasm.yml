@@ -1,0 +1,7 @@
+name: env_flye
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - myloasm=0.2.0
