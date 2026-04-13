@@ -1,4 +1,5 @@
 # Filetypes to ignore
+.direnv
 *fasta
 *fastq
 *gz
