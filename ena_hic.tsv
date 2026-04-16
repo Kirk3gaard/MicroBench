@@ -5,3 +5,4 @@ RASK00000062MP	PRJEB98069	Proximeta	Illumina NovaSeq 6000	ftp.sra.ebi.ac.uk/vol1
 RASK00000027MP	PRJEB98069	Proximeta	Illumina NovaSeq 6000	ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986441/hic_nohuman_read_R1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986441/hic_nohuman_read_R2.fastq.gz
 PaPr00000116MP	PRJEB66493	Proximeta	Illumina NovaSeq 6000	ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16984172/hic_nohuman_read_R1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16984172/hic_nohuman_read_R2.fastq.gz
 PaPr00000216MP	PRJEB66493	Proximeta	Illumina NovaSeq 6000	ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16984171/hic_nohuman_read_R1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16984171/hic_nohuman_read_R2.fastq.gz
+ZymoFecal	PRJEB85558	Proximeta	Illumina NovaSeq 6000	ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006084/HiC_ZymoFecal_R1.fastq.gz	ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006084/HiC_ZymoFecal_R2.fastq.gz

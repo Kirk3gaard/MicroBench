@@ -1,7 +1,7 @@
 README
 ================
-Rasmus Kirkegaard
-15 September, 2025
+Rasmus Kirkegaard & Sebastian Dall
+16 April, 2026
 
 <img align="right" src="images/microbench.jpg" width="200">
 
@@ -58,6 +58,12 @@ Mock Metagenomes:
 - [soil_MFD06229](#soil_mfd06229)
 - [soil_MFD02242](#soil_mfd02242)
 - [soil_MFD02360](#soil_mfd02360)
+- [PaPr00000116MP](#papr00000116mp)
+- [PaPr00000216MP](#papr00000216mp)
+- [RASK00000027MP](#rask00000027mp)
+- [RASK00000062MP](#rask00000062mp)
+- [ASYM00000009MP](#asym00000009mp)
+- [ASYM00000026MP](#asym00000026mp)
 
 ## Mono cultures
 
@@ -66,106 +72,177 @@ Mock Metagenomes:
 You find a description of this sample here:
 <https://www.dsmz.de/collection/catalogue/details/culture/DSM-107007>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 Anabaena variabilis PCC 7120 DSM 107007
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459727/PAW78174_barcode01.dorado1.0.0.bm5.2.0_fast.sim.bam" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459728/PAW78174_barcode01.dorado1.0.0.bm5.2.0_hac.sim.bam" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459729/PAW78174_barcode01.dorado1.0.0.bm5.2.0_sup.sim.bam" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459730/PAW78174_barcode01.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789835/PAW78174_barcode01.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 Anabaena variabilis PCC 7120 DSM 107007
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251414/PAW78174_barcode01.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251415/PAW78174_barcode01.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251416/PAW78174_barcode01.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294002/PAW78174_barcode01.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789835/PAW78174_barcode01.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### Desulfobacca acetoxidans ASRB2 DSM 11109
@@ -173,106 +250,177 @@ NA
 You find a description of this sample here:
 <https://www.dsmz.de/collection/catalogue/details/culture/DSM-11109>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 Desulfobacca acetoxidans ASRB2 DSM 11109
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459763/PAW78174_barcode11.dorado1.0.0.bm5.2.0_fast.sim.bam" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459764/PAW78174_barcode11.dorado1.0.0.bm5.2.0_hac.sim.bam" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459765/PAW78174_barcode11.dorado1.0.0.bm5.2.0_sup.sim.bam" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459766/PAW78174_barcode11.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789836/PAW78174_barcode11.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 Desulfobacca acetoxidans ASRB2 DSM 11109
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294025/PAW78174_barcode11.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294026/PAW78174_barcode11.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294027/PAW78174_barcode11.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294003/PAW78174_barcode11.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789836/PAW78174_barcode11.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### Sagittula stellata E-37 DSM 11524
@@ -280,106 +428,177 @@ NA
 You find a description of this sample here:
 <https://www.dsmz.de/collection/catalogue/details/culture/DSM-11524>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 Sagittula stellata E-37 DSM 11524
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459743/PAW78174_barcode05.dorado1.0.0.bm5.2.0_fast.sim.bam" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459744/PAW78174_barcode05.dorado1.0.0.bm5.2.0_hac.sim.bam" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459745/PAW78174_barcode05.dorado1.0.0.bm5.2.0_sup.sim.bam" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459746/PAW78174_barcode05.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789837/PAW78174_barcode05.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 Sagittula stellata E-37 DSM 11524
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251417/PAW78174_barcode05.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251418/PAW78174_barcode05.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251419/PAW78174_barcode05.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294004/PAW78174_barcode05.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789837/PAW78174_barcode05.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### Salmonella bongori 1224.72 DSM 13772
@@ -387,106 +606,177 @@ NA
 You find a description of this sample here:
 <https://www.dsmz.de/collection/catalogue/details/culture/DSM-13772>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 Salmonella bongori 1224.72 DSM 13772
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459751/PAW78174_barcode07.dorado1.0.0.bm5.2.0_fast.sim.bam" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459752/PAW78174_barcode07.dorado1.0.0.bm5.2.0_hac.sim.bam" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459753/PAW78174_barcode07.dorado1.0.0.bm5.2.0_sup.sim.bam" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459754/PAW78174_barcode07.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789838/PAW78174_barcode07.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 Salmonella bongori 1224.72 DSM 13772
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251420/PAW78174_barcode07.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251421/PAW78174_barcode07.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251422/PAW78174_barcode07.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294005/PAW78174_barcode07.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789838/PAW78174_barcode07.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### Burkholderia cenocepacia J2315 DSM 16553
@@ -494,106 +784,177 @@ NA
 You find a description of this sample here:
 <https://www.dsmz.de/collection/catalogue/details/culture/DSM-16553>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 Burkholderia cenocepacia J2315 DSM 16553
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459747/PAW78174_barcode06.dorado1.0.0.bm5.2.0_fast.sim.bam" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459748/PAW78174_barcode06.dorado1.0.0.bm5.2.0_hac.sim.bam" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459749/PAW78174_barcode06.dorado1.0.0.bm5.2.0_sup.sim.bam" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459750/PAW78174_barcode06.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789839/PAW78174_barcode06.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 Burkholderia cenocepacia J2315 DSM 16553
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251423/PAW78174_barcode06.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251424/PAW78174_barcode06.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251425/PAW78174_barcode06.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294006/PAW78174_barcode06.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789839/PAW78174_barcode06.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### Sphaerobacter thermophilus S 6022 DSM 20745
@@ -601,106 +962,177 @@ NA
 You find a description of this sample here:
 <https://www.dsmz.de/collection/catalogue/details/culture/DSM-20745>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 Sphaerobacter thermophilus S 6022 DSM 20745
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459759/PAW78174_barcode10.dorado1.0.0.bm5.2.0_fast.sim.bam" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459760/PAW78174_barcode10.dorado1.0.0.bm5.2.0_hac.sim.bam" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459761/PAW78174_barcode10.dorado1.0.0.bm5.2.0_sup.sim.bam" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459762/PAW78174_barcode10.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789840/PAW78174_barcode10.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 Sphaerobacter thermophilus S 6022 DSM 20745
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251426/PAW78174_barcode10.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251427/PAW78174_barcode10.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251428/PAW78174_barcode10.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294007/PAW78174_barcode10.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789840/PAW78174_barcode10.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### Zymomonas mobilis subsp. pomaceae Barker I DSM 22645
@@ -708,106 +1140,177 @@ NA
 You find a description of this sample here:
 <https://www.dsmz.de/collection/catalogue/details/culture/DSM-22645>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 Zymomonas mobilis subsp. pomaceae Barker I DSM 22645
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459755/PAW78174_barcode08.dorado1.0.0.bm5.2.0_fast.sim.bam" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459756/PAW78174_barcode08.dorado1.0.0.bm5.2.0_hac.sim.bam" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459757/PAW78174_barcode08.dorado1.0.0.bm5.2.0_sup.sim.bam" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459758/PAW78174_barcode08.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789841/PAW78174_barcode08.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 Zymomonas mobilis subsp. pomaceae Barker I DSM 22645
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251429/PAW78174_barcode08.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251430/PAW78174_barcode08.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251431/PAW78174_barcode08.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294008/PAW78174_barcode08.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789841/PAW78174_barcode08.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### Methanocaldococcus jannaschii JAL-1 DSM 2661
@@ -815,106 +1318,177 @@ NA
 You find a description of this sample here:
 <https://www.dsmz.de/collection/catalogue/details/culture/DSM-2661>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 Methanocaldococcus jannaschii JAL-1 DSM 2661
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459739/PAW78174_barcode04.dorado1.0.0.bm5.2.0_fast.sim.bam" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459740/PAW78174_barcode04.dorado1.0.0.bm5.2.0_hac.sim.bam" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459741/PAW78174_barcode04.dorado1.0.0.bm5.2.0_sup.sim.bam" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459742/PAW78174_barcode04.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789842/PAW78174_barcode04.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 Methanocaldococcus jannaschii JAL-1 DSM 2661
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251432/PAW78174_barcode04.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251433/PAW78174_barcode04.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251434/PAW78174_barcode04.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294009/PAW78174_barcode04.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789842/PAW78174_barcode04.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### Sphaerotilus natans 6 DSM 6575
@@ -922,106 +1496,177 @@ NA
 You find a description of this sample here:
 <https://www.dsmz.de/collection/catalogue/details/culture/DSM-6575>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 Sphaerotilus natans 6 DSM 6575
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459735/PAW78174_barcode03.dorado1.0.0.bm5.2.0_fast.sim.bam" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459736/PAW78174_barcode03.dorado1.0.0.bm5.2.0_hac.sim.bam" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459737/PAW78174_barcode03.dorado1.0.0.bm5.2.0_sup.sim.bam" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459738/PAW78174_barcode03.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789843/PAW78174_barcode03.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 Sphaerotilus natans 6 DSM 6575
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251435/PAW78174_barcode03.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251436/PAW78174_barcode03.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251437/PAW78174_barcode03.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294010/PAW78174_barcode03.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789843/PAW78174_barcode03.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### Thermanaerovibrio acidaminovorans Su883 DSM 6589
@@ -1029,106 +1674,177 @@ NA
 You find a description of this sample here:
 <https://www.dsmz.de/collection/catalogue/details/culture/DSM-6589>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 Thermanaerovibrio acidaminovorans Su883 DSM 6589
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459731/PAW78174_barcode02.dorado1.0.0.bm5.2.0_fast.sim.bam" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459732/PAW78174_barcode02.dorado1.0.0.bm5.2.0_hac.sim.bam" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459733/PAW78174_barcode02.dorado1.0.0.bm5.2.0_sup.sim.bam" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459734/PAW78174_barcode02.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789844/PAW78174_barcode02.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 Thermanaerovibrio acidaminovorans Su883 DSM 6589
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251438/PAW78174_barcode02.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251439/PAW78174_barcode02.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251440/PAW78174_barcode02.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294011/PAW78174_barcode02.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789844/PAW78174_barcode02.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ## Mock metagenomes
@@ -1138,106 +1854,177 @@ NA
 You find a description of this sample here:
 <https://zymoresearch.eu/products/zymobiomics-gut-microbiome-standard>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 ZymoGut
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459768/PAY12289_barcode13.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789832/PAY12289_barcode13.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 ZymoGut
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251408/PAY12289_barcode13.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251409/PAY12289_barcode13.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251410/PAY12289_barcode13.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251397/PAY12289_barcode13.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789832/PAY12289_barcode13.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### ZymoHMW
@@ -1245,138 +2032,231 @@ NA
 You find a description of this sample here:
 <https://zymoresearch.eu/products/zymobiomics-hmw-dna-standard>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 ZymoHMW
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459722/PAS01578.dorado1.0.0.bm5.2.0_fast.sim.bam" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459723/PAS01578.dorado1.0.0.bm5.2.0_hac.sim.bam" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459724/PAS01578.dorado1.0.0.bm5.2.0_sup.sim.bam" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459725/PAS01578.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789833/PAS01578.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 ZymoHMW
 </td>
+
 <td style="text-align:left;">
+
 0.7.3
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294020/PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294021/PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294022/PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_hac.dup.fastq.gz" style="     ">hacdup</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294023/PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294024/PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps_5.0.0_sup.dup.fastq.gz" style="     ">supdup</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251398/PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps@5.0.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789833/PAS01578.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 ZymoHMW
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789833/PAS01578.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### ZymoOral
@@ -1384,106 +2264,177 @@ NA
 You find a description of this sample here:
 <https://zymoresearch.eu/products/zymobiomics-oral-microbiome-standard>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 ZymoOral
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459767/PAY12289_barcode12.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789834/PAY12289_barcode12.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 ZymoOral
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251411/PAY12289_barcode12.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251412/PAY12289_barcode12.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251413/PAY12289_barcode12.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251399/PAY12289_barcode12.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789834/PAY12289_barcode12.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ## “Real” metagenomes
@@ -1493,508 +2444,918 @@ NA
 You find a description of this sample here:
 <https://zymoresearch.eu/collections/zymobiomics-microbial-community-standards/products/zymobiomics-fecal-reference-with-trumatrix-technology>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 ZymoFecal
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459726/PAW77640.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789831/PAW77640.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 ZymoFecal
 </td>
+
 <td style="text-align:left;">
+
 0.7.3
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251395/PAW77640.dorado0.7.3.bm5.0.0.sup.mod4mC_5mC_6mA.subset.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789831/PAW77640.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 ZymoFecal
 </td>
+
 <td style="text-align:left;">
+
 0.8.2
 </td>
+
 <td style="text-align:left;">
+
 5.0.0
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251405/PAW77640.dorado0.8.2.bm5.0.0.fast.sim.fastq.gz" style="     ">fast</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251406/PAW77640.dorado0.8.2.bm5.0.0.hac.sim.fastq.gz" style="     ">hac</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251407/PAW77640.dorado0.8.2.bm5.0.0.sup.sim.fastq.gz" style="     ">sup</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251396/PAW77640.dorado0.8.2.bm5.0.0.sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789831/PAW77640.tar.gz" style="     ">pod5</a>
 </td>
+
 </tr>
+
 </tbody>
+
+</table>
+
+#### Hi-C data
+
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+ena_project
+</th>
+
+<th style="text-align:left;">
+
+library_kit
+</th>
+
+<th style="text-align:left;">
+
+platform
+</th>
+
+<th style="text-align:left;">
+
+R1
+</th>
+
+<th style="text-align:left;">
+
+R2
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+PRJEB85558
+</td>
+
+<td style="text-align:left;">
+
+Proximeta
+</td>
+
+<td style="text-align:left;">
+
+Illumina NovaSeq 6000
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006084/HiC_ZymoFecal_R1.fastq.gz" style="     ">R1</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006084/HiC_ZymoFecal_R2.fastq.gz" style="     ">R2</a>
+</td>
+
+</tr>
+
+</tbody>
+
 </table>
 
 ### wwtp_NL-09
 
 You find a description of this sample here: [wwtp_NL-09](wwtp_NL-09)
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 wwtp_NL-09
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459716/PAQ87691.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### wwtp_IL-01
 
 You find a description of this sample here: [wwtp_IL-01](wwtp_IL-01)
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 wwtp_IL-01
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459718/PAQ87858.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### wwtp_US2-26
 
 You find a description of this sample here: [wwtp_US2-26](wwtp_US2-26)
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 wwtp_US2-26
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459717/PAQ87710.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### wwtp_IN-06
 
 You find a description of this sample here: [wwtp_IN-06](wwtp_IN-06)
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 wwtp_IN-06
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459720/PAQ95921.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### wwtp_US1-124
 
 You find a description of this sample here: [wwtp_US1-124](wwtp_US1-124)
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 wwtp_US1-124
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459719/PAQ87909.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### sediment_MFD04716
@@ -2002,74 +3363,123 @@ NA
 You find a description of this sample here:
 <https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 sediment_MFD04716
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459710/MFD04716.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### sediment_MFD00905
@@ -2077,74 +3487,123 @@ NA
 You find a description of this sample here:
 <https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 sediment_MFD00905
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459707/MFD00905.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### sediment_MFD05674
@@ -2152,74 +3611,123 @@ NA
 You find a description of this sample here:
 <https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 sediment_MFD05674
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459711/MFD05674.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### sediment_MFD10007
@@ -2227,74 +3735,123 @@ NA
 You find a description of this sample here:
 <https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 sediment_MFD10007
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459715/MFD10007.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### sediment_MFD09779
@@ -2302,74 +3859,123 @@ NA
 You find a description of this sample here:
 <https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 sediment_MFD09779
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459714/MFD09779.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### soil_MFD00392
@@ -2377,74 +3983,123 @@ NA
 You find a description of this sample here:
 <https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 soil_MFD00392
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459706/MFD00392.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### soil_MFD06742
@@ -2452,74 +4107,123 @@ NA
 You find a description of this sample here:
 <https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 soil_MFD06742
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459713/MFD06742.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### soil_MFD06229
@@ -2527,74 +4231,123 @@ NA
 You find a description of this sample here:
 <https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 soil_MFD06229
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459712/MFD06229.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### soil_MFD02242
@@ -2602,74 +4355,123 @@ NA
 You find a description of this sample here:
 <https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 soil_MFD02242
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459708/MFD02242.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 ### soil_MFD02360
@@ -2677,72 +4479,1621 @@ NA
 You find a description of this sample here:
 <https://github.com/cmc-aau/mfd_metadata/blob/main/analysis/releases/latest_mfd_db.xlsx>
 <table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;">
+
 Sample
 </th>
+
 <th style="text-align:left;">
+
 dorado version
 </th>
+
 <th style="text-align:left;">
+
 basecall model version
 </th>
+
 <th style="text-align:left;">
+
 fast
 </th>
+
 <th style="text-align:left;">
+
 hac
 </th>
+
 <th style="text-align:left;">
+
 hacdup
 </th>
+
 <th style="text-align:left;">
+
 sup
 </th>
+
 <th style="text-align:left;">
+
 supdup
 </th>
+
 <th style="text-align:left;">
+
 mods
 </th>
+
 <th style="text-align:left;">
+
 pod5
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 soil_MFD02360
 </td>
+
 <td style="text-align:left;">
+
 1.0.0
 </td>
+
 <td style="text-align:left;">
+
 5.2.0
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 <td style="text-align:left;">
+
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459709/MFD02360.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam" style="     ">mods</a>
 </td>
+
 <td style="text-align:left;">
+
 NA
 </td>
+
 </tr>
+
 </tbody>
+
+</table>
+
+### PaPr00000116MP
+
+You find a description of this sample here:
+<https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6148080>
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Sample
+</th>
+
+<th style="text-align:left;">
+
+dorado version
+</th>
+
+<th style="text-align:left;">
+
+basecall model version
+</th>
+
+<th style="text-align:left;">
+
+fast
+</th>
+
+<th style="text-align:left;">
+
+hac
+</th>
+
+<th style="text-align:left;">
+
+hacdup
+</th>
+
+<th style="text-align:left;">
+
+sup
+</th>
+
+<th style="text-align:left;">
+
+supdup
+</th>
+
+<th style="text-align:left;">
+
+mods
+</th>
+
+<th style="text-align:left;">
+
+pod5
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+PaPr00000116MP
+</td>
+
+<td style="text-align:left;">
+
+1.4.0+ba44a013
+</td>
+
+<td style="text-align:left;">
+
+5.2.0
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://yes" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986813/PaPr00000116MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+PaPr00000116MP
+</td>
+
+<td style="text-align:left;">
+
+0.4.1
+</td>
+
+<td style="text-align:left;">
+
+4.2
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR156/ERR15688549/PaPr00000116MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR156/ERR15688549/PaPr00000116MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR156/ERR15688549/PaPr00000116MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">pod5</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+#### Hi-C data
+
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+ena_project
+</th>
+
+<th style="text-align:left;">
+
+library_kit
+</th>
+
+<th style="text-align:left;">
+
+platform
+</th>
+
+<th style="text-align:left;">
+
+R1
+</th>
+
+<th style="text-align:left;">
+
+R2
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+PRJEB66493
+</td>
+
+<td style="text-align:left;">
+
+Proximeta
+</td>
+
+<td style="text-align:left;">
+
+Illumina NovaSeq 6000
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16984172/hic_nohuman_read_R1.fastq.gz" style="     ">R1</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16984172/hic_nohuman_read_R2.fastq.gz" style="     ">R2</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+### PaPr00000216MP
+
+You find a description of this sample here:
+<https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6148080>
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Sample
+</th>
+
+<th style="text-align:left;">
+
+dorado version
+</th>
+
+<th style="text-align:left;">
+
+basecall model version
+</th>
+
+<th style="text-align:left;">
+
+fast
+</th>
+
+<th style="text-align:left;">
+
+hac
+</th>
+
+<th style="text-align:left;">
+
+hacdup
+</th>
+
+<th style="text-align:left;">
+
+sup
+</th>
+
+<th style="text-align:left;">
+
+supdup
+</th>
+
+<th style="text-align:left;">
+
+mods
+</th>
+
+<th style="text-align:left;">
+
+pod5
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+PaPr00000216MP
+</td>
+
+<td style="text-align:left;">
+
+1.4.0+ba44a013
+</td>
+
+<td style="text-align:left;">
+
+5.2.0
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://yes" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986812/PaPr00000216MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+PaPr00000216MP
+</td>
+
+<td style="text-align:left;">
+
+0.4.1
+</td>
+
+<td style="text-align:left;">
+
+4.2
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR156/ERR15688557/PaPr00000216MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR156/ERR15688557/PaPr00000216MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR156/ERR15688557/PaPr00000216MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">pod5</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+#### Hi-C data
+
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+ena_project
+</th>
+
+<th style="text-align:left;">
+
+library_kit
+</th>
+
+<th style="text-align:left;">
+
+platform
+</th>
+
+<th style="text-align:left;">
+
+R1
+</th>
+
+<th style="text-align:left;">
+
+R2
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+PRJEB66493
+</td>
+
+<td style="text-align:left;">
+
+Proximeta
+</td>
+
+<td style="text-align:left;">
+
+Illumina NovaSeq 6000
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16984171/hic_nohuman_read_R1.fastq.gz" style="     ">R1</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16984171/hic_nohuman_read_R2.fastq.gz" style="     ">R2</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+### RASK00000027MP
+
+You find a description of this sample here:
+<https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6148080>
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Sample
+</th>
+
+<th style="text-align:left;">
+
+dorado version
+</th>
+
+<th style="text-align:left;">
+
+basecall model version
+</th>
+
+<th style="text-align:left;">
+
+fast
+</th>
+
+<th style="text-align:left;">
+
+hac
+</th>
+
+<th style="text-align:left;">
+
+hacdup
+</th>
+
+<th style="text-align:left;">
+
+sup
+</th>
+
+<th style="text-align:left;">
+
+supdup
+</th>
+
+<th style="text-align:left;">
+
+mods
+</th>
+
+<th style="text-align:left;">
+
+pod5
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+RASK00000027MP
+</td>
+
+<td style="text-align:left;">
+
+1.4.0+ba44a013
+</td>
+
+<td style="text-align:left;">
+
+5.2.0
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://yes" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006693/RASK00000027MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+RASK00000027MP
+</td>
+
+<td style="text-align:left;">
+
+0.4.1
+</td>
+
+<td style="text-align:left;">
+
+4.2
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15738649/RASK00000027MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15738649/RASK00000027MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15738649/RASK00000027MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">pod5</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+#### Hi-C data
+
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+ena_project
+</th>
+
+<th style="text-align:left;">
+
+library_kit
+</th>
+
+<th style="text-align:left;">
+
+platform
+</th>
+
+<th style="text-align:left;">
+
+R1
+</th>
+
+<th style="text-align:left;">
+
+R2
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+PRJEB98069
+</td>
+
+<td style="text-align:left;">
+
+Proximeta
+</td>
+
+<td style="text-align:left;">
+
+Illumina NovaSeq 6000
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986441/hic_nohuman_read_R1.fastq.gz" style="     ">R1</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986441/hic_nohuman_read_R2.fastq.gz" style="     ">R2</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+### RASK00000062MP
+
+You find a description of this sample here:
+<https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6148080>
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Sample
+</th>
+
+<th style="text-align:left;">
+
+dorado version
+</th>
+
+<th style="text-align:left;">
+
+basecall model version
+</th>
+
+<th style="text-align:left;">
+
+fast
+</th>
+
+<th style="text-align:left;">
+
+hac
+</th>
+
+<th style="text-align:left;">
+
+hacdup
+</th>
+
+<th style="text-align:left;">
+
+sup
+</th>
+
+<th style="text-align:left;">
+
+supdup
+</th>
+
+<th style="text-align:left;">
+
+mods
+</th>
+
+<th style="text-align:left;">
+
+pod5
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+RASK00000062MP
+</td>
+
+<td style="text-align:left;">
+
+1.4.0+ba44a013
+</td>
+
+<td style="text-align:left;">
+
+5.2.0
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://yes" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006618/RASK00000062MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+RASK00000062MP
+</td>
+
+<td style="text-align:left;">
+
+0.4.1
+</td>
+
+<td style="text-align:left;">
+
+4.2
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15738643/RASK00000062MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15738643/RASK00000062MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15738643/RASK00000062MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">pod5</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+#### Hi-C data
+
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+ena_project
+</th>
+
+<th style="text-align:left;">
+
+library_kit
+</th>
+
+<th style="text-align:left;">
+
+platform
+</th>
+
+<th style="text-align:left;">
+
+R1
+</th>
+
+<th style="text-align:left;">
+
+R2
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+PRJEB98069
+</td>
+
+<td style="text-align:left;">
+
+Proximeta
+</td>
+
+<td style="text-align:left;">
+
+Illumina NovaSeq 6000
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986361/hic_nohuman_read_R1.fastq.gz" style="     ">R1</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986361/hic_nohuman_read_R2.fastq.gz" style="     ">R2</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+### ASYM00000009MP
+
+You find a description of this sample here:
+<https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6148080>
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Sample
+</th>
+
+<th style="text-align:left;">
+
+dorado version
+</th>
+
+<th style="text-align:left;">
+
+basecall model version
+</th>
+
+<th style="text-align:left;">
+
+fast
+</th>
+
+<th style="text-align:left;">
+
+hac
+</th>
+
+<th style="text-align:left;">
+
+hacdup
+</th>
+
+<th style="text-align:left;">
+
+sup
+</th>
+
+<th style="text-align:left;">
+
+supdup
+</th>
+
+<th style="text-align:left;">
+
+mods
+</th>
+
+<th style="text-align:left;">
+
+pod5
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+ASYM00000009MP
+</td>
+
+<td style="text-align:left;">
+
+1.4.0+ba44a013
+</td>
+
+<td style="text-align:left;">
+
+5.2.0
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://yes" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006587/ASYM00000009MP_R10.4.1_sup_6mA_4mC_5mC.bam" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+ASYM00000009MP
+</td>
+
+<td style="text-align:left;">
+
+0.4.1
+</td>
+
+<td style="text-align:left;">
+
+4.2
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15757797/ASYM00000009MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15757797/ASYM00000009MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15757797/ASYM00000009MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">pod5</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+#### Hi-C data
+
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+ena_project
+</th>
+
+<th style="text-align:left;">
+
+library_kit
+</th>
+
+<th style="text-align:left;">
+
+platform
+</th>
+
+<th style="text-align:left;">
+
+R1
+</th>
+
+<th style="text-align:left;">
+
+R2
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+PRJEB98069
+</td>
+
+<td style="text-align:left;">
+
+Proximeta
+</td>
+
+<td style="text-align:left;">
+
+Illumina NovaSeq 6000
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986348/hic_nohuman_read_R1.fastq.gz" style="     ">R1</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986348/hic_nohuman_read_R2.fastq.gz" style="     ">R2</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+### ASYM00000026MP
+
+You find a description of this sample here:
+<https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6148080>
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Sample
+</th>
+
+<th style="text-align:left;">
+
+dorado version
+</th>
+
+<th style="text-align:left;">
+
+basecall model version
+</th>
+
+<th style="text-align:left;">
+
+fast
+</th>
+
+<th style="text-align:left;">
+
+hac
+</th>
+
+<th style="text-align:left;">
+
+hacdup
+</th>
+
+<th style="text-align:left;">
+
+sup
+</th>
+
+<th style="text-align:left;">
+
+supdup
+</th>
+
+<th style="text-align:left;">
+
+mods
+</th>
+
+<th style="text-align:left;">
+
+pod5
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+ASYM00000026MP
+</td>
+
+<td style="text-align:left;">
+
+1.4.0+ba44a013
+</td>
+
+<td style="text-align:left;">
+
+5.2.0
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://yes" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006599/ASYM00000026MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+</tr>
+
+<tr>
+
+<td style="text-align:left;">
+
+ASYM00000026MP
+</td>
+
+<td style="text-align:left;">
+
+0.4.1
+</td>
+
+<td style="text-align:left;">
+
+4.2
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15766702/ASYM00000026MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15766702/ASYM00000026MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15766702/ASYM00000026MP_R10.4.1_5kHz_NBD114.24.tar.gz" style="     ">pod5</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+#### Hi-C data
+
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+ena_project
+</th>
+
+<th style="text-align:left;">
+
+library_kit
+</th>
+
+<th style="text-align:left;">
+
+platform
+</th>
+
+<th style="text-align:left;">
+
+R1
+</th>
+
+<th style="text-align:left;">
+
+R2
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+PRJEB98069
+</td>
+
+<td style="text-align:left;">
+
+Proximeta
+</td>
+
+<td style="text-align:left;">
+
+Illumina NovaSeq 6000
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986349/hic_nohuman_read_R1.fastq.gz" style="     ">R1</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986349/hic_nohuman_read_R2.fastq.gz" style="     ">R2</a>
+</td>
+
+</tr>
+
+</tbody>
+
 </table>
