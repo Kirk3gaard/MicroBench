@@ -4698,7 +4698,7 @@ NA
 
 <td style="text-align:left;">
 
-<a href="http://yes" style="     ">sup</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986813/PaPr00000116MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam" style="     ">sup</a>
 </td>
 
 <td style="text-align:left;">
@@ -4948,7 +4948,7 @@ NA
 
 <td style="text-align:left;">
 
-<a href="http://yes" style="     ">sup</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986812/PaPr00000216MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam" style="     ">sup</a>
 </td>
 
 <td style="text-align:left;">
@@ -5198,7 +5198,7 @@ NA
 
 <td style="text-align:left;">
 
-<a href="http://yes" style="     ">sup</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006693/RASK00000027MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam" style="     ">sup</a>
 </td>
 
 <td style="text-align:left;">
@@ -5448,7 +5448,7 @@ NA
 
 <td style="text-align:left;">
 
-<a href="http://yes" style="     ">sup</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006618/RASK00000062MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam" style="     ">sup</a>
 </td>
 
 <td style="text-align:left;">
@@ -5698,7 +5698,7 @@ NA
 
 <td style="text-align:left;">
 
-<a href="http://yes" style="     ">sup</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006587/ASYM00000009MP_R10.4.1_sup_6mA_4mC_5mC.bam" style="     ">sup</a>
 </td>
 
 <td style="text-align:left;">
@@ -5948,7 +5948,7 @@ NA
 
 <td style="text-align:left;">
 
-<a href="http://yes" style="     ">sup</a>
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006599/ASYM00000026MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam" style="     ">sup</a>
 </td>
 
 <td style="text-align:left;">
