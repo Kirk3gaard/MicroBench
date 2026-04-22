@@ -1,7 +1,7 @@
 README
 ================
 Rasmus Kirkegaard & Sebastian Dall
-16 April, 2026
+22 April, 2026
 
 <img align="right" src="images/microbench.jpg" width="200">
 
@@ -16,6 +16,15 @@ Monocultures:
 
 - [Anabaena variabilis PCC 7120 DSM
   107007](#anabaena-variabilis-pcc-7120-dsm-107007)
+- [Escherichia coli K-12 MG1655 DSM
+  18039](#escherichia-coli-k-12-mg1655-dsm-18039)
+- [Kangiella aquimarina SW-154 DSMZ
+  16071](#kangiella-aquimarina-sw-154-dsmz-16071)
+- [Meiothermus ruber 21 DSM 1279](#meiothermus-ruber-21-dsm-1279)
+- [Shewanella oneidensis MR-1 ATCC
+  700550](#shewanella-oneidensis-mr-1-atcc-700550)
+- [Pelobacter carbinolicus Bd1 DSM
+  2380](#pelobacter-carbinolicus-bd1-dsm-2380)
 - [Desulfobacca acetoxidans ASRB2 DSM
   11109](#desulfobacca-acetoxidans-asrb2-dsm-11109)
 - [Sagittula stellata E-37 DSM
@@ -237,6 +246,626 @@ NA
 <td style="text-align:left;">
 
 <a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789835/PAW78174_barcode01.tar.gz" style="     ">pod5</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+### Escherichia coli K-12 MG1655 DSM 18039
+
+You find a description of this sample here:
+<https://www.dsmz.de/collection/catalogue/details/culture/DSM-18039>
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Sample
+</th>
+
+<th style="text-align:left;">
+
+dorado version
+</th>
+
+<th style="text-align:left;">
+
+basecall model version
+</th>
+
+<th style="text-align:left;">
+
+fast
+</th>
+
+<th style="text-align:left;">
+
+hac
+</th>
+
+<th style="text-align:left;">
+
+hacdup
+</th>
+
+<th style="text-align:left;">
+
+sup
+</th>
+
+<th style="text-align:left;">
+
+supdup
+</th>
+
+<th style="text-align:left;">
+
+mods
+</th>
+
+<th style="text-align:left;">
+
+pod5
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Escherichia coli K-12 MG1655 DSM 18039
+</td>
+
+<td style="text-align:left;">
+
+1.4.0+ba44a013
+</td>
+
+<td style="text-align:left;">
+
+5.2.0
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17025883/R1041_5kHz_sup_6mA_4mC_5mC_Escherichia-coli_DSMZ18039.bam" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17025883/R1041_5kHz_sup_6mA_4mC_5mC_Escherichia-coli_DSMZ18039.bam" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17029706/R1041_5kHz_Escherichia-coli_DSMZ18039.tar.gz" style="     ">pod5</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+### Kangiella aquimarina SW-154 DSMZ 16071
+
+You find a description of this sample here:
+<https://webshop.dsmz.de/en/bacteria/Kangiella-aquimarina.html?listtype=search&searchparam=16071>
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Sample
+</th>
+
+<th style="text-align:left;">
+
+dorado version
+</th>
+
+<th style="text-align:left;">
+
+basecall model version
+</th>
+
+<th style="text-align:left;">
+
+fast
+</th>
+
+<th style="text-align:left;">
+
+hac
+</th>
+
+<th style="text-align:left;">
+
+hacdup
+</th>
+
+<th style="text-align:left;">
+
+sup
+</th>
+
+<th style="text-align:left;">
+
+supdup
+</th>
+
+<th style="text-align:left;">
+
+mods
+</th>
+
+<th style="text-align:left;">
+
+pod5
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Kangiella aquimarina SW-154 DSMZ 16071
+</td>
+
+<td style="text-align:left;">
+
+1.4.0+ba44a013
+</td>
+
+<td style="text-align:left;">
+
+5.2.0
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17025944/R1041_5kHz_sup_6mA_4mC_5mC_Kangiella-aquimarina.bam" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17025944/R1041_5kHz_sup_6mA_4mC_5mC_Kangiella-aquimarina.bam" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17029707/R1041_5kHz_Kangiella-aquimarina.tar.gz" style="     ">pod5</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+### Meiothermus ruber 21 DSM 1279
+
+You find a description of this sample here:
+<https://www.dsmz.de/collection/catalogue/details/culture/DSM-1279>
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Sample
+</th>
+
+<th style="text-align:left;">
+
+dorado version
+</th>
+
+<th style="text-align:left;">
+
+basecall model version
+</th>
+
+<th style="text-align:left;">
+
+fast
+</th>
+
+<th style="text-align:left;">
+
+hac
+</th>
+
+<th style="text-align:left;">
+
+hacdup
+</th>
+
+<th style="text-align:left;">
+
+sup
+</th>
+
+<th style="text-align:left;">
+
+supdup
+</th>
+
+<th style="text-align:left;">
+
+mods
+</th>
+
+<th style="text-align:left;">
+
+pod5
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Meiothermus ruber 21 DSM 1279
+</td>
+
+<td style="text-align:left;">
+
+1.4.0+ba44a013
+</td>
+
+<td style="text-align:left;">
+
+5.2.0
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17025968/R1041_5kHz_sup_6mA_4mC_5mC_Meiothermus-ruber_DSMZ1279.bam" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17025968/R1041_5kHz_sup_6mA_4mC_5mC_Meiothermus-ruber_DSMZ1279.bam" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17029708/R1041_5kHz_Meiothermus-ruber_DSMZ1279.tar.gz" style="     ">pod5</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+### Shewanella oneidensis MR-1 ATCC 700550
+
+You find a description of this sample here:
+<https://www.atcc.org/products/700550d>
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Sample
+</th>
+
+<th style="text-align:left;">
+
+dorado version
+</th>
+
+<th style="text-align:left;">
+
+basecall model version
+</th>
+
+<th style="text-align:left;">
+
+fast
+</th>
+
+<th style="text-align:left;">
+
+hac
+</th>
+
+<th style="text-align:left;">
+
+hacdup
+</th>
+
+<th style="text-align:left;">
+
+sup
+</th>
+
+<th style="text-align:left;">
+
+supdup
+</th>
+
+<th style="text-align:left;">
+
+mods
+</th>
+
+<th style="text-align:left;">
+
+pod5
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Shewanella oneidensis MR-1 ATCC 700550
+</td>
+
+<td style="text-align:left;">
+
+1.4.0+ba44a013
+</td>
+
+<td style="text-align:left;">
+
+5.2.0
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17026041/R1041_5kHz_sup_6mA_4mC_5mC_Shewanella-oneidensis.bam" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17026041/R1041_5kHz_sup_6mA_4mC_5mC_Shewanella-oneidensis.bam" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17029710/R1041_5kHz_Shewanella-oneidensis.tar.gz" style="     ">pod5</a>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+### Pelobacter carbinolicus Bd1 DSM 2380
+
+You find a description of this sample here:
+<https://webshop.dsmz.de/de/DSM-2380.html>
+<table class="table table-striped table-hover table-condensed table-responsive table-bordered" style="width: auto !important; ">
+
+<thead>
+
+<tr>
+
+<th style="text-align:left;">
+
+Sample
+</th>
+
+<th style="text-align:left;">
+
+dorado version
+</th>
+
+<th style="text-align:left;">
+
+basecall model version
+</th>
+
+<th style="text-align:left;">
+
+fast
+</th>
+
+<th style="text-align:left;">
+
+hac
+</th>
+
+<th style="text-align:left;">
+
+hacdup
+</th>
+
+<th style="text-align:left;">
+
+sup
+</th>
+
+<th style="text-align:left;">
+
+supdup
+</th>
+
+<th style="text-align:left;">
+
+mods
+</th>
+
+<th style="text-align:left;">
+
+pod5
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:left;">
+
+Pelobacter carbinolicus Bd1 DSM 2380
+</td>
+
+<td style="text-align:left;">
+
+1.4.0+ba44a013
+</td>
+
+<td style="text-align:left;">
+
+5.2.0
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17026035/R1041_5kHz_sup_6mA_4mC_5mC_Pelobacter-carbinolicus_DSMZ2380.bam" style="     ">sup</a>
+</td>
+
+<td style="text-align:left;">
+
+NA
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17026035/R1041_5kHz_sup_6mA_4mC_5mC_Pelobacter-carbinolicus_DSMZ2380.bam" style="     ">mods</a>
+</td>
+
+<td style="text-align:left;">
+
+<a href="http://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17029709/R1041_5kHz_Pelobacter-carbinolicus_DSMZ2380.tar.gz" style="     ">pod5</a>
 </td>
 
 </tr>
