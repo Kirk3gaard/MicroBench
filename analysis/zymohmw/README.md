@@ -1,7 +1,7 @@
 README
 ================
 Rasmus Kirkegaard
-30 September, 2025
+29 May, 2026
 
 # R10.4.1 Zymo HMW basecalling
 
@@ -96,6 +96,20 @@ assemblies consistently for all of the organisms.
 
 ![](README_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
+## hac (v6.0.0) mode vs sup (v5.2.0)
+
+With the release of dorado 2.0.0 during LC2026 the plan was to replace
+the GPU intensive sup model with a faster HAC model that should beat the
+previous sup both in terms of speed and accuracy.
+
+### Indel rate vs coverage
+
+![](README_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+
+### Mismatch rate vs coverage
+
+![](README_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+
 ## Assemblers
 
 - flye
@@ -104,11 +118,11 @@ assemblies consistently for all of the organisms.
 
 ### Mismatch rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
 ### Indel rate vs coverage
 
-![](README_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
 
 ## Materials and methods
 
@@ -134,7 +148,9 @@ The reads were basecalled using
 hac and sup accuracy mode using the 5.0.0 models.The reads were
 basecalled using [dorado](https://github.com/nanoporetech/dorado) (v.
 1.0.0) with fast, hac and sup accuracy mode using the 5.2.0 models and
-hyp model 5.0.0.
+hyp model 5.0.0. The reads were basecalled using
+[dorado](https://github.com/nanoporetech/dorado) (v. 2.0.0) with hac
+mode using the 6.0.0 model.
 
 ### Read QC
 
