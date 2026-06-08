@@ -28,6 +28,7 @@ There are some serious improvements in raw read accuracy between the fast, hac s
 ```{r load_libraries_and_data,echo=FALSE,warning=FALSE,message=FALSE}
 library(tidyverse)
 library(vroom)
+library(ggrepel)
 
 get_read_QC_optimized <- function(model = "dna_r10.4.1_e8.2_400bps_hac@v4.0.0") {
 
@@ -411,21 +412,35 @@ With the release of dorado 2.0.0 during LC2026 the plan was to replace the GPU i
 ### Indel rate vs coverage
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
+plot_text<-genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
+  filter(model=="6.0.0_hac.sim" | model=="5.2.0_sup.sim") %>% 
+  filter(coverage<100) %>%
+  group_by(model,ref) %>% filter(coverage==max(coverage))
+
 genome_stats %>% 
   mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
   filter(asmtype=="flye") %>%
   filter(model=="6.0.0_hac.sim" | model=="5.2.0_sup.sim") %>%
-  ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
+  ggplot(aes(x=coverage,y = `# indels per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))+geom_text_repel(data=plot_text,aes(label=`# indels per 100 kbp`))
 ```
 
 ### Mismatch rate vs coverage
 
 ```{r fig.width=10, echo=FALSE,warning=FALSE,message=FALSE}
+plot_text<-genome_stats %>% 
+  mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
+  filter(asmtype=="flye") %>%
+  filter(model=="6.0.0_hac.sim" | model=="5.2.0_sup.sim") %>% 
+  filter(coverage<100) %>%
+  group_by(model,ref) %>% filter(coverage==max(coverage))
+
 genome_stats %>% 
   mutate(model=gsub(x = model,pattern=".*bps_",replacement="")) %>%
   filter(asmtype=="flye") %>%
   filter(model=="6.0.0_hac.sim" | model=="5.2.0_sup.sim") %>%
-  ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))
+  ggplot(aes(x=coverage,y = `# mismatches per 100 kbp`,col=model,shape=asmtype))+geom_point()+geom_line()+facet_wrap(~ref)+scale_y_log10()+coord_cartesian(xlim=c(0, 100))+geom_text_repel(data=plot_text,aes(label=`# mismatches per 100 kbp`))
 ```
 
 
