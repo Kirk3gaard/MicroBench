@@ -21,7 +21,9 @@ set -eu
 eval "$(conda shell.bash hook)"
 conda activate /home/bio.aau.dk/ur36rv/.conda/envs/microbench_zymohmw_basecalling-benchmarks
 
-snakemake --profile profile/
+snakemake --use-conda --conda-frontend conda --conda-create-envs-only --cores 1
+
+#snakemake --profile profile/
 
 # cluster command not in snakemake 8... downgrading
 #snakemake --cluster "sbatch --parsable --output=jobs/{rule}/slurm_%x_%j.out --error=jobs/{rule}/slurm_%x_%j.log --mem={resources.mem_mb} --cpus-per-task={threads} --time 00-10:00:00" -j 400 --use-conda
