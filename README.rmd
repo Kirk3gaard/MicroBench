@@ -71,19 +71,19 @@ generate_nanopore_table <- function(df) {
     # Output the table
     sample_data %>% select(-c(	SampleType,SampleInfo)) %>%
           mutate(fast = case_when(is.na(fast)~NA,
-                                  TRUE~cell_spec("fast", "html", link = paste0("http://",fast)))) %>%
+                                  TRUE~cell_spec("fast", "html", link = paste0("https://",fast)))) %>%
           mutate(hac = case_when(is.na(hac)~NA,
-                                 TRUE~cell_spec("hac", "html", link = paste0("http://",hac)))) %>%
+                                 TRUE~cell_spec("hac", "html", link = paste0("https://",hac)))) %>%
           mutate(sup = case_when(is.na(sup)~NA,
-                                 TRUE~cell_spec("sup", "html", link = paste0("http://",sup)))) %>%
+                                 TRUE~cell_spec("sup", "html", link = paste0("https://",sup)))) %>%
           mutate(hacdup = case_when(is.na(hacdup)~NA,
-                                    TRUE~cell_spec("hacdup", "html", link = paste0("http://",hacdup)))) %>%
+                                    TRUE~cell_spec("hacdup", "html", link = paste0("https://",hacdup)))) %>%
           mutate(supdup = case_when(is.na(supdup)~NA,
-                                    TRUE~cell_spec("supdup", "html", link = paste0("http://",supdup)))) %>%
+                                    TRUE~cell_spec("supdup", "html", link = paste0("https://",supdup)))) %>%
           mutate(mods = case_when(is.na(mods)~NA,
-                                  TRUE~cell_spec("mods", "html", link = paste0("http://",mods))))%>%
+                                  TRUE~cell_spec("mods", "html", link = paste0("https://",mods))))%>%
           mutate(pod5 = case_when(is.na(pod5)~NA,
-                                  TRUE~cell_spec("pod5", "html", link = paste0("http://",pod5)))) %>%
+                                  TRUE~cell_spec("pod5", "html", link = paste0("https://",pod5)))) %>%
           kable(format="html",escape = F) %>%
           kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive" ,"bordered"),
                         full_width=FALSE,  position = "left") %>%
@@ -98,8 +98,8 @@ generate_hic_table <- function(df) {
   df %>%
     rename(R1 = 5, R2 = 6) %>%
     select(-sample) %>%
-    mutate(R1 = cell_spec("R1", "html", link = paste0("http://", R1))) %>%
-    mutate(R2 = cell_spec("R2", "html", link = paste0("http://", R2))) %>%
+    mutate(R1 = cell_spec("R1", "html", link = paste0("https://", R1))) %>%
+    mutate(R2 = cell_spec("R2", "html", link = paste0("https://", R2))) %>%
     kable(format = "html", escape = FALSE) %>%
     kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive", "bordered"),
                   full_width = FALSE, position = "left") %>%
