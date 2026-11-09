@@ -7,6 +7,8 @@ Rasmus Kirkegaard & Sebastian Dall
 
 # MicroBench
 
+**Browse all datasets (with basecalling settings, read counts and N50) at <https://kirk3gaard.github.io/MicroBench/>**
+
 Overview of our data for microbial genomic benchmarking. We have
 sequenced a bunch of mono cultures, and metagenomic samples. Data has
 been deposited to the ENA
@@ -6726,3 +6728,7 @@ Illumina NovaSeq 6000
 </tbody>
 
 </table>
+
+## Updating the website
+
+The page at <https://kirk3gaard.github.io/MicroBench/> is served from `docs/` (Settings → Pages → Deploy from branch `main`, folder `/docs`). Its data file `docs/data/microbench.json` is built from `ENA_data_links.tsv` and `ena_hic.tsv` by `python3 scripts/build_site_data.py` (standard library only). It pulls read/base counts from ENA and dorado settings, N50 and read Q from the BAM files. Fill in the `library_kit` column to show kits. The GitHub Action in `.github/workflows/site-data.yml` reruns the script when the tables change.

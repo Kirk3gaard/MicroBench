@@ -11,3 +11,7 @@ jobs/
 temp/
 results/
 .snakemake/
+
+# GitHub Pages site data
+!docs/data/
+scripts/__pycache__/

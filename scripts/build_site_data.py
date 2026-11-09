@@ -1,0 +1,258 @@
+#!/usr/bin/env python3
+"""Build docs/data/microbench.json for the MicroBench GitHub Pages site.
+
+Sources
+  * ENA_data_links.tsv / ena_hic.tsv      – the curated tables in this repo
+  * ENA portal API                         – exact read count, bases and file size per run
+  * BAM headers (HTTP range request)       – dorado version, command line, models, GPU,
+                                             flow cell, device and run date
+  * BAM sampling (HTTP range requests)     – read N50 and mean read Q estimated from
+                                             ~30 evenly spaced 1 MB slices of each BAM
+
+Usage
+  python3 scripts/build_site_data.py              # uses cache in scripts/.cache
+  python3 scripts/build_site_data.py --refresh    # re-query everything
+
+Only the Python standard library is needed.
+"""
+import argparse, csv, json, os, re, statistics, sys, time, urllib.parse, urllib.request
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+sys.path.insert(0, os.path.dirname(__file__))
+import bamsample as bs  # noqa: E402
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CACHE = os.path.join(os.path.dirname(__file__), ".cache")
+OUT = os.path.join(ROOT, "docs", "data", "microbench.json")
+TIERS = ["fast", "hac", "hacdup", "sup", "supdup", "mods"]
+N_CHUNKS = 30
+EXACT_BELOW = 250_000_000  # BAMs smaller than this are read completely -> exact N50
+
+
+def acc_of(url):
+    m = re.search(r"/(ERR\d{6,})/", url)
+    return m.group(1) if m else None
+
+
+def https(u):
+    return u if u.startswith("http") else "https://" + u
+
+
+def ena_runs(accs):
+    fields = ("run_accession,study_accession,sample_accession,instrument_model,read_count,"
+              "base_count,submitted_bytes,submitted_ftp,first_public")
+    out = {}
+    accs = sorted(accs)
+    for i in range(0, len(accs), 100):
+        q = urllib.parse.urlencode({"result": "read_run", "includeAccessions": ",".join(accs[i:i + 100]),
+                                    "fields": fields, "format": "json", "limit": 0})
+        with urllib.request.urlopen("https://www.ebi.ac.uk/ena/portal/api/search?" + q, timeout=120) as r:
+            for rec in json.load(r):
+                out[rec["run_accession"]] = rec
+    return out
+
+
+def parse_header(h):
+    info = {}
+    for line in h.splitlines():
+        f = line.split("\t")
+        if f[0] == "@PG" and "PN:dorado" in line:
+            for x in f[1:]:
+                k, v = x.split(":", 1)
+                if k == "VN": info["dorado"] = v
+                if k == "CL": info["command"] = v
+                if k == "DS": info["hardware"] = v.replace("gpu:", "")
+        if f[0] == "@RG" and "basecall_model" not in info:
+            for x in f[1:]:
+                k, v = x.split(":", 1)
+                if k == "PU": info["flowcell_id"] = v
+                if k == "PM": info["device"] = v
+                if k == "DT": info["run_date"] = v[:10]
+                if k == "DS":
+                    for kv in v.split(" "):
+                        if "=" in kv:
+                            a, b = kv.split("=", 1)
+                            if a == "basecall_model": info["basecall_model"] = b
+                            if a == "modbase_models": info["modbase_models"] = b.split(",")
+    return info
+
+
+def cache_path(url):
+    key = re.sub(r"[^A-Za-z0-9_.-]", "_", url.split("/")[-2] + "_" + url.split("/")[-1]) + ".json"
+    return os.path.join(CACHE, key)
+
+
+def sample_bam(url, size):
+    """Header + sampled stats for one BAM, with on-disk cache."""
+    path = cache_path(url)
+    if os.path.exists(path) and not ARGS.refresh:
+        return json.load(open(path))
+    hdr = parse_header(bs.header(url))
+    if size < EXACT_BELOW:
+        lens, qs = bs.full_pass(url, size)
+        res = {"header": hdr, "sampled_reads": len(lens), "exact": True}
+        return finish(res, lens, qs, path)
+    lens, qs = [], []
+    starts = [int(size * (k + 0.5) / N_CHUNKS) for k in range(N_CHUNKS)]
+    for st in starts:
+        for attempt in range(3):
+            try:
+                data = bs.inflate_bgzf(bs.get_range(url, st, min(size - 1, st + 1_000_000)))
+                break
+            except Exception:
+                time.sleep(2 + attempt * 5)
+        else:
+            continue
+        for l, q in bs.parse_records(data):
+            if l > 0:
+                lens.append(l)
+                if q is not None: qs.append(q)
+    res = {"header": hdr, "sampled_reads": len(lens), "exact": False}
+    return finish(res, lens, qs, path)
+
+
+def finish(res, lens, qs, path):
+    if lens:
+        res.update(n50_est=bs.n50(lens), median_len_est=int(statistics.median(lens)))
+    if qs:
+        res.update(median_q_est=round(statistics.median(qs), 1),
+                   q20_frac_est=round(sum(q >= 20 for q in qs) / len(qs), 3))
+    json.dump(res, open(path, "w"))
+    return res
+
+
+def clean_cmd(v):
+    """Drop local directory paths from a dorado command line, keep the settings."""
+    if not v: return v
+    v = re.sub(r'"?(/[^\s"]*/)?([^/\s"]+)/?"?(?=\s|$)', lambda m: m.group(2) if m.group(1) else m.group(0), v)
+    return v.replace('"', "")
+
+
+def main():
+    os.makedirs(CACHE, exist_ok=True)
+    rows = list(csv.DictReader(open(os.path.join(ROOT, "ENA_data_links.tsv")), delimiter="\t"))
+    hic = list(csv.reader(open(os.path.join(ROOT, "ena_hic.tsv")), delimiter="\t"))
+    hic_head, hic = hic[0], hic[1:]
+
+    accs = set()
+    for r in rows:
+        for k in TIERS + ["pod5"]:
+            if r.get(k, "NA") not in ("NA", ""): accs.add(acc_of(r[k]))
+    for h in hic:
+        accs.add(acc_of(h[4])); accs.add(acc_of(h[5]))
+    accs.discard(None)
+
+    cache_ena = os.path.join(CACHE, "ena_runs.json")
+    if os.path.exists(cache_ena) and not ARGS.refresh:
+        ena = json.load(open(cache_ena))
+        missing = accs - set(ena)
+        if missing: ena.update(ena_runs(missing))
+    else:
+        ena = ena_runs(accs)
+    json.dump(ena, open(cache_ena, "w"))
+
+    def num(a, k):
+        v = ena.get(a, {}).get(k)
+        try: return int(v)
+        except (TypeError, ValueError): return None
+
+    # sample all BAMs in parallel
+    bams = {}
+    for r in rows:
+        for k in TIERS:
+            u = r.get(k, "NA")
+            if u not in ("NA", "") and u.endswith(".bam"):
+                a = acc_of(u)
+                bams[https(u)] = num(a, "submitted_bytes")
+    results = {}
+    with ThreadPoolExecutor(max_workers=ARGS.threads) as ex:
+        todo = {u: s for u, s in bams.items() if s}
+        if ARGS.cached_only:
+            todo = {u: s for u, s in todo.items() if os.path.exists(cache_path(u))}
+        futs = {ex.submit(sample_bam, u, s): u for u, s in todo.items()}
+        for i, f in enumerate(as_completed(futs), 1):
+            u = futs[f]
+            try:
+                results[u] = f.result()
+            except Exception as e:
+                print("WARN", u, e, file=sys.stderr)
+            print(f"\r{i}/{len(futs)} BAMs sampled", end="", file=sys.stderr)
+    print(file=sys.stderr)
+
+    samples = {}
+    for r in rows:
+        s = samples.setdefault(r["Sample"], {
+            "name": r["Sample"], "type": r["SampleType"], "info": r["SampleInfo"],
+            "library_kit": set(), "projects": set(), "datasets": [], "hic": []})
+        kit = (r.get("library_kit") or "").strip()
+        if kit and kit.lower() not in ("na", "unknown"): s["library_kit"].add(kit)
+        ds = {"dorado": r["dorado version"], "model_version": r["basecall model version"],
+              "files": [], "pod5": None}
+        best = None
+        for k in TIERS:
+            u = r.get(k, "NA")
+            if u in ("NA", ""): continue
+            a = acc_of(u); fu = https(u)
+            f = {"tier": k, "url": fu, "accession": a, "format": "bam" if u.endswith(".bam") else "tar.gz" if u.endswith(".tar.gz") else "fastq.gz",
+                 "reads": num(a, "read_count"), "bases": num(a, "base_count"), "bytes": num(a, "submitted_bytes")}
+            if ena.get(a, {}).get("study_accession"): s["projects"].add(ena[a]["study_accession"])
+            if fu in results:
+                res = results[fu]
+                f["basecall_model"] = res["header"].get("basecall_model")
+                f["modbase_models"] = res["header"].get("modbase_models")
+                f["command"] = clean_cmd(res["header"].get("command"))
+                for kk in ("n50_est", "median_q_est", "q20_frac_est", "sampled_reads", "exact"):
+                    if kk in res: f[kk] = res[kk]
+                # prefer the sup/mods BAM for dataset-level run info
+                if best is None or k in ("mods", "sup"):
+                    best = res
+            ds["files"].append(f)
+        if r.get("pod5", "NA") not in ("NA", ""):
+            a = acc_of(r["pod5"])
+            ds["pod5"] = {"url": https(r["pod5"]), "accession": a, "bytes": num(a, "submitted_bytes")}
+            if ena.get(a, {}).get("study_accession"): s["projects"].add(ena[a]["study_accession"])
+        if best:
+            h = best["header"]
+            ds["run"] = {k: h.get(k) for k in ("flowcell_id", "device", "run_date", "hardware")}
+            ds["chemistry"] = None
+            bm = h.get("basecall_model") or ""
+            m = re.match(r"dna_(r[\d.]+)_(e[\d.]+)_(\d+bps)", bm)
+            if m: ds["chemistry"] = f"{m.group(1).upper()} {m.group(2)} {m.group(3)}"
+            ds["n50_est"] = best.get("n50_est")
+            ds["sampled_reads"] = best.get("sampled_reads")
+            ds["exact"] = best.get("exact", False)
+        # dataset-level read count: prefer sup simplex, then any
+        pick = next((f for t in ("sup", "mods", "hac", "fast") for f in ds["files"] if f["tier"] == t and f["reads"]), None)
+        if pick:
+            ds["reads"], ds["bases"] = pick["reads"], pick["bases"]
+            ds["mean_len"] = round(pick["bases"] / pick["reads"]) if pick["reads"] else None
+        s["datasets"].append(ds)
+
+    for h in hic:
+        s = samples.get(h[0])
+        if not s: continue
+        a = acc_of(h[4])
+        s["hic"].append({"project": h[1], "kit": h[2], "platform": h[3],
+                         "r1": https(h[4]), "r2": https(h[5]), "accession": a,
+                         "reads": num(a, "read_count"), "bases": num(a, "base_count")})
+        s["projects"].add(h[1])
+
+    out = []
+    for s in samples.values():
+        s["library_kit"] = sorted(s["library_kit"])
+        s["projects"] = sorted(s["projects"])
+        s["datasets"].sort(key=lambda d: (d["model_version"], d["dorado"]), reverse=True)
+        out.append(s)
+    os.makedirs(os.path.dirname(OUT), exist_ok=True)
+    json.dump({"generated": time.strftime("%Y-%m-%d"), "main_project": "PRJEB85558",
+               "n_chunks": N_CHUNKS, "samples": out}, open(OUT, "w"), indent=1)
+    print("wrote", OUT, file=sys.stderr)
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--refresh", action="store_true")
+    ap.add_argument("--cached-only", action="store_true", help="skip BAMs not sampled yet (quick rebuild)")
+    ap.add_argument("--threads", type=int, default=12)
+    ARGS = ap.parse_args()
+    main()

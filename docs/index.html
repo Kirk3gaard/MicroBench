@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MicroBench – nanopore benchmark datasets</title>
+<meta name="description" content="Browse MicroBench: Oxford Nanopore monoculture, mock community and metagenome datasets for microbial genomics benchmarking, with basecalling settings, read counts and N50 for every dataset.">
+<link rel="icon" href="microbench.jpg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="hero">
+  <div class="wrap hero-inner">
+    <img src="microbench.jpg" alt="" class="logo" width="88" height="88">
+    <div>
+      <h1>MicroBench</h1>
+      <p class="lede">Nanopore sequencing data for microbial genomics benchmarking — monocultures, mock communities and real metagenomes, basecalled with several dorado models, plus Hi-C for selected samples.</p>
+      <p class="links">
+        <a href="https://www.ebi.ac.uk/ena/browser/view/PRJEB85558">ENA PRJEB85558</a>
+        <a href="https://github.com/Kirk3gaard/MicroBench">GitHub repository</a>
+        <a href="https://github.com/Kirk3gaard/MicroBench/tree/main/analysis">Analyses</a>
+      </p>
+    </div>
+  </div>
+  <div class="wrap stats" id="stats" aria-live="polite"></div>
+</header>
+
+<main class="wrap">
+  <section class="controls" aria-label="Filters">
+    <input id="q" type="search" placeholder="Search sample, run, flow cell, model…" autocomplete="off">
+    <div class="chips" id="typeChips" role="group" aria-label="Sample type"></div>
+    <div class="row">
+      <label>Model <select id="model"><option value="">any</option></select></label>
+      <label>Data <select id="has">
+        <option value="">anything</option>
+        <option value="fast">fast basecalls</option>
+        <option value="hac">hac basecalls</option>
+        <option value="sup">sup basecalls</option>
+        <option value="dup">duplex</option>
+        <option value="mods">modified bases (4mC/5mC/6mA)</option>
+        <option value="pod5">raw POD5</option>
+        <option value="hic">Hi-C</option>
+      </select></label>
+      <label>Sort <select id="sort">
+        <option value="type">type, name</option>
+        <option value="name">name</option>
+        <option value="bases">yield (high→low)</option>
+        <option value="n50">read N50 (high→low)</option>
+      </select></label>
+      <button id="dl" class="btn" type="button" title="Download a text file with the URLs of all files matching the filters">⤓ URL list</button>
+    </div>
+    <p class="count" id="count"></p>
+  </section>
+
+  <section id="list" class="list"></section>
+
+  <section class="notes" id="about">
+    <h2>About the numbers</h2>
+    <ul>
+      <li><b>Reads</b> and <b>yield</b> are the exact counts reported by ENA for each submitted file. The value shown for a dataset is from the sup (or modified-base) file.</li>
+      <li><b>N50</b> and <b>read Q</b> are computed from the BAM files. BAMs under 250&nbsp;MB are read completely (exact values). Larger ones are estimated (marked ≈) from about <span id="nchunks">30</span> evenly spaced 1&nbsp;MB slices of each BAM (typically 2,000–5,000 reads), fetched with HTTP range requests. Read Q is the median per-read mean quality. Checked against a full pass over one 600&nbsp;MB BAM, the estimates were within 1%.</li>
+      <li><b>Basecalling settings</b> (dorado version, full command line, models, GPU, flow cell, device and run date) are read directly from the BAM headers.</li>
+      <li><b>Library kit</b> comes from the <code>library_kit</code> column in <code>ENA_data_links.tsv</code>.</li>
+      <li>File suffixes: <code>sim</code> = simplex reads, <code>dup</code> = duplex reads, <code>mods</code> = sup basecalls with 4mC/5mC/6mA modification tags (unaligned BAM), <code>pod5</code> = raw signal archive.</li>
+    </ul>
+    <p class="muted" id="generated"></p>
+  </section>
+</main>
+
+<footer class="wrap muted">
+  Rasmus Kirkegaard &amp; Sebastian Dall · Aalborg University · Data at <a href="https://www.ebi.ac.uk/ena/browser/view/PRJEB85558">ENA</a>
+</footer>
+
+<template id="cardTpl">
+  <article class="card">
+    <header class="card-head">
+      <div>
+        <h3 class="name"></h3>
+        <div class="meta"></div>
+      </div>
+      <span class="badge"></span>
+    </header>
+    <div class="facts"></div>
+    <div class="table-wrap"><table class="ds">
+      <thead><tr>
+        <th>Basecaller</th><th class="num">Reads</th><th class="num">Yield</th>
+        <th class="num">Mean len</th><th class="num">N50</th><th class="num">Read Q</th><th>Files</th><th></th>
+      </tr></thead>
+      <tbody></tbody>
+    </table></div>
+    <div class="hic"></div>
+  </article>
+</template>
+
+<script src="app.js"></script>
+</body>
+</html>
