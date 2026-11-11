@@ -28,3 +28,20 @@ for m in 10 20 50; do python3 sync.py hmw.reads.jsonl $m 2; done > sync.jsonl
 # 5. page data
 python3 build_page_data.py hmw.reads.jsonl hmw_sup520.bam ../../docs/data/artefacts_zymohmw.json sync.jsonl
 ```
+
+## Whole-run scan (all 12.6 M reads)
+
+The page now uses every read of the run. On a 12-core Mac this takes ~45 min after downloading the 44 GB BAM
+(`aria2c -x 16`, MD5 checked against ENA). Extra requirements: `pandas numpy scipy`.
+
+```bash
+python3 fullrun.py sup520.bam zymo_hmw.fa full 11            # per-read table, indel events, artefact layouts
+python3 fullstats.py full full_stats.json zymo_hmw.fa        # summaries, per-second synchrony test, channels
+python3 build_full_page.py full sup520.bam full_stats.json artefacts_zymohmw_full.json   # examples
+python3 scan.py          # detects the periodic MinKNOW scans and bins reads by time since the last scan -> scan_stats.json
+python3 saw.py           # 5-min error/junk series -> saw.json
+python3 junk_time.py     # timing and position of low-complexity stretches -> junk_time.json
+python3 scan_examples.py # example reads that start with junk right after a scan -> scan_examples.json
+python3 occ.py           # artefact rates vs active channels and per channel (printed)
+```
+The four JSON files are merged into `docs/data/artefacts_zymohmw.json` (keys `saw`, `scan`, `examples.post_scan_junk`).

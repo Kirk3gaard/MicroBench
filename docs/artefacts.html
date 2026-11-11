@@ -16,7 +16,7 @@
     <div>
       <nav class="crumbs"><a href="./">Datasets</a> <span>›</span> <b>Read artefacts</b></nav>
       <h1>What dorado leaves in your reads</h1>
-      <p class="lede">Basecalled nanopore reads still contain chimeras, adapters, foldbacks and stretches of invented sequence. Browse real examples from the <span id="dsName">ZymoBIOMICS HMW mock</span>, see how common each artefact is, and check whether the usual filters would catch it.</p>
+      <p class="lede">Basecalled nanopore reads still contain chimeras, adapters, foldbacks and stretches of invented sequence. Every one of the 12.6 million reads of the <span id="dsName">ZymoBIOMICS HMW mock</span> run was checked. Browse real examples, see how common each artefact is and when it happens, and check whether the usual filters would catch it.</p>
     </div>
   </div>
   <div class="wrap stats" id="headline"></div>
@@ -32,6 +32,15 @@
     </div>
     <div id="overviewChart" class="chart"></div>
     <p class="note">One read can carry several artefacts. Bars are clickable and open the examples.</p>
+  </section>
+
+  <section class="block" id="scans">
+    <h2>Every 1.6 hours the whole flow cell changes</h2>
+    <p id="scanIntro"></p>
+    <div id="sawChart" class="chart"></div>
+    <div class="legend" id="sawLegend"></div>
+    <div class="table-wrap"><table class="plain" id="sinceTable"></table></div>
+    <p class="note" id="scanNote"></p>
   </section>
 
   <section class="block" id="gallery">
@@ -76,13 +85,19 @@
   </section>
 
   <section class="block" id="time">
-    <h2>Errors through the run</h2>
+    <h2>Slow drift through the run</h2>
     <p id="timeIntro"></p>
     <div id="timeChart" class="chart"></div>
-    <h3>Do long deletions happen in many channels at the same moment?</h3>
+    <h3>Do long deletions hit many channels in the same second?</h3>
     <p id="syncIntro"></p>
-    <div id="raster" class="chart"></div>
     <div class="table-wrap"><table class="plain" id="syncTable"></table></div>
+  </section>
+
+  <section class="block" id="channels">
+    <h2>Some pores produce much more junk</h2>
+    <p id="chanIntro"></p>
+    <div id="chanChart" class="chart"></div>
+    <div class="table-wrap"><table class="plain" id="chanTable"></table></div>
   </section>
 
   <section class="block" id="tools">

@@ -27,7 +27,7 @@ const CATS = [
     what: "The read continues from one strand into the reverse complement of the same region, so the read is a near-palindrome. The second half is the complement strand passing through the pore after the template.",
     detect: "Adjacent alignments to the same place in the genome on opposite strands.",
     matters: "Each base is counted twice, which inflates coverage and creates fake inverted repeats. The second half is usually less accurate.",
-    tools: "In this run about 4 in 10 foldbacks contain the ligation adapter at the fold, so adapter splitting can catch those. The rest join without an adapter." },
+    tools: "In this run about 4 in 10 foldbacks contain the ligation adapter at the fold, so adapter splitting can catch those. The rest join without an adapter. Foldbacks become rarer during the run (4.8% of reads ≥1 kb at the start, about 2% later) and more common within each scan cycle, so they depend on the state of the pores, not just the library." },
   { key: "internal_adapter", title: "Adapters inside reads", short: "Internal adapters",
     what: "A copy of the ligation adapter sits inside the read instead of at the very end, typically after a short leading fragment.",
     detect: "Match to the ONT ligation adapter (CCTGTACTTCGTTCAGTTACGTATTGCT, ≤20% edits) more than 100 bp from either end.",
@@ -41,8 +41,13 @@ const CATS = [
   { key: "low_complexity", title: "Low-complexity junk", short: "Low-complexity junk",
     what: "Hundreds of bases of simple repeats — (GGAAT)n, poly-A, poly-T, (TA)n — inside or at the end of otherwise good reads. They align to nothing in the mock and appear as long insertions.",
     detect: "Runs of ≥6 GGAAT units, ≥25 A or T, or ≥12 dinucleotide units in a read with at least one alignment.",
-    matters: "(GGAAT)n is the motif of human satellite III, so these reads can trigger human-contamination screens. Junk insertions also end up in low-coverage assemblies and inflate error rates. In this run the repeat appears almost only as GGAAT and practically never as its reverse complement ATTCC, which points to the basecaller rather than real DNA.",
+    matters: "About 7% of these stretches appear right after MinKNOW's periodic pore scan (see below). (GGAAT)n is the motif of human satellite III, so these reads can trigger human-contamination screens. Junk insertions also end up in low-coverage assemblies and inflate error rates. In this run the repeat appears almost only as GGAAT and practically never as its reverse complement ATTCC, which points to the basecaller rather than real DNA.",
     tools: "Mean-quality filters average the junk away inside a long read. Only tools that look at local quality or sequence complexity can remove it." },
+  { key: "post_scan_junk", title: "Junk right after a pore scan", short: "Post-scan junk",
+    what: "Reads that start within a few minutes after MinKNOW's periodic scan often begin with hundreds of bases of (GGAAT)n or poly-A at very low quality (Q≈2–3), followed by normal sequence.",
+    detect: "A low-complexity run of ≥100 bp in the first 5% of a read that started 0–330 s after a scan began.",
+    matters: "It happens on the whole flow cell at the same time, every 1.6 hours. The junk sits where adapter trimmers look, so it can push the real adapter or the start of the insert out of their search window.",
+    tools: "Local quality trimming at read starts removes it. Mean-quality filters average it away in long reads." },
   { key: "skip_prone", title: "Skip-prone reads", short: "Skip-prone reads",
     what: "Reads with five or more deletions of ≥10 bp: stretches of the molecule that never appear in the basecalls, as if the strand slipped through the pore.",
     detect: "≥5 deletions of ≥10 bp that are not shared by other reads (shared ones are real differences from the reference).",
@@ -73,16 +78,16 @@ function headline() {
     [pct(s._any.pct_reads), "of reads"],
     [pct(100 * chimReads / st.n_reads), "of reads are chimeric or foldback"],
     [pct(100 * st.dorado_split_reads / st.n_reads), "of reads were already split by dorado"],
-    [st.n_reads.toLocaleString(), "reads analysed"],
+    [st.n_reads.toLocaleString(), "reads analysed (the whole run)"],
   ];
   $("#headline").innerHTML = tiles.map(([v, l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
   const ds = D.dataset;
-  $("#datasetLine").innerHTML = `${esc(ds.sample)} · flow cell ${esc(ds.flowcell)} · ${esc(ds.basecaller)} · ${st.n_reads.toLocaleString()} reads (${(st.n_bases / 1e6).toFixed(0)} Mb) sampled from ${st.n_channels} channels of <a href="https://www.ebi.ac.uk/ena/browser/view/${esc(ds.accession)}">${esc(ds.accession)}</a>.`;
+  $("#datasetLine").innerHTML = `${esc(ds.sample)} · flow cell ${esc(ds.flowcell)} · ${esc(ds.basecaller)} · all ${st.n_reads.toLocaleString()} reads (${(st.n_bases / 1e9).toFixed(1)} Gb) from ${st.n_channels.toLocaleString()} channels in <a href="https://www.ebi.ac.uk/ena/browser/view/${esc(ds.accession)}">${esc(ds.accession)}</a>.`;
 }
 
 function overview() {
   const host = $("#overviewChart");
-  const rows = CATS.map((c) => ({ c, v: D.summary[c.key][unit], n: D.summary[c.key].reads }));
+  const rows = CATS.filter((c) => D.summary[c.key]).map((c) => ({ c, v: D.summary[c.key][unit], n: D.summary[c.key].reads }));
   const W = 760, rowH = 26, left = 190, H = rows.length * rowH + 24;
   const max = Math.max(...rows.map((r) => r.v)) * 1.15;
   const s = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Artefact prevalence" });
@@ -99,15 +104,17 @@ function overview() {
 
 function tabs() {
   $("#tabs").innerHTML = CATS.filter((c) => D.examples[c.key]?.length).map((c) =>
-    `<button class="chip" role="tab" data-k="${c.key}" aria-pressed="${c.key === cur}">${esc(c.short)}<small>${pct(D.summary[c.key].pct_reads)}</small></button>`).join("");
+    `<button class="chip" role="tab" data-k="${c.key}" aria-pressed="${c.key === cur}">${esc(c.short)}${D.summary[c.key] ? `<small>${pct(D.summary[c.key].pct_reads)}</small>` : ""}</button>`).join("");
 }
 
 function select(k) { cur = k; idx = 0; tabs(); renderCat(); }
 
 function renderCat() {
   const c = CAT[cur], s = D.summary[cur], f = D.filters?.[cur];
+  const head = s ? `<div><span class="big">${pct(s.pct_reads)}</span> of reads · <b>${pct(s.pct_bases)}</b> of bases · ${s.reads.toLocaleString()} reads</div>`
+    : cur === "post_scan_junk" ? `<div><span class="big">${D.scan.n_post_scan_reads.toLocaleString()}</span> reads of 1.5–30 kb, across ${D.scan.scan_start_h.length - 1} scans</div>` : "";
   $("#catInfo").innerHTML = `<h3>${esc(c.title)}</h3>
-    <div><span class="big">${pct(s.pct_reads)}</span> of reads · <b>${pct(s.pct_bases)}</b> of bases · ${s.reads.toLocaleString()} reads</div>
+    ${head}
     <dl><dt>What it is</dt><dd>${esc(c.what)}</dd>
     <dt>How it was detected</dt><dd>${esc(c.detect)}</dd>
     <dt>Why it matters</dt><dd>${esc(c.matters)}</dd>
@@ -251,8 +258,7 @@ function foldChart() {
   svg("text", { x: l + (W - l) / 2, y: H - 4, "text-anchor": "middle", fill: "var(--muted)" }, s).textContent = "identity of first part (%)";
   svg("text", { x: 10, y: 12, fill: "var(--muted)" }, s).textContent = "second part (%)";
   $("#foldChart").replaceChildren(s);
-  const worse = pts.filter(([a, c]) => c < a).length;
-  $("#foldNote").textContent = `In ${Math.round(100 * worse / pts.length)}% of ${pts.length.toLocaleString()} foldbacks the second (complement) half is less accurate than the first. Points below the dashed line.`;
+  $("#foldNote").textContent = `In ${Math.round(100 * D.stats.foldback_second_worse)}% of ${D.stats.foldback_n.toLocaleString()} two-part foldbacks (${pts.length.toLocaleString()} shown) the second (complement) half is less accurate than the first. Points below the dashed line.`;
 }
 
 function filterTable() {
@@ -262,56 +268,101 @@ function filterTable() {
     rows.map(([n, f], i) => `<tr><td>${esc(n)}</td><td class="num">${f.median_qs}</td><td class="num ${i < 3 && f.q10_l1000 > D.filters.clean.q10_l1000 ? "hi" : ""}">${f.q10_l1000}%</td><td class="num">${f.q15_l1000}%</td><td class="num">${f.q20_l5000}%</td></tr>`).join("") + `</tbody>`;
 }
 
+function scanSection() {
+  const sc = D.scan, saw = D.saw;
+  const starts = sc.scan_start_h.filter((h, i) => sc.scan_dur_s[i] > 0);
+  const W = 900, H = 260, l = 46, b = 34, t = 14, r = 12;
+  const maxH = Math.ceil(D.run_hours);
+  const [hz0, hz1] = [zoom.h0, zoom.h1 ?? maxH];
+  const pts = saw.filter((x) => x.h >= hz0 && x.h <= hz1);
+  const X = (h) => l + (W - l - r) * (h - hz0) / (hz1 - hz0);
+  const dmin = Math.min(...pts.map((x) => x.dels)) * 0.95, dmax = Math.max(...pts.map((x) => x.dels)) * 1.03;
+  const Y = (v) => t + (H - b - t) * 0.55 * (1 - (v - dmin) / (dmax - dmin));
+  const lmax = Math.max(...pts.map((x) => x.lowc));
+  const Yl = (v) => H - b - (H - b - t) * 0.38 * v / lmax;
+  const s = svg("svg", { viewBox: `0 0 ${W} ${H}` });
+  for (const h0 of starts) if (h0 >= hz0 && h0 <= hz1) svg("line", { x1: X(h0), x2: X(h0), y1: t, y2: H - b, stroke: "var(--muted)", "stroke-dasharray": "2 3", "stroke-opacity": .7 }, s);
+  const bw = Math.max(1, (W - l - r) / (pts.length || 1) - 0.5);
+  for (const x of pts) svg("rect", { x: X(x.h), y: Yl(x.lowc), width: bw, height: H - b - Yl(x.lowc), fill: "var(--junk)" }, s);
+  svg("polyline", { points: pts.map((x) => `${X(x.h + 1 / 24)},${Y(x.dels)}`).join(" "), fill: "none", stroke: "var(--bad)", "stroke-width": 1.6 }, s);
+  const step = (hz1 - hz0) > 12 ? 6 : (hz1 - hz0) > 4 ? 1 : 0.5;
+  for (let h = Math.ceil(hz0 / step) * step; h <= hz1; h += step) svg("text", { x: X(h), y: H - b + 14, "text-anchor": "middle", fill: "var(--muted)" }, s).textContent = (+h.toFixed(1)) + " h";
+  for (const v of [dmin, (dmin + dmax) / 2, dmax]) svg("text", { x: l - 6, y: Y(v) + 4, "text-anchor": "end", fill: "var(--bad)" }, s).textContent = v.toFixed(2);
+  svg("text", { x: l, y: t - 3, fill: "var(--bad)" }, s).textContent = "deletions per kb (median read, 5-min bins)";
+  svg("text", { x: l - 6, y: Yl(lmax) + 4, "text-anchor": "end", fill: "var(--junk)" }, s).textContent = (100 * lmax).toFixed(0) + "%";
+  svg("text", { x: l + 4, y: Yl(lmax) - 4, fill: "var(--junk)" }, s).textContent = "reads with low-complexity junk";
+  $("#sawChart").replaceChildren(s);
+  $("#sawLegend").innerHTML = `<span>Dashed lines: the ${starts.length} moments when hundreds of reads end at once (MinKNOW's periodic scan).</span>
+    <span>Zoom: <button class="chip" data-z="all" aria-pressed="${zoom.h1 == null}">whole run</button> <button class="chip" data-z="6" aria-pressed="${zoom.h1 === 6}">first 6 h</button> <button class="chip" data-z="c" aria-pressed="${zoom.h1 === 13.5}">one cycle</button></span>`;
+  const sn = sc.since, first = sn[0], mid = sn.slice(4, 8), during = sn[sn.length - 1];
+  const avg = (k) => mid.reduce((a, x) => a + x[k] * x.n, 0) / mid.reduce((a, x) => a + x.n, 0);
+  const gap = (starts[starts.length - 2] - starts[1]) / (starts.length - 3);
+  const durs = sc.scan_dur_s.filter((x) => x > 100);
+  const med = durs.slice().sort((a, b) => a - b)[Math.floor(durs.length / 2)];
+  $("#scanIntro").innerHTML = `Every <b>${gap.toFixed(2)} hours</b>, hundreds of reads across the flow cell stop within the same few seconds. This is MinKNOW's periodic pore/mux scan, which interrupts sequencing in a few waves over about ${Math.round(med / 60 * 10) / 10} minutes (${med} s). Two things follow, on the whole flow cell at once:
+    <b>1. Junk at the start of reads.</b> Reads starting in the first minute after a scan carry low-complexity junk ${(first.lowc / avg("lowc")).toFixed(0)} times as often as other reads (${pct(100 * first.lowc)} vs ${pct(100 * avg("lowc"))}), usually as the first few hundred bases. They also carry internal adapters ${(first.ia / avg("ia")).toFixed(1)} times as often.
+    <b>2. A sawtooth in the error rate.</b> The deletion rate drops right after each scan and climbs again until the next one: ${first.delkb.toFixed(2)} deletions per kb in reads starting in the first minute vs ${sn[7].delkb.toFixed(2)} an hour later. The foldback rate climbs within each cycle too, from ${pct(100 * sn[1].fold)} to ${pct(100 * sn[7].fold)}.`;
+  $("#sinceTable").innerHTML = `<thead><tr><th>Read started</th><th class="num">Reads ≥1 kb</th><th class="num">Low-complexity</th><th class="num">Internal adapter</th><th class="num">Foldback</th><th class="num">Inter-species chimera</th><th class="num">Deletions / kb</th><th class="num">Median length</th></tr></thead><tbody>` +
+    sn.map((x, i) => {
+      const lab = i === sn.length - 1 ? "during a scan" : x.b.replace(/^\((-?\d+), (\d+)\]$/, (m, a, b2) => `${Math.max(0, +a)}–${b2} min after a scan`);
+      return `<tr><td>${lab}</td><td class="num">${x.n.toLocaleString()}</td><td class="num ${x.lowc > 2 * avg("lowc") ? "hi" : ""}">${pct(100 * x.lowc)}</td><td class="num ${x.ia > 1.8 * avg("ia") ? "hi" : ""}">${pct(100 * x.ia)}</td><td class="num">${pct(100 * x.fold)}</td><td class="num">${pct(100 * x.inter)}</td><td class="num">${x.delkb.toFixed(2)}</td><td class="num">${fmtLen(x.medlen)}</td></tr>`;
+    }).join("") + `</tbody>`;
+  const jt = sc.junk_time;
+  $("#scanNote").innerHTML = `${pct(100 * jt.frac_in_window)} of all low-complexity stretches ≥100 bp sit in reads passing the pore during or just after a scan, which is only ${pct(100 * jt.window_share)} of run time. These junk stretches sit at the very start of the read (median position ${pct(100 * jt.pos_near)} into the read), whereas junk elsewhere in the run sits towards the end (median ${pct(100 * jt.pos_other)}). Their base qualities are very low (Q≈2–3), so local quality trimming removes them, but mean-quality filters on long reads do not. See the <a href="#gallery" data-goto="post_scan_junk">post-scan examples</a>.`;
+}
+let zoom = { h0: 0, h1: null };
+
 function timeChart() {
   const T = D.timeline;
-  const W = 900, H = 240, l = 46, b = 34, t = 12, r = 120;
-  const maxH = Math.max(...T.map((x) => x.h)) + 1;
-  const series = [["del", "deletions", "var(--bad)"], ["mm", "mismatches", "#4e79a7"], ["ins", "insertions", "#59a14f"]];
-  const maxV = Math.max(...T.flatMap((x) => series.map(([k]) => x[k]))) * 1.1;
-  const X = (h) => l + (W - l - r) * (h + 0.5) / maxH, Y = (v) => H - b - (H - b - t) * v / maxV;
+  const W = 900, H = 240, l = 46, b = 34, t = 14, r = 120;
+  const maxH = Math.ceil(D.run_hours);
+  const series = [["dels", "deletions /kb", "var(--bad)", 1], ["mm", "mismatches /kb", "#4e79a7", 1], ["ins", "insertions /kb", "#59a14f", 1]];
+  const maxV = Math.max(...T.flatMap((x) => series.map(([k, , , f]) => x[k] * f))) * 1.1;
+  const X = (h) => l + (W - l - r) * h / maxH, Y = (v) => H - b - (H - b - t) * v / maxV;
   const s = svg("svg", { viewBox: `0 0 ${W} ${H}` });
   for (let v = 0; v <= maxV; v += 0.5) {
     svg("line", { x1: l, x2: W - r, y1: Y(v), y2: Y(v), stroke: "var(--grid)" }, s);
-    svg("text", { x: l - 6, y: Y(v) + 4, "text-anchor": "end", fill: "var(--muted)" }, s).textContent = v.toFixed(1);
+    svg("text", { x: l - 6, y: Y(v) + 4, "text-anchor": "end", fill: "var(--muted)" }, s).textContent = v;
   }
-  for (let h = 0; h <= maxH; h += 6) svg("text", { x: X(h) , y: H - b + 14, "text-anchor": "middle", fill: "var(--muted)" }, s).textContent = h + " h";
-  svg("text", { x: l, y: t - 2, fill: "var(--muted)" }, s).textContent = "errors per kb (median read)";
-  for (const [k, label, col] of series) {
-    svg("polyline", { points: T.map((x) => `${X(x.h)},${Y(x[k])}`).join(" "), fill: "none", stroke: col, "stroke-width": 2 }, s);
-    const last = T[T.length - 1];
-    svg("text", { x: X(last.h) + 6, y: Y(last[k]) + 4, fill: col }, s).textContent = label;
+  for (let h = 0; h <= maxH; h += 6) svg("text", { x: X(h), y: H - b + 14, "text-anchor": "middle", fill: "var(--muted)" }, s).textContent = h + " h";
+  for (const [k, label, col, f] of series) {
+    svg("polyline", { points: T.map((x) => `${X(x.h)},${Y(x[k] * f)}`).join(" "), fill: "none", stroke: col, "stroke-width": 1.8 }, s);
+    const last = T[T.length - 2];
+    svg("text", { x: X(last.h) + 6, y: Y(last[k] * f) + 4, fill: col }, s).textContent = label;
   }
   $("#timeChart").replaceChildren(s);
-  const first = T.slice(0, 3), lastT = T.slice(-6, -1);
   const m = (a, k) => a.reduce((x, y) => x + y[k], 0) / a.length;
+  const first = T.slice(0, 6), lastT = T.slice(-14, -2);
   const up = (k) => Math.round(100 * (m(lastT, k) / m(first, k) - 1));
-  $("#timeIntro").innerHTML = `Median per-read error rates for reads starting in each hour of the ${T.length}-hour run (reads ≥1 kb). They creep up across the flow cell: deletions rise by about ${up("del")}% and mismatches by about ${up("mm")}% between the first hours and the end of the run. The chimera rate fluctuates (${Math.min(...T.map((x) => x.chim)).toFixed(0)}–${Math.max(...T.map((x) => x.chim)).toFixed(0)}% of reads ≥1 kb per hour), with no trend, which fits chimeras forming during library preparation rather than during sequencing.`;
+  $("#timeIntro").innerHTML = `Underneath the 1.6-hour sawtooth, error rates drift upwards over the ${Math.round(D.run_hours)}-hour run (15-minute bins, median of reads ≥1 kb): deletions by about ${up("dels")}% and mismatches by about ${up("mm")}% from the first 1.5 hours to the last 3. Chimeras and foldbacks together fall from ${(100 * m(T.slice(0, 2), "chim")).toFixed(1)}% to about ${(100 * m(lastT, "chim")).toFixed(1)}% of reads ≥1 kb, almost entirely through fewer foldbacks. The inter-species chimera rate stays at 2.3–3.1% for the whole run, which fits chimeras that form in the library rather than in the pore.`;
 }
 
-function raster() {
-  const ev = D.raster;
-  const chans = [...new Set(ev.map((e) => e[1]))].sort((a, b) => a - b);
-  const W = 900, H = 260, l = 46, b = 30, t = 10;
-  const maxH = Math.max(...D.timeline.map((x) => x.h)) + 1;
-  const X = (h) => l + (W - l - 10) * h / maxH;
-  const cidx = Object.fromEntries(chans.map((c, i) => [c, i]));
-  const Y = (c) => t + (H - b - t) * cidx[c] / Math.max(1, chans.length - 1);
+function syncTable() {
+  const sy = D.sync, k = Object.keys(sy);
+  const nsec = Math.round(D.run_hours * 3600);
+  $("#syncIntro").innerHTML = `If something hit every channel at once, such as a voltage step or a pause in data acquisition, all reads in progress would lose sequence in the same second. Each deletion (not shared with other reads at the same genome position) was placed at the second it passed through the pore (read start + position × duration from the signal sample counts), and every second of the run was compared with the number of reads in progress then (on average ${Math.round(sy[k[0]].mean_active).toLocaleString()}). Only a handful of the ${nsec.toLocaleString()} seconds show more deletions than chance (Poisson test, Bonferroni-corrected), and none involves more than ${Math.max(...k.flatMap((x) => sy[x].sig_examples.map((e) => e.channels)))} channels. There are no flow-cell-wide bursts of deletions in this run. The flow-cell-wide effect is the scan cycle above.`;
+  $("#syncTable").innerHTML = `<thead><tr><th>Deletion size</th><th class="num">Deletions</th><th class="num">Per read-hour</th><th class="num">Seconds with excess</th><th class="num">Most in one second</th><th>Channels involved in those seconds</th></tr></thead><tbody>` +
+    k.map((x) => { const v = sy[x]; return `<tr><td>≥${x} bp</td><td class="num">${v.events.toLocaleString()}</td><td class="num">${v.rate_per_read_hour}</td><td class="num">${v.sig_seconds} of ${nsec.toLocaleString()}</td><td class="num">${v.max_in_one_second}</td><td>${v.sig_examples.map((e) => e.channels).join(", ") || "–"}</td></tr>`; }).join("") + `</tbody>`;
+}
+
+function channelSection() {
+  const c = D.channels;
+  const h = c.hist_lowc, e = c.hist_lowc_edges;
+  const W = 900, H = 200, l = 46, b = 34, t = 10;
+  const max = Math.max(...h);
+  const bw = (W - l - 10) / h.length;
   const s = svg("svg", { viewBox: `0 0 ${W} ${H}` });
-  for (let h = 0; h <= maxH; h += 6) {
-    svg("line", { x1: X(h), x2: X(h), y1: t, y2: H - b, stroke: "var(--grid)" }, s);
-    svg("text", { x: X(h), y: H - b + 14, "text-anchor": "middle", fill: "var(--muted)" }, s).textContent = h + " h";
-  }
-  for (const [h, c, ln] of ev) {
-    const p = svg("circle", { cx: X(h), cy: Y(c), r: Math.min(5, 1.5 + Math.log10(ln)), fill: "var(--bad)", "fill-opacity": .55 }, s);
-    svg("title", {}, p).textContent = `${ln} bp deletion · channel ${c} · ${h.toFixed(2)} h`;
-  }
-  svg("text", { x: 12, y: H / 2, fill: "var(--muted)", transform: `rotate(-90 12 ${H / 2})`, "text-anchor": "middle" }, s).textContent = `${chans.length} channels`;
-  $("#raster").replaceChildren(s);
-  const sy = D.sync;
-  const conc = sy[0]?.mean_concurrent_reads;
-  $("#syncIntro").innerHTML = `Each dot is a deletion of ≥20 bp (not present in other reads, so not a real difference from the reference), placed at the moment it passed through the pore (read start + position × duration) and on its channel's row. If something hit the whole flow cell at once, such as a voltage step or a pause in data acquisition, you would see vertical stripes. On average ${conc} of the sampled reads were being sequenced at any moment. The table compares the number of deletion pairs in different channels within ±2 s of each other with the same reads placed at random times (50 shuffles).`;
-  $("#syncTable").innerHTML = `<thead><tr><th>Deletion size</th><th class="num">Events</th><th class="num">Coincident pairs</th><th class="num">Expected by chance (max)</th><th>Verdict</th></tr></thead><tbody>` +
-    sy.map((x) => `<tr><td>≥${x.min_len} bp</td><td class="num">${x.events.toLocaleString()}</td><td class="num">${x.observed_pairs}</td><td class="num">${x.null_mean.toFixed(1)} (${x.null_max})</td><td>${x.observed_pairs > x.null_max ? '<span class="no">synchronised</span>' : '<span class="yes">no excess</span>'}</td></tr>`).join("") + `</tbody>`;
+  h.forEach((n, i) => {
+    const hh = n ? Math.max(2, (H - b - t) * Math.sqrt(n / max)) : 0;
+    const rr = svg("rect", { x: l + i * bw + 1, y: H - b - hh, width: bw - 2, height: hh, fill: e[i] > 3 ? "var(--bad)" : "var(--junk)" }, s);
+    svg("title", {}, rr).textContent = `${e[i].toFixed(1)}–${e[i + 1].toFixed(1)}%: ${n} channels`;
+    if (i % 3 === 0) svg("text", { x: l + i * bw, y: H - b + 14, fill: "var(--muted)" }, s).textContent = e[i].toFixed(1) + "%";
+  });
+  svg("text", { x: l + (W - l) / 2, y: H - 4, "text-anchor": "middle", fill: "var(--muted)" }, s).textContent = "share of a channel's reads with low-complexity junk (bar height: √channels)";
+  $("#chanChart").replaceChildren(s);
+  $("#chanIntro").innerHTML = `Across ${c.n.toLocaleString()} channels with ≥200 reads, the share of reads with low-complexity junk varies ${c.lowc_var_ratio.toFixed(0)} times more than chance would allow, and the inter-species chimera share ${c.chim_var_ratio.toFixed(0)} times more. A few pores produce junk in 5–12% of their reads, against ${pct(D.summary.low_complexity.pct_reads)} overall. Channel number is in every read's <code>ch</code> tag, so these pores can be identified and their reads flagged.`;
+  $("#chanTable").innerHTML = `<thead><tr><th>Channel</th><th class="num">Reads</th><th class="num">Low-complexity</th><th class="num">Inter-species chimeras</th><th class="num">Skip-prone</th><th class="num">Median read Q</th></tr></thead><tbody>` +
+    c.top_lowc.slice(0, 8).map((x) => `<tr><td>${x.ch}</td><td class="num">${x.n.toLocaleString()}</td><td class="num hi">${pct(100 * x.lowc)}</td><td class="num">${pct(100 * x.chim)}</td><td class="num">${pct(100 * x.skip)}</td><td class="num">${x.qs}</td></tr>`).join("") + `</tbody>`;
 }
 
 function toolTable() {
@@ -331,13 +382,15 @@ function toolTable() {
 function methods() {
   const ds = D.dataset, st = D.stats;
   const items = [
-    `Reads: complete BAM records from ${st.n_reads.toLocaleString()} reads, taken from evenly spaced 1 MB slices of <code>${esc(ds.file)}</code> (${esc(ds.accession)}). Dorado writes the BAM grouped by channel, so the sample covers ${st.n_channels} channels over the whole run.`,
-    `Basecalling: ${esc(ds.basecaller)}. Reads are analysed as published, i.e. after dorado's own adapter trimming and read splitting.`,
+    `Reads: all ${st.n_reads.toLocaleString()} reads in <code>${esc(ds.file)}</code> (${esc(ds.accession)}, MD5 checked against ENA), ${(st.n_bases / 1e9).toFixed(1)} Gb from ${st.n_channels.toLocaleString()} channels over ${Math.round(D.run_hours)} hours.`,
+    `Basecalling: ${esc(ds.basecaller)}. Reads are analysed as published, i.e. after dorado's own adapter trimming and read splitting (${pct(100 * st.dorado_split_reads / st.n_reads)} of reads are products of a split).`,
     `Reference: ${esc(ds.reference)}. Alignment with minimap2 (mappy, map-ont preset). Alignments shorter than 300 bp or overlapping a longer one by >20% are ignored.`,
     `Adapter search: edlib, ≤20% edit distance, both orientations of the SQK-LSK114 ligation adapter.`,
     `Chimeras: adjacent alignments to different species (inter-species), or to the same contig more than 2 kb away from where a continuous molecule would be, allowing for circular chromosomes (intra-genome). Opposite strands at the same place = foldback. Joins between contigs of the draft yeast assembly are not counted.`,
-    `Deletion events: deletions ≥10 bp inside alignments that occur in fewer than 3 reads at the same reference position. Their time is estimated as read start + duration × position / length.`,
-    `Caveats: the Zymo reference genomes are not from the same lot as this DNA, so a few real differences remain. Chimera rates depend on library prep (the ligation adapter is present, so this was a ligation library; the exact kit is not recorded yet). The run had about ${(st.n_mapped / st.n_reads * 100).toFixed(0)}% mappable reads; unmapped reads are mostly <500 bp.`,
+    `Low-complexity junk: runs of ≥6 GGAAT units, ≥25 identical bases, or ≥12 dinucleotide units, in reads that also align to the mock.`,
+    `Scan cycle: seconds in which significantly more reads ended than the number of reads in progress predicts (Poisson, Bonferroni-corrected, ≥5 reads and ≥3× expected), grouped into events. Reads are binned by start time relative to the end of the last event.`,
+    `Deletion timing: deletions ≥10 bp inside alignments, placed in time from the read start, trimmed samples and the sample position (ns/ts/du tags). Deletions found in ≥30% of reads at the same genome position are real differences from the reference and were excluded.`,
+    `Caveats: the Zymo reference genomes are not from the same lot as this DNA. The library is a ligation library (the LSK114 adapter is present), but the exact kit is not recorded yet. Unmapped reads (${pct(D.summary.unmapped.pct_reads)} of reads, ${pct(D.summary.unmapped.pct_bases)} of bases) are mostly <500 bp. The cause of the scan-cycle effects cannot be read from the BAM; MinKNOW logs or POD5 run information (bias voltage, mux changes) would show it.`,
   ];
   $("#methodsList").innerHTML = items.map((x) => `<li>${x}</li>`).join("");
 }
@@ -351,6 +404,17 @@ function bind() {
     document.querySelectorAll("[data-unit]").forEach((x) => x.setAttribute("aria-pressed", x === b));
     overview();
   }));
+  $("#scans").addEventListener("click", (e) => {
+    const z = e.target.closest("[data-z]");
+    if (z) {
+      const s0 = D.scan.scan_start_h;
+      zoom = z.dataset.z === "all" ? { h0: 0, h1: null } : z.dataset.z === "6" ? { h0: 0, h1: 6 } : { h0: s0[7] - 0.25, h1: 13.5 };
+      if (z.dataset.z === "c") zoom.h1 = 13.5, zoom.h0 = 10.5;
+      scanSection();
+    }
+    const g = e.target.closest("[data-goto]");
+    if (g) { e.preventDefault(); select(g.dataset.goto); $("#gallery").scrollIntoView({ behavior: "smooth" }); }
+  });
   let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => renderExample(), 200); });
   document.addEventListener("keydown", (e) => {
     if (e.target.closest("input,select,textarea")) return;
@@ -363,5 +427,5 @@ fetch("data/artefacts_zymohmw.json").then((r) => r.json()).then((d) => {
   D = d;
   const hash = location.hash.slice(1);
   if (CAT[hash]) cur = hash;
-  headline(); overview(); tabs(); renderCat(); gapChart(); foldChart(); filterTable(); timeChart(); raster(); toolTable(); methods(); bind();
+  headline(); overview(); scanSection(); tabs(); renderCat(); gapChart(); foldChart(); filterTable(); timeChart(); syncTable(); channelSection(); toolTable(); methods(); bind();
 }).catch((e) => { $("#overview").insertAdjacentHTML("beforeend", `<p class="empty">Could not load data (${esc(e.message)}).</p>`); });
