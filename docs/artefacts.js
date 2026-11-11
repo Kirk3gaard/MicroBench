@@ -27,7 +27,7 @@ const CATS = [
     what: "The read continues from one strand into the reverse complement of the same region, so the read is a near-palindrome. The second half is the complement strand passing through the pore after the template.",
     detect: "Adjacent alignments to the same place in the genome on opposite strands.",
     matters: "Each base is counted twice, which inflates coverage and creates fake inverted repeats. The second half is usually less accurate.",
-    tools: "In this run about 4 in 10 foldbacks contain the ligation adapter at the fold, so adapter splitting can catch those. The rest join without an adapter. Foldbacks become rarer during the run (4.8% of reads ≥1 kb at the start, about 2% later) and more common within each scan cycle, so they depend on the state of the pores, not just the library." },
+    tools: "Some foldbacks contain the ligation adapter at the fold (see the chimera section), so adapter splitting can catch those; the rest join without an adapter. In the ZymoHMW run foldbacks became rarer during the run (4.8% of reads ≥1 kb at the start, about 2% later) and more common within each scan cycle, so they depend on the state of the pores, not just the library." },
   { key: "internal_adapter", title: "Adapters inside reads", short: "Internal adapters",
     what: "A copy of the ligation adapter sits inside the read instead of at the very end, typically after a short leading fragment.",
     detect: "Match to the ONT ligation adapter (CCTGTACTTCGTTCAGTTACGTATTGCT, ≤20% edits) more than 100 bp from either end.",
@@ -38,10 +38,15 @@ const CATS = [
     detect: "Adapter match within 100 bp of the read start or end.",
     matters: "Rare after dorado trimming (see the numbers), but a common problem when reads were basecalled with --no-trim or by older software.",
     tools: "End trimming by dorado or Porechop_ABI removes it." },
+  { key: "untrimmed_barcode", title: "Barcodes left in the reads", short: "Untrimmed barcodes",
+    what: "The run was demultiplexed, but the native barcode construct (flank + 24-base barcode + flank, about 46 bases) is still at the start and end of nearly every read, because the reads were basecalled without a barcoding kit name.",
+    detect: "Exact 20-mers of the native barcode construct in the first and last 80 bases of 200,000 reads (and edit-tolerant search in the kit check on the datasets page).",
+    matters: "Barcode sequence ends up in assemblies, k-mer profiles and read-end analyses, and barcode-to-barcode joins look like chimeras. Every user of the data has to trim it first.",
+    tools: "dorado trim or dorado demux with --kit-name, Porechop/Porechop_ABI, or ontrim remove it. Length and quality filters do not." },
   { key: "low_complexity", title: "Low-complexity junk", short: "Low-complexity junk",
     what: "Hundreds of bases of simple repeats — (GGAAT)n, poly-A, poly-T, (TA)n — inside or at the end of otherwise good reads. They align to nothing in the mock and appear as long insertions.",
     detect: "Runs of ≥6 GGAAT units, ≥25 A or T, or ≥12 dinucleotide units in a read with at least one alignment.",
-    matters: "About 7% of these stretches appear right after MinKNOW's periodic pore scan (see below). (GGAAT)n is the motif of human satellite III, so these reads can trigger human-contamination screens. Junk insertions also end up in low-coverage assemblies and inflate error rates. In this run the repeat appears almost only as GGAAT and practically never as its reverse complement ATTCC, which points to the basecaller rather than real DNA.",
+    matters: "In the ZymoHMW run, stretches like these cluster right after MinKNOW's periodic pore scan (see the scan section). (GGAAT)n is the motif of human satellite III, so these reads can trigger human-contamination screens. Junk insertions also end up in low-coverage assemblies and inflate error rates. In this run the repeat appears almost only as GGAAT and practically never as its reverse complement ATTCC, which points to the basecaller rather than real DNA.",
     tools: "Mean-quality filters average the junk away inside a long read. Only tools that look at local quality or sequence complexity can remove it." },
   { key: "post_scan_junk", title: "Junk right after a pore scan", short: "Post-scan junk",
     what: "Reads that start within a few minutes after MinKNOW's periodic scan often begin with hundreds of bases of (GGAAT)n or poly-A at very low quality (Q≈2–3), followed by normal sequence.",
@@ -78,6 +83,7 @@ function headline() {
     [pct(s._any.pct_reads), "of reads"],
     [pct(100 * chimReads / st.n_reads), "of reads are chimeric or foldback"],
     [pct(100 * st.dorado_split_reads / st.n_reads), "of reads were already split by dorado"],
+    ...(D.gaps?.n_events ? [[D.gaps.n_events.toLocaleString(), `signal gaps, hitting ${pct(D.gaps.pct_reads_hit)} of reads`]] : []),
     [st.n_reads.toLocaleString(), "reads analysed (the whole run)"],
   ];
   $("#headline").innerHTML = tiles.map(([v, l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
@@ -299,7 +305,15 @@ function scanSection() {
   const gap = (starts[starts.length - 2] - starts[1]) / (starts.length - 3);
   const durs = sc.scan_dur_s.filter((x) => x > 100);
   const med = durs.slice().sort((a, b) => a - b)[Math.floor(durs.length / 2)];
-  $("#scanIntro").innerHTML = `Every <b>${gap.toFixed(2)} hours</b>, hundreds of reads across the flow cell stop within the same few seconds. This is MinKNOW's periodic pore/mux scan, which interrupts sequencing in a few waves over about ${Math.round(med / 60 * 10) / 10} minutes (${med} s). Two things follow, on the whole flow cell at once:
+  const effect = first.lowc / avg("lowc");
+  if (!(effect > 2) || !isFinite(gap)) {
+    $("#scanTitle").textContent = "Pore scans: no effect on the reads in this run";
+    $("#scanIntro").innerHTML = `MinKNOW still pauses the flow cell from time to time (${starts.length} moments when hundreds of reads ended together, at irregular intervals), but reads that start right after these pauses look like all other reads: ${pct(100 * first.lowc)} carry low-complexity junk against ${pct(100 * avg("lowc"))} otherwise, and the deletion rate does not change. Compare with the <a href="?ds=zymohmw#scans">ZymoHMW run</a>.`;
+    $("#scanNote").innerHTML = "";
+  }
+  const noEffect = !(effect > 2) || !isFinite(gap);
+  if (!noEffect) $("#scanTitle").textContent = `Every ${gap.toFixed(1)} hours the whole flow cell changes`;
+  if (!noEffect) $("#scanIntro").innerHTML = `Every <b>${gap.toFixed(2)} hours</b>, hundreds of reads across the flow cell stop within the same few seconds. This is MinKNOW's periodic pore/mux scan, which interrupts sequencing in a few waves over about ${Math.round(med / 60 * 10) / 10} minutes (${med} s). Two things follow, on the whole flow cell at once:
     <b>1. Junk at the start of reads.</b> Reads starting in the first minute after a scan carry low-complexity junk ${(first.lowc / avg("lowc")).toFixed(0)} times as often as other reads (${pct(100 * first.lowc)} vs ${pct(100 * avg("lowc"))}), usually as the first few hundred bases. They also carry internal adapters ${(first.ia / avg("ia")).toFixed(1)} times as often.
     <b>2. A sawtooth in the error rate.</b> The deletion rate drops right after each scan and climbs again until the next one: ${first.delkb.toFixed(2)} deletions per kb in reads starting in the first minute vs ${sn[7].delkb.toFixed(2)} an hour later. The foldback rate climbs within each cycle too, from ${pct(100 * sn[1].fold)} to ${pct(100 * sn[7].fold)}.`;
   $("#sinceTable").innerHTML = `<thead><tr><th>Read started</th><th class="num">Reads ≥1 kb</th><th class="num">Low-complexity</th><th class="num">Internal adapter</th><th class="num">Foldback</th><th class="num">Inter-species chimera</th><th class="num">Deletions / kb</th><th class="num">Median length</th></tr></thead><tbody>` +
@@ -308,7 +322,7 @@ function scanSection() {
       return `<tr><td>${lab}</td><td class="num">${x.n.toLocaleString()}</td><td class="num ${x.lowc > 2 * avg("lowc") ? "hi" : ""}">${pct(100 * x.lowc)}</td><td class="num ${x.ia > 1.8 * avg("ia") ? "hi" : ""}">${pct(100 * x.ia)}</td><td class="num">${pct(100 * x.fold)}</td><td class="num">${pct(100 * x.inter)}</td><td class="num">${x.delkb.toFixed(2)}</td><td class="num">${fmtLen(x.medlen)}</td></tr>`;
     }).join("") + `</tbody>`;
   const jt = sc.junk_time;
-  $("#scanNote").innerHTML = `${pct(100 * jt.frac_in_window)} of all low-complexity stretches ≥100 bp sit in reads passing the pore during or just after a scan, which is only ${pct(100 * jt.window_share)} of run time. These junk stretches sit at the very start of the read (median position ${pct(100 * jt.pos_near)} into the read), whereas junk elsewhere in the run sits towards the end (median ${pct(100 * jt.pos_other)}). Their base qualities are very low (Q≈2–3), so local quality trimming removes them, but mean-quality filters on long reads do not. See the <a href="#gallery" data-goto="post_scan_junk">post-scan examples</a>.`;
+  if (!noEffect) $("#scanNote").innerHTML = `${pct(100 * jt.frac_in_window)} of all low-complexity stretches ≥100 bp sit in reads passing the pore during or just after a scan, which is only ${pct(100 * jt.window_share)} of run time. These junk stretches sit at the very start of the read (median position ${pct(100 * jt.pos_near)} into the read), whereas junk elsewhere in the run sits towards the end (median ${pct(100 * jt.pos_other)}). Their base qualities are very low (Q≈2–3), so local quality trimming removes them, but mean-quality filters on long reads do not. See the <a href="#gallery" data-goto="post_scan_junk">post-scan examples</a>.`;
 }
 let zoom = { h0: 0, h1: null };
 
@@ -334,7 +348,7 @@ function timeChart() {
   const m = (a, k) => a.reduce((x, y) => x + y[k], 0) / a.length;
   const first = T.slice(0, 6), lastT = T.slice(-14, -2);
   const up = (k) => Math.round(100 * (m(lastT, k) / m(first, k) - 1));
-  $("#timeIntro").innerHTML = `Underneath the 1.6-hour sawtooth, error rates drift upwards over the ${Math.round(D.run_hours)}-hour run (15-minute bins, median of reads ≥1 kb): deletions by about ${up("dels")}% and mismatches by about ${up("mm")}% from the first 1.5 hours to the last 3. Chimeras and foldbacks together fall from ${(100 * m(T.slice(0, 2), "chim")).toFixed(1)}% to about ${(100 * m(lastT, "chim")).toFixed(1)}% of reads ≥1 kb, almost entirely through fewer foldbacks. The inter-species chimera rate stays at 2.3–3.1% for the whole run, which fits chimeras that form in the library rather than in the pore.`;
+  $("#timeIntro").innerHTML = `Over the whole run, error rates drift upwards over the ${Math.round(D.run_hours)}-hour run (15-minute bins, median of reads ≥1 kb): deletions by about ${up("dels")}% and mismatches by about ${up("mm")}% from the first 1.5 hours to the last 3. Chimeras and foldbacks together fall from ${(100 * m(T.slice(0, 2), "chim")).toFixed(1)}% to about ${(100 * m(lastT, "chim")).toFixed(1)}% of reads ≥1 kb, mostly through fewer foldbacks in the ZymoHMW run. Inter-species chimeras stay at a steady rate, which fits chimeras that form in the library rather than in the pore.`;
 }
 
 function syncTable() {
@@ -390,7 +404,9 @@ function methods() {
     `Low-complexity junk: runs of ≥6 GGAAT units, ≥25 identical bases, or ≥12 dinucleotide units, in reads that also align to the mock.`,
     `Scan cycle: seconds in which significantly more reads ended than the number of reads in progress predicts (Poisson, Bonferroni-corrected, ≥5 reads and ≥3× expected), grouped into events. Reads are binned by start time relative to the end of the last event.`,
     `Deletion timing: deletions ≥10 bp inside alignments, placed in time from the read start, trimmed samples and the sample position (ns/ts/du tags). Deletions found in ≥30% of reads at the same genome position are real differences from the reference and were excluded.`,
-    `Caveats: the Zymo reference genomes are not from the same lot as this DNA. The library is a ligation library (the LSK114 adapter is present), but the exact kit is not recorded yet. Unmapped reads (${pct(D.summary.unmapped.pct_reads)} of reads, ${pct(D.summary.unmapped.pct_bases)} of bases) are mostly <500 bp. The cause of the scan-cycle effects cannot be read from the BAM; MinKNOW logs or POD5 run information (bias voltage, mux changes) would show it.`,
+    `Signal gaps: deletions ≥10 bp inside alignments and collinear split alignments, counted once per read per second and compared with the number of reads in progress that second (Poisson, Bonferroni-corrected, ≥10 reads); neighbouring seconds within 3 s are merged into one gap.`,
+    `Molecules read twice: consecutive reads in the same channel on opposite strands that overlap by ≥80% on the genome and start within 20 s of each other.`,
+    `Caveats: the Zymo reference genomes are not from the same lot as this DNA. Library: ${esc(D.dataset.kit || "not recorded")}. Unmapped reads (${pct(D.summary.unmapped.pct_reads)} of reads, ${pct(D.summary.unmapped.pct_bases)} of bases) are mostly <500 bp. The cause of the scan-cycle effects cannot be read from the BAM; MinKNOW logs or POD5 run information (bias voltage, mux changes) would show it.`,
   ];
   $("#methodsList").innerHTML = items.map((x) => `<li>${x}</li>`).join("");
 }
@@ -423,9 +439,81 @@ function bind() {
   });
 }
 
-fetch("data/artefacts_zymohmw.json").then((r) => r.json()).then((d) => {
-  D = d;
+let INDEX = [], DSID = "zymohmw", bound = false;
+
+function gapSection() {
+  const sec = $("#gaps"), g = D.gaps;
+  if (!g) { sec.hidden = true; return; }
+  sec.hidden = false;
+  const pm = g.per_minute.filter((x) => x[2] > 20);
+  const W = 900, H = 220, l = 46, b = 34, t = 16, r = 10;
+  const maxH = Math.ceil(g.run_hours);
+  const X = (h) => l + (W - l - r) * h / maxH;
+  const vals = pm.map((x) => 1000 * x[1] / (x[2] * 60));
+  const vmax = Math.max(...vals) * 1.05 || 1;
+  const Y = (v) => H - b - (H - b - t) * v / vmax;
+  const s = svg("svg", { viewBox: `0 0 ${W} ${H}` });
+  for (let h = 0; h <= maxH; h += 6) {
+    svg("line", { x1: X(h), x2: X(h), y1: t, y2: H - b, stroke: "var(--grid)" }, s);
+    svg("text", { x: X(h), y: H - b + 14, "text-anchor": "middle", fill: "var(--muted)" }, s).textContent = h + " h";
+  }
+  svg("polyline", { points: pm.map((x, i) => `${X(x[0]).toFixed(1)},${Y(vals[i]).toFixed(1)}`).join(" "), fill: "none", stroke: "var(--q)", "stroke-width": 1 }, s);
+  for (const e of g.events) {
+    const tick = svg("line", { x1: X(e.t_h), x2: X(e.t_h), y1: t - 10, y2: t - 2, stroke: "var(--bad)", "stroke-width": 1.5 }, s);
+    svg("title", {}, tick).textContent = `${e.t_utc}: ${e.reads} reads on ${e.channels} channels`;
+  }
+  svg("text", { x: l, y: H - 2, fill: "var(--muted)" }, s).textContent = "reads losing ≥10 bases per 1,000 reads in progress, per second (1-min means) · red ticks: detected gaps";
+  svg("text", { x: l - 6, y: Y(vmax / 1.05) + 4, "text-anchor": "end", fill: "var(--muted)" }, s).textContent = (vmax / 1.05).toFixed(1);
+  svg("text", { x: l - 6, y: Y(0) + 4, "text-anchor": "end", fill: "var(--muted)" }, s).textContent = "0";
+  $("#gapTimeChart").replaceChildren(s);
+  const dev = D.dataset.device ? ` on <b>${esc(D.dataset.device)}</b>` : "";
+  $("#gapIntro").innerHTML = g.n_events
+    ? `If the flow cell stops delivering signal for a moment, every read being sequenced loses the stretch of its molecule that passed through the pore meanwhile (about 400 bases per second). In the reads this shows up as a deletion, or as a read whose alignment is split in two, in hundreds of channels at the same second. This run${dev} has <b>${g.n_events.toLocaleString()} such gaps</b>, hitting <b>${g.reads_hit.toLocaleString()} reads (${pct(g.pct_reads_hit)})</b>. The missing stretch is too short to break a read and too long to be a normal error, so neither dorado nor the usual filters notice it.`
+    : `If the flow cell stops delivering signal for a moment, every read being sequenced loses the stretch of its molecule that passed through the pore meanwhile (about 400 bases per second). Every second of this run${dev} was tested (on average ${Math.round(g.mean_active).toLocaleString()} reads in progress). <b>No signal gaps were found</b>: no second has many reads on many channels losing sequence together.`;
+  $("#gapRuns").innerHTML = `<thead><tr><th>Run</th><th>Device</th><th class="num">Reads</th><th class="num">Gaps</th><th class="num">Reads hit</th></tr></thead><tbody>` +
+    INDEX.map((x) => `<tr><td>${x.id === DSID ? "<b>" + esc(x.label) + "</b>" : `<a href="?ds=${x.id}#gaps">${esc(x.label)}</a>`}</td><td>${esc(x.device || "")}</td><td class="num">${x.n_reads ? x.n_reads.toLocaleString() : "–"}</td><td class="num ${x.gaps ? "hi" : ""}">${x.gaps ?? "–"}</td><td class="num">${x.gaps_pct != null ? pct(x.gaps_pct) : "–"}</td></tr>`).join("") + `</tbody>`;
+  const top = g.events.slice().sort((a, b) => b.reads - a.reads).slice(0, 12);
+  $("#gapTable").innerHTML = top.length ? `<thead><tr><th>Time (UTC)</th><th class="num">Run hour</th><th class="num">Reads hit</th><th class="num">Channels</th><th class="num">Share of reads in progress</th><th class="num">Bases missing (median)</th><th class="num">Seen as split alignment</th></tr></thead><tbody>` +
+    top.map((e) => `<tr><td>${e.t_utc}</td><td class="num">${e.t_h.toFixed(2)}</td><td class="num">${e.reads}</td><td class="num">${e.channels}</td><td class="num">${pct(100 * e.share_of_active)}</td><td class="num">${e.missing_median}</td><td class="num">${pct(100 * e.split_share)}</td></tr>`).join("") + `</tbody>` : "";
+  $("#gapTable").parentElement.previousElementSibling.hidden = !top.length;
+  $("#gapNote2").innerHTML = g.ontrim ? `Independent check: ontrim's report for the same run lists ${g.ontrim.events} gaps; ${g.ontrim.matched_by_mine} of them fall within 5 s of a gap found here, and ${g.ontrim.mine_matched_by_ontrim} of the ${g.n_events} gaps found here are in ontrim's list.` : "";
+}
+
+function duplexSection() {
+  const d = D.duplex, sec = $("#duplex");
+  if (!d) { sec.hidden = true; return; }
+  sec.hidden = false;
+  $("#duplexIntro").innerHTML = `In ${d.pairs.toLocaleString()} cases the next read in the same pore is the other strand of the same molecule (opposite strand, ≥80% overlap on the genome, started within 20 s). ${pct(d.pct_reads_in_pairs)} of reads are in such a pair and ${pct(d.bases_in_second_reads_pct)} of the bases are the second strand of a molecule that is already in the data. ${d.from_one_split_read.toLocaleString()} of the pairs were one read that dorado split in two. The simplex BAM keeps both reads, so these molecules count twice in coverage, abundance and allele frequencies. Duplex basecalling, or dropping the second read of each pair (dorado's <code>dx</code> tag and <code>pi</code> parent IDs help), avoids that.`;
+}
+
+function picker() {
+  $("#dsPicker").innerHTML = INDEX.map((x) => `<button class="chip" data-ds="${x.id}" aria-pressed="${x.id === DSID}">${esc(x.label)}</button>`).join("");
+}
+
+function renderAll() {
+  headline(); overview(); scanSection(); gapSection(); tabs(); renderCat(); gapChart(); foldChart(); filterTable(); timeChart(); syncTable(); channelSection(); duplexSection(); toolTable(); methods();
+  if (!bound) { bind(); bound = true; }
+}
+
+function load(id) {
+  const meta = INDEX.find((x) => x.id === id) || INDEX[0];
+  DSID = meta.id; picker();
+  return fetch("data/" + meta.file).then((r) => r.json()).then((d) => {
+    D = d; idx = 0; zoom = { h0: 0, h1: null };
+    if (!D.examples[cur]?.length) cur = "chimera_interspecies";
+    renderAll();
+  });
+}
+
+fetch("data/artefacts_index.json").then((r) => r.json()).then((ix) => {
+  INDEX = ix;
+  const p = new URLSearchParams(location.search);
   const hash = location.hash.slice(1);
   if (CAT[hash]) cur = hash;
-  headline(); overview(); scanSection(); tabs(); renderCat(); gapChart(); foldChart(); filterTable(); timeChart(); syncTable(); channelSection(); toolTable(); methods(); bind();
+  $("#dsPicker").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-ds]"); if (!b) return;
+    history.replaceState(null, "", "?ds=" + b.dataset.ds + location.hash);
+    load(b.dataset.ds);
+  });
+  return load(p.get("ds") || ix[0].id).then(() => { if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView(); });
 }).catch((e) => { $("#overview").insertAdjacentHTML("beforeend", `<p class="empty">Could not load data (${esc(e.message)}).</p>`); });

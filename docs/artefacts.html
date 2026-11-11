@@ -16,12 +16,13 @@
     <div>
       <nav class="crumbs"><a href="./">Datasets</a> <span>›</span> <b>Read artefacts</b></nav>
       <h1>What dorado leaves in your reads</h1>
-      <p class="lede">Basecalled nanopore reads still contain chimeras, adapters, foldbacks and stretches of invented sequence. Every one of the 12.6 million reads of the <span id="dsName">ZymoBIOMICS HMW mock</span> run was checked. Browse real examples, see how common each artefact is and when it happens, and check whether the usual filters would catch it.</p>
+      <p class="lede">Basecalled nanopore reads still contain chimeras, adapters, foldbacks and stretches of invented sequence. Every read of each run was checked (<span id="dsName">ZymoBIOMICS mock communities</span>). Browse real examples, see how common each artefact is and when it happens, and check whether the usual filters would catch it.</p>
     </div>
   </div>
   <div class="wrap stats" id="headline"></div>
 </header>
 
+<div class="wrap dsbar"><span class="muted">Run:</span> <span id="dsPicker" role="group" aria-label="Sequencing run"></span></div>
 <main class="wrap">
   <section class="block" id="overview">
     <h2>How common is each artefact?</h2>
@@ -35,12 +36,22 @@
   </section>
 
   <section class="block" id="scans">
-    <h2>Every 1.6 hours the whole flow cell changes</h2>
+    <h2 id="scanTitle">Every 1.6 hours the whole flow cell changes</h2>
     <p id="scanIntro"></p>
     <div id="sawChart" class="chart"></div>
     <div class="legend" id="sawLegend"></div>
     <div class="table-wrap"><table class="plain" id="sinceTable"></table></div>
     <p class="note" id="scanNote"></p>
+  </section>
+
+  <section class="block" id="gaps">
+    <h2>Signal gaps: a stretch missing from every read at the same moment</h2>
+    <p id="gapIntro"></p>
+    <div id="gapTimeChart" class="chart"></div>
+    <div class="table-wrap"><table class="plain" id="gapRuns"></table></div>
+    <h3>Largest gaps in this run</h3>
+    <div class="table-wrap"><table class="plain" id="gapTable"></table></div>
+    <p class="note" id="gapNote2"></p>
   </section>
 
   <section class="block" id="gallery">
@@ -98,6 +109,11 @@
     <p id="chanIntro"></p>
     <div id="chanChart" class="chart"></div>
     <div class="table-wrap"><table class="plain" id="chanTable"></table></div>
+  </section>
+
+  <section class="block" id="duplex">
+    <h2>Molecules read twice</h2>
+    <p id="duplexIntro"></p>
   </section>
 
   <section class="block" id="tools">

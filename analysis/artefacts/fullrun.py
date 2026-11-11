@@ -138,10 +138,25 @@ def process(batch):
         rows.append("\t".join(map(str, [name, L, round(qs, 2), tags.get("ch", ""), round(st, 3), round(du, 3), tags.get("mx", ""),
                                          1 if "pi" in tags else 0, len(segs), primary_sp, tot("match"), tot("mm"), tot("ins"), tot("del"), aln,
                                          len(ads), len(int_ad), lowc_bp, junk, nskip, *loc, ",".join(cls) or "clean"])))
+        tq = lambda q: st + (tsamp + (ns - tsamp) * q / L) / sr if ns else st + du * q / L
         for sg in segs:
             for t, q, rp, ln in sg["long"]:
-                tt = st + (tsamp + (ns - tsamp) * q / L) / sr if ns else st + du * q / L
-                events.append("\t".join(map(str, [name, tags.get("ch", ""), round(tt, 3), t, ln, sg["ctg"], rp, q, L])))
+                events.append("\t".join(map(str, [name, tags.get("ch", ""), round(tq(q), 3), t, ln, sg["ctg"], rp, q, L])))
+        # junctions between adjacent alignments: collinear splits (a stretch of the molecule missing
+        # or inserted) and chimera/foldback joins, with their time
+        for a_, b_ in zip(segs, segs[1:]):
+            kind = junction_kind(a_, b_)
+            q = a_["q1"]
+            if kind == "collinear":
+                qgap = b_["q0"] - a_["q1"]
+                rgap = b_["r0"] - a_["r1"] if a_["strand"] == "+" else a_["r0"] - b_["r1"]
+                clen = CTGLEN[a_["ctg"]]
+                if abs(rgap) > clen / 2: rgap = rgap - clen if rgap > 0 else rgap + clen
+                miss = rgap - qgap
+                rp = a_["r1"] if a_["strand"] == "+" else a_["r0"]
+                events.append("\t".join(map(str, [name, tags.get("ch", ""), round(tq(q), 3), "split", miss, a_["ctg"], rp, q, L])))
+            else:
+                events.append("\t".join(map(str, [name, tags.get("ch", ""), round(tq(q), 3), "junction_" + kind, b_["q0"] - a_["q1"], a_["ctg"], a_["r1"], q, L])))
         if cls and cls != ["unmapped"]:
             details.append(json.dumps({"id": name, "len": L, "qs": round(qs, 2), "ch": tags.get("ch"), "st": tags.get("st"), "du": du,
                                        "pi": tags.get("pi"), "cls": cls,

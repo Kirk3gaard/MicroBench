@@ -1,6 +1,6 @@
 """Page data for the whole-run artefact scan: summary stats (fullstats.py) + example reads.
 
-usage: build_full_page.py <prefix> reads.bam stats.json out.json
+usage: build_full_page.py <prefix> reads.bam stats.json out.json [dataset-json]
 """
 import sys, json, gzip, random, re, collections, statistics
 import pysam
@@ -101,10 +101,12 @@ stats = {
     "foldback_second_worse": round(sum(1 for a, b in fold if b < a) / max(1, len(fold)), 3),
     "internal_adapter_total": n_int_ad, "internal_adapter_near_end": n_int_ad_near,
 }
-out = {"dataset": {"sample": "ZymoHMW", "flowcell": "PAS01578", "run_date": "2023-08-07", "scope": "full",
-                   "file": "PAS01578.dorado1.0.0.bm5.2.0_sup.sim.bam", "accession": "ERR15459724",
-                   "basecaller": "dorado 1.0.0, dna_r10.4.1_e8.2_400bps_sup@v5.2.0 (default adapter trimming)",
-                   "reference": "ZymoBIOMICS D6322 reference genomes (Zymo Research)"},
+DATASET = {"sample": "ZymoHMW", "flowcell": "PAS01578", "run_date": "2023-08-07", "scope": "full",
+           "file": "PAS01578.dorado1.0.0.bm5.2.0_sup.sim.bam", "accession": "ERR15459724",
+           "basecaller": "dorado 1.0.0, dna_r10.4.1_e8.2_400bps_sup@v5.2.0 (default adapter trimming)",
+           "reference": "ZymoBIOMICS D6322 reference genomes (Zymo Research)"}
+if len(sys.argv) > 5: DATASET.update(json.loads(sys.argv[5]))
+out = {"dataset": DATASET,
        "summary": S["summary"], "filters": S["filters"], "stats": stats, "timeline": S["timeline"], "sync": S["sync"],
        "deletions": S["deletions"], "systematic_sites": S["systematic_sites"], "n_systematic_sites": S["n_systematic_sites"],
        "mass_end": S["mass_end_seconds"], "mass_end_deletions": S.get("mass_end_deletions"), "channels": S["channels"],

@@ -237,8 +237,14 @@ def main():
                          "reads": num(a, "read_count"), "bases": num(a, "base_count")})
         s["projects"].add(h[1])
 
+    kits_path = os.path.join(CACHE, "kits.json")
+    kits = json.load(open(kits_path)) if os.path.exists(kits_path) else {}
     out = []
     for s in samples.values():
+        k = kits.get(s["name"])
+        if k and "kit" in k:
+            s["kit_inferred"] = {x: k.get(x) for x in ("kit", "confidence", "barcode", "evidence", "reads")}
+            s["kit_inferred"]["fractions"] = k.get("fractions")
         s["library_kit"] = sorted(s["library_kit"])
         s["projects"] = sorted(s["projects"])
         s["datasets"].sort(key=lambda d: (d["model_version"], d["dorado"]), reverse=True)

@@ -65,6 +65,8 @@ select { font: inherit; font-size: .9rem; padding: 5px 8px; border-radius: 8px; 
 .fact { background: var(--surface-2); border-radius: 8px; padding: 3px 9px; font-size: .82rem; }
 .fact b { font-weight: 600; }
 .fact.warn { color: var(--muted); font-style: italic; }
+.fact.alert { background: #fde8e1; color: #9a3412; }
+@media (prefers-color-scheme: dark) { .fact.alert { background: #3b1d12; color: #fdba74; } }
 
 .table-wrap { overflow-x: auto; margin: 0 -16px; padding: 0 16px; }
 table { border-collapse: collapse; width: 100%; font-size: .88rem; }

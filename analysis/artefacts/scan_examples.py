@@ -1,9 +1,13 @@
+import sys
+P = sys.argv[1] if len(sys.argv) > 1 else "full"
+BAM = sys.argv[2] if len(sys.argv) > 2 else BAM
+TAG = sys.argv[3] if len(sys.argv) > 3 else ""
 import json, gzip, random, datetime, numpy as np, pysam, pandas as pd
 random.seed(5)
-S=json.load(open("scan_stats.json")); starts=np.array(S["scan_start_h"])*3600
-t0=pd.read_csv("full.reads.tsv.gz",sep="\t",usecols=["st"]).st; t0=t0[t0>0].min()
+S=json.load(open(TAG + "scan_stats.json")); starts=np.array(S["scan_start_h"])*3600
+t0=pd.read_csv(P + ".reads.tsv.gz",sep="\t",usecols=["st"]).st; t0=t0[t0>0].min()
 pool=[]
-for line in gzip.open("full.artefacts.jsonl.gz","rt"):
+for line in gzip.open(P + ".artefacts.jsonl.gz","rt"):
     r=json.loads(line)
     if "low_complexity" not in r["cls"] or not (1500<=r["len"]<=30000): continue
     a=[x for x in r["lowc"] if x[1]-x[0]>=100 and x[0]<0.05*r["len"]]
@@ -13,7 +17,7 @@ for line in gzip.open("full.artefacts.jsonl.gz","rt"):
     if 0<=d<=330: r["since_scan_s"]=round(float(d),1); pool.append(r)
 pick=random.sample(pool,min(12,len(pool)))
 want={r["id"]:r for r in pick}; seqs={}
-for a in pysam.AlignmentFile("sup520.bam",check_sq=False,threads=4):
+for a in pysam.AlignmentFile(BAM,check_sq=False,threads=4):
     if a.query_name in want:
         seqs[a.query_name]=(a.query_sequence,list(a.query_qualities))
         if len(seqs)==len(want): break
@@ -23,5 +27,5 @@ exec("def thin"+src.split("def thin")[1].split("examples = {")[0])
 ex=[]
 for r in pick:
     e=example(r); e["since_scan_s"]=r["since_scan_s"]; ex.append(e)
-json.dump({"n_pool":len(pool),"examples":ex},open("scan_examples.json","w"),separators=(",",":"))
+json.dump({"n_pool":len(pool),"examples":ex},open(TAG + "scan_examples.json","w"),separators=(",",":"))
 print(len(pool),len(ex))

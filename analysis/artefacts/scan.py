@@ -1,6 +1,9 @@
+import sys
+P = sys.argv[1] if len(sys.argv) > 1 else "full"
+BAM = sys.argv[2] if len(sys.argv) > 2 else BAM
+TAG = sys.argv[3] if len(sys.argv) > 3 else ""
 import pandas as pd, numpy as np, json
-S=json.load(open("full_stats.json"))
-R=pd.read_csv("full.reads.tsv.gz",sep="\t",usecols=["id","len","qs","ch","st","du","split","aln","del","mm","ins","n_del10","cls"])
+R=pd.read_csv(P + ".reads.tsv.gz",sep="\t",usecols=["id","len","qs","ch","st","du","split","aln","del","mm","ins","n_del10","cls"])
 t0=R.st[R.st>0].min(); R["t"]=R.st-t0; R["end"]=R.t+R.du
 for c in ["chimera_interspecies","chimera_intraspecies","foldback","internal_adapter","low_complexity","skip_prone","unmapped","end_adapter"]:
     R[c]=R.cls.str.contains(c,regex=False)
@@ -25,4 +28,4 @@ L=L.assign(b=pd.cut(L.since_min,[-1,1,2,5,10,20,40,60,90,200]))
 g=L.groupby("b",observed=True).agg(n=("id","size"),lowc=("low_complexity","mean"),ia=("internal_adapter","mean"),inter=("chimera_interspecies","mean"),fold=("foldback","mean"),skip=("skip_prone","mean"),qs=("qs","median"),medlen=("len","median"))
 L2=L[L.aln>0]; g["delkb"]=L2.groupby("b",observed=True).apply(lambda x:(1000*x["del"]/x.aln).median())
 print(g.round(4).to_string())
-json.dump({"scan_start_h":(starts/3600).round(4).tolist(),"scan_dur_s":(stops-starts).tolist(),"since":g.reset_index().astype({"b":str}).round(5).to_dict("records")},open("scan_stats.json","w"))
+json.dump({"scan_start_h":(starts/3600).round(4).tolist(),"scan_dur_s":(stops-starts).tolist(),"since":g.reset_index().astype({"b":str}).round(5).to_dict("records")},open(TAG + "scan_stats.json","w"))

@@ -1,0 +1,733 @@
+{
+ "ZymoFecal": {
+  "reads": 367,
+  "fractions": {
+   "la_end": 0.019
+  },
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "ZymoFecal",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251395/PAW77640.dorado0.7.3.bm5.0.0.sup.mod4mC_5mC_6mA.subset.bam",
+  "dorado": "0.7.3"
+ },
+ "ZymoGut": {
+  "reads": 424,
+  "fractions": {
+   "nb_start": 0.974,
+   "nb_end": 0.998,
+   "la_end": 0.021
+  },
+  "kit": "Native barcoding (SQK-NBD114-24/96)",
+  "confidence": "high",
+  "barcode": "NB13",
+  "top_barcodes": [
+   [
+    "NB13",
+    836
+   ]
+  ],
+  "evidence": "barcode still on 97% of read starts and 100% of read ends",
+  "sample": "ZymoGut",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251397/PAY12289_barcode13.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam",
+  "dorado": "0.8.2"
+ },
+ "ZymoHMW": {
+  "reads": 291,
+  "fractions": {
+   "la_end": 0.021
+  },
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "ZymoHMW",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14251398/PAS01578.dorado0.7.3.bmdna_r10.4.1_e8.2_400bps@5.0.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "0.7.3"
+ },
+ "ZymoOral": {
+  "reads": 387,
+  "fractions": {
+   "nb_start": 0.987,
+   "nb_end": 0.997
+  },
+  "kit": "Native barcoding (SQK-NBD114-24/96)",
+  "confidence": "high",
+  "barcode": "NB12",
+  "top_barcodes": [
+   [
+    "NB12",
+    768
+   ]
+  ],
+  "evidence": "barcode still on 99% of read starts and 100% of read ends",
+  "sample": "ZymoOral",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459767/PAY12289_barcode12.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "Anabaena variabilis PCC 7120 DSM 107007": {
+  "reads": 201,
+  "fractions": {
+   "rb_start": 0.05,
+   "rad_start": 0.07
+  },
+  "kit": "Rapid barcoding (SQK-RBK114-24/96)",
+  "confidence": "high",
+  "barcode": "BC01",
+  "top_barcodes": [
+   [
+    "BC01",
+    10
+   ]
+  ],
+  "evidence": "rapid barcode/primer left on 7% of read starts",
+  "sample": "Anabaena variabilis PCC 7120 DSM 107007",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294002/PAW78174_barcode01.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam",
+  "dorado": "0.8.2"
+ },
+ "Escherichia coli K-12 MG1655 DSM 18039": {
+  "reads": 236,
+  "fractions": {
+   "nb_start": 0.928,
+   "nb_end": 0.78
+  },
+  "kit": "Native barcoding (SQK-NBD114-24/96)",
+  "confidence": "high",
+  "barcode": "NB01",
+  "top_barcodes": [
+   [
+    "NB01",
+    403
+   ]
+  ],
+  "evidence": "barcode still on 93% of read starts and 78% of read ends",
+  "sample": "Escherichia coli K-12 MG1655 DSM 18039",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17025883/R1041_5kHz_sup_6mA_4mC_5mC_Escherichia-coli_DSMZ18039.bam",
+  "dorado": "1.4.0+ba44a013"
+ },
+ "Kangiella aquimarina SW-154 DSMZ 16071": {
+  "reads": 696,
+  "fractions": {
+   "rad_start": 0.022
+  },
+  "kit": "Rapid (SQK-RAD114/RBK114)?",
+  "confidence": "low",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "traces of the rapid primer on 2% of read starts",
+  "sample": "Kangiella aquimarina SW-154 DSMZ 16071",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17025944/R1041_5kHz_sup_6mA_4mC_5mC_Kangiella-aquimarina.bam",
+  "dorado": "1.4.0+ba44a013"
+ },
+ "Meiothermus ruber 21 DSM 1279": {
+  "reads": 258,
+  "fractions": {
+   "nb_start": 0.93,
+   "nb_end": 0.814
+  },
+  "kit": "Native barcoding (SQK-NBD114-24/96)",
+  "confidence": "high",
+  "barcode": "NB03",
+  "top_barcodes": [
+   [
+    "NB03",
+    450
+   ]
+  ],
+  "evidence": "barcode still on 93% of read starts and 81% of read ends",
+  "sample": "Meiothermus ruber 21 DSM 1279",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17025968/R1041_5kHz_sup_6mA_4mC_5mC_Meiothermus-ruber_DSMZ1279.bam",
+  "dorado": "1.4.0+ba44a013"
+ },
+ "Shewanella oneidensis MR-1 ATCC 700550": {
+  "reads": 621,
+  "fractions": {
+   "rad_start": 0.045,
+   "rb_start": 0.016
+  },
+  "kit": "Rapid (SQK-RAD114/RBK114)?",
+  "confidence": "low",
+  "barcode": null,
+  "top_barcodes": [
+   [
+    "BC07",
+    10
+   ]
+  ],
+  "evidence": "traces of the rapid primer on 4% of read starts",
+  "sample": "Shewanella oneidensis MR-1 ATCC 700550",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17026041/R1041_5kHz_sup_6mA_4mC_5mC_Shewanella-oneidensis.bam",
+  "dorado": "1.4.0+ba44a013"
+ },
+ "Pelobacter carbinolicus Bd1 DSM 2380": {
+  "reads": 287,
+  "fractions": {
+   "rb_start": 0.017,
+   "rad_start": 0.024
+  },
+  "kit": "Rapid (SQK-RAD114/RBK114)?",
+  "confidence": "low",
+  "barcode": null,
+  "top_barcodes": [
+   [
+    "BC09",
+    5
+   ]
+  ],
+  "evidence": "traces of the rapid primer on 2% of read starts",
+  "sample": "Pelobacter carbinolicus Bd1 DSM 2380",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17026035/R1041_5kHz_sup_6mA_4mC_5mC_Pelobacter-carbinolicus_DSMZ2380.bam",
+  "dorado": "1.4.0+ba44a013"
+ },
+ "Desulfobacca acetoxidans ASRB2 DSM 11109": {
+  "reads": 241,
+  "fractions": {
+   "rad_start": 0.149,
+   "rb_start": 0.116
+  },
+  "kit": "Rapid barcoding (SQK-RBK114-24/96)",
+  "confidence": "high",
+  "barcode": "BC11",
+  "top_barcodes": [
+   [
+    "BC11",
+    28
+   ]
+  ],
+  "evidence": "rapid barcode/primer left on 15% of read starts",
+  "sample": "Desulfobacca acetoxidans ASRB2 DSM 11109",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294003/PAW78174_barcode11.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam",
+  "dorado": "0.8.2"
+ },
+ "Sagittula stellata E-37 DSM 11524": {
+  "reads": 73,
+  "fractions": {
+   "rb_start": 0.26,
+   "rad_start": 0.233,
+   "la_end": 0.014
+  },
+  "kit": "Rapid barcoding (SQK-RBK114-24/96)",
+  "confidence": "high",
+  "barcode": "BC05",
+  "top_barcodes": [
+   [
+    "BC05",
+    17
+   ],
+   [
+    "BC02",
+    1
+   ],
+   [
+    "BC07",
+    1
+   ]
+  ],
+  "evidence": "rapid barcode/primer left on 26% of read starts",
+  "sample": "Sagittula stellata E-37 DSM 11524",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294004/PAW78174_barcode05.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam",
+  "dorado": "0.8.2"
+ },
+ "Salmonella bongori 1224.72 DSM 13772": {
+  "reads": 277,
+  "fractions": {
+   "rb_start": 0.108,
+   "rad_start": 0.123,
+   "la_end": 0.007
+  },
+  "kit": "Rapid barcoding (SQK-RBK114-24/96)",
+  "confidence": "high",
+  "barcode": "BC07",
+  "top_barcodes": [
+   [
+    "BC07",
+    30
+   ]
+  ],
+  "evidence": "rapid barcode/primer left on 12% of read starts",
+  "sample": "Salmonella bongori 1224.72 DSM 13772",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294005/PAW78174_barcode07.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam",
+  "dorado": "0.8.2"
+ },
+ "Burkholderia cenocepacia J2315 DSM 16553": {
+  "reads": 459,
+  "fractions": {
+   "rb_start": 0.076,
+   "rad_start": 0.096,
+   "la_end": 0.002
+  },
+  "kit": "Rapid barcoding (SQK-RBK114-24/96)",
+  "confidence": "high",
+  "barcode": "BC06",
+  "top_barcodes": [
+   [
+    "BC06",
+    34
+   ],
+   [
+    "BC09",
+    1
+   ]
+  ],
+  "evidence": "rapid barcode/primer left on 10% of read starts",
+  "sample": "Burkholderia cenocepacia J2315 DSM 16553",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294006/PAW78174_barcode06.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam",
+  "dorado": "0.8.2"
+ },
+ "Sphaerobacter thermophilus S 6022 DSM 20745": {
+  "reads": 114,
+  "fractions": {
+   "rb_start": 0.053,
+   "rad_start": 0.044,
+   "la_end": 0.009
+  },
+  "kit": "Rapid barcoding (SQK-RBK114-24/96)",
+  "confidence": "high",
+  "barcode": "BC10",
+  "top_barcodes": [
+   [
+    "BC10",
+    6
+   ]
+  ],
+  "evidence": "rapid barcode/primer left on 5% of read starts",
+  "sample": "Sphaerobacter thermophilus S 6022 DSM 20745",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294007/PAW78174_barcode10.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam",
+  "dorado": "0.8.2"
+ },
+ "Zymomonas mobilis subsp. pomaceae Barker I DSM 22645": {
+  "reads": 52,
+  "fractions": {
+   "rb_start": 0.462,
+   "rad_start": 0.308
+  },
+  "kit": "Rapid barcoding (SQK-RBK114-24/96)",
+  "confidence": "high",
+  "barcode": "BC08",
+  "top_barcodes": [
+   [
+    "BC08",
+    23
+   ],
+   [
+    "BC09",
+    1
+   ]
+  ],
+  "evidence": "rapid barcode/primer left on 46% of read starts",
+  "sample": "Zymomonas mobilis subsp. pomaceae Barker I DSM 22645",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294008/PAW78174_barcode08.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam",
+  "dorado": "0.8.2"
+ },
+ "Methanocaldococcus jannaschii JAL-1 DSM 2661": {
+  "reads": 1402,
+  "fractions": {
+   "rb_start": 0.091,
+   "rad_start": 0.098
+  },
+  "kit": "Rapid barcoding (SQK-RBK114-24/96)",
+  "confidence": "high",
+  "barcode": "BC04",
+  "top_barcodes": [
+   [
+    "BC04",
+    128
+   ]
+  ],
+  "evidence": "rapid barcode/primer left on 10% of read starts",
+  "sample": "Methanocaldococcus jannaschii JAL-1 DSM 2661",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294009/PAW78174_barcode04.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam",
+  "dorado": "0.8.2"
+ },
+ "Sphaerotilus natans 6 DSM 6575": {
+  "reads": 344,
+  "fractions": {
+   "rb_start": 0.137,
+   "rad_start": 0.16,
+   "la_end": 0.006
+  },
+  "kit": "Rapid barcoding (SQK-RBK114-24/96)",
+  "confidence": "high",
+  "barcode": "BC03",
+  "top_barcodes": [
+   [
+    "BC03",
+    47
+   ]
+  ],
+  "evidence": "rapid barcode/primer left on 16% of read starts",
+  "sample": "Sphaerotilus natans 6 DSM 6575",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294010/PAW78174_barcode03.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam",
+  "dorado": "0.8.2"
+ },
+ "Thermanaerovibrio acidaminovorans Su883 DSM 6589": {
+  "reads": 235,
+  "fractions": {
+   "rb_start": 0.081,
+   "rad_start": 0.085
+  },
+  "kit": "Rapid barcoding (SQK-RBK114-24/96)",
+  "confidence": "high",
+  "barcode": "BC02",
+  "top_barcodes": [
+   [
+    "BC02",
+    19
+   ]
+  ],
+  "evidence": "rapid barcode/primer left on 8% of read starts",
+  "sample": "Thermanaerovibrio acidaminovorans Su883 DSM 6589",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR142/ERR14294011/PAW78174_barcode02.dorado0.8.2.bm5.0.0.sup.mod4mC_5mC_6mA.bam",
+  "dorado": "0.8.2"
+ },
+ "wwtp_NL-09": {
+  "reads": 322,
+  "fractions": {},
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "wwtp_NL-09",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459716/PAQ87691.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "wwtp_IL-01": {
+  "reads": 344,
+  "fractions": {},
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "wwtp_IL-01",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459718/PAQ87858.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "wwtp_US2-26": {
+  "reads": 308,
+  "fractions": {
+   "la_end": 0.006
+  },
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "wwtp_US2-26",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459717/PAQ87710.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "wwtp_IN-06": {
+  "reads": 368,
+  "fractions": {
+   "la_end": 0.003
+  },
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "wwtp_IN-06",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459720/PAQ95921.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "wwtp_US1-124": {
+  "reads": 343,
+  "fractions": {},
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "wwtp_US1-124",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459719/PAQ87909.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "sediment_MFD04716": {
+  "reads": 517,
+  "fractions": {},
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "sediment_MFD04716",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459710/MFD04716.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "sediment_MFD00905": {
+  "reads": 543,
+  "fractions": {
+   "la_end": 0.002
+  },
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "sediment_MFD00905",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459707/MFD00905.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "sediment_MFD05674": {
+  "reads": 767,
+  "fractions": {
+   "la_end": 0.001
+  },
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "sediment_MFD05674",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459711/MFD05674.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "sediment_MFD10007": {
+  "reads": 660,
+  "fractions": {},
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "sediment_MFD10007",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459715/MFD10007.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "sediment_MFD09779": {
+  "reads": 611,
+  "fractions": {},
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "sediment_MFD09779",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459714/MFD09779.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "soil_MFD00392": {
+  "reads": 292,
+  "fractions": {},
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "soil_MFD00392",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459706/MFD00392.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "soil_MFD06742": {
+  "reads": 436,
+  "fractions": {},
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "soil_MFD06742",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459713/MFD06742.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "soil_MFD06229": {
+  "reads": 432,
+  "fractions": {},
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "soil_MFD06229",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459712/MFD06229.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "soil_MFD02242": {
+  "reads": 460,
+  "fractions": {},
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "soil_MFD02242",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459708/MFD02242.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "soil_MFD02360": {
+  "reads": 436,
+  "fractions": {
+   "la_end": 0.002
+  },
+  "kit": "Ligation (e.g. SQK-LSK114)",
+  "confidence": "medium",
+  "barcode": null,
+  "top_barcodes": [],
+  "evidence": "no barcode or rapid primer found",
+  "sample": "soil_MFD02360",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR154/ERR15459709/MFD02360.dorado1.0.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+  "dorado": "1.0.0"
+ },
+ "PaPr00000116MP": {
+  "reads": 1550,
+  "fractions": {
+   "nb_start": 0.976,
+   "nb_end": 0.397
+  },
+  "kit": "Native barcoding (SQK-NBD114-24/96)",
+  "confidence": "high",
+  "barcode": "NB12",
+  "top_barcodes": [
+   [
+    "NB12",
+    2125
+   ],
+   [
+    "NB17",
+    1
+   ],
+   [
+    "NB07",
+    1
+   ]
+  ],
+  "evidence": "barcode still on 98% of read starts and 40% of read ends",
+  "sample": "PaPr00000116MP",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986813/PaPr00000116MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam",
+  "dorado": "1.4.0+ba44a013"
+ },
+ "PaPr00000216MP": {
+  "reads": 1459,
+  "fractions": {
+   "nb_start": 0.972,
+   "nb_end": 0.296,
+   "la_end": 0.008
+  },
+  "kit": "Native barcoding (SQK-NBD114-24/96)",
+  "confidence": "high",
+  "barcode": "NB08",
+  "top_barcodes": [
+   [
+    "NB08",
+    1746
+   ],
+   [
+    "NB04",
+    13
+   ],
+   [
+    "NB09",
+    12
+   ]
+  ],
+  "evidence": "barcode still on 97% of read starts and 30% of read ends",
+  "sample": "PaPr00000216MP",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986812/PaPr00000216MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam",
+  "dorado": "1.4.0+ba44a013"
+ },
+ "RASK00000027MP": {
+  "reads": 1242,
+  "fractions": {
+   "nb_start": 0.975,
+   "nb_end": 0.743,
+   "la_end": 0.002
+  },
+  "kit": "Native barcoding (SQK-NBD114-24/96)",
+  "confidence": "high",
+  "barcode": "NB15",
+  "top_barcodes": [
+   [
+    "NB15",
+    2134
+   ]
+  ],
+  "evidence": "barcode still on 98% of read starts and 74% of read ends",
+  "sample": "RASK00000027MP",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006693/RASK00000027MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam",
+  "dorado": "1.4.0+ba44a013"
+ },
+ "RASK00000062MP": {
+  "reads": 1471,
+  "fractions": {
+   "nb_start": 0.961,
+   "nb_end": 0.68,
+   "la_end": 0.003
+  },
+  "kit": "Native barcoding (SQK-NBD114-24/96)",
+  "confidence": "high",
+  "barcode": "NB16",
+  "top_barcodes": [
+   [
+    "NB16",
+    2405
+   ],
+   [
+    "NB10",
+    3
+   ],
+   [
+    "NB15",
+    2
+   ]
+  ],
+  "evidence": "barcode still on 96% of read starts and 68% of read ends",
+  "sample": "RASK00000062MP",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006618/RASK00000062MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam",
+  "dorado": "1.4.0+ba44a013"
+ },
+ "ASYM00000009MP": {
+  "reads": 1393,
+  "fractions": {
+   "nb_start": 0.96,
+   "nb_end": 0.533,
+   "la_end": 0.002
+  },
+  "kit": "Native barcoding (SQK-NBD114-24/96)",
+  "confidence": "high",
+  "barcode": "NB23",
+  "top_barcodes": [
+   [
+    "NB23",
+    2079
+   ],
+   [
+    "NB17",
+    1
+   ]
+  ],
+  "evidence": "barcode still on 96% of read starts and 53% of read ends",
+  "sample": "ASYM00000009MP",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006587/ASYM00000009MP_R10.4.1_sup_6mA_4mC_5mC.bam",
+  "dorado": "1.4.0+ba44a013"
+ },
+ "ASYM00000026MP": {
+  "reads": 1478,
+  "fractions": {
+   "nb_start": 0.974,
+   "nb_end": 0.692,
+   "la_end": 0.003
+  },
+  "kit": "Native barcoding (SQK-NBD114-24/96)",
+  "confidence": "high",
+  "barcode": "NB13",
+  "top_barcodes": [
+   [
+    "NB13",
+    2461
+   ],
+   [
+    "NB16",
+    1
+   ]
+  ],
+  "evidence": "barcode still on 97% of read starts and 69% of read ends",
+  "sample": "ASYM00000026MP",
+  "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006599/ASYM00000026MP_R10.4.1_NBD24_5kHz_SUP_400bps.bam",
+  "dorado": "1.4.0+ba44a013"
+ }
+}

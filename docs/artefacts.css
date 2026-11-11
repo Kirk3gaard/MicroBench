@@ -54,3 +54,5 @@ table.tools td:first-child { min-width: 150px; }
 }
 .seqbox .fl { border-bottom: 3px solid var(--c); }
 @media (max-width: 640px) { .chart svg { min-width: 620px; } #gapChart svg, #foldChart svg { min-width: 0; } }
+.dsbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 12px; }
+#dsPicker { display: inline-flex; gap: 6px; flex-wrap: wrap; }

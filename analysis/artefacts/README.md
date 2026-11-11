@@ -45,3 +45,23 @@ python3 scan_examples.py # example reads that start with junk right after a scan
 python3 occ.py           # artefact rates vs active channels and per channel (printed)
 ```
 The four JSON files are merged into `docs/data/artefacts_zymohmw.json` (keys `saw`, `scan`, `examples.post_scan_junk`).
+
+## Signal gaps, molecules read twice, second run
+
+`fullrun.py` also writes collinear split alignments and chimera junctions as timed events.
+
+```bash
+python3 gaps.py full hmw_gaps.json [ontrim_report.html]   # flow-cell-wide signal gaps (+ comparison with ontrim's list)
+python3 duplex.py full hmw_duplex.json                    # complement strand read right after the template in the same pore
+```
+
+ZymoGut (ERR15459768, P2 Solo) was run with the same scripts using the D6331 references
+(`D6331.refseq.zip` from Zymo; E. coli strains collapsed to one species) and a `gut_` prefix for the scan scripts.
+`docs/data/artefacts_index.json` lists the runs shown on the page.
+
+## Kit inference
+
+`scripts/kit_detect.py` samples reads from one BAM per sample and looks for native barcode constructs,
+rapid barcode constructs, the rapid adapter primer and ligation adapter remnants (sequences from dorado's kit
+definitions, `scripts/ont_barcodes.json`). Results are cached in `scripts/.cache/kits.json` and shown on the
+datasets page as "Kit from reads", with a warning where barcodes are still in the reads.
