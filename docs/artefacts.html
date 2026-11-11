@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MicroBench – read artefacts</title>
+<meta name="description" content="Interactive examples of artefacts that remain in dorado-basecalled Oxford Nanopore reads: chimeras, foldback reads, untrimmed adapters, low-complexity junk, skip-prone reads and run-time error drift, measured on the ZymoBIOMICS HMW mock.">
+<link rel="icon" href="microbench.jpg">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="artefacts.css">
+</head>
+<body>
+<header class="hero">
+  <div class="wrap hero-inner">
+    <a href="./"><img src="microbench.jpg" alt="MicroBench home" class="logo" width="88" height="88"></a>
+    <div>
+      <nav class="crumbs"><a href="./">Datasets</a> <span>›</span> <b>Read artefacts</b></nav>
+      <h1>What dorado leaves in your reads</h1>
+      <p class="lede">Basecalled nanopore reads still contain chimeras, adapters, foldbacks and stretches of invented sequence. Browse real examples from the <span id="dsName">ZymoBIOMICS HMW mock</span>, see how common each artefact is, and check whether the usual filters would catch it.</p>
+    </div>
+  </div>
+  <div class="wrap stats" id="headline"></div>
+</header>
+
+<main class="wrap">
+  <section class="block" id="overview">
+    <h2>How common is each artefact?</h2>
+    <p class="muted" id="datasetLine"></p>
+    <div class="toggle" role="group" aria-label="Unit">
+      <button class="chip" data-unit="pct_bases" aria-pressed="true">% of bases</button>
+      <button class="chip" data-unit="pct_reads" aria-pressed="false">% of reads</button>
+    </div>
+    <div id="overviewChart" class="chart"></div>
+    <p class="note">One read can carry several artefacts. Bars are clickable and open the examples.</p>
+  </section>
+
+  <section class="block" id="gallery">
+    <h2>Examples</h2>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div class="catpanel">
+      <div class="catinfo" id="catInfo"></div>
+      <div class="viewer">
+        <div class="viewer-bar">
+          <button class="btn small" id="prev" type="button" aria-label="Previous example">‹</button>
+          <span id="exCount"></span>
+          <button class="btn small" id="next" type="button" aria-label="Next example">›</button>
+          <span class="exmeta" id="exMeta"></span>
+        </div>
+        <div id="readSvg" class="readsvg"></div>
+        <div class="legend" id="legend"></div>
+        <div id="exDetails"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="chimeras">
+    <h2>Chimeric reads: how are the pieces joined?</h2>
+    <div class="twocol">
+      <div>
+        <h3>Gap between the two aligned parts</h3>
+        <div id="gapChart" class="chart"></div>
+        <p class="note" id="gapNote"></p>
+      </div>
+      <div>
+        <h3>Foldback reads: first vs second half accuracy</h3>
+        <div id="foldChart" class="chart"></div>
+        <p class="note" id="foldNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="filters">
+    <h2>Would a quality filter remove them?</h2>
+    <p>Length and mean-quality filters (Filtlong, chopper, NanoFilt, fastplong) score the whole read. A chimera made of two good molecules is a long, high-quality read. The table shows how many reads in each class pass common settings, based on dorado's mean read Q-score.</p>
+    <div class="table-wrap"><table class="plain" id="filterTable"></table></div>
+  </section>
+
+  <section class="block" id="time">
+    <h2>Errors through the run</h2>
+    <p id="timeIntro"></p>
+    <div id="timeChart" class="chart"></div>
+    <h3>Do long deletions happen in many channels at the same moment?</h3>
+    <p id="syncIntro"></p>
+    <div id="raster" class="chart"></div>
+    <div class="table-wrap"><table class="plain" id="syncTable"></table></div>
+  </section>
+
+  <section class="block" id="tools">
+    <h2>What handles what</h2>
+    <p>What each kind of tool is built to do. Benchmarks of trimming and filtering tools on bacterial isolates are in <a href="https://doi.org/10.64898/2026.10.12.758701">Furqon, Wick, Roberts &amp; Hall (2026)</a> and their <a href="https://adimascf.github.io/qcbenchnano/">interactive dashboard</a>.</p>
+    <div class="table-wrap"><table class="plain tools" id="toolTable"></table></div>
+  </section>
+
+  <section class="notes" id="methods">
+    <h2>How this was measured</h2>
+    <ul id="methodsList"></ul>
+    <p class="muted">Code: <code>analysis/artefacts/</code> in the <a href="https://github.com/Kirk3gaard/MicroBench">MicroBench repository</a>.</p>
+  </section>
+</main>
+
+<footer class="wrap muted">
+  MicroBench · Aalborg University · <a href="./">Back to the datasets</a>
+</footer>
+<script src="artefacts.js"></script>
+</body>
+</html>
