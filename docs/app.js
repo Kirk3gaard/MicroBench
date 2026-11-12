@@ -119,9 +119,7 @@ function card(s) {
   if (s.library_kit.length) facts.push(`<span class="fact"><b>Kit</b> ${esc(s.library_kit.join(", "))}</span>`);
   if (ki) facts.push(`<span class="fact" title="Inferred from ${ki.reads} sampled reads: ${esc(ki.evidence)} (confidence: ${esc(ki.confidence)})"><b>Kit from reads</b> ${esc(ki.kit)}${ki.barcode ? " · " + esc(ki.barcode) : ""}</span>`);
   else if (!s.library_kit.length) facts.push(`<span class="fact warn">Kit not recorded yet</span>`);
-  const nbs = ki?.fractions?.nb_start || 0, rbs = Math.max(ki?.fractions?.rb_start || 0, ki?.fractions?.rad_start || 0);
-  if (nbs > 0.2) facts.push(`<span class="fact alert">⚠ Barcodes not trimmed: ${esc(ki.evidence)}</span>`);
-  else if (rbs >= 0.05) facts.push(`<span class="fact alert">⚠ ${esc(ki.evidence)}</span>`);
+  // leftover barcode/primer warnings are held back with the read-artefact page until verified
   if (chem.length) facts.push(`<span class="fact"><b>Chemistry</b> ${esc(chem.join(", "))}</span>`);
   if (fc.length) facts.push(`<span class="fact"><b>Flow cell</b> ${esc(fc.join(", "))}</span>`);
   if (s.hic.length) facts.push(`<span class="fact"><b>Hi-C</b> ${esc(s.hic[0].kit)}</span>`);
