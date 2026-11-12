@@ -32,7 +32,7 @@ code { font: 0.9em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; bac
 h1 { margin: 0 0 4px; font-size: 2rem; letter-spacing: -0.02em; }
 .lede { margin: 0 0 8px; color: var(--muted); max-width: 70ch; }
 .links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0; font-weight: 500; }
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 20px; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-top: 20px; }
 .stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; }
 .stat b { display: block; font-size: 1.35rem; font-variant-numeric: tabular-nums; }
 .stat span { color: var(--muted); font-size: .85rem; }
