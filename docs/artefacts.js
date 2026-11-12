@@ -55,6 +55,11 @@ const CATS = [
     tools: "Their mean Q-score is lower but most still pass a Q10 filter." },
   { key: "signal_gap", title: "Signal gaps", short: "Signal gaps",
     what: "A stretch of the molecule missing from every read in progress at one moment.", detect: "See the signal-gap section.", matters: "", tools: "" },
+  { key: "recurrent_junction", title: "Breaks at recurrent positions", short: "Recurrent breaks",
+    what: "Reads that look chimeric, but every break sits at a genome position where many other reads break too.",
+    detect: "Chimera junctions in 200-bp bins with far more breaks than the contig's junction density predicts (Poisson, Bonferroni, ≥5 reads).",
+    matters: "These are differences between the sequenced strain and the reference (rearrangements, an inversion), repeats placed in another copy, or the ends of a linear contig or plasmid in the reference. They are not library artefacts and are not counted as chimeras.",
+    tools: "" },
   { key: "unmapped", title: "Unmapped reads", short: "Unmapped",
     what: "Reads with no alignment of ≥300 bp. Almost all are short.",
     detect: "No alignment to the mock references.",
@@ -90,7 +95,7 @@ function headline() {
   $("#barcodeNote").innerHTML = bc ? `<b>Before anything else:</b> ${esc(bc)}` : "";
   $("#barcodeNote").hidden = !bc;
   const inAny = CATS.filter((c) => CORE.includes(c.key) || (c.key === "signal_gap" && n.classes.signal_gap.reads)).map((c) => c.short.toLowerCase());
-  $("#overviewNote").innerHTML = `Each bar is the share of all reads, or of all bases, in reads that have that artefact (the whole read is counted). A read can have several artefacts, so the bars do not add up: ${pct(any.pct_reads)} of reads (${pct(any.pct_bases)} of bases) have at least one of ${inAny.slice(0, -1).join(", ")} or ${inAny.slice(-1)}. Unmapped reads are not counted as an artefact. Click a bar for examples.`;
+  $("#overviewNote").innerHTML = `Each bar is the share of all reads, or of all bases, in reads that have that artefact (the whole read is counted). A read can have several artefacts, so the bars do not add up: ${pct(any.pct_reads)} of reads (${pct(any.pct_bases)} of bases) have at least one of ${inAny.slice(0, -1).join(", ")} or ${inAny.slice(-1)}. Grey bars (unmapped reads, breaks at recurrent positions) are not counted as artefacts. Click a bar for examples.`;
 }
 
 function overview() {
@@ -104,7 +109,7 @@ function overview() {
     const g = svg("g", { class: "bar-row", transform: `translate(0 ${i * rowH + 4})` }, s);
     svg("text", { x: left - 8, y: 15, "text-anchor": "end" }, g).textContent = r.c.short;
     const w = Math.max(2, (W - left - 90) * r.v / max);
-    svg("rect", { class: "bar", x: left, y: 3, width: w, height: 16, rx: 3, fill: r.c.key === "unmapped" ? "var(--muted)" : "var(--bad)" }, g);
+    svg("rect", { class: "bar", x: left, y: 3, width: w, height: 16, rx: 3, fill: ["unmapped", "recurrent_junction"].includes(r.c.key) ? "var(--muted)" : "var(--bad)" }, g);
     svg("text", { x: left + w + 6, y: 15 }, g).textContent = `${pct(r.v)}  (${r.n.toLocaleString()} reads)`;
     g.addEventListener("click", () => {
       if (!D.examples[r.c.key]?.length) { (r.c.key === "signal_gap" ? $("#gaps") : $("#gallery")).scrollIntoView({ behavior: "smooth" }); return; }
@@ -253,7 +258,10 @@ function gapChart() {
   $("#gapChart").replaceChildren(s);
   const st = D.stats, ca = st.chimera_with_adapter;
   const nn = D.numbers;
-  $("#gapNote").innerHTML = `${Math.round(100 * st.chimera_direct_frac)}% of chimera junctions join the two molecules directly (less than 20 bases between the aligned parts), leaving no room for an adapter. Only ${nn.chimeric_with_internal_adapter.toLocaleString()} of the ${nn.chimeric.reads.toLocaleString()} chimeric reads (${pct(100 * nn.chimeric_with_internal_adapter / nn.chimeric.reads)}) contain an adapter, against ${pct(100 * nn.foldback_with_internal_adapter / nn.classes.foldback.reads)} of foldbacks. The shorter part is often small (median ${fmtLen(st.chimera_shortest_seg_median)}; ${Math.round(100 * st.chimera_shortest_lt1k_frac)}% under 1 kb).`;
+  $("#gapNote").innerHTML = `${Math.round(100 * st.chimera_direct_frac)}% of chimera junctions join the two molecules directly (less than 20 bases between the aligned parts), leaving no room for an adapter. Only ${nn.chimeric_with_internal_adapter.toLocaleString()} of the ${nn.chimeric.reads.toLocaleString()} chimeric reads (${pct(100 * nn.chimeric_with_internal_adapter / nn.chimeric.reads)}) contain an adapter, against ${pct(100 * nn.foldback_with_internal_adapter / nn.classes.foldback.reads)} of foldbacks. The shorter part is often small (median ${fmtLen(st.chimera_shortest_seg_median)}; ${Math.round(100 * st.chimera_shortest_lt1k_frac)}% under 1 kb).${(() => {
+    const sb = Object.entries(D.species_bases || {}).filter(([k]) => k !== "unbinned").sort((a, b) => b[1] - a[1]); const tot = sb.reduce((a, x) => a + x[1], 0);
+    return sb.length && sb[0][1] / tot > 0.4 ? ` Whether a chimera is inter- or intra-genome depends on the mix: ${pct(100 * sb[0][1] / tot)} of the aligned bases in this run come from ${esc(spName(sb[0][0]))}, so most chimeras join two molecules of it.` : "";
+  })()} ${D.recurrent_junctions?.reads_moved ? `${D.recurrent_junctions.reads_moved.toLocaleString()} reads whose breaks all sit at ${D.recurrent_junctions.recurrent_sites} recurrent positions are not counted as chimeras (see "Recurrent breaks").` : ""}`;
 }
 
 function foldChart() {
@@ -315,7 +323,9 @@ function scanSection() {
   const effect = first.lowc / avg("lowc");
   if (!(effect > 2) || !isFinite(gap)) {
     $("#scanTitle").textContent = "Pore scans: no effect on the reads in this run";
-    $("#scanIntro").innerHTML = `MinKNOW still pauses the flow cell from time to time (${starts.length} moments when hundreds of reads ended together, at irregular intervals), but reads that start right after these pauses look like all other reads: ${pct(100 * first.lowc)} carry low-complexity junk against ${pct(100 * avg("lowc"))} otherwise, and the deletion rate does not change. Compare with the <a href="?ds=zymohmw#scans">ZymoHMW run</a>.`;
+    $("#scanIntro").innerHTML = starts.length < 5
+      ? `This sample had too few reads in progress at any moment (about ${Math.round(D.gaps?.mean_active || 0)}) to time MinKNOW's pore scans from the reads. Reads that start in the first minute of the scan windows that were found look like all other reads (${pct(100 * first.lowc)} carry low-complexity junk against ${pct(100 * avg("lowc"))} otherwise).`
+      : `MinKNOW still pauses the flow cell from time to time (${starts.length} moments when hundreds of reads ended together, at irregular intervals), but reads that start right after these pauses look like all other reads: ${pct(100 * first.lowc)} carry low-complexity junk against ${pct(100 * avg("lowc"))} otherwise, and the deletion rate does not change. Compare with the <a href="?ds=zymohmw#scans">ZymoHMW run</a>.`;
     $("#scanNote").innerHTML = "";
   }
   const noEffect = !(effect > 2) || !isFinite(gap);
@@ -479,7 +489,7 @@ function gapSection() {
   $("#gapTable").innerHTML = top.length ? `<thead><tr><th>Time (UTC)</th><th class="num">Run hour</th><th class="num">Reads hit</th><th class="num">Channels</th><th class="num">Share of reads in progress</th><th class="num">Bases missing (median)</th><th class="num">Seen as split alignment</th></tr></thead><tbody>` +
     top.map((e) => `<tr><td>${e.t_utc}</td><td class="num">${e.t_h.toFixed(2)}</td><td class="num">${e.reads}</td><td class="num">${e.channels}</td><td class="num">${pct(100 * e.share_of_active)}</td><td class="num">${e.missing_median}</td><td class="num">${pct(100 * e.split_share)}</td></tr>`).join("") + `</tbody>` : "";
   $("#gapTable").parentElement.previousElementSibling.hidden = !top.length;
-  $("#gapNote2").innerHTML = g.ontrim ? `Independent check: ontrim's report for the same run lists ${g.ontrim.events} gaps; ${g.ontrim.matched_by_mine} of them fall within 5 s of a gap found here, and ${g.ontrim.mine_matched_by_ontrim} of the ${g.n_events} gaps found here are in ontrim's list.` : "";
+  $("#gapNote2").innerHTML = g.ontrim ? `Independent check: ontrim's report for this flow cell lists ${g.ontrim.events} gaps; ${g.ontrim.matched_by_mine} of them fall within 5 s of a gap found here, and ${g.ontrim.mine_matched_by_ontrim} of the ${g.n_events} gaps found here are in ontrim's list.` : "";
 }
 
 function duplexSection() {

@@ -11,6 +11,8 @@ import pysam, mappy, edlib
 
 BAM, REF, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 THREADS = int(sys.argv[4]) if len(sys.argv) > 4 else max(1, os.cpu_count() - 1)
+# keep the full sequence of this fraction of artefact reads (for example plots when the BAM is streamed, not stored)
+POOL = float(os.environ.get("POOL_FRAC", "0"))
 BATCH = 2000
 ADAPTERS = {"LA_top": "CCTGTACTTCGTTCAGTTACGTATTGCT", "LA_bottom": "AGCAATACGTAACTGAACGAAGTACAGG"}
 LOWC = re.compile(r"(?:GGAAT){6,}|(?:ATTCC){6,}|A{25,}|T{25,}|(?:TA){12,}|(?:AT){12,}|(?:AG){12,}|(?:CT){12,}|(?:GA){12,}|(?:TC){12,}|C{25,}|G{25,}")
@@ -66,6 +68,10 @@ def cs_stats(cs):
     return m, mm, ins, dele, ev
 
 def junction_kind(a, b):
+    # contigs of an assembly that are not complete genomes are labelled "unbinned": a join to or
+    # between them cannot be called a chimera (they may be parts of the same genome or its plasmids)
+    if a["ctg"] != b["ctg"] and "unbinned" in (a["sp"], b["sp"]):
+        return "ambiguous"
     if a["ctg"] != b["ctg"]:
         return "ambiguous" if a["sp"] == b["sp"] else "chimera"
     qgap = b["q0"] - a["q1"]
@@ -83,7 +89,7 @@ def ts_epoch(s):
     return datetime.datetime.fromisoformat(s.replace("Z", "+00:00")).timestamp()
 
 def process(batch):
-    rows, events, details = [], [], []
+    rows, events, details, pool = [], [], [], []
     for name, seq, qual, tags in batch:
         L = len(seq)
         hits = []
@@ -106,7 +112,7 @@ def process(batch):
         if not segs: cls.append("unmapped")
         if len(segs) >= 2:
             kinds = [junction_kind(a, b) for a, b in zip(segs, segs[1:])]
-            if any(a["sp"] != b["sp"] for a, b in zip(segs, segs[1:])): cls.append("chimera_interspecies")
+            if any(a["sp"] != b["sp"] and k == "chimera" for k, a, b in zip(kinds, segs, segs[1:])): cls.append("chimera_interspecies")
             if "foldback" in kinds: cls.append("foldback")
             if any(k == "chimera" for k, a, b in zip(kinds, segs, segs[1:]) if a["sp"] == b["sp"]): cls.append("chimera_intraspecies")
         int_ad = [a for a in ads if 100 < a[2] < L - 100]
@@ -157,22 +163,25 @@ def process(batch):
                 events.append("\t".join(map(str, [name, tags.get("ch", ""), round(tq(q), 3), "split", miss, a_["ctg"], rp, q, L])))
             else:
                 events.append("\t".join(map(str, [name, tags.get("ch", ""), round(tq(q), 3), "junction_" + kind, b_["q0"] - a_["q1"], a_["ctg"], a_["r1"], q, L])))
+        if POOL and cls and cls != ["unmapped"] and (zlib.crc32(name.encode()) % 100000) < POOL * 100000:
+            pool.append(f"@{name}\n{seq}\n+\n{qual}\n")
         if cls and cls != ["unmapped"]:
             details.append(json.dumps({"id": name, "len": L, "qs": round(qs, 2), "ch": tags.get("ch"), "st": tags.get("st"), "du": du,
                                        "pi": tags.get("pi"), "cls": cls,
                                        "segs": [{k: s[k] for k in ("q0", "q1", "ctg", "sp", "r0", "r1", "strand", "mapq", "match", "mm", "ins", "del", "long")} for s in segs],
                                        "adapters": [{"name": a[0], "strand": a[1], "start": a[2], "end": a[3], "ed": a[4]} for a in ads],
                                        "lowc": lowc[:20]}, separators=(",", ":")))
-    return rows, events, details
+    return rows, events, details, pool
 
 def batches():
-    bam = pysam.AlignmentFile(BAM, check_sq=False, threads=2)
+    bam = pysam.AlignmentFile("-" if BAM == "-" else BAM, check_sq=False, threads=2)
     b = []
     for r in bam:
         seq = r.query_sequence
         if not seq: continue
         tags = {k: v for k, v in r.get_tags() if k in ("st", "du", "ns", "ts", "qs", "ch", "mx", "pi")}
-        b.append((r.query_name, seq, None, tags))
+        q = r.query_qualities
+        b.append((r.query_name, seq, "".join(chr(x + 33) for x in q) if (POOL and q is not None) else "", tags))
         if len(b) >= BATCH:
             yield b; b = []
     if b: yield b
@@ -182,11 +191,13 @@ if __name__ == "__main__":
     with gzip.open(OUT + ".reads.tsv.gz", "wt", compresslevel=3) as fr, \
          gzip.open(OUT + ".events.tsv.gz", "wt", compresslevel=3) as fe, \
          gzip.open(OUT + ".artefacts.jsonl.gz", "wt", compresslevel=3) as fd, \
+         gzip.open(OUT + ".pool.fastq.gz", "wt", compresslevel=3) as fp, \
          mp.Pool(THREADS, initializer=init) as pool:
         fr.write(hdr)
         fe.write("id\tch\tt\ttype\tlen\tctg\trpos\tqpos\treadlen\n")
         n = 0
-        for rows, events, details in pool.imap(process, batches(), chunksize=1):
+        for rows, events, details, keep in pool.imap(process, batches(), chunksize=1):
+            if keep: fp.write("".join(keep))
             fr.write("\n".join(rows) + "\n")
             if events: fe.write("\n".join(events) + "\n")
             if details: fd.write("\n".join(details) + "\n")

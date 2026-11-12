@@ -3,7 +3,7 @@
   "id": "zymohmw",
   "label": "ZymoHMW \u00b7 P24 \u00b7 2023",
   "file": "artefacts_zymohmw.json",
-  "device": "PromethION P24",
+  "device": "PCA100019 (PromethION P24)",
   "n_reads": 12644740,
   "gaps": 0,
   "gaps_pct": 0.0
@@ -12,9 +12,18 @@
   "id": "zymogut",
   "label": "ZymoGut \u00b7 P2 Solo \u00b7 2024",
   "file": "artefacts_zymogut.json",
-  "device": "P2 Solo (nanopore-ws2)",
+  "device": "nanopore-ws2 (P2 Solo)",
   "n_reads": 9220254,
   "gaps": 934,
   "gaps_pct": 3.465
+ },
+ {
+  "id": "zymooral",
+  "label": "ZymoOral \u00b7 P2 Solo \u00b7 2024",
+  "file": "artefacts_zymooral.json",
+  "device": "nanopore-ws2 (P2 Solo)",
+  "n_reads": 1140135,
+  "gaps": 749,
+  "gaps_pct": 4.503
  }
 ]

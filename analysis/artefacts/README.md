@@ -71,3 +71,18 @@ datasets page as "Kit from reads", with a warning where barcodes are still in th
 `count_numbers.py <prefix> out.json [page.json]` recomputes every total shown at the top of the page from the
 per-read table, counting each read once (unions, not sums of overlapping classes), and checks the page JSON's
 per-class numbers against it. The result is stored in the page JSON under `numbers`.
+
+## More runs, recurrent breaks, streaming
+
+- `post.sh DIR PREFIX SEQS REF TAG DATASET_JSON [ONTRIM_HTML]` runs every step after `fullrun.py`
+  (refine_chimeras, gaps, duplex, fullstats, scan, saw, junk_time, scan_examples, build_full_page, count_numbers);
+  `merge_page.py` then assembles `docs/data/artefacts_<run>.json` and updates `artefacts_index.json`.
+- `refine_chimeras.py` moves reads whose chimera junctions all sit at recurrent genome positions
+  (strain differences, repeats, ends of linear reference contigs) out of the chimera classes into
+  `recurrent_junction`, so that only junctions at random positions count as chimeras.
+- `rangecat.py URL SIZE | fullrun.py - ...` streams a BAM too large to store through the scan
+  (parallel HTTP range requests via curl, MD5 checked on the fly); `POOL_FRAC=0.02` keeps the full
+  sequence of 2% of artefact reads for example plots.
+- ZymoOral (D6332 references) runs exactly like ZymoGut. ZymoFecal has no reference genomes: its
+  reference is assembled from its own reads with metaMDBG (complete circular contigs ≥1 Mb named,
+  the rest pooled as "unbinned", and joins involving unbinned contigs are not called chimeras).

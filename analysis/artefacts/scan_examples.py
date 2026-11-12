@@ -15,14 +15,20 @@ for line in gzip.open(P + ".artefacts.jsonl.gz","rt"):
     st=datetime.datetime.fromisoformat(r["st"]).timestamp()-t0
     d=st-starts[np.argmin(np.abs(starts-st))]
     if 0<=d<=330: r["since_scan_s"]=round(float(d),1); pool.append(r)
+if BAM.endswith((".fastq.gz",".fq.gz")):
+    ids={r.name for r in pysam.FastxFile(BAM)}; pool=[r for r in pool if r["id"] in ids]
 pick=random.sample(pool,min(12,len(pool)))
 want={r["id"]:r for r in pick}; seqs={}
-for a in pysam.AlignmentFile(BAM,check_sq=False,threads=4):
-    if a.query_name in want:
-        seqs[a.query_name]=(a.query_sequence,list(a.query_qualities))
-        if len(seqs)==len(want): break
-exec(open("build_full_page.py").read().split("def thin")[0].split("P, BAM, STATS, OUT")[0])
-src=open("build_full_page.py").read()
+if BAM.endswith((".fastq.gz",".fq.gz")):
+    for r in pysam.FastxFile(BAM):
+        if r.name in want: seqs[r.name]=(r.sequence,[ord(c)-33 for c in r.quality])
+else:
+    for a in pysam.AlignmentFile(BAM,check_sq=False,threads=4):
+        if a.query_name in want:
+            seqs[a.query_name]=(a.query_sequence,list(a.query_qualities))
+            if len(seqs)==len(want): break
+exec(open(__import__("os").path.join(__import__("os").path.dirname(__import__("os").path.abspath(__file__)), "build_full_page.py")).read().split("def thin")[0].split("P, BAM, STATS, OUT")[0])
+src=open(__import__("os").path.join(__import__("os").path.dirname(__import__("os").path.abspath(__file__)), "build_full_page.py")).read()
 exec("def thin"+src.split("def thin")[1].split("examples = {")[0])
 ex=[]
 for r in pick:

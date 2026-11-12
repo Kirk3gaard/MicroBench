@@ -22,11 +22,14 @@ def ok(c, r):
     if c == "internal_adapter": return not (set(r["cls"]) & CHIM) and r["segs"]
     if c == "low_complexity": return any(b - a >= 100 for a, b in r["lowc"])
     return True
+POOLIDS = None
+if BAM.endswith((".fastq.gz", ".fq.gz")):
+    POOLIDS = {r.name for r in pysam.FastxFile(BAM)}
 for line in gzip.open(P + ".artefacts.jsonl.gz", "rt"):
     r = json.loads(line)
     cls = set(r["cls"])
     for c in CATS:
-        if c in cls and ok(c, r):
+        if c in cls and ok(c, r) and (POOLIDS is None or r["id"] in POOLIDS):
             seen[c] += 1
             if len(res[c]) < 400: res[c].append(r)
             else:
@@ -59,10 +62,14 @@ for c in CATS:
 want = {r["id"] for v in picked.values() for r in v}
 
 seqs = {}
-for a in pysam.AlignmentFile(BAM, check_sq=False, threads=4):
-    if a.query_name in want:
-        seqs[a.query_name] = (a.query_sequence, list(a.query_qualities))
-        if len(seqs) == len(want): break
+if BAM.endswith((".fastq.gz", ".fq.gz")):
+    for r in pysam.FastxFile(BAM):
+        if r.name in want: seqs[r.name] = (r.sequence, [ord(c) - 33 for c in r.quality])
+else:
+    for a in pysam.AlignmentFile(BAM, check_sq=False, threads=4):
+        if a.query_name in want:
+            seqs[a.query_name] = (a.query_sequence, list(a.query_qualities))
+            if len(seqs) == len(want): break
 
 def thin(q, w=50, maxn=300):
     qw = [sum(q[i:i + w]) / len(q[i:i + w]) for i in range(0, len(q), w)]
