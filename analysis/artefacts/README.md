@@ -65,3 +65,9 @@ ZymoGut (ERR15459768, P2 Solo) was run with the same scripts using the D6331 ref
 rapid barcode constructs, the rapid adapter primer and ligation adapter remnants (sequences from dorado's kit
 definitions, `scripts/ont_barcodes.json`). Results are cached in `scripts/.cache/kits.json` and shown on the
 datasets page as "Kit from reads", with a warning where barcodes are still in the reads.
+
+## Headline numbers
+
+`count_numbers.py <prefix> out.json [page.json]` recomputes every total shown at the top of the page from the
+per-read table, counting each read once (unions, not sums of overlapping classes), and checks the page JSON's
+per-class numbers against it. The result is stored in the page JSON under `numbers`.

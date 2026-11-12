@@ -56,3 +56,6 @@ table.tools td:first-child { min-width: 150px; }
 @media (max-width: 640px) { .chart svg { min-width: 620px; } #gapChart svg, #foldChart svg { min-width: 0; } }
 .dsbar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding-top: 12px; }
 #dsPicker { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+.stat small { display: block; color: var(--muted); font-size: .75rem; margin-top: 2px; }
+.alertline { background: #fde8e1; color: #9a3412; border-radius: 8px; padding: 8px 12px; font-size: .9rem; }
+@media (prefers-color-scheme: dark) { .alertline { background: #3b1d12; color: #fdba74; } }

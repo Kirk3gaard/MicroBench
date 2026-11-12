@@ -31,8 +31,9 @@
       <button class="chip" data-unit="pct_bases" aria-pressed="true">% of bases</button>
       <button class="chip" data-unit="pct_reads" aria-pressed="false">% of reads</button>
     </div>
+    <p class="alertline" id="barcodeNote" hidden></p>
     <div id="overviewChart" class="chart"></div>
-    <p class="note">One read can carry several artefacts. Bars are clickable and open the examples.</p>
+    <p class="note" id="overviewNote"></p>
   </section>
 
   <section class="block" id="scans">
@@ -99,9 +100,6 @@
     <h2>Slow drift through the run</h2>
     <p id="timeIntro"></p>
     <div id="timeChart" class="chart"></div>
-    <h3>Do long deletions hit many channels in the same second?</h3>
-    <p id="syncIntro"></p>
-    <div class="table-wrap"><table class="plain" id="syncTable"></table></div>
   </section>
 
   <section class="block" id="channels">

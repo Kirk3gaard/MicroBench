@@ -42,7 +42,9 @@ for ev in events:
                  "t_h": round(ev[0] / 3600, 4), "reads": int(X.id.nunique()), "channels": int(X.ch.nunique()),
                  "active_reads": int(act_here), "share_of_active": round(X.id.nunique() / max(1, act_here), 3),
                  "missing_median": float(X.len.median()), "split_share": round(float((X.type == "split").mean()), 3)})
-reads_hit = per[per.sec.isin([s for ev in events for s in range(ev[0] - 2, ev[-1] + 3)])].id.nunique()
+hit_ids = per[per.sec.isin([s for ev in events for s in range(ev[0] - 2, ev[-1] + 3)])].id.unique()
+reads_hit = len(hit_ids)
+open(P + ".gap_reads.txt", "w").write("\n".join(hit_ids) + ("\n" if len(hit_ids) else ""))
 out = {"n_reads": int(len(R)), "run_hours": round(float(R.end.max() / 3600), 2), "mean_active": round(float(act.mean()), 1),
        "background_per_read_hour": round(rate * 3600, 3), "n_events": len(rows), "reads_hit": int(reads_hit),
        "pct_reads_hit": round(100 * reads_hit / len(R), 3), "events": rows,

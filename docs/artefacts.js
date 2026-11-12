@@ -38,11 +38,6 @@ const CATS = [
     detect: "Adapter match within 100 bp of the read start or end.",
     matters: "Rare after dorado trimming (see the numbers), but a common problem when reads were basecalled with --no-trim or by older software.",
     tools: "End trimming by dorado or Porechop_ABI removes it." },
-  { key: "untrimmed_barcode", title: "Barcodes left in the reads", short: "Untrimmed barcodes",
-    what: "The run was demultiplexed, but the native barcode construct (flank + 24-base barcode + flank, about 46 bases) is still at the start and end of nearly every read, because the reads were basecalled without a barcoding kit name.",
-    detect: "Exact 20-mers of the native barcode construct in the first and last 80 bases of 200,000 reads (and edit-tolerant search in the kit check on the datasets page).",
-    matters: "Barcode sequence ends up in assemblies, k-mer profiles and read-end analyses, and barcode-to-barcode joins look like chimeras. Every user of the data has to trim it first.",
-    tools: "dorado trim or dorado demux with --kit-name, Porechop/Porechop_ABI, or ontrim remove it. Length and quality filters do not." },
   { key: "low_complexity", title: "Low-complexity junk", short: "Low-complexity junk",
     what: "Hundreds of bases of simple repeats — (GGAAT)n, poly-A, poly-T, (TA)n — inside or at the end of otherwise good reads. They align to nothing in the mock and appear as long insertions.",
     detect: "Runs of ≥6 GGAAT units, ≥25 A or T, or ≥12 dinucleotide units in a read with at least one alignment.",
@@ -58,6 +53,8 @@ const CATS = [
     detect: "≥5 deletions of ≥10 bp that are not shared by other reads (shared ones are real differences from the reference).",
     matters: "A source of false indels and frameshifts in low-coverage regions.",
     tools: "Their mean Q-score is lower but most still pass a Q10 filter." },
+  { key: "signal_gap", title: "Signal gaps", short: "Signal gaps",
+    what: "A stretch of the molecule missing from every read in progress at one moment.", detect: "See the signal-gap section.", matters: "", tools: "" },
   { key: "unmapped", title: "Unmapped reads", short: "Unmapped",
     what: "Reads with no alignment of ≥300 bp. Almost all are short.",
     detect: "No alignment to the mock references.",
@@ -66,6 +63,7 @@ const CATS = [
 ];
 const CAT = Object.fromEntries(CATS.map((c) => [c.key, c]));
 
+const CORE = ["chimera_interspecies", "chimera_intraspecies", "foldback", "internal_adapter", "end_adapter", "low_complexity", "skip_prone"];
 let D, cur = "chimera_interspecies", idx = 0, unit = "pct_bases";
 
 function svg(tag, attrs = {}, parent) {
@@ -76,24 +74,29 @@ function svg(tag, attrs = {}, parent) {
 }
 
 function headline() {
-  const s = D.summary, st = D.stats;
-  const chimReads = ["chimera_interspecies", "chimera_intraspecies", "foldback"].reduce((a, k) => a + s[k].reads, 0);
+  const st = D.stats, n = D.numbers;
+  const any = n.classes.signal_gap.reads ? n.any_core_or_gap : n.any_core;
   const tiles = [
-    [pct(s._any.pct_bases), "of bases are in reads with at least one artefact"],
-    [pct(s._any.pct_reads), "of reads"],
-    [pct(100 * chimReads / st.n_reads), "of reads are chimeric or foldback"],
-    [pct(100 * st.dorado_split_reads / st.n_reads), "of reads were already split by dorado"],
-    ...(D.gaps?.n_events ? [[D.gaps.n_events.toLocaleString(), `signal gaps, hitting ${pct(D.gaps.pct_reads_hit)} of reads`]] : []),
-    [st.n_reads.toLocaleString(), "reads analysed (the whole run)"],
+    [pct(any.pct_reads), "of reads have at least one read artefact", `${pct(any.pct_bases)} of all bases are in these reads`],
+    [pct(n.chimeric_or_foldback.pct_reads), "of reads are chimeras or foldbacks", `${pct(n.chimeric_or_foldback.pct_bases)} of all bases`],
+    ...(n.classes.signal_gap.reads ? [[pct(n.classes.signal_gap.pct_reads), "of reads lost a stretch of sequence in a signal gap", `${D.gaps.n_events.toLocaleString()} gaps in the run`]] : []),
+    [pct(n.split_pieces.pct_reads), "of reads are pieces of longer reads that dorado already split", "dorado's own fix; everything else on this page is left after it"],
+    [st.n_reads.toLocaleString(), "reads analysed", "every read of the run"],
   ];
-  $("#headline").innerHTML = tiles.map(([v, l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
+  $("#headline").innerHTML = tiles.map(([v, l, sub]) => `<div class="stat"><b>${v}</b><span>${l}</span><small>${sub}</small></div>`).join("");
   const ds = D.dataset;
   $("#datasetLine").innerHTML = `${esc(ds.sample)} · flow cell ${esc(ds.flowcell)} · ${esc(ds.basecaller)} · all ${st.n_reads.toLocaleString()} reads (${(st.n_bases / 1e9).toFixed(1)} Gb) from ${st.n_channels.toLocaleString()} channels in <a href="https://www.ebi.ac.uk/ena/browser/view/${esc(ds.accession)}">${esc(ds.accession)}</a>.`;
+  const bc = D.barcode_note;
+  $("#barcodeNote").innerHTML = bc ? `<b>Before anything else:</b> ${esc(bc)}` : "";
+  $("#barcodeNote").hidden = !bc;
+  const inAny = CATS.filter((c) => CORE.includes(c.key) || (c.key === "signal_gap" && n.classes.signal_gap.reads)).map((c) => c.short.toLowerCase());
+  $("#overviewNote").innerHTML = `Each bar is the share of all reads, or of all bases, in reads that have that artefact (the whole read is counted). A read can have several artefacts, so the bars do not add up: ${pct(any.pct_reads)} of reads (${pct(any.pct_bases)} of bases) have at least one of ${inAny.slice(0, -1).join(", ")} or ${inAny.slice(-1)}. Unmapped reads are not counted as an artefact. Click a bar for examples.`;
 }
 
 function overview() {
   const host = $("#overviewChart");
-  const rows = CATS.filter((c) => D.summary[c.key]).map((c) => ({ c, v: D.summary[c.key][unit], n: D.summary[c.key].reads }));
+  const rows = CATS.filter((c) => D.summary[c.key] && c.key !== "untrimmed_barcode" && !(c.key === "signal_gap" && !D.summary.signal_gap.reads))
+    .map((c) => ({ c, v: D.summary[c.key][unit], n: D.summary[c.key].reads }));
   const W = 760, rowH = 26, left = 190, H = rows.length * rowH + 24;
   const max = Math.max(...rows.map((r) => r.v)) * 1.15;
   const s = svg("svg", { viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Artefact prevalence" });
@@ -103,7 +106,10 @@ function overview() {
     const w = Math.max(2, (W - left - 90) * r.v / max);
     svg("rect", { class: "bar", x: left, y: 3, width: w, height: 16, rx: 3, fill: r.c.key === "unmapped" ? "var(--muted)" : "var(--bad)" }, g);
     svg("text", { x: left + w + 6, y: 15 }, g).textContent = `${pct(r.v)}  (${r.n.toLocaleString()} reads)`;
-    g.addEventListener("click", () => { select(r.c.key); $("#gallery").scrollIntoView({ behavior: "smooth" }); });
+    g.addEventListener("click", () => {
+      if (!D.examples[r.c.key]?.length) { (r.c.key === "signal_gap" ? $("#gaps") : $("#gallery")).scrollIntoView({ behavior: "smooth" }); return; }
+      select(r.c.key); $("#gallery").scrollIntoView({ behavior: "smooth" });
+    });
   });
   host.replaceChildren(s);
 }
@@ -246,7 +252,8 @@ function gapChart() {
   svg("text", { x: 4, y: t + 8, fill: "var(--muted)" }, s).textContent = max.toLocaleString();
   $("#gapChart").replaceChildren(s);
   const st = D.stats, ca = st.chimera_with_adapter;
-  $("#gapNote").innerHTML = `${Math.round(100 * st.chimera_direct_frac)}% of chimera junctions join the two molecules directly (within ±15 bp), with no room for an adapter. Only ${ca.chimera_interspecies + ca.chimera_intraspecies} of ${(D.summary.chimera_interspecies.reads + D.summary.chimera_intraspecies.reads).toLocaleString()} chimeric reads contain an adapter. The shorter part is often small (median ${fmtLen(st.chimera_shortest_seg_median)}; ${Math.round(100 * st.chimera_shortest_lt1k_frac)}% under 1 kb).`;
+  const nn = D.numbers;
+  $("#gapNote").innerHTML = `${Math.round(100 * st.chimera_direct_frac)}% of chimera junctions join the two molecules directly (less than 20 bases between the aligned parts), leaving no room for an adapter. Only ${nn.chimeric_with_internal_adapter.toLocaleString()} of the ${nn.chimeric.reads.toLocaleString()} chimeric reads (${pct(100 * nn.chimeric_with_internal_adapter / nn.chimeric.reads)}) contain an adapter, against ${pct(100 * nn.foldback_with_internal_adapter / nn.classes.foldback.reads)} of foldbacks. The shorter part is often small (median ${fmtLen(st.chimera_shortest_seg_median)}; ${Math.round(100 * st.chimera_shortest_lt1k_frac)}% under 1 kb).`;
 }
 
 function foldChart() {
@@ -269,9 +276,9 @@ function foldChart() {
 
 function filterTable() {
   const rows = CATS.filter((c) => D.filters[c.key]).map((c) => [c.short, D.filters[c.key]]);
-  rows.push(["Clean reads (reference)", D.filters.clean]);
+  rows.push(["Reads without artefacts (includes many short reads)", D.filters.clean]);
   $("#filterTable").innerHTML = `<thead><tr><th>Read class</th><th class="num">Median read Q</th><th class="num">Q≥10 &amp; ≥1 kb</th><th class="num">Q≥15 &amp; ≥1 kb</th><th class="num">Q≥20 &amp; ≥5 kb</th></tr></thead><tbody>` +
-    rows.map(([n, f], i) => `<tr><td>${esc(n)}</td><td class="num">${f.median_qs}</td><td class="num ${i < 3 && f.q10_l1000 > D.filters.clean.q10_l1000 ? "hi" : ""}">${f.q10_l1000}%</td><td class="num">${f.q15_l1000}%</td><td class="num">${f.q20_l5000}%</td></tr>`).join("") + `</tbody>`;
+    rows.map(([n, f], i) => `<tr><td>${esc(n)}</td><td class="num">${f.median_qs}</td><td class="num">${f.q10_l1000}%</td><td class="num">${f.q15_l1000}%</td><td class="num">${f.q20_l5000}%</td></tr>`).join("") + `</tbody>`;
 }
 
 function scanSection() {
@@ -314,7 +321,7 @@ function scanSection() {
   const noEffect = !(effect > 2) || !isFinite(gap);
   if (!noEffect) $("#scanTitle").textContent = `Every ${gap.toFixed(1)} hours the whole flow cell changes`;
   if (!noEffect) $("#scanIntro").innerHTML = `Every <b>${gap.toFixed(2)} hours</b>, hundreds of reads across the flow cell stop within the same few seconds. This is MinKNOW's periodic pore/mux scan, which interrupts sequencing in a few waves over about ${Math.round(med / 60 * 10) / 10} minutes (${med} s). Two things follow, on the whole flow cell at once:
-    <b>1. Junk at the start of reads.</b> Reads starting in the first minute after a scan carry low-complexity junk ${(first.lowc / avg("lowc")).toFixed(0)} times as often as other reads (${pct(100 * first.lowc)} vs ${pct(100 * avg("lowc"))}), usually as the first few hundred bases. They also carry internal adapters ${(first.ia / avg("ia")).toFixed(1)} times as often.
+    <b>1. Junk at the start of reads.</b> Of the reads (≥1 kb) that start in the first minute after a scan, ${pct(100 * first.lowc)} carry low-complexity junk, ${(first.lowc / avg("lowc")).toFixed(0)} times as many as reads that start 10–90 minutes after a scan (${pct(100 * avg("lowc"))}), usually as the first few hundred bases. They also carry internal adapters ${(first.ia / avg("ia")).toFixed(1)} times as often.
     <b>2. A sawtooth in the error rate.</b> The deletion rate drops right after each scan and climbs again until the next one: ${first.delkb.toFixed(2)} deletions per kb in reads starting in the first minute vs ${sn[7].delkb.toFixed(2)} an hour later. The foldback rate climbs within each cycle too, from ${pct(100 * sn[1].fold)} to ${pct(100 * sn[7].fold)}.`;
   $("#sinceTable").innerHTML = `<thead><tr><th>Read started</th><th class="num">Reads ≥1 kb</th><th class="num">Low-complexity</th><th class="num">Internal adapter</th><th class="num">Foldback</th><th class="num">Inter-species chimera</th><th class="num">Deletions / kb</th><th class="num">Median length</th></tr></thead><tbody>` +
     sn.map((x, i) => {
@@ -348,15 +355,11 @@ function timeChart() {
   const m = (a, k) => a.reduce((x, y) => x + y[k], 0) / a.length;
   const first = T.slice(0, 6), lastT = T.slice(-14, -2);
   const up = (k) => Math.round(100 * (m(lastT, k) / m(first, k) - 1));
-  $("#timeIntro").innerHTML = `Over the whole run, error rates drift upwards over the ${Math.round(D.run_hours)}-hour run (15-minute bins, median of reads ≥1 kb): deletions by about ${up("dels")}% and mismatches by about ${up("mm")}% from the first 1.5 hours to the last 3. Chimeras and foldbacks together fall from ${(100 * m(T.slice(0, 2), "chim")).toFixed(1)}% to about ${(100 * m(lastT, "chim")).toFixed(1)}% of reads ≥1 kb, mostly through fewer foldbacks in the ZymoHMW run. Inter-species chimeras stay at a steady rate, which fits chimeras that form in the library rather than in the pore.`;
-}
-
-function syncTable() {
-  const sy = D.sync, k = Object.keys(sy);
-  const nsec = Math.round(D.run_hours * 3600);
-  $("#syncIntro").innerHTML = `If something hit every channel at once, such as a voltage step or a pause in data acquisition, all reads in progress would lose sequence in the same second. Each deletion (not shared with other reads at the same genome position) was placed at the second it passed through the pore (read start + position × duration from the signal sample counts), and every second of the run was compared with the number of reads in progress then (on average ${Math.round(sy[k[0]].mean_active).toLocaleString()}). Only a handful of the ${nsec.toLocaleString()} seconds show more deletions than chance (Poisson test, Bonferroni-corrected), and none involves more than ${Math.max(...k.flatMap((x) => sy[x].sig_examples.map((e) => e.channels)))} channels. There are no flow-cell-wide bursts of deletions in this run. The flow-cell-wide effect is the scan cycle above.`;
-  $("#syncTable").innerHTML = `<thead><tr><th>Deletion size</th><th class="num">Deletions</th><th class="num">Per read-hour</th><th class="num">Seconds with excess</th><th class="num">Most in one second</th><th>Channels involved in those seconds</th></tr></thead><tbody>` +
-    k.map((x) => { const v = sy[x]; return `<tr><td>≥${x} bp</td><td class="num">${v.events.toLocaleString()}</td><td class="num">${v.rate_per_read_hour}</td><td class="num">${v.sig_seconds} of ${nsec.toLocaleString()}</td><td class="num">${v.max_in_one_second}</td><td>${v.sig_examples.map((e) => e.channels).join(", ") || "–"}</td></tr>`; }).join("") + `</tbody>`;
+  const dUp = up("dels"), mUp = up("mm");
+  const trend = Math.max(dUp, mUp) >= 10
+    ? `error rates drift upwards: deletions by about ${dUp}% and mismatches by about ${mUp}%`
+    : `error rates stay roughly flat (deletions ${dUp >= 0 ? "+" : ""}${dUp}%, mismatches ${mUp >= 0 ? "+" : ""}${mUp}%)`;
+  $("#timeIntro").innerHTML = `Over the ${Math.round(D.run_hours)}-hour run (15-minute bins, median of reads ≥1 kb), ${trend} between the first 1.5 hours and the last 3. Chimeras and foldbacks together go from ${(100 * m(T.slice(0, 2), "chim")).toFixed(1)}% of reads ≥1 kb at the start to about ${(100 * m(lastT, "chim")).toFixed(1)}% at the end.`;
 }
 
 function channelSection() {
@@ -374,7 +377,7 @@ function channelSection() {
   });
   svg("text", { x: l + (W - l) / 2, y: H - 4, "text-anchor": "middle", fill: "var(--muted)" }, s).textContent = "share of a channel's reads with low-complexity junk (bar height: √channels)";
   $("#chanChart").replaceChildren(s);
-  $("#chanIntro").innerHTML = `Across ${c.n.toLocaleString()} channels with ≥200 reads, the share of reads with low-complexity junk varies ${c.lowc_var_ratio.toFixed(0)} times more than chance would allow, and the inter-species chimera share ${c.chim_var_ratio.toFixed(0)} times more. A few pores produce junk in 5–12% of their reads, against ${pct(D.summary.low_complexity.pct_reads)} overall. Channel number is in every read's <code>ch</code> tag, so these pores can be identified and their reads flagged.`;
+  $("#chanIntro").innerHTML = `Across ${c.n.toLocaleString()} channels with ≥200 reads, the share of reads with low-complexity junk varies ${c.lowc_var_ratio.toFixed(0)} times more between channels than chance would allow${c.chim_var_ratio >= 2 ? `, and the inter-species chimera share ${c.chim_var_ratio.toFixed(0)} times more` : `, while the inter-species chimera share varies no more than chance`}. The worst pores produce junk in up to ${pct(100 * Math.max(...c.top_lowc.map((x) => x.lowc)))} of their reads, against ${pct(D.summary.low_complexity.pct_reads)} overall. Channel number is in every read's <code>ch</code> tag, so these pores can be identified and their reads flagged.`;
   $("#chanTable").innerHTML = `<thead><tr><th>Channel</th><th class="num">Reads</th><th class="num">Low-complexity</th><th class="num">Inter-species chimeras</th><th class="num">Skip-prone</th><th class="num">Median read Q</th></tr></thead><tbody>` +
     c.top_lowc.slice(0, 8).map((x) => `<tr><td>${x.ch}</td><td class="num">${x.n.toLocaleString()}</td><td class="num hi">${pct(100 * x.lowc)}</td><td class="num">${pct(100 * x.chim)}</td><td class="num">${pct(100 * x.skip)}</td><td class="num">${x.qs}</td></tr>`).join("") + `</tbody>`;
 }
@@ -483,7 +486,7 @@ function duplexSection() {
   const d = D.duplex, sec = $("#duplex");
   if (!d) { sec.hidden = true; return; }
   sec.hidden = false;
-  $("#duplexIntro").innerHTML = `In ${d.pairs.toLocaleString()} cases the next read in the same pore is the other strand of the same molecule (opposite strand, ≥80% overlap on the genome, started within 20 s). ${pct(d.pct_reads_in_pairs)} of reads are in such a pair and ${pct(d.bases_in_second_reads_pct)} of the bases are the second strand of a molecule that is already in the data. ${d.from_one_split_read.toLocaleString()} of the pairs were one read that dorado split in two. The simplex BAM keeps both reads, so these molecules count twice in coverage, abundance and allele frequencies. Duplex basecalling, or dropping the second read of each pair (dorado's <code>dx</code> tag and <code>pi</code> parent IDs help), avoids that.`;
+  $("#duplexIntro").innerHTML = `${d.pairs.toLocaleString()} times, the next read in the same pore is the other strand of the same molecule (opposite strand, ≥80% overlap on the genome, starting within 20 s). ${pct(d.pct_reads_in_pairs)} of reads belong to such a pair. The second read of each pair (${pct(d.pct_reads_second)} of all reads, ${pct(d.bases_in_second_reads_pct)} of all bases) is a molecule that is already in the data. ${d.from_one_split_read.toLocaleString()} of the pairs were one read that dorado split in two. ${D.dataset.flowcell_note ? D.dataset.flowcell_note + " " : ""}The simplex BAM keeps both reads, so these molecules count twice in coverage, abundance and allele frequencies. Duplex basecalling, or dropping the second read of each pair, avoids that.`;
 }
 
 function picker() {
@@ -491,7 +494,7 @@ function picker() {
 }
 
 function renderAll() {
-  headline(); overview(); scanSection(); gapSection(); tabs(); renderCat(); gapChart(); foldChart(); filterTable(); timeChart(); syncTable(); channelSection(); duplexSection(); toolTable(); methods();
+  headline(); overview(); scanSection(); gapSection(); tabs(); renderCat(); gapChart(); foldChart(); filterTable(); timeChart(); channelSection(); duplexSection(); toolTable(); methods();
   if (!bound) { bind(); bound = true; }
 }
 
