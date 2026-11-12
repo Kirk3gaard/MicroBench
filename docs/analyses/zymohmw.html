@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basecalling models and assemblers on the ZymoHMW mock – MicroBench</title>
+<meta name="description" content="To check the quality of nanopore data with the ZymoHMW mock DNA.">
+<link rel="icon" href="../microbench.jpg">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../analyses.css">
+</head>
+<body>
+<header class="hero slim">
+  <div class="wrap hero-inner">
+    <a href=".././"><img src="../microbench.jpg" alt="MicroBench home" class="logo" width="64" height="64"></a>
+    <div>
+      <nav class="crumbs"><a href=".././">Datasets</a> <span>›</span> <a href="./">Analyses</a> <span>›</span> <b>zymohmw</b></nav>
+      <h1>Basecalling models and assemblers on the ZymoHMW mock</h1>
+      <p class="lede">Rasmus Kirkegaard · updated 08 June, 2026 · 20 figures</p>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+<div class="report">
+  <aside class="side">
+    <details class="tocwrap" id="tocwrap"><summary>Contents</summary><nav class="toc" aria-label="Contents"><ul><li class="l2"><a href="#aim">Aim</a></li><li class="l2"><a href="#conclusion">Conclusion</a></li><li class="l2"><a href="#data-availability">Data availability</a></li><li class="l2"><a href="#np-reads-mapped-to-the-refs-overall-percent-identity">NP reads mapped to the refs overall (percent identity)</a></li><li class="l2"><a href="#longest-perfect-read">Longest perfect read</a></li><li class="l2"><a href="#np-reads-mapped-to-the-refs-overall-phred-scale">NP reads mapped to the refs overall (phred scale)</a></li><li class="l2"><a href="#all-modes">all modes</a></li><li class="l3"><a href="#mismatch-rate-vs-coverage">Mismatch rate vs coverage</a></li><li class="l3"><a href="#indel-rate-vs-coverage">Indel rate vs coverage</a></li><li class="l3"><a href="#mismatch-rate-vs-coverage-2">Mismatch rate vs coverage</a></li><li class="l2"><a href="#fast-mode">Fast mode</a></li><li class="l3"><a href="#indel-rate-vs-coverage-2">Indel rate vs coverage</a></li><li class="l3"><a href="#mismatch-rate-vs-coverage-3">Mismatch rate vs coverage</a></li><li class="l2"><a href="#hac-mode">HAC mode</a></li><li class="l3"><a href="#indel-rate-vs-coverage-3">Indel rate vs coverage</a></li><li class="l3"><a href="#mismatch-rate-vs-coverage-4">Mismatch rate vs coverage</a></li><li class="l2"><a href="#sup-mode">SUP mode</a></li><li class="l3"><a href="#indel-rate-vs-coverage-4">Indel rate vs coverage</a></li><li class="l3"><a href="#mismatch-rate-vs-coverage-5">Mismatch rate vs coverage</a></li><li class="l2"><a href="#duplex-mode">Duplex mode</a></li><li class="l3"><a href="#indel-rate-vs-coverage-5">Indel rate vs coverage</a></li><li class="l3"><a href="#mismatch-rate-vs-coverage-6">Mismatch rate vs coverage</a></li><li class="l2"><a href="#hyp-mode-vs-sup">hyp mode vs sup</a></li><li class="l3"><a href="#indel-rate-vs-coverage-6">Indel rate vs coverage</a></li><li class="l3"><a href="#mismatch-rate-vs-coverage-7">Mismatch rate vs coverage</a></li><li class="l2"><a href="#hac-v6-0-0-mode-vs-sup-v5-2-0">hac (v6.0.0) mode vs sup (v5.2.0)</a></li><li class="l3"><a href="#indel-rate-vs-coverage-7">Indel rate vs coverage</a></li><li class="l3"><a href="#mismatch-rate-vs-coverage-8">Mismatch rate vs coverage</a></li><li class="l2"><a href="#assemblers">Assemblers</a></li><li class="l3"><a href="#mismatch-rate-vs-coverage-9">Mismatch rate vs coverage</a></li><li class="l3"><a href="#indel-rate-vs-coverage-8">Indel rate vs coverage</a></li><li class="l2"><a href="#materials-and-methods">Materials and methods</a></li><li class="l3"><a href="#dna-sequencing">DNA sequencing</a></li><li class="l3"><a href="#basecalling">Basecalling</a></li><li class="l3"><a href="#read-qc">Read QC</a></li><li class="l3"><a href="#assembly">Assembly</a></li><li class="l3"><a href="#genome-quality-assessment">Genome quality assessment</a></li></ul></nav></details>
+    <div class="sidebox"><b>Code</b><ul><li><a href="https://github.com/Kirk3gaard/MicroBench/blob/main/analysis/zymohmw/README.Rmd" target="_blank" rel="noopener">README.Rmd</a></li><li><a href="https://github.com/Kirk3gaard/MicroBench/blob/main/analysis/zymohmw/Snakefile" target="_blank" rel="noopener">Snakefile</a></li><li><a href="https://github.com/Kirk3gaard/MicroBench/blob/main/analysis/zymohmw/config.yaml" target="_blank" rel="noopener">config.yaml</a></li><li><a href="https://github.com/Kirk3gaard/MicroBench/blob/main/analysis/zymohmw/create_env.sh" target="_blank" rel="noopener">create_env.sh</a></li><li><a href="https://github.com/Kirk3gaard/MicroBench/blob/main/analysis/zymohmw/environment.yml" target="_blank" rel="noopener">environment.yml</a></li><li><a href="https://github.com/Kirk3gaard/MicroBench/blob/main/analysis/zymohmw/force_run_snake_claaudia.sh" target="_blank" rel="noopener">force_run_snake_claaudia.sh</a></li><li><a href="https://github.com/Kirk3gaard/MicroBench/blob/main/analysis/zymohmw/run_snake_claaudia.sh" target="_blank" rel="noopener">run_snake_claaudia.sh</a></li></ul>
+      <p><a href="https://github.com/Kirk3gaard/MicroBench/tree/main/analysis/zymohmw" target="_blank" rel="noopener">Folder on GitHub ↗</a></p></div>
+  </aside>
+  <article class="prose"><h2 id="aim">Aim<a class="anchor" href="#aim" aria-label="Link to this section">#</a></h2>
+<p>To check the quality of nanopore data with the ZymoHMW mock DNA.</p>
+<h2 id="conclusion">Conclusion<a class="anchor" href="#conclusion" aria-label="Link to this section">#</a></h2>
+<p>There are some serious improvements in raw read accuracy between the
+fast, hac sup, and now hyp models. However, for some reason the improved
+raw read accuracy of the hyp(er) accuracy model does not improve
+assemblies consistently for all of the organisms.</p>
+<h2 id="data-availability">Data availability<a class="anchor" href="#data-availability" aria-label="Link to this section">#</a></h2>
+<p><a href="https://github.com/Kirk3gaard/MicroBench" target="_blank" rel="noopener">https://github.com/Kirk3gaard/MicroBench</a></p>
+<h2 id="np-reads-mapped-to-the-refs-overall-percent-identity">NP reads mapped to the refs overall (percent identity)<a class="anchor" href="#np-reads-mapped-to-the-refs-overall-percent-identity" aria-label="Link to this section">#</a></h2>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-1-1.png" class="zoom" data-cap="NP reads mapped to the refs overall (percent identity)"><img src="zymohmw/unnamed-chunk-1-1.png" alt="NP reads mapped to the refs overall (percent identity)" loading="lazy"></a><figcaption>NP reads mapped to the refs overall (percent identity) <a href="zymohmw/unnamed-chunk-1-1.png" download>PNG</a></figcaption></figure>
+<h2 id="longest-perfect-read">Longest perfect read<a class="anchor" href="#longest-perfect-read" aria-label="Link to this section">#</a></h2>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-2-1.png" class="zoom" data-cap="Longest perfect read"><img src="zymohmw/unnamed-chunk-2-1.png" alt="Longest perfect read" loading="lazy"></a><figcaption>Longest perfect read <a href="zymohmw/unnamed-chunk-2-1.png" download>PNG</a></figcaption></figure>
+<h2 id="np-reads-mapped-to-the-refs-overall-phred-scale">NP reads mapped to the refs overall (phred scale)<a class="anchor" href="#np-reads-mapped-to-the-refs-overall-phred-scale" aria-label="Link to this section">#</a></h2>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-4-1.png" class="zoom" data-cap="NP reads mapped to the refs overall (phred scale)"><img src="zymohmw/unnamed-chunk-4-1.png" alt="NP reads mapped to the refs overall (phred scale)" loading="lazy"></a><figcaption>NP reads mapped to the refs overall (phred scale) <a href="zymohmw/unnamed-chunk-4-1.png" download>PNG</a></figcaption></figure>
+<h2 id="all-modes">all modes<a class="anchor" href="#all-modes" aria-label="Link to this section">#</a></h2>
+<h3 id="mismatch-rate-vs-coverage">Mismatch rate vs coverage<a class="anchor" href="#mismatch-rate-vs-coverage" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-5-1.png" class="zoom" data-cap="all modes – Mismatch rate vs coverage"><img src="zymohmw/unnamed-chunk-5-1.png" alt="all modes – Mismatch rate vs coverage" loading="lazy"></a><figcaption>all modes – Mismatch rate vs coverage <a href="zymohmw/unnamed-chunk-5-1.png" download>PNG</a></figcaption></figure>
+<h3 id="indel-rate-vs-coverage">Indel rate vs coverage<a class="anchor" href="#indel-rate-vs-coverage" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-6-1.png" class="zoom" data-cap="all modes – Indel rate vs coverage"><img src="zymohmw/unnamed-chunk-6-1.png" alt="all modes – Indel rate vs coverage" loading="lazy"></a><figcaption>all modes – Indel rate vs coverage <a href="zymohmw/unnamed-chunk-6-1.png" download>PNG</a></figcaption></figure>
+<h3 id="mismatch-rate-vs-coverage-2">Mismatch rate vs coverage<a class="anchor" href="#mismatch-rate-vs-coverage-2" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-7-1.png" class="zoom" data-cap="all modes – Mismatch rate vs coverage"><img src="zymohmw/unnamed-chunk-7-1.png" alt="all modes – Mismatch rate vs coverage" loading="lazy"></a><figcaption>all modes – Mismatch rate vs coverage <a href="zymohmw/unnamed-chunk-7-1.png" download>PNG</a></figcaption></figure>
+<h2 id="fast-mode">Fast mode<a class="anchor" href="#fast-mode" aria-label="Link to this section">#</a></h2>
+<h3 id="indel-rate-vs-coverage-2">Indel rate vs coverage<a class="anchor" href="#indel-rate-vs-coverage-2" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-8-1.png" class="zoom" data-cap="Fast mode – Indel rate vs coverage"><img src="zymohmw/unnamed-chunk-8-1.png" alt="Fast mode – Indel rate vs coverage" loading="lazy"></a><figcaption>Fast mode – Indel rate vs coverage <a href="zymohmw/unnamed-chunk-8-1.png" download>PNG</a></figcaption></figure>
+<h3 id="mismatch-rate-vs-coverage-3">Mismatch rate vs coverage<a class="anchor" href="#mismatch-rate-vs-coverage-3" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-9-1.png" class="zoom" data-cap="Fast mode – Mismatch rate vs coverage"><img src="zymohmw/unnamed-chunk-9-1.png" alt="Fast mode – Mismatch rate vs coverage" loading="lazy"></a><figcaption>Fast mode – Mismatch rate vs coverage <a href="zymohmw/unnamed-chunk-9-1.png" download>PNG</a></figcaption></figure>
+<h2 id="hac-mode">HAC mode<a class="anchor" href="#hac-mode" aria-label="Link to this section">#</a></h2>
+<h3 id="indel-rate-vs-coverage-3">Indel rate vs coverage<a class="anchor" href="#indel-rate-vs-coverage-3" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-10-1.png" class="zoom" data-cap="HAC mode – Indel rate vs coverage"><img src="zymohmw/unnamed-chunk-10-1.png" alt="HAC mode – Indel rate vs coverage" loading="lazy"></a><figcaption>HAC mode – Indel rate vs coverage <a href="zymohmw/unnamed-chunk-10-1.png" download>PNG</a></figcaption></figure>
+<h3 id="mismatch-rate-vs-coverage-4">Mismatch rate vs coverage<a class="anchor" href="#mismatch-rate-vs-coverage-4" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-11-1.png" class="zoom" data-cap="HAC mode – Mismatch rate vs coverage"><img src="zymohmw/unnamed-chunk-11-1.png" alt="HAC mode – Mismatch rate vs coverage" loading="lazy"></a><figcaption>HAC mode – Mismatch rate vs coverage <a href="zymohmw/unnamed-chunk-11-1.png" download>PNG</a></figcaption></figure>
+<h2 id="sup-mode">SUP mode<a class="anchor" href="#sup-mode" aria-label="Link to this section">#</a></h2>
+<h3 id="indel-rate-vs-coverage-4">Indel rate vs coverage<a class="anchor" href="#indel-rate-vs-coverage-4" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-12-1.png" class="zoom" data-cap="SUP mode – Indel rate vs coverage"><img src="zymohmw/unnamed-chunk-12-1.png" alt="SUP mode – Indel rate vs coverage" loading="lazy"></a><figcaption>SUP mode – Indel rate vs coverage <a href="zymohmw/unnamed-chunk-12-1.png" download>PNG</a></figcaption></figure>
+<h3 id="mismatch-rate-vs-coverage-5">Mismatch rate vs coverage<a class="anchor" href="#mismatch-rate-vs-coverage-5" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-13-1.png" class="zoom" data-cap="SUP mode – Mismatch rate vs coverage"><img src="zymohmw/unnamed-chunk-13-1.png" alt="SUP mode – Mismatch rate vs coverage" loading="lazy"></a><figcaption>SUP mode – Mismatch rate vs coverage <a href="zymohmw/unnamed-chunk-13-1.png" download>PNG</a></figcaption></figure>
+<h2 id="duplex-mode">Duplex mode<a class="anchor" href="#duplex-mode" aria-label="Link to this section">#</a></h2>
+<h3 id="indel-rate-vs-coverage-5">Indel rate vs coverage<a class="anchor" href="#indel-rate-vs-coverage-5" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-14-1.png" class="zoom" data-cap="Duplex mode – Indel rate vs coverage"><img src="zymohmw/unnamed-chunk-14-1.png" alt="Duplex mode – Indel rate vs coverage" loading="lazy"></a><figcaption>Duplex mode – Indel rate vs coverage <a href="zymohmw/unnamed-chunk-14-1.png" download>PNG</a></figcaption></figure>
+<h3 id="mismatch-rate-vs-coverage-6">Mismatch rate vs coverage<a class="anchor" href="#mismatch-rate-vs-coverage-6" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-15-1.png" class="zoom" data-cap="Duplex mode – Mismatch rate vs coverage"><img src="zymohmw/unnamed-chunk-15-1.png" alt="Duplex mode – Mismatch rate vs coverage" loading="lazy"></a><figcaption>Duplex mode – Mismatch rate vs coverage <a href="zymohmw/unnamed-chunk-15-1.png" download>PNG</a></figcaption></figure>
+<h2 id="hyp-mode-vs-sup">hyp mode vs sup<a class="anchor" href="#hyp-mode-vs-sup" aria-label="Link to this section">#</a></h2>
+<h3 id="indel-rate-vs-coverage-6">Indel rate vs coverage<a class="anchor" href="#indel-rate-vs-coverage-6" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-16-1.png" class="zoom" data-cap="hyp mode vs sup – Indel rate vs coverage"><img src="zymohmw/unnamed-chunk-16-1.png" alt="hyp mode vs sup – Indel rate vs coverage" loading="lazy"></a><figcaption>hyp mode vs sup – Indel rate vs coverage <a href="zymohmw/unnamed-chunk-16-1.png" download>PNG</a></figcaption></figure>
+<h3 id="mismatch-rate-vs-coverage-7">Mismatch rate vs coverage<a class="anchor" href="#mismatch-rate-vs-coverage-7" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-17-1.png" class="zoom" data-cap="hyp mode vs sup – Mismatch rate vs coverage"><img src="zymohmw/unnamed-chunk-17-1.png" alt="hyp mode vs sup – Mismatch rate vs coverage" loading="lazy"></a><figcaption>hyp mode vs sup – Mismatch rate vs coverage <a href="zymohmw/unnamed-chunk-17-1.png" download>PNG</a></figcaption></figure>
+<h2 id="hac-v6-0-0-mode-vs-sup-v5-2-0">hac (v6.0.0) mode vs sup (v5.2.0)<a class="anchor" href="#hac-v6-0-0-mode-vs-sup-v5-2-0" aria-label="Link to this section">#</a></h2>
+<p>With the release of dorado 2.0.0 during LC2026 the plan was to replace
+the GPU intensive sup model with a faster HAC model that should beat the
+previous sup both in terms of speed and accuracy.</p>
+<h3 id="indel-rate-vs-coverage-7">Indel rate vs coverage<a class="anchor" href="#indel-rate-vs-coverage-7" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-18-1.png" class="zoom" data-cap="hac (v6.0.0) mode vs sup (v5.2.0) – Indel rate vs coverage"><img src="zymohmw/unnamed-chunk-18-1.png" alt="hac (v6.0.0) mode vs sup (v5.2.0) – Indel rate vs coverage" loading="lazy"></a><figcaption>hac (v6.0.0) mode vs sup (v5.2.0) – Indel rate vs coverage <a href="zymohmw/unnamed-chunk-18-1.png" download>PNG</a></figcaption></figure>
+<h3 id="mismatch-rate-vs-coverage-8">Mismatch rate vs coverage<a class="anchor" href="#mismatch-rate-vs-coverage-8" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-19-1.png" class="zoom" data-cap="hac (v6.0.0) mode vs sup (v5.2.0) – Mismatch rate vs coverage"><img src="zymohmw/unnamed-chunk-19-1.png" alt="hac (v6.0.0) mode vs sup (v5.2.0) – Mismatch rate vs coverage" loading="lazy"></a><figcaption>hac (v6.0.0) mode vs sup (v5.2.0) – Mismatch rate vs coverage <a href="zymohmw/unnamed-chunk-19-1.png" download>PNG</a></figcaption></figure>
+<h2 id="assemblers">Assemblers<a class="anchor" href="#assemblers" aria-label="Link to this section">#</a></h2>
+<ul>
+<li>flye</li>
+<li>myloasm</li>
+<li>metamdbg</li>
+</ul>
+<h3 id="mismatch-rate-vs-coverage-9">Mismatch rate vs coverage<a class="anchor" href="#mismatch-rate-vs-coverage-9" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-20-1.png" class="zoom" data-cap="Assemblers – Mismatch rate vs coverage"><img src="zymohmw/unnamed-chunk-20-1.png" alt="Assemblers – Mismatch rate vs coverage" loading="lazy"></a><figcaption>Assemblers – Mismatch rate vs coverage <a href="zymohmw/unnamed-chunk-20-1.png" download>PNG</a></figcaption></figure>
+<h3 id="indel-rate-vs-coverage-8">Indel rate vs coverage<a class="anchor" href="#indel-rate-vs-coverage-8" aria-label="Link to this section">#</a></h3>
+<figure class="fig"><a href="zymohmw/unnamed-chunk-21-1.png" class="zoom" data-cap="Assemblers – Indel rate vs coverage"><img src="zymohmw/unnamed-chunk-21-1.png" alt="Assemblers – Indel rate vs coverage" loading="lazy"></a><figcaption>Assemblers – Indel rate vs coverage <a href="zymohmw/unnamed-chunk-21-1.png" download>PNG</a></figcaption></figure>
+<h2 id="materials-and-methods">Materials and methods<a class="anchor" href="#materials-and-methods" aria-label="Link to this section">#</a></h2>
+<p>Here is a brief description of the tools used. For the exact commands
+check out the <strong>Snakefile</strong> in this repository
+(<a href="https://snakemake.readthedocs.io/en/stable/" target="_blank" rel="noopener">Snakemake</a> v. 7.18.2).</p>
+<h3 id="dna-sequencing">DNA sequencing<a class="anchor" href="#dna-sequencing" aria-label="Link to this section">#</a></h3>
+<p>DNA sample was the <a href="https://zymoresearch.eu/products/zymobiomics-hmw-dna-standard" target="_blank" rel="noopener">Zymo Mock HMW
+standard</a>.
+The DNA was prepared for sequencing using the nanopore ligation
+sequencing kit (SQK-LSK114) and sequenced on a R10.4.1 nanopore
+PromethION flowcell (FLO-PRO114HD) with the “400 bp/s” mode (5khz
+sampling).</p>
+<h3 id="basecalling">Basecalling<a class="anchor" href="#basecalling" aria-label="Link to this section">#</a></h3>
+<h4 id="5-khz-high-duplex-promethion-data">5 khz High Duplex PromethION data<a class="anchor" href="#5-khz-high-duplex-promethion-data" aria-label="Link to this section">#</a></h4>
+<p>The reads were basecalled using
+<a href="https://github.com/nanoporetech/dorado" target="_blank" rel="noopener">dorado</a> (v. 0.7.3) with fast,
+hac and sup accuracy mode using the 5.0.0 models.The reads were
+basecalled using <a href="https://github.com/nanoporetech/dorado" target="_blank" rel="noopener">dorado</a> (v.
+1.0.0) with fast, hac and sup accuracy mode using the 5.2.0 models and
+hyp model 5.0.0. The reads were basecalled using
+<a href="https://github.com/nanoporetech/dorado" target="_blank" rel="noopener">dorado</a> (v. 2.0.0) with hac
+mode using the 6.0.0 model.</p>
+<h3 id="read-qc">Read QC<a class="anchor" href="#read-qc" aria-label="Link to this section">#</a></h3>
+<p>Reads were mapped to the updated zymo reference genomes (hopefully goes
+public soon) using <a href="https://github.com/lh3/minimap2" target="_blank" rel="noopener">minimap2</a> (v.
+2.24), and QC information was obtained using
+<a href="https://github.com/wdecoster/NanoPlot" target="_blank" rel="noopener">NanoPlot</a> (v. 1.41.0).</p>
+<h3 id="assembly">Assembly<a class="anchor" href="#assembly" aria-label="Link to this section">#</a></h3>
+<p>The reads were subsampled using <a href="https://github.com/lh3/seqtk" target="_blank" rel="noopener">seqtk</a>
+(v. 1.3) and assembled using <a href="https://github.com/fenderglass/Flye" target="_blank" rel="noopener">flye</a>
+(v. 2.9.5), <a href="https://github.com/bluenote-1577/myloasm" target="_blank" rel="noopener">myloasm</a> (v.
+0.2.0), and <a href="https://github.com/GaetanBenoitDev/metaMDBG" target="_blank" rel="noopener">metamdbg</a> (v.
+1.2).</p>
+<h3 id="genome-quality-assessment">Genome quality assessment<a class="anchor" href="#genome-quality-assessment" aria-label="Link to this section">#</a></h3>
+<p>The assembled contigs were compared to the reference contigs using
+<a href="https://github.com/ablab/quast" target="_blank" rel="noopener">QUAST</a> (v. 5.2.0) and
+<a href="https://github.com/ParBLiSS/FastANI" target="_blank" rel="noopener">fastANI</a> (v. 1.33).</p></article>
+</div>
+</main>
+<footer class="wrap muted">MicroBench · Aalborg University · <a href=".././">Datasets</a> · <a href="../analyses/">Analyses</a> · <a href="../artefacts.html">Read artefacts</a></footer>
+<div class="lightbox" id="lb" hidden><button type="button" aria-label="Close">×</button><img alt=""><p></p></div>
+<script>
+const lb = document.getElementById("lb");
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("a.zoom");
+  if (a) { e.preventDefault(); lb.querySelector("img").src = a.href; lb.querySelector("p").textContent = a.dataset.cap; lb.hidden = false; return; }
+  if (!lb.hidden && (e.target === lb || e.target.closest("#lb button"))) lb.hidden = true;
+});
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") lb.hidden = true; });
+const tw = document.getElementById("tocwrap");
+if (tw && window.matchMedia("(min-width: 861px)").matches) tw.open = true;
+const links = [...document.querySelectorAll(".toc a")];
+if (links.length && "IntersectionObserver" in window) {
+  const io = new IntersectionObserver((es) => es.forEach((en) => {
+    if (en.isIntersecting) links.forEach((l) => l.classList.toggle("on", l.getAttribute("href") === "#" + en.target.id));
+  }), { rootMargin: "0px 0px -70% 0px" });
+  document.querySelectorAll("article h2[id], article h3[id]").forEach((h) => io.observe(h));
+}
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-11",
+ "generated": "2026-11-12",
  "main_project": "PRJEB85558",
  "n_chunks": 30,
  "samples": [
@@ -333,7 +333,9 @@
    "name": "ZymoHMW",
    "type": "mock",
    "info": "https://zymoresearch.eu/products/zymobiomics-hmw-dna-standard",
-   "library_kit": [],
+   "library_kit": [
+    "SQK-LSK114"
+   ],
    "projects": [
     "PRJEB85558"
    ],

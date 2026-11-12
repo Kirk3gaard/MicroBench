@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analyses – MicroBench</title>
+<meta name="description" content="Analyses of the MicroBench nanopore benchmark data.">
+<link rel="icon" href="../microbench.jpg">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../analyses.css">
+</head>
+<body>
+<header class="hero slim">
+  <div class="wrap hero-inner">
+    <a href=".././"><img src="../microbench.jpg" alt="MicroBench home" class="logo" width="64" height="64"></a>
+    <div>
+      <nav class="crumbs"><a href=".././">Datasets</a> <span>›</span> <b>Analyses</b></nav>
+      <h1>Analyses</h1>
+      
+    </div>
+  </div>
+</header>
+<main class="wrap">
+<p class="lede-in">Analyses run on the MicroBench data. Each page is built from the analysis folder in the repository, where the full workflow (Snakefile, environments, R Markdown) lives.</p>
+<div class="agrid"><a class="acard" href="zymohmw.html">
+  <div class="thumb"><img src="zymohmw/unnamed-chunk-1-1.png" alt="" loading="lazy"></div>
+  <div class="abody"><h2>Basecalling models and assemblers on the ZymoHMW mock</h2><p>To check the quality of nanopore data with the ZymoHMW mock DNA. There are some serious improvements in raw read accuracy between the fast, hac sup, and now hyp models. However, for some reason the improved raw read accuracy of the hyp(er) accuracy model does not improve assemblies consistently for all of the organisms.</p>
+  <div class="ameta"><span class="tag">basecalling</span><span class="tag">accuracy</span><span class="tag">assembly</span><span class="muted">08 June, 2026 · 20 figures</span></div></div></a><a class="acard" href="../artefacts.html">
+  <div class="thumb"><div class="thumb-ph">interactive</div></div>
+  <div class="abody"><h2>Read artefacts in basecalled nanopore data</h2><p>Chimeras, foldbacks, untrimmed adapters and barcodes, low-complexity junk, pore-scan effects and flow-cell-wide signal gaps, measured on every read of the ZymoHMW and ZymoGut runs. Interactive.</p>
+  <div class="ameta"><span class="tag">reads</span><span class="tag">artefacts</span><span class="tag">interactive</span><span class="muted"></span></div></div></a></div>
+</main>
+<footer class="wrap muted">MicroBench · Aalborg University · <a href=".././">Datasets</a> · <a href="../analyses/">Analyses</a> · <a href="../artefacts.html">Read artefacts</a></footer>
+<div class="lightbox" id="lb" hidden><button type="button" aria-label="Close">×</button><img alt=""><p></p></div>
+<script>
+const lb = document.getElementById("lb");
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("a.zoom");
+  if (a) { e.preventDefault(); lb.querySelector("img").src = a.href; lb.querySelector("p").textContent = a.dataset.cap; lb.hidden = false; return; }
+  if (!lb.hidden && (e.target === lb || e.target.closest("#lb button"))) lb.hidden = true;
+});
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") lb.hidden = true; });
+const tw = document.getElementById("tocwrap");
+if (tw && window.matchMedia("(min-width: 861px)").matches) tw.open = true;
+const links = [...document.querySelectorAll(".toc a")];
+if (links.length && "IntersectionObserver" in window) {
+  const io = new IntersectionObserver((es) => es.forEach((en) => {
+    if (en.isIntersecting) links.forEach((l) => l.classList.toggle("on", l.getAttribute("href") === "#" + en.target.id));
+  }), { rootMargin: "0px 0px -70% 0px" });
+  document.querySelectorAll("article h2[id], article h3[id]").forEach((h) => io.observe(h));
+}
+</script>
+</body>
+</html>

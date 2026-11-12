@@ -1,10 +1,10 @@
 # Rebuilds docs/data/microbench.json whenever the data tables change.
 # New BAMs are sampled; already-sampled ones are reused from scripts/.cache.
-name: Update site data
+name: Update site data and analysis pages
 on:
   push:
     branches: [main]
-    paths: [ENA_data_links.tsv, ena_hic.tsv, scripts/**]
+    paths: [ENA_data_links.tsv, ena_hic.tsv, scripts/**, analysis/**]
   workflow_dispatch:
 permissions:
   contents: write
@@ -17,9 +17,10 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: "3.12" }
       - run: python3 scripts/build_site_data.py --threads 16
+      - run: pip install markdown && python3 scripts/build_analysis_pages.py
       - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/data/microbench.json scripts/.cache
+          git add docs/data/microbench.json scripts/.cache docs/analyses
           git diff --cached --quiet || git commit -m "Update site data" && git push
