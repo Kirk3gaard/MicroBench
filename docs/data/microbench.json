@@ -4825,6 +4825,835 @@
      "la_end": 0.003
     }
    }
+  },
+  {
+   "name": "MFD15133",
+   "type": "deep",
+   "info": "",
+   "description": "Sediment from Poulstrup Lake",
+   "biosample": "SAMEA124260811",
+   "library_kit": [],
+   "projects": [
+    "PRJEB125553"
+   ],
+   "datasets": [
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG09928",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104464/MFD15133.PBG09928.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104464",
+       "format": "bam",
+       "reads": 26552729,
+       "bases": 208163615336,
+       "bytes": 283232639867,
+       "md5": "f80ce6af94bc2af1d5694e73ca61b08e",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG09928 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 10093,
+       "median_q_est": 20.3,
+       "q20_frac_est": 0.528,
+       "sampled_reads": 2587,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG09928",
+      "device": "PCAMP205",
+      "run_date": "2025-11-20",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 10093,
+     "sampled_reads": 2587,
+     "exact": false,
+     "reads": 26552729,
+     "bases": 208163615336,
+     "mean_len": 7840,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG10252",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104465/MFD15133.PBG10252.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104465",
+       "format": "bam",
+       "reads": 29134545,
+       "bases": 222166404063,
+       "bytes": 292058407125,
+       "md5": "a765857d496330a016effa3712b9c90e",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG10252 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 9450,
+       "median_q_est": 21.3,
+       "q20_frac_est": 0.609,
+       "sampled_reads": 3065,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG10252",
+      "device": "PCAMP205",
+      "run_date": "2025-11-19",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 9450,
+     "sampled_reads": 3065,
+     "exact": false,
+     "reads": 29134545,
+     "bases": 222166404063,
+     "mean_len": 7626,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG38253",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104466/MFD15133.PBG38253.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104466",
+       "format": "bam",
+       "reads": 29782595,
+       "bases": 230185074708,
+       "bytes": 304285611763,
+       "md5": "27e5287374859793c515c64214fa71db",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG38253 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 9436,
+       "median_q_est": 21.6,
+       "q20_frac_est": 0.631,
+       "sampled_reads": 2898,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG38253",
+      "device": "PCAMP205",
+      "run_date": "2025-11-19",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 9436,
+     "sampled_reads": 2898,
+     "exact": false,
+     "reads": 29782595,
+     "bases": 230185074708,
+     "mean_len": 7729,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG40618",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104467/MFD15133.PBG40618.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104467",
+       "format": "bam",
+       "reads": 26540531,
+       "bases": 197463098612,
+       "bytes": 262726380746,
+       "md5": "da82b872522ffa5038ca5bbf8fde4864",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG40618 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 9521,
+       "median_q_est": 20.7,
+       "q20_frac_est": 0.555,
+       "sampled_reads": 3168,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG40618",
+      "device": "PCAMP205",
+      "run_date": "2025-11-19",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 9521,
+     "sampled_reads": 3168,
+     "exact": false,
+     "reads": 26540531,
+     "bases": 197463098612,
+     "mean_len": 7440,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG42176",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104468/MFD15133.PBG42176.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104468",
+       "format": "bam",
+       "reads": 25011090,
+       "bases": 203239897020,
+       "bytes": 270805040072,
+       "md5": "b12ac3213ac983f0bab50b984f244ff7",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG42176 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 9751,
+       "median_q_est": 21.0,
+       "q20_frac_est": 0.57,
+       "sampled_reads": 2646,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG42176",
+      "device": "PCAMP205",
+      "run_date": "2025-11-25",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 9751,
+     "sampled_reads": 2646,
+     "exact": false,
+     "reads": 25011090,
+     "bases": 203239897020,
+     "mean_len": 8126,
+     "in_combined": true
+    }
+   ],
+   "hic": [],
+   "combined": {
+    "flowcells": 5,
+    "basecalls": 5,
+    "reads": 137021490,
+    "bases": 1061218089739,
+    "mean_len": 7745,
+    "bytes": 1413108079573,
+    "bytes_all": 1413108079573,
+    "n50_est": 9630,
+    "median_q_est": 21.0,
+    "sampled_reads": 14364,
+    "dorado": [
+     "1.2.0"
+    ],
+    "model_version": [
+     "5.2.0"
+    ]
+   }
+  },
+  {
+   "name": "MFD15138",
+   "type": "deep",
+   "info": "",
+   "description": "Soil sample from the Suserup forest",
+   "biosample": "SAMEA124260809",
+   "library_kit": [],
+   "projects": [
+    "PRJEB125553"
+   ],
+   "datasets": [
+    {
+     "dorado": "1.3.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG39009",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104472/MFD15138.PBG39009.dorado1.3.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104472",
+       "format": "bam",
+       "reads": 25292198,
+       "bases": 189235593361,
+       "bytes": 208799669919,
+       "md5": "6c9c6fcb5a2e8abbb396b75a296373d3",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --device cuda:all sup pod5 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 9716,
+       "median_q_est": 21.5,
+       "q20_frac_est": 0.621,
+       "sampled_reads": 3530,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG39009",
+      "device": "PCAMP205",
+      "run_date": "2025-11-19",
+      "hardware": "NVIDIA A10"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 9716,
+     "sampled_reads": 3530,
+     "exact": false,
+     "reads": 25292198,
+     "bases": 189235593361,
+     "mean_len": 7482,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG40121",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104473/MFD15138.PBG40121.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104473",
+       "format": "bam",
+       "reads": 23954500,
+       "bases": 178416316315,
+       "bytes": 237866361728,
+       "md5": "7c65b7c816b353746ea54230e89fa84e",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG40121 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 9608,
+       "median_q_est": 21.3,
+       "q20_frac_est": 0.595,
+       "sampled_reads": 2823,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG40121",
+      "device": "PCAMP205",
+      "run_date": "2025-11-19",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 9608,
+     "sampled_reads": 2823,
+     "exact": false,
+     "reads": 23954500,
+     "bases": 178416316315,
+     "mean_len": 7448,
+     "in_combined": false
+    },
+    {
+     "dorado": "1.3.1",
+     "model_version": "5.2.0",
+     "flowcell": "PBG40121",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104474/MFD15138.PBG40121.dorado1.3.1.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104474",
+       "format": "bam",
+       "reads": 23954500,
+       "bases": 178416316315,
+       "bytes": 197693011811,
+       "md5": "08875934b8f1cc66fc266d9e27c5cd8f",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG40121 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 9226,
+       "median_q_est": 21.2,
+       "q20_frac_est": 0.605,
+       "sampled_reads": 3518,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG40121",
+      "device": "PCAMP205",
+      "run_date": "2025-11-19",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 9226,
+     "sampled_reads": 3518,
+     "exact": false,
+     "reads": 23954500,
+     "bases": 178416316315,
+     "mean_len": 7448,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.3.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG42722",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104475/MFD15138.PBG42722.dorado1.3.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104475",
+       "format": "bam",
+       "reads": 20126406,
+       "bases": 149355202903,
+       "bytes": 163755186030,
+       "md5": "e691259c1ec322a08be04a7b2f2a8db0",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --device cuda:all sup pod5 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 9785,
+       "median_q_est": 22.0,
+       "q20_frac_est": 0.666,
+       "sampled_reads": 3627,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG42722",
+      "device": "PCAMP205",
+      "run_date": "2025-11-19",
+      "hardware": "NVIDIA A10"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 9785,
+     "sampled_reads": 3627,
+     "exact": false,
+     "reads": 20126406,
+     "bases": 149355202903,
+     "mean_len": 7421,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.3.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG50053",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104476/MFD15138.PBG50053.dorado1.3.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104476",
+       "format": "bam",
+       "reads": 17879283,
+       "bases": 141255470192,
+       "bytes": 155811130220,
+       "md5": "f4950561643effd8352b9f10d1ee4d32",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --device cuda:all sup pod5 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 10361,
+       "median_q_est": 21.6,
+       "q20_frac_est": 0.636,
+       "sampled_reads": 3280,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG50053",
+      "device": "PCAMP205",
+      "run_date": "2025-11-25",
+      "hardware": "NVIDIA A10"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 10361,
+     "sampled_reads": 3280,
+     "exact": false,
+     "reads": 17879283,
+     "bases": 141255470192,
+     "mean_len": 7901,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG92039",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104477/MFD15138.PBG92039.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104477",
+       "format": "bam",
+       "reads": 23440919,
+       "bases": 189256591296,
+       "bytes": 254070986992,
+       "md5": "f3d7f9a0ecb55356073ef7bca9f5f5a1",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG92039 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 9668,
+       "median_q_est": 21.5,
+       "q20_frac_est": 0.628,
+       "sampled_reads": 2752,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG92039",
+      "device": "PCAMP205",
+      "run_date": "2025-12-15",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 9668,
+     "sampled_reads": 2752,
+     "exact": false,
+     "reads": 23440919,
+     "bases": 189256591296,
+     "mean_len": 8074,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG92085",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104478/MFD15138.PBG92085.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104478",
+       "format": "bam",
+       "reads": 20182447,
+       "bases": 163553208906,
+       "bytes": 220955559816,
+       "md5": "dba4aba51a41847cceca4e1775e6f730",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG92085 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 10564,
+       "median_q_est": 21.4,
+       "q20_frac_est": 0.624,
+       "sampled_reads": 2542,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG92085",
+      "device": "PCAMP205",
+      "run_date": "2025-12-15",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 10564,
+     "sampled_reads": 2542,
+     "exact": false,
+     "reads": 20182447,
+     "bases": 163553208906,
+     "mean_len": 8104,
+     "in_combined": false
+    },
+    {
+     "dorado": "1.3.1",
+     "model_version": "5.2.0",
+     "flowcell": "PBG92085",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104479/MFD15138.PBG92085.dorado1.3.1.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104479",
+       "format": "bam",
+       "reads": 20182447,
+       "bases": 163553208906,
+       "bytes": 185011323264,
+       "md5": "e296526d8afd30f47b4de825c65db98e",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG92085 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 10330,
+       "median_q_est": 21.3,
+       "q20_frac_est": 0.616,
+       "sampled_reads": 3169,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG92085",
+      "device": "PCAMP205",
+      "run_date": "2025-12-15",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 10330,
+     "sampled_reads": 3169,
+     "exact": false,
+     "reads": 20182447,
+     "bases": 163553208906,
+     "mean_len": 8104,
+     "in_combined": true
+    }
+   ],
+   "hic": [],
+   "combined": {
+    "flowcells": 6,
+    "basecalls": 8,
+    "reads": 130875753,
+    "bases": 1011072382973,
+    "mean_len": 7725,
+    "bytes": 1165141308236,
+    "bytes_all": 1623963229780,
+    "n50_est": 9835,
+    "median_q_est": 21.5,
+    "sampled_reads": 19876,
+    "dorado": [
+     "1.2.0",
+     "1.3.0",
+     "1.3.1"
+    ],
+    "model_version": [
+     "5.2.0"
+    ]
+   }
+  },
+  {
+   "name": "MFD16500",
+   "type": "deep",
+   "info": "",
+   "description": "Soil sample from the Rold forest",
+   "biosample": "SAMEA124260810",
+   "library_kit": [],
+   "projects": [
+    "PRJEB125553"
+   ],
+   "datasets": [
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG10633",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104480/MFD16500.PBG10633.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104480",
+       "format": "bam",
+       "reads": 26627598,
+       "bases": 210370277335,
+       "bytes": 280649238946,
+       "md5": "b5fb88f2804231acfa6b4d3c7aec8259",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG10633 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 10806,
+       "median_q_est": 21.2,
+       "q20_frac_est": 0.595,
+       "sampled_reads": 2725,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG10633",
+      "device": "PCAMP205",
+      "run_date": "2025-11-19",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 10806,
+     "sampled_reads": 2725,
+     "exact": false,
+     "reads": 26627598,
+     "bases": 210370277335,
+     "mean_len": 7900,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG30509",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104481/MFD16500.PBG30509.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104481",
+       "format": "bam",
+       "reads": 24722112,
+       "bases": 199272075705,
+       "bytes": 265781420118,
+       "md5": "51d0c12847641a7e676113a8d5ab9744",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG30509 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 9860,
+       "median_q_est": 21.7,
+       "q20_frac_est": 0.623,
+       "sampled_reads": 2823,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG30509",
+      "device": "PCAMP205",
+      "run_date": "2025-11-19",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 9860,
+     "sampled_reads": 2823,
+     "exact": false,
+     "reads": 24722112,
+     "bases": 199272075705,
+     "mean_len": 8060,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG38165",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104482/MFD16500.PBG38165.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104482",
+       "format": "bam",
+       "reads": 23772361,
+       "bases": 193549831194,
+       "bytes": 257689445874,
+       "md5": "c118ffd9c9a00b4f7ad7d113933e4819",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG38165 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 10653,
+       "median_q_est": 22.0,
+       "q20_frac_est": 0.667,
+       "sampled_reads": 2621,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG38165",
+      "device": "PCAMP205",
+      "run_date": "2025-11-19",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 10653,
+     "sampled_reads": 2621,
+     "exact": false,
+     "reads": 23772361,
+     "bases": 193549831194,
+     "mean_len": 8142,
+     "in_combined": true
+    },
+    {
+     "dorado": "1.2.0",
+     "model_version": "5.2.0",
+     "flowcell": "PBG89579",
+     "files": [
+      {
+       "tier": "mods",
+       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104486/MFD16500.PBG89579.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam",
+       "accession": "ERR18104486",
+       "format": "bam",
+       "reads": 23644519,
+       "bases": 176754090128,
+       "bytes": 238147021938,
+       "md5": "0a00d16ceff95b6b58a5a33748cb9008",
+       "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
+       "modbase_models": [
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
+        "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1"
+       ],
+       "command": "dorado basecaller --recursive --device cuda:all sup PBG89579 --modified-bases 4mC_5mC 6mA",
+       "n50_est": 11358,
+       "median_q_est": 21.4,
+       "q20_frac_est": 0.62,
+       "sampled_reads": 2685,
+       "exact": false
+      }
+     ],
+     "pod5": null,
+     "run": {
+      "flowcell_id": "PBG89579",
+      "device": "PCAMP205",
+      "run_date": "2025-12-15",
+      "hardware": "NVIDIA L40S"
+     },
+     "chemistry": "R10.4.1 e8.2 400bps",
+     "n50_est": 11358,
+     "sampled_reads": 2685,
+     "exact": false,
+     "reads": 23644519,
+     "bases": 176754090128,
+     "mean_len": 7475,
+     "in_combined": true
+    }
+   ],
+   "hic": [],
+   "combined": {
+    "flowcells": 4,
+    "basecalls": 4,
+    "reads": 98766590,
+    "bases": 779946274362,
+    "mean_len": 7897,
+    "bytes": 1042267126876,
+    "bytes_all": 1042267126876,
+    "n50_est": 10609,
+    "median_q_est": 21.6,
+    "sampled_reads": 10854,
+    "dorado": [
+     "1.2.0"
+    ],
+    "model_version": [
+     "5.2.0"
+    ]
+   }
   }
  ]
 }

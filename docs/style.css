@@ -139,3 +139,9 @@ footer { padding: 16px; font-size: .85rem; border-top: 1px solid var(--border); 
 .dlpreview { max-height: 180px; overflow: auto; background: var(--surface-2); border-radius: 8px; padding: 8px; font-size: .72rem; margin: 6px 0 0; white-space: pre; }
 .toast { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); background: var(--text); color: var(--bg); padding: 8px 14px; border-radius: 999px; font-size: .88rem; z-index: 60; }
 @media (max-width: 640px) { .dlgroup { margin-left: 0; } .dlpanel { left: 0; right: auto; } }
+
+/* deeply sequenced samples: combined row on top, extra basecalls dimmed */
+table.ds tr.combined td { background: var(--surface-2); font-weight: 600; }
+table.ds tr.combined .sub { font-weight: 400; }
+table.ds tr.dupbc td { opacity: .72; }
+.badge.deep { color: var(--accent); }

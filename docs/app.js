@@ -3,6 +3,7 @@ const TYPES = [
   ["monoculture", "Monocultures"],
   ["mock", "Mock communities"],
   ["metagenome", "Metagenomes"],
+  ["deep", "Deeply sequenced metagenomes"],
 ];
 const TIER_LABEL = { fast: "fast", hac: "hac", hacdup: "hac duplex", sup: "sup", supdup: "sup duplex", mods: "sup + mods" };
 const state = { q: "", types: new Set(), model: "", has: "", sort: "type" };
@@ -13,12 +14,13 @@ const $ = (s, el = document) => el.querySelector(s);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const slug = (s) => s.replace(/ /g, "-").toLowerCase();
 const fmtN = (n) => n == null ? "–" : n >= 1e9 ? (n / 1e9).toFixed(1) + " G" : n >= 1e6 ? (n / 1e6).toFixed(2) + " M" : n >= 1e3 ? (n / 1e3).toFixed(1) + " k" : String(n);
-const fmtBases = (n) => n == null ? "–" : n >= 1e9 ? (n / 1e9).toFixed(n >= 1e11 ? 0 : 1) + " Gb" : (n / 1e6).toFixed(0) + " Mb";
+const fmtBases = (n) => n == null ? "–" : n >= 1e12 ? (n / 1e12).toFixed(2) + " Tb" : n >= 1e9 ? (n / 1e9).toFixed(n >= 1e11 ? 0 : 1) + " Gb" : (n / 1e6).toFixed(0) + " Mb";
 const fmtLen = (n) => n == null ? "–" : n >= 1000 ? (n / 1000).toFixed(1) + " kb" : n + " bp";
 const fmtBytes = (n) => n == null ? "" : n >= 1e12 ? (n / 1e12).toFixed(1) + " TB" : n >= 1e9 ? (n / 1e9).toFixed(1) + " GB" : (n / 1e6).toFixed(0) + " MB";
 
-function sampleBases(s) { return s.datasets.reduce((m, d) => Math.max(m, d.bases || 0), 0); }
-function sampleN50(s) { return s.datasets.reduce((m, d) => Math.max(m, d.n50_est || 0), 0); }
+function sampleBases(s) { return s.combined ? s.combined.bases : s.datasets.reduce((m, d) => Math.max(m, d.bases || 0), 0); }
+function sampleN50(s) { return s.combined ? s.combined.n50_est || 0 : s.datasets.reduce((m, d) => Math.max(m, d.n50_est || 0), 0); }
+const dsKey = (s, d) => `${s.name}|${d.flowcell || ""}|${d.dorado}|${d.model_version}`;
 function hasData(s, what) {
   if (what === "hic") return s.hic.length > 0;
   if (what === "pod5") return s.datasets.some((d) => d.pod5);
@@ -26,9 +28,9 @@ function hasData(s, what) {
   return s.datasets.some((d) => d.files.some((f) => f.tier === what));
 }
 function haystack(s) {
-  const parts = [s.name, s.type, s.info, ...s.projects, ...s.library_kit, s.kit_inferred?.kit, s.kit_inferred?.barcode];
+  const parts = [s.name, s.type, s.info, s.description, s.biosample, ...s.projects, ...s.library_kit, s.kit_inferred?.kit, s.kit_inferred?.barcode];
   for (const d of s.datasets) {
-    parts.push(d.dorado, d.model_version, d.chemistry, d.run?.flowcell_id, d.run?.device, d.run?.hardware);
+    parts.push(d.dorado, d.model_version, d.chemistry, d.flowcell, d.run?.flowcell_id, d.run?.device, d.run?.hardware);
     for (const f of d.files) parts.push(f.accession, f.basecall_model, f.url.split("/").pop());
     if (d.pod5) parts.push(d.pod5.accession);
   }
@@ -106,7 +108,9 @@ function card(s) {
   el.id = slug(s.name);
   $(".name", el).innerHTML = `<a href="#${esc(el.id)}">${esc(s.name)}</a>`;
   const meta = [];
+  if (s.description) meta.push(`<span>${esc(s.description)}</span>`);
   if (s.info) meta.push(`<a href="${esc(s.info)}" target="_blank" rel="noopener">sample description ↗</a>`);
+  if (s.biosample) meta.push(`<a href="https://www.ebi.ac.uk/ena/browser/view/${esc(s.biosample)}?show=reads">${esc(s.biosample)}</a>`);
   for (const p of s.projects) meta.push(`<a href="https://www.ebi.ac.uk/ena/browser/view/${esc(p)}">${esc(p)}</a>`);
   $(".meta", el).innerHTML = meta.join("");
   const b = $(".badge", el); b.textContent = s.type; b.classList.add(s.type);
@@ -121,13 +125,19 @@ function card(s) {
   else if (!s.library_kit.length) facts.push(`<span class="fact warn">Kit not recorded yet</span>`);
   // leftover barcode/primer warnings are held back with the read-artefact page until verified
   if (chem.length) facts.push(`<span class="fact"><b>Chemistry</b> ${esc(chem.join(", "))}</span>`);
-  if (fc.length) facts.push(`<span class="fact"><b>Flow cell</b> ${esc(fc.join(", "))}</span>`);
+  if (fc.length && !s.combined) facts.push(`<span class="fact"><b>Flow cell</b> ${esc(fc.join(", "))}</span>`);
+  if (s.combined) {
+    const c = s.combined;
+    facts.unshift(`<span class="fact"><b>Combined</b> ${c.flowcells} flow cells · ${fmtN(c.reads)} reads · ${fmtBases(c.bases)} · ${fmtBytes(c.bytes)}</span>`);
+    const dev = [...new Set(ds.map((d) => d.run?.device).filter(Boolean))];
+    if (dev.length) facts.push(`<span class="fact"><b>Device</b> ${esc(dev.join(", "))}</span>`);
+  }
   if (s.hic.length) facts.push(`<span class="fact"><b>Hi-C</b> ${esc(s.hic[0].kit)}</span>`);
   $(".facts", el).innerHTML = facts.join("");
 
   const tbody = $("tbody", el);
   tbody.innerHTML = ds.map((d, i) => {
-    const key = `${s.name}|${d.dorado}|${d.model_version}`;
+    const key = dsKey(s, d);
     const merged = mergedFiles(d);
     const pod5Inside = d.pod5 && merged.some((f) => f.url === d.pod5.url);
     if (pod5Inside) merged.find((f) => f.url === d.pod5.url).labels.push("pod5");
@@ -135,8 +145,11 @@ function card(s) {
     const qf = ["mods", "sup", "hac", "fast"].map((t) => d.files.find((f) => f.tier === t && f.median_q_est != null)).find(Boolean);
     const q = qf?.median_q_est;
     const isOpen = open.has(key);
-    return `<tr>
-      <td class="bc"><span class="model">v${esc(d.model_version)}</span> <span class="sub">dorado ${esc(d.dorado)}</span></td>
+    const first = d.flowcell
+      ? `<span class="model">${esc(d.flowcell)}</span> <span class="sub">dorado ${esc(d.dorado)} · v${esc(d.model_version)}${d.in_combined ? "" : ` · <span title="This flow cell was basecalled twice; the combined numbers use the newer basecall">re-basecall, not in total</span>`}</span>`
+      : `<span class="model">v${esc(d.model_version)}</span> <span class="sub">dorado ${esc(d.dorado)}</span>`;
+    return `<tr${d.flowcell && !d.in_combined ? ' class="dupbc"' : ""}>
+      <td class="bc">${first}</td>
       <td class="num" data-label="Reads">${fmtN(d.reads)}</td><td class="num" data-label="Yield">${fmtBases(d.bases)}</td>
       <td class="num" data-label="Mean len">${d.mean_len ? fmtLen(d.mean_len) : "–"}</td>
       <td class="num" data-label="N50" title="${d.exact ? "exact (whole BAM read)" : `estimated from ${d.sampled_reads?.toLocaleString()} sampled reads`}">${approx(d.n50_est ? fmtLen(d.n50_est) : null, d.exact)}</td>
@@ -145,6 +158,17 @@ function card(s) {
       <td class="mcell"><button class="more" data-key="${esc(key)}" aria-expanded="${isOpen}">${isOpen ? "less" : "settings"}</button></td>
     </tr>${isOpen ? detailsRow(d, key) : ""}`;
   }).join("");
+  if (s.combined && !state.model) {
+    const c = s.combined;
+    $("thead th", el).textContent = "Flow cell";
+    tbody.insertAdjacentHTML("afterbegin", `<tr class="combined">
+      <td class="bc"><span class="model">All ${c.flowcells} flow cells</span> <span class="sub">combined${c.basecalls > c.flowcells ? `, each flow cell once` : ""}</span></td>
+      <td class="num" data-label="Reads">${fmtN(c.reads)}</td><td class="num" data-label="Yield">${fmtBases(c.bases)}</td>
+      <td class="num" data-label="Mean len">${c.mean_len ? fmtLen(c.mean_len) : "–"}</td>
+      <td class="num" data-label="N50" title="estimated from ${c.sampled_reads?.toLocaleString()} reads sampled across the flow cells">${approx(c.n50_est ? fmtLen(c.n50_est) : null, false)}</td>
+      <td class="num" data-label="Read Q">${approx(c.median_q_est, false)}</td>
+      <td class="fcell"><span class="sub">${fmtBytes(c.bytes)} in ${c.flowcells} BAM files${c.bytes_all > c.bytes ? ` (${fmtBytes(c.bytes_all)} with the extra basecalls)` : ""}</span></td><td class="mcell"></td></tr>`);
+  } else if (s.combined) $("thead th", el).textContent = "Flow cell";
 
   if (s.hic.length) {
     $(".hic", el).innerHTML = `<h4>Hi-C</h4>` + s.hic.map((h) =>
@@ -192,11 +216,11 @@ function renderStats() {
   }
   const files = uniq.size, bytes = [...uniq.values()].reduce((a, b) => a + b, 0);
   const runs = {};
-  for (const x of s) for (const d of x.datasets) { const k = d.pod5?.url || x.name; runs[k] = Math.max(runs[k] || 0, d.bases || 0); }
+  for (const x of s) for (const d of x.datasets) { const k = d.pod5?.url || (d.flowcell ? x.name + "|" + d.flowcell : x.name); runs[k] = Math.max(runs[k] || 0, d.bases || 0); }
   bases = Object.values(runs).reduce((a, b) => a + b, 0);
   const t = (k) => s.filter((x) => x.type === k).length;
   $("#stats").innerHTML = [
-    [s.length, "samples"], [t("monoculture"), "monocultures"], [t("mock"), "mock communities"], [t("metagenome"), "metagenomes"],
+    [s.length, "samples"], [t("monoculture"), "monocultures"], [t("mock"), "mock communities"], [t("metagenome"), "metagenomes"], [t("deep"), "deeply sequenced"],
     [(bases / 1e12).toFixed(2) + " Tb", "unique sequence"], [files, "downloadable files"], [(bytes / 1e12).toFixed(1) + " TB", "total file size"],
   ].map(([v, l]) => `<div class="stat"><b>${v}</b><span>${l}</span></div>`).join("");
 }

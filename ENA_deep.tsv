@@ -1,0 +1,18 @@
+Sample	SampleType	SampleInfo	BioSample	flowcell	dorado version	basecall model version	mods	pod5	library_kit
+MFD15133	deep	Sediment from Poulstrup Lake	SAMEA124260811	PBG09928	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104464/MFD15133.PBG09928.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15133	deep	Sediment from Poulstrup Lake	SAMEA124260811	PBG10252	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104465/MFD15133.PBG10252.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15133	deep	Sediment from Poulstrup Lake	SAMEA124260811	PBG38253	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104466/MFD15133.PBG38253.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15133	deep	Sediment from Poulstrup Lake	SAMEA124260811	PBG40618	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104467/MFD15133.PBG40618.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15133	deep	Sediment from Poulstrup Lake	SAMEA124260811	PBG42176	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104468/MFD15133.PBG42176.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15138	deep	Soil sample from the Suserup forest	SAMEA124260809	PBG39009	1.3.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104472/MFD15138.PBG39009.dorado1.3.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15138	deep	Soil sample from the Suserup forest	SAMEA124260809	PBG40121	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104473/MFD15138.PBG40121.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15138	deep	Soil sample from the Suserup forest	SAMEA124260809	PBG40121	1.3.1	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104474/MFD15138.PBG40121.dorado1.3.1.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15138	deep	Soil sample from the Suserup forest	SAMEA124260809	PBG42722	1.3.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104475/MFD15138.PBG42722.dorado1.3.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15138	deep	Soil sample from the Suserup forest	SAMEA124260809	PBG50053	1.3.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104476/MFD15138.PBG50053.dorado1.3.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15138	deep	Soil sample from the Suserup forest	SAMEA124260809	PBG92039	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104477/MFD15138.PBG92039.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15138	deep	Soil sample from the Suserup forest	SAMEA124260809	PBG92085	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104478/MFD15138.PBG92085.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD15138	deep	Soil sample from the Suserup forest	SAMEA124260809	PBG92085	1.3.1	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104479/MFD15138.PBG92085.dorado1.3.1.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD16500	deep	Soil sample from the Rold forest	SAMEA124260810	PBG10633	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104480/MFD16500.PBG10633.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD16500	deep	Soil sample from the Rold forest	SAMEA124260810	PBG30509	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104481/MFD16500.PBG30509.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD16500	deep	Soil sample from the Rold forest	SAMEA124260810	PBG38165	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104482/MFD16500.PBG38165.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown
+MFD16500	deep	Soil sample from the Rold forest	SAMEA124260810	PBG89579	1.2.0	5.2.0	ftp.sra.ebi.ac.uk/vol1/run/ERR181/ERR18104486/MFD16500.PBG89579.dorado1.2.0.bm5.2.0_sup.sim.mod4mC_5mC_6mA.bam	NA	unknown

@@ -3,6 +3,8 @@
 
 Sources
   * ENA_data_links.tsv / ena_hic.tsv      – the curated tables in this repo
+  * ENA_deep.tsv                           – deeply sequenced samples (one row per flow cell
+                                             and basecall; volumes are combined per sample)
   * ENA portal API                         – exact read count, bases and file size per run
   * BAM headers (HTTP range request)       – dorado version, command line, models, GPU,
                                              flow cell, device and run date
@@ -82,11 +84,13 @@ def cache_path(url):
     return os.path.join(CACHE, key)
 
 
-def sample_bam(url, size):
-    """Header + sampled stats for one BAM, with on-disk cache."""
+def sample_bam(url, size, keep=False):
+    """Header + sampled stats for one BAM, with on-disk cache. keep=True also stores the sampled
+    read lengths and qualities, so several flow cells of one sample can be pooled."""
     path = cache_path(url)
     if os.path.exists(path) and not ARGS.refresh:
-        return json.load(open(path))
+        res = json.load(open(path))
+        if not keep or "lens" in res: return res
     hdr = parse_header(bs.header(url))
     if size < EXACT_BELOW:
         lens, qs = bs.full_pass(url, size)
@@ -103,11 +107,12 @@ def sample_bam(url, size):
                 time.sleep(2 + attempt * 5)
         else:
             continue
-        for l, q in bs.parse_records(data):
+        for *_, l, q in bs.parse_records(data):
             if l > 0:
                 lens.append(l)
                 if q is not None: qs.append(q)
     res = {"header": hdr, "sampled_reads": len(lens), "exact": False}
+    if keep: res.update(lens=lens, qs=[round(q, 1) for q in qs])
     return finish(res, lens, qs, path)
 
 
@@ -133,6 +138,8 @@ def main():
     rows = list(csv.DictReader(open(os.path.join(ROOT, "ENA_data_links.tsv")), delimiter="\t"))
     hic = list(csv.reader(open(os.path.join(ROOT, "ena_hic.tsv")), delimiter="\t"))
     hic_head, hic = hic[0], hic[1:]
+    deep_path = os.path.join(ROOT, "ENA_deep.tsv")
+    deep = list(csv.DictReader(open(deep_path), delimiter="\t")) if os.path.exists(deep_path) else []
 
     accs = set()
     for r in rows:
@@ -140,6 +147,9 @@ def main():
             if r.get(k, "NA") not in ("NA", ""): accs.add(acc_of(r[k]))
     for h in hic:
         accs.add(acc_of(h[4])); accs.add(acc_of(h[5]))
+    for r in deep:
+        for k in TIERS + ["pod5"]:
+            if r.get(k, "NA") not in ("NA", ""): accs.add(acc_of(r[k]))
     accs.discard(None)
 
     cache_ena = os.path.join(CACHE, "ena_runs.json")
@@ -185,12 +195,18 @@ def main():
             if u not in ("NA", "") and u.endswith(".bam"):
                 a = acc_of(u)
                 bams[https(u)] = num(a, "submitted_bytes")
+    deep_urls = set()
+    for r in deep:
+        for k in TIERS:
+            u = r.get(k, "NA")
+            if u not in ("NA", "") and u.endswith(".bam"):
+                bams[https(u)] = bytes_of(acc_of(u), u); deep_urls.add(https(u))
     results = {}
     with ThreadPoolExecutor(max_workers=ARGS.threads) as ex:
         todo = {u: s for u, s in bams.items() if s}
         if ARGS.cached_only:
             todo = {u: s for u, s in todo.items() if os.path.exists(cache_path(u))}
-        futs = {ex.submit(sample_bam, u, s): u for u, s in todo.items()}
+        futs = {ex.submit(sample_bam, u, s, u in deep_urls): u for u, s in todo.items()}
         for i, f in enumerate(as_completed(futs), 1):
             u = futs[f]
             try:
@@ -261,6 +277,65 @@ def main():
                          "r1_bytes": bytes_of(a, h[4]), "r2_bytes": bytes_of(acc_of(h[5]), h[5])})
         s["projects"].add(h[1])
 
+    # deeply sequenced samples: one dataset per flow cell (and basecall); volumes combined per sample
+    for r in deep:
+        s = samples.setdefault(r["Sample"], {
+            "name": r["Sample"], "type": r["SampleType"], "info": "", "description": r["SampleInfo"],
+            "biosample": r.get("BioSample"), "library_kit": set(), "projects": set(), "datasets": [], "hic": []})
+        kit = (r.get("library_kit") or "").strip()
+        if kit and kit.lower() not in ("na", "unknown"): s["library_kit"].add(kit)
+        ds = {"dorado": r["dorado version"], "model_version": r["basecall model version"], "flowcell": r["flowcell"],
+              "files": [], "pod5": None}
+        for k in TIERS:
+            u = r.get(k, "NA")
+            if u in ("NA", ""): continue
+            a = acc_of(u); fu = https(u)
+            f = {"tier": k, "url": fu, "accession": a, "format": "bam" if u.endswith(".bam") else "fastq.gz",
+                 "reads": num(a, "read_count"), "bases": num(a, "base_count"), "bytes": bytes_of(a, u), "md5": md5_of(a, fu)}
+            if ena.get(a, {}).get("study_accession"): s["projects"].add(ena[a]["study_accession"])
+            res = results.get(fu)
+            if res:
+                f["basecall_model"] = res["header"].get("basecall_model")
+                f["modbase_models"] = res["header"].get("modbase_models")
+                f["command"] = clean_cmd(res["header"].get("command"))
+                for kk in ("n50_est", "median_q_est", "q20_frac_est", "sampled_reads", "exact"):
+                    if kk in res: f[kk] = res[kk]
+                h = res["header"]
+                ds["run"] = {k2: h.get(k2) for k2 in ("flowcell_id", "device", "run_date", "hardware")}
+                m = re.match(r"dna_(r[\d.]+)_(e[\d.]+)_(\d+bps)", h.get("basecall_model") or "")
+                ds["chemistry"] = f"{m.group(1).upper()} {m.group(2)} {m.group(3)}" if m else None
+                ds["n50_est"], ds["sampled_reads"], ds["exact"] = res.get("n50_est"), res.get("sampled_reads"), False
+            ds["files"].append(f)
+        pick = next((f for f in ds["files"] if f["reads"]), None)
+        if pick:
+            ds["reads"], ds["bases"] = pick["reads"], pick["bases"]
+            ds["mean_len"] = round(pick["bases"] / pick["reads"])
+        s["datasets"].append(ds)
+    for s in samples.values():
+        if s["type"] != "deep": continue
+        # each flow cell counts once; where a flow cell was basecalled twice, the newest basecall is used
+        ver = lambda d: tuple(int(x) for x in re.findall(r"\d+", d["dorado"]))
+        per_fc = {}
+        for d in s["datasets"]:
+            if d["flowcell"] not in per_fc or ver(d) > ver(per_fc[d["flowcell"]]): per_fc[d["flowcell"]] = d
+        use = list(per_fc.values())
+        for d in s["datasets"]: d["in_combined"] = d in use
+        lens, qs = [], []
+        for d in use:
+            for f in d["files"]:
+                res = results.get(f["url"]) or {}
+                lens += res.get("lens", []); qs += res.get("qs", [])
+        reads = sum(d.get("reads") or 0 for d in use); bases = sum(d.get("bases") or 0 for d in use)
+        s["combined"] = {
+            "flowcells": len(use), "basecalls": len(s["datasets"]), "reads": reads, "bases": bases,
+            "mean_len": round(bases / reads) if reads else None,
+            "bytes": sum(f["bytes"] or 0 for d in use for f in d["files"]),
+            "bytes_all": sum(f["bytes"] or 0 for d in s["datasets"] for f in d["files"]),
+            "n50_est": bs.n50(lens) if lens else None, "median_q_est": round(statistics.median(qs), 1) if qs else None,
+            "sampled_reads": len(lens),
+            "dorado": sorted({d["dorado"] for d in use}, key=lambda v: tuple(map(int, v.split(".")))),
+            "model_version": sorted({d["model_version"] for d in use})}
+
     kits_path = os.path.join(CACHE, "kits.json")
     kits = json.load(open(kits_path)) if os.path.exists(kits_path) else {}
     out = []
@@ -271,7 +346,8 @@ def main():
             s["kit_inferred"]["fractions"] = k.get("fractions")
         s["library_kit"] = sorted(s["library_kit"])
         s["projects"] = sorted(s["projects"])
-        s["datasets"].sort(key=lambda d: (d["model_version"], d["dorado"]), reverse=True)
+        if s["type"] == "deep": s["datasets"].sort(key=lambda d: (d["flowcell"], d["dorado"]))
+        else: s["datasets"].sort(key=lambda d: (d["model_version"], d["dorado"]), reverse=True)
         out.append(s)
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump({"generated": time.strftime("%Y-%m-%d"), "main_project": "PRJEB85558",
