@@ -177,17 +177,22 @@ function render() {
   const nds = items.reduce((a, s) => a + visibleDatasets(s).length, 0);
   $("#count").textContent = `${items.length} of ${DATA.samples.length} samples · ${nds} basecalled datasets`;
   writeHash();
+  refreshDl();
 }
 
 function renderStats() {
   const s = DATA.samples;
-  let files = 0, bases = 0, bytes = 0;
-  const seen = new Set();
-  for (const x of s) for (const d of x.datasets) {
-    for (const f of d.files) { files++; bytes += f.bytes || 0; }
-    if (d.pod5 && !seen.has(d.pod5.url)) { seen.add(d.pod5.url); files++; bytes += d.pod5.bytes || 0; }
-    // count raw sequence once per sample + run: take the max sup yield per pod5 archive
+  let bases = 0;
+  // every distinct file once (several tiers can point to the same file), Hi-C included
+  const uniq = new Map();
+  for (const x of s) {
+    for (const d of x.datasets) {
+      for (const f of d.files) uniq.set(f.url, f.bytes || 0);
+      if (d.pod5) uniq.set(d.pod5.url, d.pod5.bytes || 0);
+    }
+    for (const h of x.hic) { uniq.set(h.r1, h.r1_bytes || 0); uniq.set(h.r2, h.r2_bytes || 0); }
   }
+  const files = uniq.size, bytes = [...uniq.values()].reduce((a, b) => a + b, 0);
   const runs = {};
   for (const x of s) for (const d of x.datasets) { const k = d.pod5?.url || x.name; runs[k] = Math.max(runs[k] || 0, d.bases || 0); }
   bases = Object.values(runs).reduce((a, b) => a + b, 0);
@@ -223,17 +228,113 @@ function buildControls() {
     const s = DATA.samples.find((x) => slug(x.name) === cardEl.id);
     cardEl.replaceWith(card(s));
   });
-  $("#dl").addEventListener("click", () => {
-    const urls = [];
-    for (const s of filtered()) for (const d of visibleDatasets(s)) {
-      for (const f of d.files) if (!state.has || f.tier === state.has || (state.has === "dup" && f.tier.endsWith("dup"))) urls.push(f.url);
-      if (d.pod5 && (!state.has || state.has === "pod5")) urls.push(d.pod5.url);
+  bindDownloads();
+}
+
+// ---------- download script ----------
+const dirName = (s) => s.replace(/[^A-Za-z0-9._-]+/g, "_").replace(/^_+|_+$/g, "");
+function selectedFiles() {
+  const out = new Map();
+  const add = (url, dir, md5, bytes) => { if (url && !out.has(url)) out.set(url, { url, dir, md5, bytes, name: url.split("/").pop() }); };
+  const fileOk = (f) => !state.has || f.tier === state.has || (state.has === "dup" && f.tier.endsWith("dup"));
+  for (const s of filtered()) {
+    const dir = dirName(s.name);
+    for (const d of visibleDatasets(s)) {
+      for (const f of d.files) if (fileOk(f)) add(f.url, dir, f.md5, f.bytes);
+      if (d.pod5 && (!state.has || state.has === "pod5")) add(d.pod5.url, dir + "/pod5", d.pod5.md5, d.pod5.bytes);
     }
-    if (!state.has || state.has === "hic") for (const s of filtered()) for (const h of s.hic) urls.push(h.r1, h.r2);
-    const blob = new Blob([[...new Set(urls)].join("\n") + "\n"], { type: "text/plain" });
-    const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: "microbench_urls.txt" });
-    document.body.appendChild(a); a.click(); a.remove();
+    if (!state.has || state.has === "hic") for (const h of s.hic) { add(h.r1, dir + "/hic", h.r1_md5, h.r1_bytes); add(h.r2, dir + "/hic", h.r2_md5, h.r2_bytes); }
+  }
+  return [...out.values()];
+}
+const fmtSize = (b) => b >= 1e12 ? (b / 1e12).toFixed(2) + " TB" : b >= 1e9 ? (b / 1e9).toFixed(1) + " GB" : (b / 1e6).toFixed(0) + " MB";
+const shq = (s) => "'" + String(s).replace(/'/g, "'\\''") + "'";
+function filterText() {
+  const p = [];
+  if (state.q) p.push(`search "${state.q}"`);
+  if (state.types.size) p.push("type " + [...state.types].join("+"));
+  if (state.model) p.push("model v" + state.model);
+  if (state.has) p.push("data " + state.has);
+  return p.join(", ") || "no filters (everything)";
+}
+function buildScript(tool, md5) {
+  const files = selectedFiles();
+  const total = files.reduce((a, f) => a + (f.bytes || 0), 0);
+  const L = [];
+  L.push("#!/usr/bin/env bash");
+  L.push(`# MicroBench download: ${files.length} files, ${fmtSize(total)}`);
+  L.push(`# Selection: ${filterText()}`);
+  L.push(`# Page: ${location.href}`);
+  L.push(`# Generated ${new Date().toISOString().slice(0, 10)} · data from ENA (https://www.ebi.ac.uk/ena)`);
+  L.push("# Usage: bash microbench_download.sh [target folder]   (re-run to resume unfinished downloads)");
+  if (total > 1e12) L.push(`# NOTE: this is ${fmtSize(total)}. Check free disk space first.`);
+  L.push("set -euo pipefail");
+  L.push('OUT="${1:-microbench}"');
+  L.push('mkdir -p "$OUT" && cd "$OUT"');
+  L.push("");
+  if (tool === "aria2c") {
+    L.push("# aria2c: 4 files at a time, 8 connections each; resumes with -c");
+    L.push("aria2c -c -x 8 -s 8 -j 4 --auto-file-renaming=false -i - <<'EOF'");
+    for (const f of files) { L.push(f.url); L.push(`  dir=${f.dir}`); if (md5 && f.md5) L.push(`  checksum=md5=${f.md5}`); }
+    L.push("EOF");
+  } else {
+    L.push("# get <folder> <url> <bytes>: skips files that are already complete, resumes partial ones");
+    L.push("get() {");
+    L.push('  local f="$1/${2##*/}"; mkdir -p "$1"');
+    L.push('  if [ -n "${3:-}" ] && [ -f "$f" ] && [ "$(wc -c < "$f" | tr -d " ")" = "$3" ]; then echo "already complete: $f"; return; fi');
+    if (tool === "wget") L.push('  wget -c -q --show-progress -P "$1" "$2"');
+    else L.push('  (cd "$1" && curl -fL --retry 5 -C - -O "$2")');
+    L.push("}");
+    for (const f of files) L.push(`get ${shq(f.dir)} ${shq(f.url)} ${f.bytes || ""}  # ${f.bytes ? fmtSize(f.bytes) : "size unknown"}`);
+  }
+  if (md5) {
+    const withSum = files.filter((f) => f.md5);
+    L.push("");
+    L.push(`# Check MD5 sums (from ENA) for ${withSum.length} files`);
+    L.push("cat > md5sums.txt <<'EOF'");
+    for (const f of withSum) L.push(`${f.md5}  ${f.dir}/${f.name}`);
+    L.push("EOF");
+    L.push("if command -v md5sum >/dev/null; then md5sum -c md5sums.txt");
+    L.push('else while read -r sum file; do [ "$(md5 -q "$file")" = "$sum" ] && echo "$file: OK" || echo "$file: FAILED"; done < md5sums.txt; fi');
+  }
+  return { text: L.join("\n") + "\n", files, total };
+}
+function dlOptions() {
+  return { tool: document.querySelector('input[name="dltool"]:checked').value, md5: $("#dlMd5").checked };
+}
+function refreshDl() {
+  if (!$("#dlmenu").open) return;
+  const { tool, md5 } = dlOptions();
+  const { text, files, total } = buildScript(tool, md5);
+  $("#dlSum").innerHTML = files.length
+    ? `<b>${files.length} files · ${fmtSize(total)}</b> ${state.q || state.types.size || state.model || state.has ? `matching the current filters (${esc(filterText())})` : "— everything; set filters above to narrow it down"}. One folder per sample, MD5 sums from ENA.`
+    : `<b>No files</b> match the current filters.`;
+  $("#dlPreview").textContent = text.split("\n").slice(0, 18).join("\n") + (text.split("\n").length > 18 ? "\n…" : "");
+  $("#dlCopy").disabled = $("#dlSave").disabled = !files.length;
+}
+function toast(msg) {
+  const t = Object.assign(document.createElement("div"), { className: "toast", textContent: msg });
+  document.body.appendChild(t); setTimeout(() => t.remove(), 2600);
+}
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); return true; }
+  catch { const ta = Object.assign(document.createElement("textarea"), { value: text }); document.body.appendChild(ta); ta.select();
+    const ok = document.execCommand("copy"); ta.remove(); return ok; }
+}
+function saveFile(text, name, type = "text/plain") {
+  const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(new Blob([text], { type })), download: name });
+  document.body.appendChild(a); a.click(); a.remove();
+}
+function bindDownloads() {
+  $("#dlmenu").addEventListener("toggle", refreshDl);
+  $("#dlmenu").addEventListener("change", refreshDl);
+  document.addEventListener("click", (e) => { if (e.isTrusted && $("#dlmenu").open && !e.target.closest("#dlmenu")) $("#dlmenu").open = false; });
+  $("#dlCopy").addEventListener("click", async () => {
+    const { tool, md5 } = dlOptions(); const { text, files, total } = buildScript(tool, md5);
+    toast((await copyText(text)) ? `Copied ${tool} script for ${files.length} files (${fmtSize(total)})` : "Copy failed: use Save .sh");
   });
+  $("#dlSave").addEventListener("click", () => { const { tool, md5 } = dlOptions(); saveFile(buildScript(tool, md5).text, "microbench_download.sh", "text/x-sh"); });
+  $("#dl").addEventListener("click", () => saveFile(selectedFiles().map((f) => f.url).join("\n") + "\n", "microbench_urls.txt"));
 }
 
 // filters live in the query string so a filtered view can be shared; #anchor jumps to a sample

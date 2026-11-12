@@ -40,7 +40,7 @@ def https(u):
 
 def ena_runs(accs):
     fields = ("run_accession,study_accession,sample_accession,instrument_model,read_count,"
-              "base_count,submitted_bytes,submitted_ftp,first_public")
+              "base_count,submitted_bytes,submitted_ftp,submitted_md5,first_public")
     out = {}
     accs = sorted(accs)
     for i in range(0, len(accs), 100):
@@ -146,10 +146,31 @@ def main():
     if os.path.exists(cache_ena) and not ARGS.refresh:
         ena = json.load(open(cache_ena))
         missing = accs - set(ena)
+        if any("submitted_md5" not in v for v in ena.values()):  # older cache without checksums
+            missing = accs
         if missing: ena.update(ena_runs(missing))
     else:
         ena = ena_runs(accs)
     json.dump(ena, open(cache_ena, "w"))
+
+    def md5_of(a, url):
+        """MD5 of one submitted file of a run (runs can hold several files)."""
+        rec = ena.get(a, {})
+        files = (rec.get("submitted_ftp") or "").split(";")
+        sums = (rec.get("submitted_md5") or "").split(";")
+        name = url.rstrip("/").split("/")[-1]
+        for f, m in zip(files, sums):
+            if f.split("/")[-1] == name: return m or None
+        return None
+
+    def bytes_of(a, url):
+        rec = ena.get(a, {})
+        files = (rec.get("submitted_ftp") or "").split(";")
+        sizes = (rec.get("submitted_bytes") or "").split(";")
+        name = url.rstrip("/").split("/")[-1]
+        for f, s in zip(files, sizes):
+            if f.split("/")[-1] == name and s.isdigit(): return int(s)
+        return None
 
     def num(a, k):
         v = ena.get(a, {}).get(k)
@@ -194,7 +215,8 @@ def main():
             if u in ("NA", ""): continue
             a = acc_of(u); fu = https(u)
             f = {"tier": k, "url": fu, "accession": a, "format": "bam" if u.endswith(".bam") else "tar.gz" if u.endswith(".tar.gz") else "fastq.gz",
-                 "reads": num(a, "read_count"), "bases": num(a, "base_count"), "bytes": num(a, "submitted_bytes")}
+                 "reads": num(a, "read_count"), "bases": num(a, "base_count"), "bytes": num(a, "submitted_bytes"),
+                 "md5": md5_of(a, fu)}
             if ena.get(a, {}).get("study_accession"): s["projects"].add(ena[a]["study_accession"])
             if fu in results:
                 res = results[fu]
@@ -209,7 +231,7 @@ def main():
             ds["files"].append(f)
         if r.get("pod5", "NA") not in ("NA", ""):
             a = acc_of(r["pod5"])
-            ds["pod5"] = {"url": https(r["pod5"]), "accession": a, "bytes": num(a, "submitted_bytes")}
+            ds["pod5"] = {"url": https(r["pod5"]), "accession": a, "bytes": num(a, "submitted_bytes"), "md5": md5_of(a, r["pod5"])}
             if ena.get(a, {}).get("study_accession"): s["projects"].add(ena[a]["study_accession"])
         if best:
             h = best["header"]
@@ -234,7 +256,9 @@ def main():
         a = acc_of(h[4])
         s["hic"].append({"project": h[1], "kit": h[2], "platform": h[3],
                          "r1": https(h[4]), "r2": https(h[5]), "accession": a,
-                         "reads": num(a, "read_count"), "bases": num(a, "base_count")})
+                         "reads": num(a, "read_count"), "bases": num(a, "base_count"),
+                         "r1_md5": md5_of(a, h[4]), "r2_md5": md5_of(acc_of(h[5]), h[5]),
+                         "r1_bytes": bytes_of(a, h[4]), "r2_bytes": bytes_of(acc_of(h[5]), h[5])})
         s["projects"].add(h[1])
 
     kits_path = os.path.join(CACHE, "kits.json")

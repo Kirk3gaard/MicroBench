@@ -48,7 +48,26 @@
         <option value="bases">yield (high→low)</option>
         <option value="n50">read N50 (high→low)</option>
       </select></label>
-      <button id="dl" class="btn" type="button" title="Download a text file with the URLs of all files matching the filters">⤓ URL list</button>
+      <div class="dlgroup">
+        <details class="dlmenu" id="dlmenu">
+          <summary class="btn" title="Get a shell script that downloads every file matching the filters">⤓ Download script</summary>
+          <div class="dlpanel" role="dialog" aria-label="Download script">
+            <p class="dlsum" id="dlSum"></p>
+            <div class="dlrow" role="group" aria-label="Download tool">
+              <label><input type="radio" name="dltool" value="wget" checked> wget</label>
+              <label><input type="radio" name="dltool" value="curl"> curl</label>
+              <label><input type="radio" name="dltool" value="aria2c"> aria2c <small>(parallel)</small></label>
+            </div>
+            <label class="dlrow"><input type="checkbox" id="dlMd5" checked> check MD5 sums from ENA after download</label>
+            <div class="dlrow">
+              <button class="btn solid" type="button" id="dlCopy">Copy script</button>
+              <button class="btn" type="button" id="dlSave">Save .sh</button>
+              <button class="btn" type="button" id="dl" title="Plain list of URLs">URL list</button>
+            </div>
+            <pre class="dlpreview" id="dlPreview"></pre>
+          </div>
+        </details>
+      </div>
     </div>
     <p class="count" id="count"></p>
   </section>
@@ -62,6 +81,7 @@
       <li><b>N50</b> and <b>read Q</b> are computed from the BAM files. BAMs under 250&nbsp;MB are read completely (exact values). Larger ones are estimated (marked ≈) from about <span id="nchunks">30</span> evenly spaced 1&nbsp;MB slices of each BAM (typically 2,000–5,000 reads), fetched with HTTP range requests. Read Q is the median per-read mean quality. Checked against a full pass over one 600&nbsp;MB BAM, the estimates were within 1%.</li>
       <li><b>Basecalling settings</b> (dorado version, full command line, models, GPU, flow cell, device and run date) are read directly from the BAM headers.</li>
       <li><b>Library kit</b> comes from the <code>library_kit</code> column in <code>ENA_data_links.tsv</code>.</li>
+      <li><b>Download script</b>: the button above the list builds a bash script (wget, curl or aria2c) for all files that match the current filters, one folder per sample. Re-running it skips finished files and resumes partial ones, and it checks every file against the MD5 sum recorded by ENA. Files that several basecalling tiers share are downloaded once.</li>
       <li>File suffixes: <code>sim</code> = simplex reads, <code>dup</code> = duplex reads, <code>mods</code> = sup basecalls with 4mC/5mC/6mA modification tags (unaligned BAM), <code>pod5</code> = raw signal archive.</li>
     </ul>
     <p class="muted" id="generated"></p>

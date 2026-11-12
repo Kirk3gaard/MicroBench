@@ -24,6 +24,7 @@
        "reads": 32342142,
        "bases": 173775656464,
        "bytes": 181606678273,
+       "md5": "8a35f2a670cc1cd2176a451daee9d259",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -39,7 +40,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789831/PAW77640.tar.gz",
       "accession": "ERR14789831",
-      "bytes": 1028428352193
+      "bytes": 1028428352193,
+      "md5": "f3318bebd08ada65f846e014196772c3"
      },
      "run": {
       "flowcell_id": "PAW77640",
@@ -66,7 +68,8 @@
        "format": "fastq.gz",
        "reads": 32275332,
        "bases": 170938277126,
-       "bytes": 176812376129
+       "bytes": 176812376129,
+       "md5": "3985a8b5ea96e5ca5a94108ff0e14c78"
       },
       {
        "tier": "hac",
@@ -75,7 +78,8 @@
        "format": "fastq.gz",
        "reads": 32319513,
        "bases": 172110832750,
-       "bytes": 171079000050
+       "bytes": 171079000050,
+       "md5": "4a8ba32a291179c6b1f69295741778e2"
       },
       {
        "tier": "sup",
@@ -84,7 +88,8 @@
        "format": "fastq.gz",
        "reads": 32335202,
        "bases": 174012416440,
-       "bytes": 144378146371
+       "bytes": 144378146371,
+       "md5": "8527f1a5e2ee980998d0bd9b0001f88f"
       },
       {
        "tier": "mods",
@@ -94,6 +99,7 @@
        "reads": 32335202,
        "bases": 174012416440,
        "bytes": 241123616144,
+       "md5": "e39b10a38bc730c2cb42e9ca3321acd9",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -109,7 +115,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789831/PAW77640.tar.gz",
       "accession": "ERR14789831",
-      "bytes": 1028428352193
+      "bytes": 1028428352193,
+      "md5": "f3318bebd08ada65f846e014196772c3"
      },
      "run": {
       "flowcell_id": "PAW77640",
@@ -137,6 +144,7 @@
        "reads": 4665804,
        "bases": 25451459270,
        "bytes": 34964854584,
+       "md5": "90dd72c047fe0b4d979b66bc24fc59d7",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -152,7 +160,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789831/PAW77640.tar.gz",
       "accession": "ERR14789831",
-      "bytes": 1028428352193
+      "bytes": 1028428352193,
+      "md5": "f3318bebd08ada65f846e014196772c3"
      },
      "run": {
       "flowcell_id": "PAW77640",
@@ -178,7 +187,11 @@
      "r2": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17006084/HiC_ZymoFecal_R2.fastq.gz",
      "accession": "ERR17006084",
      "reads": 831996016,
-     "bases": 125631398416
+     "bases": 125631398416,
+     "r1_md5": "e3fa1558a484b3d84270996ca327308e",
+     "r2_md5": "e0c2f686fa6afd64b8e12ee850e6c2a3",
+     "r1_bytes": 29363714724,
+     "r2_bytes": 29037652734
     }
    ],
    "kit_inferred": {
@@ -213,6 +226,7 @@
        "reads": 9220254,
        "bases": 46500885978,
        "bytes": 48559401630,
+       "md5": "014b94149646ae2ccc4583a2b385bd11",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -228,7 +242,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789832/PAY12289_barcode13.tar.gz",
       "accession": "ERR14789832",
-      "bytes": 559246349838
+      "bytes": 559246349838,
+      "md5": "161afd70035fec9160e2fcd7ebc07ea2"
      },
      "run": {
       "flowcell_id": "PAY12289",
@@ -255,7 +270,8 @@
        "format": "fastq.gz",
        "reads": 9215781,
        "bases": 46215076039,
-       "bytes": 48206037648
+       "bytes": 48206037648,
+       "md5": "f58067e0d0caf70fe10971958659ebb2"
       },
       {
        "tier": "hac",
@@ -264,7 +280,8 @@
        "format": "fastq.gz",
        "reads": 9219096,
        "bases": 46419368145,
-       "bytes": 46412766580
+       "bytes": 46412766580,
+       "md5": "9c6a254d54b64de005c44e4e5500d56d"
       },
       {
        "tier": "sup",
@@ -273,7 +290,8 @@
        "format": "fastq.gz",
        "reads": 9219198,
        "bases": 46502766156,
-       "bytes": 37860493786
+       "bytes": 37860493786,
+       "md5": "aeecfe9d2003cd4ae53c08d1a28db88b"
       },
       {
        "tier": "mods",
@@ -283,6 +301,7 @@
        "reads": 9219198,
        "bases": 46502766156,
        "bytes": 64431062929,
+       "md5": "d5661e12679211ba1e78d303cac9b69d",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -298,7 +317,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789832/PAY12289_barcode13.tar.gz",
       "accession": "ERR14789832",
-      "bytes": 559246349838
+      "bytes": 559246349838,
+      "md5": "161afd70035fec9160e2fcd7ebc07ea2"
      },
      "run": {
       "flowcell_id": "PAY12289",
@@ -352,6 +372,7 @@
        "reads": 12405608,
        "bases": 54300970738,
        "bytes": 55588869638,
+       "md5": "34415f5466a5f5fab79545c335512227",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all fast PAS01578",
@@ -368,6 +389,7 @@
        "reads": 12593845,
        "bases": 54276863541,
        "bytes": 52225583249,
+       "md5": "672a2762d434d4a61002405b5e23cf4b",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_hac@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all hac PAS01578",
@@ -384,6 +406,7 @@
        "reads": 12644740,
        "bases": 54337152257,
        "bytes": 43971831966,
+       "md5": "fe57b7999cd23ed82595311746f99d08",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all sup PAS01578",
@@ -400,6 +423,7 @@
        "reads": 12644740,
        "bases": 54337152257,
        "bytes": 54143902907,
+       "md5": "b77933f9698e9fd03015db89069e4fc4",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -415,7 +439,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789833/PAS01578.tar.gz",
       "accession": "ERR14789833",
-      "bytes": 652826798848
+      "bytes": 652826798848,
+      "md5": "cb2f25f0be8b1e2bc79023dd1f286e58"
      },
      "run": {
       "flowcell_id": "PAS01578",
@@ -438,7 +463,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789833/PAS01578.tar.gz",
       "accession": "ERR14789833",
-      "bytes": 652826798848
+      "bytes": 652826798848,
+      "md5": "cb2f25f0be8b1e2bc79023dd1f286e58"
      }
     },
     {
@@ -452,7 +478,8 @@
        "format": "fastq.gz",
        "reads": 12434083,
        "bases": 53944250835,
-       "bytes": 55910024571
+       "bytes": 55910024571,
+       "md5": "249c6c7882e0a57c0a14fe739e73e2f5"
       },
       {
        "tier": "hac",
@@ -461,7 +488,8 @@
        "format": "fastq.gz",
        "reads": 7412903,
        "bases": 20207752881,
-       "bytes": 20165358443
+       "bytes": 20165358443,
+       "md5": "3bae233181eb213e96a7a8003c4cce43"
       },
       {
        "tier": "hacdup",
@@ -470,7 +498,8 @@
        "format": "fastq.gz",
        "reads": 2682126,
        "bases": 16139908300,
-       "bytes": 14677045573
+       "bytes": 14677045573,
+       "md5": "914e4a7727b64c89a25777b63f64ea76"
       },
       {
        "tier": "sup",
@@ -479,7 +508,8 @@
        "format": "fastq.gz",
        "reads": 7388650,
        "bases": 20189406813,
-       "bytes": 16031816959
+       "bytes": 16031816959,
+       "md5": "ba53839f0d6c3cd6789c2d0613bda871"
       },
       {
        "tier": "supdup",
@@ -488,7 +518,8 @@
        "format": "fastq.gz",
        "reads": 2707027,
        "bases": 16357953238,
-       "bytes": 14776889526
+       "bytes": 14776889526,
+       "md5": "ce252491870da95f3f78536540bbc5bd"
       },
       {
        "tier": "mods",
@@ -498,6 +529,7 @@
        "reads": 12614536,
        "bases": 54387622092,
        "bytes": 72114294335,
+       "md5": "fba4a974fb69237274b97112a712cbe8",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v1",
@@ -513,7 +545,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789833/PAS01578.tar.gz",
       "accession": "ERR14789833",
-      "bytes": 652826798848
+      "bytes": 652826798848,
+      "md5": "cb2f25f0be8b1e2bc79023dd1f286e58"
      },
      "run": {
       "flowcell_id": "PAS01578",
@@ -563,6 +596,7 @@
        "reads": 1140135,
        "bases": 7529740331,
        "bytes": 7619479817,
+       "md5": "eddaf026268d620b2daba7b9ec5104b8",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -578,7 +612,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789834/PAY12289_barcode12.tar.gz",
       "accession": "ERR14789834",
-      "bytes": 90786954333
+      "bytes": 90786954333,
+      "md5": "565fa31b8376a9fe4bee13d62fc715e9"
      },
      "run": {
       "flowcell_id": "PAY12289",
@@ -605,7 +640,8 @@
        "format": "fastq.gz",
        "reads": 1139706,
        "bases": 7486151162,
-       "bytes": 7817283847
+       "bytes": 7817283847,
+       "md5": "a9cf7cf0fecec4d9c8667dfff4bb7d00"
       },
       {
        "tier": "hac",
@@ -614,7 +650,8 @@
        "format": "fastq.gz",
        "reads": 1140000,
        "bases": 7514984023,
-       "bytes": 7492098460
+       "bytes": 7492098460,
+       "md5": "8622441790fcff98a6c10d48555401da"
       },
       {
        "tier": "sup",
@@ -623,7 +660,8 @@
        "format": "fastq.gz",
        "reads": 1140052,
        "bases": 7530532667,
-       "bytes": 6120831804
+       "bytes": 6120831804,
+       "md5": "9d419d6926a7c613c59b67adfc979d4d"
       },
       {
        "tier": "mods",
@@ -633,6 +671,7 @@
        "reads": 1140052,
        "bases": 7530532667,
        "bytes": 10078173217,
+       "md5": "644a62787f0846dd0d1ffbdaa22055c5",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -648,7 +687,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789834/PAY12289_barcode12.tar.gz",
       "accession": "ERR14789834",
-      "bytes": 90786954333
+      "bytes": 90786954333,
+      "md5": "565fa31b8376a9fe4bee13d62fc715e9"
      },
      "run": {
       "flowcell_id": "PAY12289",
@@ -699,6 +739,7 @@
        "reads": 63034,
        "bases": 737729250,
        "bytes": 745665457,
+       "md5": "64d07df86c055df748dbbcab12e9c838",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all fast PAW78174_barcode01",
@@ -715,6 +756,7 @@
        "reads": 63078,
        "bases": 734994264,
        "bytes": 706054585,
+       "md5": "9365372b0d851b068356e6353b3037ef",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_hac@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all hac PAW78174_barcode01",
@@ -731,6 +773,7 @@
        "reads": 63145,
        "bases": 737552152,
        "bytes": 600316833,
+       "md5": "c65c939f123c62711055a7609be19e2e",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all sup PAW78174_barcode01",
@@ -747,6 +790,7 @@
        "reads": 63145,
        "bases": 737552152,
        "bytes": 697539447,
+       "md5": "4c33ab397b367d69164307601460b813",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -762,7 +806,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789835/PAW78174_barcode01.tar.gz",
       "accession": "ERR14789835",
-      "bytes": 9161107183
+      "bytes": 9161107183,
+      "md5": "b992b23708342d77ab8bcabbde1153b3"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -789,7 +834,8 @@
        "format": "fastq.gz",
        "reads": 63070,
        "bases": 733562732,
-       "bytes": 761216982
+       "bytes": 761216982,
+       "md5": "c14343b1660f9beac51cd7964f4483e1"
       },
       {
        "tier": "hac",
@@ -798,7 +844,8 @@
        "format": "fastq.gz",
        "reads": 62953,
        "bases": 735071500,
-       "bytes": 731510882
+       "bytes": 731510882,
+       "md5": "37fe46c83932c982f33cbc1589e8d04d"
       },
       {
        "tier": "sup",
@@ -807,7 +854,8 @@
        "format": "fastq.gz",
        "reads": 63200,
        "bases": 737108062,
-       "bytes": 586293082
+       "bytes": 586293082,
+       "md5": "dd97f585c3269bda682ed1760c0b8068"
       },
       {
        "tier": "mods",
@@ -817,6 +865,7 @@
        "reads": 63200,
        "bases": 737108062,
        "bytes": 917590184,
+       "md5": "405995413fc0aae75075433b9b0e8c10",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -832,7 +881,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789835/PAW78174_barcode01.tar.gz",
       "accession": "ERR14789835",
-      "bytes": 9161107183
+      "bytes": 9161107183,
+      "md5": "b992b23708342d77ab8bcabbde1153b3"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -883,6 +933,7 @@
        "reads": 184984,
        "bases": 2077119077,
        "bytes": 2181387663,
+       "md5": "f25670974804f07e58f3dd3dc87b02a4",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -902,6 +953,7 @@
        "reads": 184984,
        "bases": 2077119077,
        "bytes": 2181387663,
+       "md5": "f25670974804f07e58f3dd3dc87b02a4",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -917,7 +969,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17029706/R1041_5kHz_Escherichia-coli_DSMZ18039.tar.gz",
       "accession": "ERR17029706",
-      "bytes": 23436831922
+      "bytes": 23436831922,
+      "md5": "8ea0bbd859815bc4c0d9c3bebeed4c07"
      },
      "run": {
       "flowcell_id": "PAQ96153",
@@ -968,6 +1021,7 @@
        "reads": 548067,
        "bases": 2022155191,
        "bytes": 2115520169,
+       "md5": "ba04492ee92df2c66c2813952a83b489",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -987,6 +1041,7 @@
        "reads": 548067,
        "bases": 2022155191,
        "bytes": 2115520169,
+       "md5": "ba04492ee92df2c66c2813952a83b489",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -1002,7 +1057,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17029707/R1041_5kHz_Kangiella-aquimarina.tar.gz",
       "accession": "ERR17029707",
-      "bytes": 22653570687
+      "bytes": 22653570687,
+      "md5": "585804aa799ecdadb1b9d5acb12f3f43"
      },
      "run": {
       "flowcell_id": "FAW33514",
@@ -1052,6 +1108,7 @@
        "reads": 236697,
        "bases": 2317285335,
        "bytes": 2709218816,
+       "md5": "b5ee937eb0f470e0969c8e83373ca5ab",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -1071,6 +1128,7 @@
        "reads": 236697,
        "bases": 2317285335,
        "bytes": 2709218816,
+       "md5": "b5ee937eb0f470e0969c8e83373ca5ab",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -1086,7 +1144,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17029708/R1041_5kHz_Meiothermus-ruber_DSMZ1279.tar.gz",
       "accession": "ERR17029708",
-      "bytes": 25820073161
+      "bytes": 25820073161,
+      "md5": "a175d270c0272da3f4349ab1d6aa5434"
      },
      "run": {
       "flowcell_id": "PAQ96153",
@@ -1137,6 +1196,7 @@
        "reads": 179439,
        "bases": 663694893,
        "bytes": 703946118,
+       "md5": "27b010195d2582997976f06ab656fb39",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -1156,6 +1216,7 @@
        "reads": 179439,
        "bases": 663694893,
        "bytes": 703946118,
+       "md5": "27b010195d2582997976f06ab656fb39",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -1171,7 +1232,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17029710/R1041_5kHz_Shewanella-oneidensis.tar.gz",
       "accession": "ERR17029710",
-      "bytes": 7426198464
+      "bytes": 7426198464,
+      "md5": "68a04ea3479fd6f2e10b26d891f3a154"
      },
      "run": {
       "flowcell_id": "FAW33514",
@@ -1222,6 +1284,7 @@
        "reads": 77137,
        "bases": 742914067,
        "bytes": 790104610,
+       "md5": "4eb4add15ffe6cb48b74709aea4c4da0",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -1241,6 +1304,7 @@
        "reads": 77137,
        "bases": 742914067,
        "bytes": 790104610,
+       "md5": "4eb4add15ffe6cb48b74709aea4c4da0",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -1256,7 +1320,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR170/ERR17029709/R1041_5kHz_Pelobacter-carbinolicus_DSMZ2380.tar.gz",
       "accession": "ERR17029709",
-      "bytes": 8786728123
+      "bytes": 8786728123,
+      "md5": "f2c643ed5e2c9354104c1f9776d82eb2"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -1307,6 +1372,7 @@
        "reads": 95929,
        "bases": 737461761,
        "bytes": 746439194,
+       "md5": "674012279777e24e6fb7542134e86cfd",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all fast PAW78174_barcode11",
@@ -1323,6 +1389,7 @@
        "reads": 95796,
        "bases": 737350295,
        "bytes": 713631042,
+       "md5": "724bd8b93081c436d7a82abd5ef347b6",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_hac@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all hac PAW78174_barcode11",
@@ -1339,6 +1406,7 @@
        "reads": 95774,
        "bases": 739285444,
        "bytes": 654826913,
+       "md5": "253f874f37090544f8a84aae9e829502",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all sup PAW78174_barcode11",
@@ -1355,6 +1423,7 @@
        "reads": 95774,
        "bases": 739285444,
        "bytes": 856862803,
+       "md5": "56d23f64d2a6cc80d1de54be1225d9e5",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -1370,7 +1439,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789836/PAW78174_barcode11.tar.gz",
       "accession": "ERR14789836",
-      "bytes": 9315318753
+      "bytes": 9315318753,
+      "md5": "81749cb6b8d3b29036d351c969f67552"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -1397,7 +1467,8 @@
        "format": "fastq.gz",
        "reads": 95973,
        "bases": 736049771,
-       "bytes": 761118196
+       "bytes": 761118196,
+       "md5": "ea5fb34753f021be72714c9677fc8060"
       },
       {
        "tier": "hac",
@@ -1406,7 +1477,8 @@
        "format": "fastq.gz",
        "reads": 95748,
        "bases": 737349721,
-       "bytes": 734315293
+       "bytes": 734315293,
+       "md5": "f6c8802256ebb40938b45cc156f465a9"
       },
       {
        "tier": "sup",
@@ -1415,7 +1487,8 @@
        "format": "fastq.gz",
        "reads": 95794,
        "bases": 740392668,
-       "bytes": 647658398
+       "bytes": 647658398,
+       "md5": "534e8fe20d31e4859dabe188099a8769"
       },
       {
        "tier": "mods",
@@ -1425,6 +1498,7 @@
        "reads": 95794,
        "bases": 740392668,
        "bytes": 1143535758,
+       "md5": "51be2857c77d710fe700827976aedf9e",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -1440,7 +1514,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789836/PAW78174_barcode11.tar.gz",
       "accession": "ERR14789836",
-      "bytes": 9315318753
+      "bytes": 9315318753,
+      "md5": "81749cb6b8d3b29036d351c969f67552"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -1491,6 +1566,7 @@
        "reads": 120544,
        "bases": 34704552,
        "bytes": 35279669,
+       "md5": "258b21a9ae73c88601e8699399edd0f7",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all fast PAW78174_barcode05",
@@ -1508,6 +1584,7 @@
        "reads": 120464,
        "bases": 26485787,
        "bytes": 25776937,
+       "md5": "0955cdf44c51111a18b2767ae5d28de2",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_hac@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all hac PAW78174_barcode05",
@@ -1525,6 +1602,7 @@
        "reads": 120506,
        "bases": 51618966,
        "bytes": 22621478,
+       "md5": "d0aaad270a3ed03c408209b1aec26429",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all sup PAW78174_barcode05",
@@ -1542,6 +1620,7 @@
        "reads": 120506,
        "bases": 51618966,
        "bytes": 40477279,
+       "md5": "b41f0754c84996c6811a8e7657209a6b",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -1558,7 +1637,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789837/PAW78174_barcode05.tar.gz",
       "accession": "ERR14789837",
-      "bytes": 1224905623
+      "bytes": 1224905623,
+      "md5": "0cb4cbe5c962bb8046007bab5c202eaf"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -1585,7 +1665,8 @@
        "format": "fastq.gz",
        "reads": 120695,
        "bases": 37076755,
-       "bytes": 33227972
+       "bytes": 33227972,
+       "md5": "498e4f83101e70ddd630a85a15505e8c"
       },
       {
        "tier": "hac",
@@ -1594,7 +1675,8 @@
        "format": "fastq.gz",
        "reads": 120607,
        "bases": 23525164,
-       "bytes": 22400155
+       "bytes": 22400155,
+       "md5": "3046607e417cc94f04704b1dc174c87a"
       },
       {
        "tier": "sup",
@@ -1603,7 +1685,8 @@
        "format": "fastq.gz",
        "reads": 121226,
        "bases": 39615535,
-       "bytes": 22514665
+       "bytes": 22514665,
+       "md5": "e503194da29c7234c9027d502c6b05c0"
       },
       {
        "tier": "mods",
@@ -1613,6 +1696,7 @@
        "reads": 121226,
        "bases": 39615535,
        "bytes": 46317264,
+       "md5": "eaffd956085b01cfc8a9cf5b822713c7",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -1629,7 +1713,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789837/PAW78174_barcode05.tar.gz",
       "accession": "ERR14789837",
-      "bytes": 1224905623
+      "bytes": 1224905623,
+      "md5": "0cb4cbe5c962bb8046007bab5c202eaf"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -1681,6 +1766,7 @@
        "reads": 102259,
        "bases": 738721370,
        "bytes": 747993870,
+       "md5": "500a2e853546c2f84866a2ae2b392cac",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all fast PAW78174_barcode07",
@@ -1697,6 +1783,7 @@
        "reads": 101959,
        "bases": 734833689,
        "bytes": 718772421,
+       "md5": "01a4d18104a647ab68b9e093c0f3c30b",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_hac@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all hac PAW78174_barcode07",
@@ -1713,6 +1800,7 @@
        "reads": 101824,
        "bases": 742848630,
        "bytes": 591510973,
+       "md5": "f1b60e8a8fc1e4c95cf0967824ae7c2f",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all sup PAW78174_barcode07",
@@ -1729,6 +1817,7 @@
        "reads": 101824,
        "bases": 742848630,
        "bytes": 780026080,
+       "md5": "e88200814f4b26d4f7feb549f855b661",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -1744,7 +1833,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789838/PAW78174_barcode07.tar.gz",
       "accession": "ERR14789838",
-      "bytes": 9535022613
+      "bytes": 9535022613,
+      "md5": "02335188f9a1e9e953d3ec29b8ffa1e4"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -1771,7 +1861,8 @@
        "format": "fastq.gz",
        "reads": 102111,
        "bases": 736913202,
-       "bytes": 762064319
+       "bytes": 762064319,
+       "md5": "5395265a13b4dcceee9d9c7699866775"
       },
       {
        "tier": "hac",
@@ -1780,7 +1871,8 @@
        "format": "fastq.gz",
        "reads": 101830,
        "bases": 734563763,
-       "bytes": 742705678
+       "bytes": 742705678,
+       "md5": "3be279e19c46a5cb2f4381ae1ecd3d05"
       },
       {
        "tier": "sup",
@@ -1789,7 +1881,8 @@
        "format": "fastq.gz",
        "reads": 101820,
        "bases": 740933847,
-       "bytes": 580660378
+       "bytes": 580660378,
+       "md5": "70ca7e4b63a1e48646beb88c751b1474"
       },
       {
        "tier": "mods",
@@ -1799,6 +1892,7 @@
        "reads": 101820,
        "bases": 740933847,
        "bytes": 1055367105,
+       "md5": "df7075d3dc917ca6ce399625631bb0f3",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -1814,7 +1908,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789838/PAW78174_barcode07.tar.gz",
       "accession": "ERR14789838",
-      "bytes": 9535022613
+      "bytes": 9535022613,
+      "md5": "02335188f9a1e9e953d3ec29b8ffa1e4"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -1866,6 +1961,7 @@
        "reads": 192901,
        "bases": 86969650,
        "bytes": 95543696,
+       "md5": "bd89fec364c9cce1fc6bdceae33574e9",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all fast PAW78174_barcode06",
@@ -1883,6 +1979,7 @@
        "reads": 192940,
        "bases": 82919826,
        "bytes": 85981455,
+       "md5": "136f05a48048d9f7c24ccf5af6a78b08",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_hac@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all hac PAW78174_barcode06",
@@ -1900,6 +1997,7 @@
        "reads": 193296,
        "bases": 98725342,
        "bytes": 75153344,
+       "md5": "58367174d8b93d49176575e4ba84bc22",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all sup PAW78174_barcode06",
@@ -1917,6 +2015,7 @@
        "reads": 193302,
        "bases": 98724338,
        "bytes": 107457304,
+       "md5": "ac614adacef532c0e3f83a5ea2073b64",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -1933,7 +2032,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789839/PAW78174_barcode06.tar.gz",
       "accession": "ERR14789839",
-      "bytes": 1877360438
+      "bytes": 1877360438,
+      "md5": "c08bbf05189a3cb050d07e6aef429b34"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -1960,7 +2060,8 @@
        "format": "fastq.gz",
        "reads": 193159,
        "bases": 93290632,
-       "bytes": 95847932
+       "bytes": 95847932,
+       "md5": "adebe9baf4e76fd585d0a408430d13d8"
       },
       {
        "tier": "hac",
@@ -1969,7 +2070,8 @@
        "format": "fastq.gz",
        "reads": 193057,
        "bases": 81957175,
-       "bytes": 83778392
+       "bytes": 83778392,
+       "md5": "db35f354c557131453188f0d90394460"
       },
       {
        "tier": "sup",
@@ -1978,7 +2080,8 @@
        "format": "fastq.gz",
        "reads": 194581,
        "bases": 94841506,
-       "bytes": 71479711
+       "bytes": 71479711,
+       "md5": "94cc2707a95e8b95dc59f38269c6f7e0"
       },
       {
        "tier": "mods",
@@ -1988,6 +2091,7 @@
        "reads": 194581,
        "bases": 94841506,
        "bytes": 148988593,
+       "md5": "0473d2050608f9f0835791a08c76528d",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -2004,7 +2108,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789839/PAW78174_barcode06.tar.gz",
       "accession": "ERR14789839",
-      "bytes": 1877360438
+      "bytes": 1877360438,
+      "md5": "c08bbf05189a3cb050d07e6aef429b34"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -2056,6 +2161,7 @@
        "reads": 49211,
        "bases": 740324585,
        "bytes": 724037936,
+       "md5": "3805a7a7b7b933169f35a0e61888e9bc",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all fast PAW78174_barcode10",
@@ -2072,6 +2178,7 @@
        "reads": 49339,
        "bases": 735690386,
        "bytes": 695888631,
+       "md5": "e4c198bbde9c002c376203173b8c352c",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_hac@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all hac PAW78174_barcode10",
@@ -2088,6 +2195,7 @@
        "reads": 49471,
        "bases": 741245186,
        "bytes": 593203091,
+       "md5": "bfde229f73a3beff72e21a7f879511d5",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all sup PAW78174_barcode10",
@@ -2104,6 +2212,7 @@
        "reads": 49471,
        "bases": 741245186,
        "bytes": 803782575,
+       "md5": "664d891e3f6e8c67fafe6d8fe16cbbef",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -2119,7 +2228,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789840/PAW78174_barcode10.tar.gz",
       "accession": "ERR14789840",
-      "bytes": 9265526173
+      "bytes": 9265526173,
+      "md5": "c4dffd54be03b725fbe114ef58380c72"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -2146,7 +2256,8 @@
        "format": "fastq.gz",
        "reads": 49208,
        "bases": 734702594,
-       "bytes": 746937362
+       "bytes": 746937362,
+       "md5": "146ef6762f4be7fc281e1c5e04be6121"
       },
       {
        "tier": "hac",
@@ -2155,7 +2266,8 @@
        "format": "fastq.gz",
        "reads": 49145,
        "bases": 734080706,
-       "bytes": 724998289
+       "bytes": 724998289,
+       "md5": "e0312b59816b3035f27fd08d5de31d83"
       },
       {
        "tier": "sup",
@@ -2164,7 +2276,8 @@
        "format": "fastq.gz",
        "reads": 49517,
        "bases": 738904793,
-       "bytes": 582886030
+       "bytes": 582886030,
+       "md5": "3364ed759d83e02ba431e2dd6cf00dff"
       },
       {
        "tier": "mods",
@@ -2174,6 +2287,7 @@
        "reads": 49517,
        "bases": 738904793,
        "bytes": 1154581780,
+       "md5": "8c6fb1245f97f7bd0fd95a86c1c7a0aa",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -2189,7 +2303,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789840/PAW78174_barcode10.tar.gz",
       "accession": "ERR14789840",
-      "bytes": 9265526173
+      "bytes": 9265526173,
+      "md5": "c4dffd54be03b725fbe114ef58380c72"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -2241,6 +2356,7 @@
        "reads": 78488,
        "bases": 13754758,
        "bytes": 16963445,
+       "md5": "6060736c599dbab3f87ac22cb7aebbc7",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all fast PAW78174_barcode08",
@@ -2258,6 +2374,7 @@
        "reads": 78509,
        "bases": 13549634,
        "bytes": 14621772,
+       "md5": "7ac4dd4b21a7e67c72cf53d57348319a",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_hac@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all hac PAW78174_barcode08",
@@ -2275,6 +2392,7 @@
        "reads": 78579,
        "bases": 19460776,
        "bytes": 13192584,
+       "md5": "4802567efb1dc829a1057c615532f66d",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all sup PAW78174_barcode08",
@@ -2292,6 +2410,7 @@
        "reads": 78568,
        "bases": 19459496,
        "bytes": 20309603,
+       "md5": "8d0fb41c9d070bd1a8a1404973906163",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -2308,7 +2427,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789841/PAW78174_barcode08.tar.gz",
       "accession": "ERR14789841",
-      "bytes": 492528698
+      "bytes": 492528698,
+      "md5": "5147f96dbd8ff49b6ef6851133e63387"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -2335,7 +2455,8 @@
        "format": "fastq.gz",
        "reads": 78555,
        "bases": 15181365,
-       "bytes": 15410960
+       "bytes": 15410960,
+       "md5": "713c44b9fef12cb39e4eb194d48d3b09"
       },
       {
        "tier": "hac",
@@ -2344,7 +2465,8 @@
        "format": "fastq.gz",
        "reads": 78517,
        "bases": 11691208,
-       "bytes": 12204305
+       "bytes": 12204305,
+       "md5": "71c28144dc04b6418153a08b0e1f9f54"
       },
       {
        "tier": "sup",
@@ -2353,7 +2475,8 @@
        "format": "fastq.gz",
        "reads": 79139,
        "bases": 17453149,
-       "bytes": 12074084
+       "bytes": 12074084,
+       "md5": "f027b2f6ec74e934fcecaa2c1df72fa4"
       },
       {
        "tier": "mods",
@@ -2363,6 +2486,7 @@
        "reads": 79139,
        "bases": 17453149,
        "bytes": 24990706,
+       "md5": "8321106c0b3b122e802bf1d55fa355af",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -2379,7 +2503,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789841/PAW78174_barcode08.tar.gz",
       "accession": "ERR14789841",
-      "bytes": 492528698
+      "bytes": 492528698,
+      "md5": "5147f96dbd8ff49b6ef6851133e63387"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -2430,6 +2555,7 @@
        "reads": 443180,
        "bases": 712133571,
        "bytes": 766037294,
+       "md5": "b98ba38616076e5d58e226cbde3b29c3",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all fast PAW78174_barcode04",
@@ -2446,6 +2572,7 @@
        "reads": 444400,
        "bases": 704311744,
        "bytes": 711550112,
+       "md5": "8d85c95d78a99c1d25bd1c51bbf55e9b",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_hac@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all hac PAW78174_barcode04",
@@ -2462,6 +2589,7 @@
        "reads": 445168,
        "bases": 716710074,
        "bytes": 630327804,
+       "md5": "7194500a874d0dc94b350df89be0129b",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all sup PAW78174_barcode04",
@@ -2478,6 +2606,7 @@
        "reads": 445168,
        "bases": 716709930,
        "bytes": 708865163,
+       "md5": "4f10872807b088727f22777669287d6b",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -2493,7 +2622,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789842/PAW78174_barcode04.tar.gz",
       "accession": "ERR14789842",
-      "bytes": 9902158378
+      "bytes": 9902158378,
+      "md5": "45ad11af4c01d627c8811470b268cd39"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -2520,7 +2650,8 @@
        "format": "fastq.gz",
        "reads": 443489,
        "bases": 725210457,
-       "bytes": 773518007
+       "bytes": 773518007,
+       "md5": "2b93bcf9462913837564b728504c0396"
       },
       {
        "tier": "hac",
@@ -2529,7 +2660,8 @@
        "format": "fastq.gz",
        "reads": 442990,
        "bases": 707193617,
-       "bytes": 720839721
+       "bytes": 720839721,
+       "md5": "ab030d9ff9478f18715919a001a224b5"
       },
       {
        "tier": "sup",
@@ -2538,7 +2670,8 @@
        "format": "fastq.gz",
        "reads": 445747,
        "bases": 713983459,
-       "bytes": 605527249
+       "bytes": 605527249,
+       "md5": "2c0ef904b9d3dd4a728cdf000ccb86c6"
       },
       {
        "tier": "mods",
@@ -2548,6 +2681,7 @@
        "reads": 445747,
        "bases": 713983459,
        "bytes": 873551188,
+       "md5": "d3838ea5931d22a9e38548b3a6094357",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -2563,7 +2697,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789842/PAW78174_barcode04.tar.gz",
       "accession": "ERR14789842",
-      "bytes": 9902158378
+      "bytes": 9902158378,
+      "md5": "45ad11af4c01d627c8811470b268cd39"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -2614,6 +2749,7 @@
        "reads": 443059,
        "bases": 710708833,
        "bytes": 732222325,
+       "md5": "28e99a38d68d7c4ccdb1659b94a449d1",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all fast PAW78174_barcode03",
@@ -2630,6 +2766,7 @@
        "reads": 428933,
        "bases": 700399551,
        "bytes": 688778668,
+       "md5": "990286dd6b161120f88f6cb677c5cb94",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_hac@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all hac PAW78174_barcode03",
@@ -2646,6 +2783,7 @@
        "reads": 427305,
        "bases": 722009666,
        "bytes": 573340714,
+       "md5": "cbdd9c0cedfa020437aec71e19f6d742",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all sup PAW78174_barcode03",
@@ -2662,6 +2800,7 @@
        "reads": 427290,
        "bases": 722010582,
        "bytes": 776987415,
+       "md5": "a39774908e1899195ece931ed824c28b",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -2677,7 +2816,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789843/PAW78174_barcode03.tar.gz",
       "accession": "ERR14789843",
-      "bytes": 10004078523
+      "bytes": 10004078523,
+      "md5": "22412afcc7c1705ce4079a2f6d21f3fb"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -2704,7 +2844,8 @@
        "format": "fastq.gz",
        "reads": 446979,
        "bases": 739520722,
-       "bytes": 762169060
+       "bytes": 762169060,
+       "md5": "f942699c679c847e7d67d82b9a67b8ea"
       },
       {
        "tier": "hac",
@@ -2713,7 +2854,8 @@
        "format": "fastq.gz",
        "reads": 429916,
        "bases": 718099229,
-       "bytes": 714702214
+       "bytes": 714702214,
+       "md5": "ab5346306691c1ce9c4879f32628167f"
       },
       {
        "tier": "sup",
@@ -2722,7 +2864,8 @@
        "format": "fastq.gz",
        "reads": 428073,
        "bases": 725450299,
-       "bytes": 555241927
+       "bytes": 555241927,
+       "md5": "7ebb1f5bec53ee632de24211f0ddaa98"
       },
       {
        "tier": "mods",
@@ -2732,6 +2875,7 @@
        "reads": 428073,
        "bases": 725450299,
        "bytes": 1171236379,
+       "md5": "cb968a2edef6c755d74cee14114d6c84",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -2747,7 +2891,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789843/PAW78174_barcode03.tar.gz",
       "accession": "ERR14789843",
-      "bytes": 10004078523
+      "bytes": 10004078523,
+      "md5": "22412afcc7c1705ce4079a2f6d21f3fb"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -2799,6 +2944,7 @@
        "reads": 97134,
        "bases": 744316124,
        "bytes": 745388535,
+       "md5": "7deed5d8dbc8c9745bd418d9a33465f3",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_fast@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all fast PAW78174_barcode02",
@@ -2815,6 +2961,7 @@
        "reads": 97185,
        "bases": 735405396,
        "bytes": 705844787,
+       "md5": "63f87e57fb0b477f8a0875edc7e971f3",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_hac@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all hac PAW78174_barcode02",
@@ -2831,6 +2978,7 @@
        "reads": 97347,
        "bases": 752715354,
        "bytes": 639224858,
+       "md5": "90ba59c3d502ca095d3578522f73492e",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": null,
        "command": "dorado basecaller --recursive --device cuda:all sup PAW78174_barcode02",
@@ -2847,6 +2995,7 @@
        "reads": 97347,
        "bases": 752715354,
        "bytes": 886798546,
+       "md5": "d2686cdebb7cef601cab5b41bfd0cce0",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -2862,7 +3011,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789844/PAW78174_barcode02.tar.gz",
       "accession": "ERR14789844",
-      "bytes": 9650942433
+      "bytes": 9650942433,
+      "md5": "bfa3c18d42006b43473b0de7b17ec48f"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -2889,7 +3039,8 @@
        "format": "fastq.gz",
        "reads": 97127,
        "bases": 737035936,
-       "bytes": 751086993
+       "bytes": 751086993,
+       "md5": "a765adda9273eec42e6b76e4103ea6e5"
       },
       {
        "tier": "hac",
@@ -2898,7 +3049,8 @@
        "format": "fastq.gz",
        "reads": 96973,
        "bases": 733402672,
-       "bytes": 726442037
+       "bytes": 726442037,
+       "md5": "973df19cfe152657d52cb2745f5a8981"
       },
       {
        "tier": "sup",
@@ -2907,7 +3059,8 @@
        "format": "fastq.gz",
        "reads": 97450,
        "bases": 743785067,
-       "bytes": 626284505
+       "bytes": 626284505,
+       "md5": "887993432c46c844d9fffaf3045e1582"
       },
       {
        "tier": "mods",
@@ -2917,6 +3070,7 @@
        "reads": 97450,
        "bases": 743785067,
        "bytes": 1220354318,
+       "md5": "250bb5d5ebf15a1aba2e52592c0fa215",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.0.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.0.0_4mC_5mC@v2",
@@ -2932,7 +3086,8 @@
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR147/ERR14789844/PAW78174_barcode02.tar.gz",
       "accession": "ERR14789844",
-      "bytes": 9650942433
+      "bytes": 9650942433,
+      "md5": "bfa3c18d42006b43473b0de7b17ec48f"
      },
      "run": {
       "flowcell_id": "PAW78174",
@@ -2983,6 +3138,7 @@
        "reads": 24243204,
        "bases": 179603095756,
        "bytes": 205341718292,
+       "md5": "e851754af061bae1c6d59324eccf7f5c",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3042,6 +3198,7 @@
        "reads": 22380358,
        "bases": 159534853262,
        "bytes": 179449233340,
+       "md5": "2f221748d5207116fba9170e05192183",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3101,6 +3258,7 @@
        "reads": 23367973,
        "bases": 186305480403,
        "bytes": 218467189910,
+       "md5": "3da34022ed09ee536c331c1dc0353693",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3162,6 +3320,7 @@
        "reads": 25520366,
        "bases": 167834576804,
        "bytes": 180491252934,
+       "md5": "19d9da056e91c9f2e61bf367947d2367",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3223,6 +3382,7 @@
        "reads": 29513563,
        "bases": 200119846416,
        "bytes": 226255824250,
+       "md5": "e2df4a67a92a7320bd5714d33719a46a",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3282,6 +3442,7 @@
        "reads": 40653726,
        "bases": 155371924011,
        "bytes": 182353961133,
+       "md5": "00b4afc36538122b6f27975e4b79bd9a",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3341,6 +3502,7 @@
        "reads": 48969015,
        "bases": 147027797919,
        "bytes": 176083680347,
+       "md5": "601a1726d5e8d3addb85eb729496df63",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3402,6 +3564,7 @@
        "reads": 49102019,
        "bases": 144232837256,
        "bytes": 169873764246,
+       "md5": "732b80185cda3f038e5baeed76e4751d",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3463,6 +3626,7 @@
        "reads": 44549288,
        "bases": 143310679984,
        "bytes": 169608617491,
+       "md5": "e79300dd0960e391dc1215fe043ecbdf",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3522,6 +3686,7 @@
        "reads": 39493334,
        "bases": 143898988088,
        "bytes": 170150857198,
+       "md5": "33263156a56fe48d0be4d53d9d82be86",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3581,6 +3746,7 @@
        "reads": 28870767,
        "bases": 186567597586,
        "bytes": 215931427560,
+       "md5": "ef39091c897a353703fe7e5cdcba3474",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3640,6 +3806,7 @@
        "reads": 33384804,
        "bases": 182169734729,
        "bytes": 213487426467,
+       "md5": "fdff954c90cc2e833831fe42e102d974",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3699,6 +3866,7 @@
        "reads": 27160578,
        "bases": 168330404280,
        "bytes": 197965023729,
+       "md5": "d3e31fd21233ea85f9f7f2e94032293e",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3758,6 +3926,7 @@
        "reads": 33576981,
        "bases": 165733400457,
        "bytes": 195346451960,
+       "md5": "05ee66bee864f3e4d456269efb95c7c5",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3817,6 +3986,7 @@
        "reads": 30567432,
        "bases": 163505990498,
        "bytes": 192815468092,
+       "md5": "09ea2c2fa1664275176f06472ef4fad7",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_4mC_5mC@v1",
@@ -3881,6 +4051,7 @@
        "reads": 1752474,
        "bases": 1491823114,
        "bytes": 1751499515,
+       "md5": "67cab1b2cda266b396bc8ecbff10f963",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -3900,6 +4071,7 @@
        "reads": 1752474,
        "bases": 1491823114,
        "bytes": 1751499515,
+       "md5": "67cab1b2cda266b396bc8ecbff10f963",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -3938,7 +4110,8 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 58681665628
+       "bytes": 58681665628,
+       "md5": "5f973749de2b835e5ae0839ef28770d7"
       },
       {
        "tier": "mods",
@@ -3947,13 +4120,15 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 58681665628
+       "bytes": 58681665628,
+       "md5": "5f973749de2b835e5ae0839ef28770d7"
       }
      ],
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR156/ERR15688549/PaPr00000116MP_R10.4.1_5kHz_NBD114.24.tar.gz",
       "accession": "ERR15688549",
-      "bytes": 58681665628
+      "bytes": 58681665628,
+      "md5": "5f973749de2b835e5ae0839ef28770d7"
      }
     }
    ],
@@ -3966,7 +4141,11 @@
      "r2": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16984172/hic_nohuman_read_R2.fastq.gz",
      "accession": "ERR16984172",
      "reads": 36656576,
-     "bases": 5535142976
+     "bases": 5535142976,
+     "r1_md5": "7adda39a074a17af3fa80567fc6798b4",
+     "r2_md5": "0bdb7618ead82de753405dc40c1cf3f9",
+     "r1_bytes": 1209954620,
+     "r2_bytes": 1327866416
     }
    ],
    "kit_inferred": {
@@ -4005,6 +4184,7 @@
        "reads": 1126781,
        "bases": 1427683903,
        "bytes": 1652320824,
+       "md5": "9a53bc6fead13d6108a6e6763f9e51ec",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -4024,6 +4204,7 @@
        "reads": 1126781,
        "bases": 1427683903,
        "bytes": 1652320824,
+       "md5": "9a53bc6fead13d6108a6e6763f9e51ec",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -4062,7 +4243,8 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 55200586096
+       "bytes": 55200586096,
+       "md5": "53c18e922d1c7122e10cf90d3729400f"
       },
       {
        "tier": "mods",
@@ -4071,13 +4253,15 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 55200586096
+       "bytes": 55200586096,
+       "md5": "53c18e922d1c7122e10cf90d3729400f"
       }
      ],
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR156/ERR15688557/PaPr00000216MP_R10.4.1_5kHz_NBD114.24.tar.gz",
       "accession": "ERR15688557",
-      "bytes": 55200586096
+      "bytes": 55200586096,
+      "md5": "53c18e922d1c7122e10cf90d3729400f"
      }
     }
    ],
@@ -4090,7 +4274,11 @@
      "r2": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16984171/hic_nohuman_read_R2.fastq.gz",
      "accession": "ERR16984171",
      "reads": 31796624,
-     "bases": 4801290224
+     "bases": 4801290224,
+     "r1_md5": "dc6ef3d7d2e15e2ce8a938ed8a3aadaf",
+     "r2_md5": "3444bd7cd63db193c07ab2ef9c5082e3",
+     "r1_bytes": 1041640257,
+     "r2_bytes": 1136038684
     }
    ],
    "kit_inferred": {
@@ -4129,6 +4317,7 @@
        "reads": 8155962,
        "bases": 14870898140,
        "bytes": 16620618547,
+       "md5": "d2e9eb4132d3f025029bd9a595819b7e",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -4148,6 +4337,7 @@
        "reads": 8155962,
        "bases": 14870898140,
        "bytes": 16620618547,
+       "md5": "d2e9eb4132d3f025029bd9a595819b7e",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -4186,7 +4376,8 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 192710963654
+       "bytes": 192710963654,
+       "md5": "cb87a608fc273f41b84bea712c8f41b8"
       },
       {
        "tier": "mods",
@@ -4195,13 +4386,15 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 192710963654
+       "bytes": 192710963654,
+       "md5": "cb87a608fc273f41b84bea712c8f41b8"
       }
      ],
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15738649/RASK00000027MP_R10.4.1_5kHz_NBD114.24.tar.gz",
       "accession": "ERR15738649",
-      "bytes": 192710963654
+      "bytes": 192710963654,
+      "md5": "cb87a608fc273f41b84bea712c8f41b8"
      }
     }
    ],
@@ -4214,7 +4407,11 @@
      "r2": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986441/hic_nohuman_read_R2.fastq.gz",
      "accession": "ERR16986441",
      "reads": 742863830,
-     "bases": 112172438330
+     "bases": 112172438330,
+     "r1_md5": "fc5d142b90a4b23f983a4f0ecbc62520",
+     "r2_md5": "87e1a99f029b7629dd71fe4d94e43d23",
+     "r1_bytes": 24366145940,
+     "r2_bytes": 25927835354
     }
    ],
    "kit_inferred": {
@@ -4253,6 +4450,7 @@
        "reads": 12416136,
        "bases": 16979531644,
        "bytes": 19236905878,
+       "md5": "226c4ca069b7bf4f498af1336180a76e",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -4272,6 +4470,7 @@
        "reads": 12416136,
        "bases": 16979531644,
        "bytes": 19236905878,
+       "md5": "226c4ca069b7bf4f498af1336180a76e",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -4310,7 +4509,8 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 221753825954
+       "bytes": 221753825954,
+       "md5": "121620b8db95d27e7d8abd5b22edc517"
       },
       {
        "tier": "mods",
@@ -4319,13 +4519,15 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 221753825954
+       "bytes": 221753825954,
+       "md5": "121620b8db95d27e7d8abd5b22edc517"
       }
      ],
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15738643/RASK00000062MP_R10.4.1_5kHz_NBD114.24.tar.gz",
       "accession": "ERR15738643",
-      "bytes": 221753825954
+      "bytes": 221753825954,
+      "md5": "121620b8db95d27e7d8abd5b22edc517"
      }
     }
    ],
@@ -4338,7 +4540,11 @@
      "r2": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986361/hic_nohuman_read_R2.fastq.gz",
      "accession": "ERR16986361",
      "reads": 585080698,
-     "bases": 88347185398
+     "bases": 88347185398,
+     "r1_md5": "07592cf6a587b923cb69bb19cfaaf29f",
+     "r2_md5": "dc7f61c270672ee1bde753ee52955950",
+     "r1_bytes": 21533095470,
+     "r2_bytes": 21407064810
     }
    ],
    "kit_inferred": {
@@ -4377,6 +4583,7 @@
        "reads": 6404383,
        "bases": 10271387116,
        "bytes": 11484702917,
+       "md5": "b3e570f700670d1a5c5743d0714cc723",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -4396,6 +4603,7 @@
        "reads": 6404383,
        "bases": 10271387116,
        "bytes": 11484702917,
+       "md5": "b3e570f700670d1a5c5743d0714cc723",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -4434,7 +4642,8 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 133511681032
+       "bytes": 133511681032,
+       "md5": "dce718ae7b395a077d2e73f2abf9497b"
       },
       {
        "tier": "mods",
@@ -4443,13 +4652,15 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 133511681032
+       "bytes": 133511681032,
+       "md5": "dce718ae7b395a077d2e73f2abf9497b"
       }
      ],
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15757797/ASYM00000009MP_R10.4.1_5kHz_NBD114.24.tar.gz",
       "accession": "ERR15757797",
-      "bytes": 133511681032
+      "bytes": 133511681032,
+      "md5": "dce718ae7b395a077d2e73f2abf9497b"
      }
     }
    ],
@@ -4462,7 +4673,11 @@
      "r2": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986348/hic_nohuman_read_R2.fastq.gz",
      "accession": "ERR16986348",
      "reads": 132866304,
-     "bases": 20062811904
+     "bases": 20062811904,
+     "r1_md5": "247cb7b647a0e1b44c51a6938fc8c25a",
+     "r2_md5": "d0ef59de902473fe1f06d758e379132c",
+     "r1_bytes": 4364547473,
+     "r2_bytes": 4822610531
     }
    ],
    "kit_inferred": {
@@ -4501,6 +4716,7 @@
        "reads": 15893087,
        "bases": 22303515669,
        "bytes": 25587323295,
+       "md5": "7fc94c300293720333b5e4f63b30889b",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -4520,6 +4736,7 @@
        "reads": 15893087,
        "bases": 22303515669,
        "bytes": 25587323295,
+       "md5": "7fc94c300293720333b5e4f63b30889b",
        "basecall_model": "dna_r10.4.1_e8.2_400bps_sup@v5.2.0",
        "modbase_models": [
         "dna_r10.4.1_e8.2_400bps_sup@v5.2.0_6mA@v1",
@@ -4558,7 +4775,8 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 292165570559
+       "bytes": 292165570559,
+       "md5": "ddbfb39cd77ae4039f5233d1631d0d21"
       },
       {
        "tier": "mods",
@@ -4567,13 +4785,15 @@
        "format": "tar.gz",
        "reads": 0,
        "bases": 0,
-       "bytes": 292165570559
+       "bytes": 292165570559,
+       "md5": "ddbfb39cd77ae4039f5233d1631d0d21"
       }
      ],
      "pod5": {
       "url": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR157/ERR15766702/ASYM00000026MP_R10.4.1_5kHz_NBD114.24.tar.gz",
       "accession": "ERR15766702",
-      "bytes": 292165570559
+      "bytes": 292165570559,
+      "md5": "ddbfb39cd77ae4039f5233d1631d0d21"
      }
     }
    ],
@@ -4586,7 +4806,11 @@
      "r2": "https://ftp.sra.ebi.ac.uk/vol1/run/ERR169/ERR16986349/hic_nohuman_read_R2.fastq.gz",
      "accession": "ERR16986349",
      "reads": 138172392,
-     "bases": 20864031192
+     "bases": 20864031192,
+     "r1_md5": "8959e1c5e6af6e99ff036578451c2dc0",
+     "r2_md5": "ff393f70f41281710fcf984c7d897759",
+     "r1_bytes": 5639776463,
+     "r2_bytes": 4812386479
     }
    ],
    "kit_inferred": {
