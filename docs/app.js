@@ -373,7 +373,7 @@ function writeHash() {
   if (state.has) p.set("has", state.has);
   if (state.sort !== "type") p.set("sort", state.sort);
   const qs = p.toString();
-  history.replaceState(null, "", (qs ? "?" + qs : location.pathname) + location.hash);
+  try { history.replaceState(null, "", (qs ? "?" + qs : location.pathname) + location.hash); } catch { /* sandboxed previews */ }
 }
 
 fetch("data/microbench.json").then((r) => r.json()).then((d) => {

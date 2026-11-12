@@ -4,7 +4,7 @@ name: Update site data and analysis pages
 on:
   push:
     branches: [main]
-    paths: [ENA_data_links.tsv, ena_hic.tsv, scripts/**, analysis/**]
+    paths: [ENA_data_links.tsv, ena_hic.tsv, ENA_deep.tsv, scripts/**, analysis/**]
   workflow_dispatch:
 permissions:
   contents: write
