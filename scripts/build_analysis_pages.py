@@ -16,9 +16,7 @@ OUT = os.path.join(ROOT, "docs", "analyses")
 REPO = "https://github.com/Kirk3gaard/MicroBench"
 
 # extra entries that live elsewhere on the site
-EXTRA = [{"slug": "../artefacts.html", "title": "Read artefacts in basecalled nanopore data",
-          "summary": "Chimeras, foldbacks, untrimmed adapters and barcodes, low-complexity junk, pore-scan effects and flow-cell-wide signal gaps, measured on every read of the ZymoHMW and ZymoGut runs. Interactive.",
-          "code": "analysis/artefacts", "tags": ["reads", "artefacts", "interactive"]}]
+EXTRA = []  # the read-artefact page is held back in drafts/artefacts-site until verified
 # nicer titles/summaries for knitted reports (fallback: first heading and the Aim section)
 META = {"zymohmw": {"title": "Basecalling models and assemblers on the ZymoHMW mock",
                     "tags": ["basecalling", "accuracy", "assembly"]}}
@@ -108,7 +106,7 @@ PAGE = """<!doctype html>
 <main class="wrap">
 {main}
 </main>
-<footer class="wrap muted">MicroBench · Aalborg University · <a href="{up}./">Datasets</a> · <a href="{up}analyses/">Analyses</a> · <a href="{up}artefacts.html">Read artefacts</a></footer>
+<footer class="wrap muted">MicroBench · Aalborg University · <a href="{up}./">Datasets</a> · <a href="{up}analyses/">Analyses</a></footer>
 <div class="lightbox" id="lb" hidden><button type="button" aria-label="Close">×</button><img alt=""><p></p></div>
 <script>
 const lb = document.getElementById("lb");
